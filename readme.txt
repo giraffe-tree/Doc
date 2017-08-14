@@ -1,6 +1,3 @@
-niad
-你的fjak
-12
-大师傅
-asfa
-dad
+Git is a distributed version control system.
+Git is free software distributed under the GPL.
+Git has a mutable index called stage.
