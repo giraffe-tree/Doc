@@ -215,6 +215,7 @@ git tag -a <tagname> -m "blablabla..."可以指定标签信息；
 - $ git tag -a v0.1 -m "version 0.1 released" 3628164
 
 ###删除，推送
+
 删除：
 > git tag -d v0.1
 推送某个标签到远程
