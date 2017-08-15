@@ -1,4 +1,4 @@
 
-##Giraffe Tree 的学习总结
+## Giraffe Tree 的学习总结
 
 *欢迎各位大佬批评指正* ╮(￣▽￣)╭
