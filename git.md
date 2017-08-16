@@ -11,7 +11,7 @@ git 使用总结
 
 ###修改自己的用户名和邮箱地址：
 >　$ git config --global user.name "xxx"
-　　$ git config --global user.email "xxx" 
+　　$ git config --global user.email "xxx"
 
 ###查看修改
 > git diff 命令
@@ -97,6 +97,9 @@ ssh-keygen -t rsa -C "youremail@example.com"
 - 添加后,远程库的名字就是origin
 查看当前所有远程仓库：git remote -v
 解除其中一个远程仓库: git remote rm <远程库名>
+本地多个ssh
+- http://blog.csdn.net/chaihuasong/article/details/37886139
+
 
 ###推送
 - git push -u origin master
