@@ -1,26 +1,26 @@
-#git 使用总结
+# git 使用总结
 
-###*git官网*
+### *git官网*
 > https://git-scm.com/
 
-###*参考网址,也是本篇总结主要来源*
+### *参考网址,也是本篇总结主要来源*
 > https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
 
-###查看自己的用户名和邮箱地址：
+### 查看自己的用户名和邮箱地址：
 >- git config user.name
 - git config user.email
 
-###修改自己的用户名和邮箱地址：
+### 修改自己的用户名和邮箱地址：
 >-  git config --global user.name "xxx"
 - git config --global user.email "xxx"
 
-###查看修改
+### 查看修改
 > git diff 命令
 如：git diff readme.txt
 
 > cat readme.txt 查看内容
 
-###查看历史
+### 查看历史
 git log
 
 git log --pretty=oneline
@@ -31,7 +31,7 @@ git log --pretty=oneline
 c9bb20f865d7c808fcb6c5f26aa4db7a472bbf8f add distributed
 507be92991da4dd6d812967bee428de0518d7eaf wrote a readme file
 
-###回退版本
+### 回退版本
 - head 表示当前版本
 - head^ 上个版本
 - head^^ 上上个版本
@@ -41,7 +41,7 @@ c9bb20f865d7c808fcb6c5f26aa4db7a472bbf8f add distributed
 - git reset --hard 60c0d  找一个版本，60c0d 为某一版本的前几位版本号
 - git reflog 记录了你的每一次的命令
 
-###工作区和暂存区
+### 工作区和暂存区
 Git的版本库里存了很多东西，其中最重要的就是称为stage（或者叫index）的暂存区，
 还有Git为我们自动创建的第一个分支master，以及指向master的一个指针叫HEAD。
 
@@ -54,10 +54,10 @@ Git的版本库里存了很多东西，其中最重要的就是称为stage（或
 > nothing to commit (working directory clean)
 	nothing to commit, working tree clean
 
-###为什么Git比其他版本控制系统设计得优秀?
+### 为什么Git比其他版本控制系统设计得优秀?
 - 因为Git跟踪并管理的是修改，而非文件。
 
-###撤销修改
+### 撤销修改
 
 1.当工作区提交，还没有add到暂存区时，
 git checkout -- readme.txt
@@ -83,7 +83,7 @@ use "git reset HEAD <file>..." to unstage
 	
 	> 或者一步到位 : git reset --hard head
 
-###删除文件
+### 删除文件
 假如现在你在文件服务器删除了一个文件
 
 1. 你要从版本库中也删掉这个文件
@@ -99,7 +99,7 @@ git commit -m "remove test.txt"
 - git checkout HEAD test.txt
 
 
-###创建SSH KEY
+### 创建SSH KEY
 - ssh-keygen -t rsa -C "youremail@example.com"
 
 **将本地仓库与远程仓库关联**
@@ -113,7 +113,7 @@ git commit -m "remove test.txt"
 - http://blog.csdn.net/chaihuasong/article/details/37886139
 
 
-###推送
+### 推送
 - git push -u origin master
 > 把本地库的内容推送到远程，用git push命令，实际上是把当前分支master推送到远程。
 由于第一次推送远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
@@ -121,7 +121,7 @@ git commit -m "remove test.txt"
 > 从现在起，只要本地作了提交，就可以通过命令：
 $ git push origin master
 
-###从远程库克隆
+### 从远程库克隆
 git clone https://github.com/cc19941109/testRepository.git
 git clone git@github.com:cc19941109/testRepository.git
 > GitHub给出的地址不止一个，还可以用https://github.com/cc19941109/testRepository.git这样的地址。实际上，Git支持多种协议，默认的git://使用ssh，但也可以使用https等其他协议。
@@ -129,20 +129,20 @@ git clone git@github.com:cc19941109/testRepository.git
 - git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。
 - 使用https除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但是在某些只开放http端口的公司内部就无法使用ssh协议而只能用https.
 
-###分支管理
+### 分支管理
  - 其他版本控制系统如SVN等都有分支管理，但是用过之后你会发现，这些版本控制系统创建和切换分支比蜗牛还慢，简直让人无法忍受，结果分支功能成了摆设，大家都不去用。
 
 但Git的分支是与众不同的，无论创建、切换和删除分支，Git在1秒钟之内就能完成！无论你的版本库是1个文件还是1万个文件。
 
 - HEAD指向的当前分支就是当前版本
 
-####创建分支
+#### 创建分支
 *git checkout -b dev*
 > git checkout命令加上-b参数表示创建并切换，相当于以下两条命令：
 - git branch dev  创建分支
 - git checkout dev  切换分支
 
-####合并分支
+#### 合并分支
 - git checkout master  切换分支
 - git merge dev 合并指定分支到当前分支
 > git 会提示 Fast-forward 快进模式
@@ -165,10 +165,10 @@ Unmerged paths:
 	both modified:   README.md
 no changes added to commit (use "git add" and/or "git commit -a")
 
-####查看分支情况
+#### 查看分支情况
 git log --graph --pretty=oneline --abbrev-commit
 
-###分支管理策略
+### 分支管理策略
 --no-ff指的是强行关闭fast-forward方式
 > $ git merge --no-ff -m "merge with no-ff" dev
 - Merge made by the 'recursive' strategy.
@@ -179,7 +179,7 @@ git log --graph --pretty=oneline --abbrev-commit
 - 查看分支历史： git log --graph --pretty=oneline --abbrev-commit
 - 合并分支时，加上--no-ff参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。
 
-###stash BUG分支
+### stash BUG分支
 > Git还提供了一个stash功能，
 可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作：
 - git stash
@@ -194,11 +194,11 @@ HEAD is now at 6224937 add merge
 > 修复bug时，我们会通过创建新的bug分支进行修复，然后合并，最后删除；
 当手头工作没有完成时，先把工作现场git stash一下，然后去修复bug，修复后，再git stash pop，回到工作现场。
 
-###feature 分支
+### feature 分支
 开发一个新feature，最好新建一个分支；
 如果要丢弃一个没有被合并过的分支，可以通过git branch -D <name>强行删除。
 
-###多人协作
+### 多人协作
 - 查看远程库的信息，用git remote
 	用git remote -v显示更详细的信息
 - 推送分支
@@ -221,7 +221,7 @@ $ git push origin dev
 - 建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；
 - 从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。
 
-###tag
+### tag
 命令git tag <name>用于新建一个标签，默认为HEAD，也可以指定一个commit id
 
 - git tag v1.0
@@ -234,7 +234,7 @@ $ git push origin dev
 - 创建带有说明的标签，用-a指定标签名，-m指定说明文字：
 - git tag -a v0.1 -m "version 0.1 released" 3628164
 
-###删除，推送
+### 删除，推送
 
 - git tag -d v0.1
 推送某个标签到远程
