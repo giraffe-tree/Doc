@@ -1,13 +1,15 @@
+# MYSQL 使用
 
-mysql 5.5.16  workbench 6.3
-使用 powershell
+#### 工具： mysql 5.5.16  workbench 6.3 powershell
 
-基本操作
-	查看表信息、结构
-		DESCRIBE actor;
-	注释
-		--
-		#
+### 基本操作
+
+- 查看表信息、结构
+
+> DESCRIBE actor;
+
+- 注释
+> -- 或者 #
 
 
 查询
