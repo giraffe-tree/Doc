@@ -19,6 +19,7 @@
 
 - **[IoC容器和Dependency Injection模式————中文译文](http://insights.thoughtworkers.org/injection/)**
 
+- **[spring源码分析————IOC容器](http://www.zzcode.cn/springioc/thread-39.html)**
 
 **所谓依赖注入，就是把底层类作为参数传入上层类，实现上层类对下层类的“控制”。**
 
