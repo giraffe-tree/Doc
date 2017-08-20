@@ -9,8 +9,8 @@
 - [Spring 学习之bean的理解](http://www.cnblogs.com/shinubi/p/4182027.html)
 
 1. 解析xml, 获取各种元素
-2. 通过Java反射把各个bean 的实例创建起来
-3. 还是通过Java反射调用OrderProcessor的两个方法
+2. 通过Java反射把各个bean的实例创建起来
+3. 还是通过Java反射调用方法
 
 
 ### Spring 依赖注入
@@ -70,6 +70,19 @@ context就是一个bean关系的集合，spring通过context来发现每个bean�
 
 有了context，就知道了bean和bean之间的关系，但我们常常需要一些工具去发现，建立，维护这些关系，这就需要core了。它就是一个维护IOC的工具。
 
+### Bean
+
+spring bean 的创建是典型的工厂模式，它的顶级接口是BeanFactory
+
+
+
+
+
+### Context
+
+
+### Core
+
 
 
 ## 源码分析
@@ -78,7 +91,7 @@ context就是一个bean关系的集合，spring通过context来发现每个bean�
 
 
 
-
+### Context
 
 
 
