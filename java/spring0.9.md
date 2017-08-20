@@ -90,6 +90,29 @@ spring bean 的创建是典型的工厂模式，它的顶级接口是BeanFactory
 ### BeanFactory
 
 
+> **BeanFactory**
+
+- Object getBean(String name) throws BeansException
+- Object getBean(String name, Class requiredType) throws BeansException
+- isSingleton(String name) throws NoSuchBeanDefinitionException
+- string[] getAliases(String name)
+
+> **ListableBeanFactory** extends BeanFactory
+
+- getBeanDefinitionCount
+- String[] getBeanDefinitionNames
+	- Returns the empty String[], rather than null, if no beans are defined. 
+-  String[] getBeanDefinitionNames(Class type)
+	- Never returns null.
+
+> abstract class **AbstractBeanFactory** implements BeanFactory
+
+*模板方法模式*
+
+- 定义一个操作中算法的框架，而将一些步骤延迟到子类中，使得子类可以不改变算法的结构即可重定义该算法中的某些特定步骤。
+
+
+
 
 ### Context
 
