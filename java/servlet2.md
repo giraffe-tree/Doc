@@ -64,5 +64,5 @@
 ## 记录一些奇葩的错误
 
 ### A child container failed during start
->最后发现是filter中配置错了，当value和urlPatterns同时出现时。。。然后tomcat怎么也启动不起来，各种子容器启动失败。只要在value和urlPatterns中去掉一个就好
+>最后发现是filter中配置错了，当value和urlPatterns同时出现时就会出错。。。然后tomcat怎么也启动不起来，各种子容器启动失败。解决：只要在value和urlPatterns中去掉一个就好
 
