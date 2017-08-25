@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 *参考：*
 > [web.xml详解](http://blog.csdn.net/believejava/article/details/43229361)
 
@@ -34,7 +33,7 @@
 
 ## servlet 响应请求的过程
 
-> 
+>
 
 1. 浏览器连接web服务器，向Servlet容器发出Http请求；
 2. Servlet容器解析Web客户想访问的主机，想访问的web应用，想访问的web资源；
@@ -45,15 +44,15 @@
 7. Servlet调用HttpResponse的有关方法，生成响应数据；
 8. Servlet容器把Servlet的响应结果传给Web客户。
 
-创建servlet对象 init srevice 
+创建servlet对象 init srevice
 
 ### 多线程响应
 
 线程不安全，如果使用锁则可能会导致多个人排队等待，不可取。
 
-使用singleThreadModel 接口 
+使用singleThreadModel 接口
 
-- singleThreadModel接口 ：它本身是个空接口，它保证一个特定的servlet实例的service方法在一个时刻技能被一个线程执行。servlet2.4已经将SingleThreadModel标记为Deprecated。  
+- singleThreadModel接口 ：它本身是个空接口，它保证一个特定的servlet实例的service方法在一个时刻技能被一个线程执行。servlet2.4已经将SingleThreadModel标记为Deprecated。
 
 对于实现了SingleThreadModel接口的Servlet，Servlet引擎仍然支持对该Servlet的多线程并发访问，其采用的方式是产生多个Servlet实例对象，并发的每个线程分别调用一个独立的Servlet实例对象。
 
@@ -139,7 +138,7 @@ ApplicationFilterChain在ApplicationFilterConfig[] 数组中 保存了到最终s
 >
 
  -------------------
- 
+
 ## servlet
 
 javax-servlet
