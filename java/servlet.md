@@ -6,7 +6,7 @@
 
 
 
-## servlet 初始化
+## servlet  初始化
 
 **load-on-startup**属性
 1. load-on-startup元素标记容器是否在启动的时候就加载这个servlet(实例化并调用其init()方法)。
