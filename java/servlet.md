@@ -1,6 +1,7 @@
 *参考：*
 > [web.xml详解](http://blog.csdn.net/believejava/article/details/43229361)
 
+> [web.xml详解](http://www.cnblogs.com/hellojava/archive/2012/12/28/2835730.html)
 
 #Servlet
 
