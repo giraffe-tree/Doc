@@ -312,12 +312,102 @@ application属性范围是在服务器上设置的一个属性，一旦设置之
 
 ## Java Bean
 
+### 定义
+
+1. 这个Java类必须具有一个无参的构造函数
+2. 属性必须私有化。
+3. 私有化的属性必须通过public类型的方法暴露给其它程序，并且方法的命名也必须遵守一定的命名规范。
+
+
+- \<jsp:useBean\>标签：用于在JSP页面中查找或实例化一个JavaBean组件。
+- \<jsp:setProperty\>标签：用于在JSP页面中设置一个JavaBean组件的属性。
+- \<jsp:getProperty\>标签：用于在JSP页面中获取一个JavaBean组件的属性。
+
+
+### \<jsp:useBean\>标签
+
+
+```
+<jsp:useBean id="beanName" class="package.class" scope="page|request|session|application"/>
+```
+
+- "id"
+  - 用于指定JavaBean实例对象的引用名称和其存储在域范围中的名称。
+- "class"
+	- 用于指定JavaBean的完整类名（即必须带有包名）。
+- "scope"
+	- 用于指定JavaBean实例对象所存储的域范围，其取值只能是page、request、session和application等四个值中的一个，其默认值是page。
 
 
 
+### 带标签体的\<jsp:useBean\>标签
+
+```
+<jsp:useBean ...> 
+     Body 
+</jsp:useBean> 
+```
+
+
+### \<jsp:setProperty\>标签
+
+- name: 
+	- 用于指定JavaBean对象的名称。 
+- property
+	- 用于指定JavaBean实例对象的属性名。
+- value
+	- 用于指定JavaBean对象的某个属性的值，value的值可以是字符串，也可以是表达式。为字符串时，该值会自动转化为JavaBean属性相应的类型，如果value的值是一个表达式，那么该表达式的计算结果必须与所要设置的JavaBean属性的类型一致。  
+- param
+	- 用于将JavaBean实例对象的某个属性值设置为一个**请求参数值**，该属性值同样会自动转换成要设置的JavaBean属性的类型。
 
 
 
+> 语法格式一：
+> 
+> ```
+<jsp:setProperty name="beanName" property="propertyName" value="string字符串"/>
+```
+
+> 语法格式二：
+
+> ```
+<jsp:setProperty name="beanName" property="propertyName" value="<%= expression %>" />
+```
+> 语法格式三：
+> 
+>```
+<jsp:setProperty name="beanName" property="propertyName" param="parameterName"/>
+```
+>语法格式四：
+
+> ```　　　　
+<jsp:setProperty name="beanName" property= "*" />
+```
+
+例如：
+
+```
+<jsp:setProperty property="name" name="user1" value="长脖子树"/>
+<jsp:setProperty property="birthday" name="user1" value="<%=new Date()%>"/>
+<jsp:setProperty property="info" name="user1" param="info"/>
+<jsp:setProperty property="*" name="user1"/>
+```
+
+
+
+### \<jsp:getProperty\>标签
+
+- name
+	- 用于指定JavaBean实例对象的名称，其值应与<jsp:useBean>标签的id属性值相同。 
+- property
+	- 用于指定JavaBean实例对象的属性名。
+
+
+*例如：*
+
+```
+<jsp:getProperty property="info" name="user1"/>
+```
 
 
 
