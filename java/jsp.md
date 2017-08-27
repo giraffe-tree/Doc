@@ -211,12 +211,37 @@ JSP标签也称之为Jsp Action(JSP动作)元素，它用于在Jsp页面中提�
 - 属性用于指定被引入资源的相对路径，它也可以通过执行一个表达式来获得。
 - flush属性指定在插入其他资源的输出内容时，是否先将当前JSP页面的已输出的内容刷新到客户端。 
 
+**使用\<jsp:include\>加入jspfpage**
+> jspf文件Tomcat服务器被当作纯文本文件处理了，没有当作jsp页面来解析执行
+> 
+> 解决方案：
+> 
+> ```
+> <servlet-mapping>
+        <servlet-name>jsp</servlet-name>
+        <url-pattern>*.jspf</url-pattern>
+    </servlet-mapping>
+    <!-- 让jsp扩展名同样成为JSP Servlet处理的文件。 -->
+    <servlet-mapping>
+        <servlet-name>jsp</servlet-name>
+        <url-pattern>*.jsp</url-pattern>
+    </servlet-mapping>
+> ```
 
 
+#### ```<jsp:forward>```标签
 
+```
+<jsp:forward page="relativeURL | <%=expression%>" /> 
+例如：
+<jsp:forward page="/jsp/test.jsp"/>
+```
 
+此跳转属于服务器端跳转。只要是服务器端跳转，则地址栏永远没有变化。
 
+#### <jsp:param>标签
 
+当使用<jsp:include>和<jsp:forward>标签引入或将请求转发给其它资源时，可以使用<jsp:param>标签向这个资源传递参数。
 
 
 ## JSP 对象、域
@@ -283,6 +308,19 @@ session设置的属性不管如何跳转，都可以取得的，只要是同一�
 #### application属性范围
 
 application属性范围是在服务器上设置的一个属性，一旦设置之后任何用户都可以浏览到此属性。
+
+
+## Java Bean
+
+
+
+
+
+
+
+
+
+
 
 
 
