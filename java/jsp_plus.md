@@ -1,6 +1,13 @@
 # JSP番外篇
 
-## JSTL标签库
+* [1.JSTL标签库](#1)
+
+* [1.1 JSTL 核心标签库标签](#1.1)
+
+* [1.1.1 表达式控制标签 - out 标签](#1.2)
+
+
+<h2 id=1>1. JSTL标签库</h2>
 
 JSTL标签库的使用是为弥补html标签的不足，规范自定义标签的使用而诞生的。使用JSLT标签的目的就是不希望在jsp页面中出现java逻辑代码
 
@@ -12,7 +19,8 @@ JSTL标签库的使用是为弥补html标签的不足，规范自定义标签的
 - XML标签(几乎不用)
 - JSTL函数(EL函数)
 
-### JSTL 核心标签库标签
+<h3 id=1.1>JSTL 核心标签库标签</h3>
+
 
 一共有13个
 
@@ -133,7 +141,7 @@ errorInfo.getStackTrace：<c:out value="${errorInfo.stackTrace}" />
 
 #### 流程控制标签 - if标签
 
-<c:if>标签和程序中的if语句作用相同，用来实现条件控制。
+```<c:if>```标签和程序中的if语句作用相同，用来实现条件控制。
 
 
 **属性**
@@ -163,6 +171,63 @@ ${adminchock}
 ```
 
 #### 流程控制标签——choose标签、when标签、otherwise标签
+
+
+```<c:choose>```、```<c:when>```和```<c:otherwise>```这3个标签通常情况下是一起使用的，```<c:choose>```标签作为```<c:when>```和```<c:otherwise>```标签的父标签来使用。这三个标签可以构造类似 “if-else if-else” 的复杂条件判断结构。
+
+
+**示例：**
+
+```
+c:set var="score" value="85"/>
+<c:choose>
+    <%--使用<c:when>进行条件判断。
+        如果大于等于90，输出“您的成绩为优秀”；
+        如果大于等于70小于90，输出“您的成绩为良好”；
+        大于等于60小于70，输出“您的成绩为及格”；
+        其他（otherwise）输出“对不起，您没能通过考试”。
+     --%>
+    <c:when test="${score>=90}">
+        你的成绩为优秀！
+    </c:when>
+    <c:when test="${score>70 && score<90}">
+        您的成绩为良好!
+    </c:when>
+    <c:when test="${score>60 && score<70}">
+        您的成绩为及格!
+    </c:when>
+    <c:otherwise>
+        对不起，您没有通过考试！
+    </c:otherwise>
+</c:choose>
+```
+
+
+#### 循环标签——forEach标签
+
+**属性**
+
+> - var
+	- 设定变量名用于存储从集合中取出元素。
+- items
+	- 指定要遍历的集合。
+- varStatus
+	- 设定变量名，该变量用于存放集合中元素的信息。    
+- begin、end
+	- 用于指定遍历的起始位置和终止位置（可选）。
+- step
+	 - 指定循环的步长。
+
+varStatus的4个状态
+
+> - *index*	&nbsp;&nbsp;int	 &nbsp;当前循环的索引值
+- *count*	&nbsp;&nbsp;int &nbsp;循环的次数
+- *frist*	&nbsp;&nbsp;boolean	&nbsp;是否为第一个位置
+- *last*	&nbsp;&nbsp;boolean	&nbsp;是否为最后一个位置
+
+
+
+
 
 
 
