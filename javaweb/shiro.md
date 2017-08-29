@@ -16,7 +16,7 @@ Subject subject = SecurityUtils.getSubject(); // 获取Subject单例对象
 subject.login(token); // 登陆
 
 - SecurityUtils对象，本质上就是一个工厂类似Spring中的ApplicationContext。
-- Shiro的核心部分是SecurityManager，它负责安全认证与授权  
+- Shiro的核心部分是SecurityManager，它负责安全认证与授权
 通过令牌（token）与项目（subject）的登陆（login）关系，Shiro保证了项目整体的安全。
 
 3. 判断用户
@@ -44,7 +44,7 @@ realm就是提供这两个对象的地方。
 在 RBAC 中，权限与角色相关联，用户通过成为适当角色的成员而得到这些角色的权限。
 
 ### Shiro 配置
-Apache Shiro 核心通过 Filter 来实现，就好像SpringMvc 通过DispachServlet 来主控制一样。 
+Apache Shiro 核心通过 Filter 来实现，就好像SpringMvc 通过DispachServlet 来主控制一样。
 
 - ShiroFilterFactoryBean
 - HashedCredentialsMatcher
@@ -57,8 +57,8 @@ Apache Shiro 核心通过 Filter 来实现，就好像SpringMvc 通过DispachSer
 
 > filterChainDefinitionMap.put("/static/**", "anon");
 
-- anon:所有url都都可以匿名访问 
-- authc: 需要认证才能进行访问 
+- anon:所有url都都可以匿名访问
+- authc: 需要认证才能进行访问
 - user:配置记住我或认证通过可以访问
 
 Shiro的认证过程最终会交由Realm执行，这时会调用Realm的dogetAuthenticationInfo(token)方法
@@ -83,7 +83,7 @@ shiro的权限授权是通过继承AuthorizingRealm抽象类
 代表了当前“用户”
 
 - 所有Subject都绑定到SecurityManager，与Subject的所有交互都会委托给SecurityManager 安全管理器
-- 可以把Subject认为是一个门面；SecurityManager才是实际的执行者； 
+- 可以把Subject认为是一个门面；SecurityManager才是实际的执行者；
 
 
 
@@ -91,7 +91,9 @@ shiro的权限授权是通过继承AuthorizingRealm抽象类
 
 - 所有与安全有关的操作都会与SecurityManager交互；且它管理着所有Subject
 - 它是Shiro的核心，它负责与后边介绍的其他组件进行交互
-- 相当于 springMVC 的 DispatcherServlet 
+- 相当于 springMVC 的 DispatcherServlet
+- Shiro 的 SecurityManager 的实现和其所依赖的组件都是 JavaBean，所以可以用多种形式对 Shiro 进行配置,不管是xml，yml，ini，json都可以。
+- Shiro SecurityMangger 本质上是一个由一套安全组件组成的对象模块视图（graph），因为与 JavaBean兼容，所以可以对所有这些组件调用的 getter 和 setter 方法来配置SecurityManager 和它的内部对象视图。
 
 
 
@@ -100,6 +102,7 @@ shiro的权限授权是通过继承AuthorizingRealm抽象类
 - 就是说SecurityManager要验证用户身份，那么它需要从Realm获取相应的用户进行比较以确定用户身份是否合法；
 - 也需要从Realm得到用户相应的角色、权限进行验证用户是否能进行操作；
 - 可以把Realm看成DataSource，即安全数据源
+- Realm 本质上是一个特定的安全 DAO：它封装与数据源连接的细节，得到Shiro 所需的相关的数据。在配置 Shiro 的时候，你必须指定至少一个Realm 来实现认证（authentication）和/或授权（authorization）。
 
 Shiro不提供维护用户/权限，而是通过Realm让开发人员自己注入。
 
@@ -163,22 +166,295 @@ credentials：
 
 ```
 
-###  身份认证流程
+#### securityManager设置
 
-1. 首先调用Subject.login(token)进行登录，其会自动委托给Security Manager，调用之前必须通过SecurityUtils. setSecurityManager()设置；
-2. SecurityManager负责真正的身份验证逻辑；它会委托给Authenticator进行身份验证；
-3. Authenticator才是真正的身份验证者，Shiro API中核心的身份认证入口点，此处可以自定义插入自己的实现；
-4. Authenticator可能会委托给相应的AuthenticationStrategy进行多Realm身份验证，默认ModularRealmAuthenticator会调用AuthenticationStrategy进行多Realm身份验证；
-5. Authenticator会把相应的token传入Realm，从Realm获取身份验证信息，如果没有返回/抛出异常表示身份验证失败了。此处可以配置多个Realm，将按照相应的顺序及策略进行访问。
+```
+    //1.
+    Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro.ini");
+    //2.
+    SecurityManager securityManager = factory.getInstance();
+    //3.
+    SecurityUtils.setSecurityManager(securityManager);
+
+```
+
+#### 得到subject
+
+在几乎所有的环境中，你可以通过如下语句得到当前用户的信息：
+
+```
+Subject currentUser = SecurityUtils.getSubject();
+```
+> 在一个独立的程序中调用 getSubject() 会在程序指定位置返回一个基于用户数据的 Subject，在服务器环境（如 web 程序）中，它将获取一个和当前线程或请求相关的基于用户数据的 Subject。
+
+#### 得到session
+
+```
+Session session = currentUser.getSession();
+session.setAttribute( "someKey", "aValue" );
+```
+
+#### 登录
+
+```
+   UsernamePasswordToken token = new UsernamePasswordToken("lonestarr", "vespa");
+
+    //支持'remember me' (无需配置，内建的!):
+    token.setRememberMe(true);
+
+    currentUser.login(token);
+```
+
+#### 常见异常
+
+- UnknownAccountException
+- IncorrectCredentialsException
+- LockedAccountException
+- AuthenticationException
+
+#### 常用验证
+
+```
+ currentUser.isPermitted( "lightsaber:weild" )
+```
 
 
+#### 登出
+
+```
+currentUser.logout();
+```
+
+### 配置
+
+#### DefaultSecurityManager 创建
+
+```
+Realm realm = //实例化或获得一个Realm的实例。我们将稍后讨论Realm。
+SecurityManager securityManager = new DefaultSecurityManager(realm);
+//使SecurityManager实例通过静态存储器对整个应用程序可见：
+SecurityUtils.setSecurityManager(securityManager);
+```
+
+#### SessionDAO
+
+使用这些函数，你可以配置 SecurityManager 视图（graph）中的任何一部分。
+
+```
+DefaultSecurityManager securityManager = new DefaultSecurityManager(realm);
+SessionDAO sessionDAO = new CustomSessionDAO();
+((DefaultSessionManager)securityManager.getSessionManager()).setSessionDAO(sessionDAO);
+```
+
+#### 通过INI配置创建SecurityManager
+
+可以直接使用路径创建
+
+```
+Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro.ini");
+SecurityManager securityManager = factory.getInstance();
+SecurityUtils.setSecurityManager(securityManager);
+```
+
+也可以通过org.apache.shiro.config.Ini 类用程序方式创建
+
+```
+Ini ini = new Ini();
+//populate the Ini instance as necessary
+Factory<SecurityManager> factory = new IniSecurityManagerFactory(ini);
+SecurityManager securityManager = factory.getInstance();
+SecurityUtils.setSecurityManager(securityManager);
+```
+
+**注意**
+
+*INI* 基于文本配置，在独立命名的区域内通过成对的键名/键值组成。键名在每个区域内必须唯一，但在整个配置文件中并不需要这样（这点和JDK的Properties不同），每一个区域（section）可以看作是一个独立的Properties 定义。
+
+注释行可以用“#”或“;”标识。
+
+
+```
+# =======================
+# Shiro INI configuration
+# =======================
+
+[main]
+# Objects and their properties are defined here,
+# Such as the securityManager, Realms and anything
+# else needed to build the SecurityManager
+
+[users]
+# The 'users' section is for simple deployments
+# when you only need a small number of statically-defined
+# set of User accounts.
+
+[roles]
+# The 'roles' section is for simple deployments
+# when you only need a small number of statically-defined
+# roles.
+
+[urls]
+# The 'urls' section is used for url-based security
+# in web applications.  We'll discuss this section in the
+# Web documentation
+```
+
+
+#### main
+
+```
+[main]
+sha256Matcher = org.apache.shiro.authc.credential.Sha256CredentialsMatcher
+
+myRealm = com.company.security.shiro.DatabaseRealm
+
+myRealm.connectionTimeout = 30000
+#myRealm.setConnectionTimeout(30000);
+
+myRealm.username = jsmith
+#myRealm.setUsername("jsmith");
+
+myRealm.password = secret
+
+myRealm.credentialsMatcher = $sha256Matcher
+
+securityManager.sessionManager.globalSessionTimeout = 1800000
+#转换逻辑为（通过BeanUtils）：
+#securityManager.getSessionManager().setGlobalSessionTimeout(1800000);
+```
+怎么做到的呢？它假定所有对象都是兼容 JavaBean 的 POJO。在设置这些属性时，Shiro 默认使用 Apache 通用的 BeanUtils 来完成这项复杂的工作，所以虽然 INI 值是文本，BeanUtils 知道如何将这些字符串值转换为适合的原始值类型并调用合适的 JavaBeans 的 setter 方法。
+
+
+如果你想设置的值并不是一个原始值，而是另一个对象怎么办呢？你可以使用一个 $ 符来引用一个之前定义的实例
+
+```myRealm.credentialsMatcher = $sha256Matcher
+```
+
+> 这定义了名为 sha256Matcher 的对象并且使用 BeanUtils 将其设置到myRealm 的实例中（通过调用 myRealm.setCredentialsMatcher(sha256Matcher) 方法）。
+
+列表（Lists）、集合（Sets）、图（Maps）可以像其它属性一样设置--直接设置或者像嵌套属性一样，对于列表和集合，只需指定一个逗号分割的值集或者对象引用集。
+
+```
+sessionListener1 = com.company.my.SessionListenerImplementation
+sessionListener2 = com.company.my.other.SessionListenerImplementation
+securityManager.sessionManager.sessionListeners = $sessionListener1, $sessionListener2
+
+```
+
+
+对于图（Maps），你可以指定以逗号分割的键-值对列表，每个键-值之间用冒号分割
+
+```
+object1 = com.company.some.Class
+object2 = com.company.another.Class
+...
+anObject = some.class.with.a.Map.property
+
+anObject.mapProperty = key1:$object1, key2:$object2
+
+anObject.map = $objectKey1:$objectValue1, $objectKey2:$objectValue2
+```
+
+
+#### 顺序问题
+
+每一个对象实例以及每一个指定的值都将按照其在 [main] 区域中产生的顺序的执行，这些行最终转换为 JavaBeans 的 getter/setter 方法调用，这些方法按同样的顺序调用。
+
+#### securityManager 实例化的问题
+
+因为securityManager实例是特殊的--它已经为你实例化过了并且准备好了，所以你并不需要知道指定的实例化SecurityManager的实现类，自动会产生Default SecurityManager
+
+但你也可以指定securityManager
+
+```
+securityManager = com.company.security.shiro.MyCustomSecurityManager
+```
+
+当然，很少需要这样--Shiro 的 SecurityManager 实现可以按需求进行定制，你可能要问一下自己（或者用户群）你是否真的需要这样做。
+
+
+#### users
+
+
+[users]区域允许你定义一组静态的用户帐号，这对于那些只有少数用户帐号并且用户帐号不需要在运行时动态创建的环境来说非常有用。下面是一个例子：
+
+```
+[users]
+admin = secret
+lonestarr = vespa, goodguy, schwartz
+darkhelmet = ludicrousspeed, badguy, schwartz
+```
+
+- 等号左边的值是用户名；
+- 等号右侧第一个值是用户密码，密码是必须的；
+- 密码之后用逗号分割的值是赋予用户的角色名，角色名是可选的。
+
+它会自动生成IniRealm
+
+#### Encrypting Passwords 密码加密
+
+reference：
+
+- [Shiro 的 Command Line Hasher](http://shiro.apache.org/command-line-hasher.html)
+
+> - 它可以加密密码和其它类型的资源，尤其使给 INI[user] 密码加密变得非常简单。
+
+如果你不希望[users]区域下的密码以明文显示
+
+你要指定了加密后的密码值，你必须告诉 shiro 它们是加密的，你可以通过配置配置在[main]隐含创建的iniRealm相应的CredentialsMatcher 实现来告知你使用的哈希算法：
+
+```
+sha256Matcher = org.apache.shiro.authc.credential.Sha256CredentialsMatcher
+
+iniRealm.credentialsMatcher = $sha256Matcher
+```
+
+
+#### roles
+
+```
+[roles]
+# 'admin' role has all permissions, indicated by the wildcard '*'
+admin = *
+# The 'schwartz' role can do anything (*) with any lightsaber:
+schwartz = lightsaber:*
+# The 'goodguy' role is allowed to 'drive' (action) the winnebago (type) with
+# license plate 'eagle5' (instance specific id)
+goodguy = winnebago:drive:eagle5
+
+```
+
+format:
+
+```
+rolename = permissionDefinition1, permissionDefinition2, ..., permissionDefinitionN
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------------------
 ## 源码
 
 ```
-String getName(); //返回一个唯一的Realm名字  
-boolean supports(AuthenticationToken token); //判断此Realm是否支持此Token  
-AuthenticationInfo getAuthenticationInfo(AuthenticationToken token)  
- throws AuthenticationException;  //根据Token获取认证信息  
+String getName(); //返回一个唯一的Realm名字
+boolean supports(AuthenticationToken token); //判断此Realm是否支持此Token
+AuthenticationInfo getAuthenticationInfo(AuthenticationToken token)
+ throws AuthenticationException;  //根据Token获取认证信息
 ```
 
 
