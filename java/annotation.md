@@ -27,7 +27,8 @@ java还提供了4中注解，专门负责新注解的创建:
 
 **例如：**
 
-```@Retention(RetentionPolicy.RUNTIME)```
+```@Retention(RetentionPolicy.RUNTIME)
+```
 
 ## @Document
 
@@ -46,9 +47,7 @@ Documented是一个标记注解，没有成员。
 
 ```
 public class AnnoUtil {
-
     public static void getInfo(Class<?> clazz) {
-
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
             if (field.isAnnotationPresent(Anno.class) == true) {
@@ -59,7 +58,6 @@ public class AnnoUtil {
         }
     }
 }
-
 ```
 
 

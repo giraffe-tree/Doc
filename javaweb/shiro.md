@@ -5,7 +5,7 @@
 
 ## shiro 架构
 
-** 以用户登录为例 **
+**以用户登录为例**
 
 1. 使用用户的登录信息创建令牌token
 	- 登录过程被抽象为shiro验证令牌是否具有合法身份以及相关权限
@@ -118,7 +118,7 @@ Shiro不提供维护用户/权限，而是通过Realm让开发人员自己注入
 > 认证器，负责主体认证的，这是一个扩展点，如果用户觉得Shiro默认的不好，可以自定义实现；其需要认证策略（Authentication Strategy），即什么情况下算用户认证通过了
 
 
-**Authrizer：**
+**Authorizer：**
 
 > 授权器，或者访问控制器，用来决定主体是否有权限进行相应的操作；即控制着用户能访问应用中的哪些功能
 
@@ -517,39 +517,231 @@ currentUser.logout(); //清除验证信息，使 session 失效
 ![tupian](http://i1288.photobucket.com/albums/b484/waylau/apache-shiro/ShiroAuthenticationSequence_zps01b19597.png)
 
 
+### AuthenticationStrategy
+
+TODO:
+
+当一个程序中定义了两个或多个 realm 时，ModularRealmAuthenticator 使用一个内部的AuthenticationStrategy 组件来决定一个验证是否成功。s
+
+例如，如果一个 Realm 验证一个 AuthenticationToken 成功，但其他的都失败了，那这次尝试是否被认为是成功的呢？是不是所有 Realm 验证都成功了才认为是成功？又或者一个 Realm 验证成功，是否还有必要讨论其他Realm？AuthenticationStrategy 根据程序需求做出恰当的决定。
+
+AuthenticationStrategy 还有责任从每一个成功的 Realm 中收集结果并将它们“绑定”到一个单独的 AuthenticationInfo，这个AuthenticationInfo 实例是被 Authenticator 实例返回的，并且 shiro 用它来展现一个 Subject 的最终身份
+
+*如果你在程序中使用多于一个的 Realm 从多个数据源中获取帐户数据，程序可看到的是 AuthenticationStrategy 最终负责 Subject 身份最终“合并（merged）”的视图*
 
 
+AtLeastOneSuccessfulStrategy
+> 如果有一个或多个Realm验证成功，所有的尝试都被认为是成功的，如果没有一个验证成功，则该次尝试失败
 
+FirstSuccessfulStrategy
+> 只有从第一个成功验证的Realm返回的信息会被使用，以后的Realm将被忽略，如果没有一个验证成功，则该次尝试失败
 
+AllSuccessfulStrategy
+>所有配置的Realm在全部尝试中都成功验证才被认为是成功，如果有一个验证不成功，则该次尝试失败。
 
+**默认**
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-------------------
-## 源码
+ModularRealmAuthenticator 默认使用 AtLeastOneSuccessfulStrategy 实现，这也是最常用的策略，然而你也可以配置你希望的不同的策略。
 
 ```
-String getName(); //返回一个唯一的Realm名字
-boolean supports(AuthenticationToken token); //判断此Realm是否支持此Token
-AuthenticationInfo getAuthenticationInfo(AuthenticationToken token)
- throws AuthenticationException;  //根据Token获取认证信息
+[main]
+
+authcStrategy = org.apache.shiro.authc.pam.FirstSuccessfulStrategy
+securityManager.authenticator.authenticationStrategy = $authcStrategy
+```
+
+#### realm 验证顺序
+
+在使用 ShiroINI 配置文件形式时，你可以按你希望其处理 AuthenticationToken 的顺序来配置 Realm，例如，在shiro.ini 中，Realm 将按照他们在INI文件中定义的顺序执行。
+
+明确定义 realm 执行的顺序，不管他们如何被定义，你可以设置 SecurityManager 的 realms 属性
+```
+blahRealm = com.company.blah.Realm
+...
+fooRealm = com.company.foo.Realm
+...
+barRealm = com.company.another.Realm
+
+securityManager.realms = $fooRealm, $barRealm, $blahRealm```
 ```
 
 
+## Authorization 授权
+
+授权有三个核心元素，在 Shiro 中我们经常要用到它们：权限（permissions）、角色（roles）和用户（users）。
+
+在 Shiro 中执行授权可以有三种途径：
+
+- 程序代码--你可以在你的 JAVA 代码中执行用类似于 if 和 else 的结构来执行权限检查。
+- JDK 注解--你可以在你的 JAVA 方法上附加权限注解
+- JSP/GSP 标签--你可以基于角色和权限控制 JSP 或 GSP 页面输出内容。
+
+#### Permissions
+
+权限指令只描述行为（和资源相关的动作），并不关心“谁”有能力执行这个动作。
+
+#### 判断role
+
+currentUser.hasRole(String roleName)
+
+- 如果Subject指定了特定的角色返回真，否则返回假；
+
+currentUser.checkRole("xxxxx");
+
+- 如果Subject被指定为特定角色则安静地返回否则抛出AuthorizationException异常；
+
+#### Permission Checks 权限检查
+```
+Permission printPermission = new PrinterPermission("laserjet4400n", "print");
+
+currentUser.isPermitted(printPermission);
+//或者使用
+currentUser.isPermitted("printer:print:laserjet4400n");
+```
+
+所有主要权限部件--printer（资源类型）、print（动作）、laserjet4400n（实例ID）都表现为一个字符串。
+
+定义一种以冒号分割的特殊形式的字符串，定义于Shiro的 org.apache.shiro.authz.permission.WildcardPermission中，它适合大多数用户的需求。
+
+```
+Permission p = new WildcardPermission("printer:print:laserjet4400n");
+```
+
+#### Permission Assertions 权限判断
+
+另一种检查 Subject 是否被允许做某件事的方法是，在逻辑执行之前简单判断他们是否具备所需的权限，如果不允许，AuthorizationException异常被抛出，如果是允许的，判断将安静地执行并按期望顺序执行下面的逻辑。
+
+```
+Subject currentUser = SecurityUtils.getSubject();
+
+//担保允许当前用户
+//开一个银行帐户：
+Permission p = new AccountPermission("open");
+currentUser.checkPermission(p);
+openBankAccount();
+```
+
+
+```
+Subject currentUser = SecurityUtils.getSubject();
+
+//担保允许当前用户
+//开一个银行帐户：
+currentUser.checkPermission("account:open");
+openBankAccount();
+```
+
+### Annotation-based Authorization 基于注解的授权
+
+
+#### RequiresAuthentication 注解
+
+RequiresAuthentication 注解表示在访问或调用被注解的类/实例/方法时，要求 Subject 在当前的 session中已经被验证。
+
+```
+@RequiresAuthentication
+public void updateAccount(Account userAccount) {
+    //这个方法只会被调用在
+    //Subject 保证被认证的情况下
+    ...
+}
+```
+
+或者不用注解
+
+```
+public void updateAccount(Account userAccount) {
+    if (!SecurityUtils.getSubject().isAuthenticated()) {
+        throw new AuthorizationException(...);
+    }
+
+    //这里 Subject 保证被认证的情况下
+    ...
+}
+```
+
+
+#### RequiresGuest 注解
+
+RequiresGuest 注解表示要求当前Subject是一个“guest(访客)”，也就是，在访问或调用被注解的类/实例/方法时，他们没有被认证或者在被前一个Session 记住。
+
+```
+@RequiresGuest
+public void signUp(User newUser) {
+    //这个方法只会被调用在
+    //Subject 未知/匿名的情况下
+    ...
+}
+```
+
+或者不用注解
+
+```
+public void signUp(User newUser) {
+    Subject currentUser = SecurityUtils.getSubject();
+    PrincipalCollection principals = currentUser.getPrincipals();
+    if (principals != null && !principals.isEmpty()) {
+        //已知的身份 - 不是 guest（访客）:
+        throw new AuthorizationException(...);
+    }
+
+    //在这里 Subject 确保是一个 'guest（访客）'
+    ...
+}
+```
+
+#### RequiresPermissions 注解
+
+RequiresPermissions 注解表示要求当前Subject在执行被注解的方法时具备一个或多个对应的权限。
+
+```
+@RequiresPermissions("account:create")
+public void createAccount(Account account) {
+    //这个方法只会被调用在
+    //Subject 允许创建一个 account 的情况下
+    ...
+}
+```
+
+或者不用注解
+
+```
+public void createAccount(Account account) {
+    Subject currentUser = SecurityUtils.getSubject();
+    if (!subject.isPermitted("account:create")) {
+        throw new AuthorizationException(...);
+    }
+
+    //在这里 Subject 确保是允许
+    ...
+}
+```
+
+#### RequiresRoles 注解
+
+```
+@RequiresRoles("administrator")
+public void deleteUser(User user) {
+    //这个方法只会被 administrator 调用
+    ...
+}
+```
+
+
+#### RequiresUser 注解
+
+RequiresUser* 注解表示要求在访问或调用被注解的类/实例/方法时，当前 Subject 是一个程序用户，“程序用户”是一个已知身份的 Subject，或者在当前 Session 中被验证过或者在以前的 Session 中被记住过。
 
 
 
+```
+@RequiresUser
+public void updateAccount(Account account) {
+    //这个方法只会被 'user' 调用
+    //i.e. Subject 是一个已知的身份with a known identity
+    ...
+}
+```
 
 
 
