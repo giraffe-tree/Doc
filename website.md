@@ -2,6 +2,10 @@ Shiro 中文文档
 
 https://waylau.com/apache-shiro-1.2.x-reference/
 
+张开涛
+
+http://jinnianshilongnian.iteye.com/blog/2019547
+
 多线程
 
 https://zhuanlan.zhihu.com/p/26441926
