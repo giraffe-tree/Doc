@@ -431,6 +431,95 @@ rolename = permissionDefinition1, permissionDefinition2, ..., permissionDefiniti
 ```
 
 
+## Authentication 认证
+
+需要通过向 Shiro 提供用户的身份（principals）和证明（credentials ）来判定是否和系统所要求的匹配。
+
+### Principals(身份) 是Subject的“标识属性”
+
+最好的身份信息（Principals）是使用在程序中唯一的标识--典型的使用用户名或邮件地址。
+
+**Primary Principal**(最主要的身份)虽然 Shiro 可以使用任何数量的身份，Shiro 还是希望一个程序精确地使用一个主要的身份--一个仅有的唯一标识 Subject 值。在多数程序中经常会是一个用户名、邮件地址或者全局唯一的用户 ID。
+
+### Credentials(证明)
+
+通常是只有 Subject 知道的机密内容，用来证明他们真正拥有所需的身份，一些简单的证书例子如密码、指纹、眼底扫描和X.509证书等。
+
+### Subject 验证的过程
+
+#### 第一步：收集用户身份和证明
+
+```
+UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+
+//”Remember Me” 功能是内建的
+token.setRememberMe(true);
+```
+
+在这里我们使用 *UsernamePasswordToken* ，支持所有常用的用户名/密码验证途径，这是一个 *org.apache.shiro.authc.AuthenticationToken* 接口的实现，这个接口被 Shiro 认证系统用来提交身份和证明。
+
+#### 第二步：提交身份和证明
+
+```
+Subject currentUser = SecurityUtils.getSubject();
+
+currentUser.login(token);
+```
+
+#### 第三步：处理成功或失败
+
+
+```
+try {
+    currentUser.login(token);
+} catch ( UnknownAccountException uae ) { ...
+} catch ( IncorrectCredentialsException ice ) { ...
+} catch ( LockedAccountException lae ) { ...
+} catch ( ExcessiveAttemptsException eae ) { ...
+} ... 捕获你自己的异常 ...
+} catch ( AuthenticationException ae ) {
+    //未预计的错误?
+}
+```
+
+
+### Remembered vs. Authenticated
+
+Shiro 支持在登录过程中执行"remember me"，在此值得指出，一个已记住的 Subject（remembered Subject）和一个正常通过认证的 Subject（authenticated Subject）在 Shiro 是完全不同的。
+
+- **记住的（Remembered）**：一个被记住的 Subject 没有已知身份（也就是说subject.getPrincipals())返回空），但是它的身份被先前的认证过程记住，并存于先前session中，一个被认为记住的对象在执行subject.isRemembered())返回真。
+
+- **已验证（Authenticated）**：一个被验证的 Subject 是成功验证后（如登录成功）并存于当前 session 中，一个被认为验证过的对象调用subject.isAuthenticated()) 将返回真。
+
+*已记住（Remembered）和已验证（Authenticated）是互斥的--一个标识值为真另一个就为假，反过来也一样。*
+
+#### 区别
+
+当一个用户仅仅在上一次与程序交互时被记住，证明的状态已经不存在了：被记住的身份只是给系统一个信息这个用户可能是谁，但不确定，没有办法担保这个被记住的 Subject 是所要求的用户，一旦这个 Subject 被验证通过，他们将不再被认为是记住的因为他们的身份已经被验证并存于当前的session中。
+
+区分不同业务场景，在普通浏览界面使用 *Remembered*,而在购买、敏感操作时需要*强制登录* ，保证 Authenticated 状态
+
+
+#### 退出登录
+
+```
+currentUser.logout(); //清除验证信息，使 session 失效
+```
+
+当你调用 logout，任何现存的 session 将变为不可用并且所有的身份信息将消失（如：在 web 程序中，RememberMe 的 Cookie 信息同样被删除）。
+
+
+*因为在 Web 程序中记住身份信息往往使用 Cookies，而 Cookies 只能在 Response 提交时才能被删除，所以强烈要求在为最终用户调用subject.logout() 之后立即将用户引导到一个新页面，确保任何与安全相关的 Cookies 如期删除，这是 Http 本身 Cookies 功能的限制而不是 Shiro 的限制。*
+
+### shiro 是如何认证的
+
+
+![tupian](http://i1288.photobucket.com/albums/b484/waylau/apache-shiro/ShiroAuthenticationSequence_zps01b19597.png)
+
+
+
+
+
 
 
 
