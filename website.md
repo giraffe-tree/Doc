@@ -1,7 +1,8 @@
 
 shiro servlet 实例
 - http://www.cnblogs.com/shanheyongmu/p/5740202.html
-
+- http://blog.csdn.net/eson_15/article/details/51787391
+    - spring jpa配置 http://www.cnblogs.com/liuyitian/p/4062748.html
 
 aspectj
 
