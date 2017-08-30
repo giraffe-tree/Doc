@@ -313,6 +313,9 @@ $ git push origin dev
 	2. 然后从远程删除。
 		 - git push origin :refs/tags/v0.9
 
+## 如何合并
+
+
 
 
 

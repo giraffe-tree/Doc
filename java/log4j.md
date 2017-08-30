@@ -66,4 +66,27 @@ log4j.logger.org.logicalcobwebs=WARN
 
 
 
+# Slf4j
+
+[使用Slf4j而不是log4j](http://www.oschina.net/translate/why-use-sl4j-over-log4j-for-logging)
+
+### BUG  不加入 commons-logging 会报错
+
+```java.lang.ClassNotFoundException: org.apache.commons.logging.LogFactory```
+
+解决：加入jar包依赖
+```
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-simple</artifactId>
+    <version>1.6.1</version>
+</dependency>
+<dependency>
+    <groupId>commons-logging</groupId>
+    <artifactId>commons-logging</artifactId>
+    <version>1.1.3</version>
+</dependency>
+```
+
+
 
