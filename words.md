@@ -10,3 +10,8 @@
 
 *Wildcard*
 >通配符
+
+*wizard*
+> 向导
+
+
