@@ -328,35 +328,191 @@ Spring通过<value>标签或value属性注入常量值，所有注入的数据�
 
 此处不是循环调用，循环调用是方法之间的环调用。  循环调用是无法解决的，除非有终结条件，否则就是死循环，最终导致内存溢出错误
 
-[spring3](http://jinnianshilongnian.iteye.com/blog/1415278)
+
+### 构造器循环依赖：
+
+表示通过构造器注入构成的循环依赖，此依赖是无法解决的，只能抛出BeanCurrentlyInCreationException异常表示循环依赖。
+
+### setter循环依赖：
+
+表示通过setter注入方式构成的循环依赖。对于setter注入造成的依赖是通过Spring容器提前暴露刚完成构造器注入但未完成其他步骤（如setter注入）的Bean来完成的，而且只能解决单例作用域的Bean循环依赖。
+
+
+出现循环依赖是设计上的问题，一定要避免！
 
 
 
+## 3.3 更多的DI 
+
+
+### 3.3.1  延迟初始化Bean
+
+延迟初始化也叫做惰性初始化，指不提前初始化Bean，而是只有在真正使用时才创建及初始化Bean。
+
+配置方式很简单只需在<bean>标签上指定 “lazy-init” 属性值为“true”即可延迟初始化Bean。
+
+延迟初始化的Bean通常会在第一次使用时被初始化；或者在被非延迟初始化Bean作为依赖对象注入时在会随着初始化该Bean时被初始化，因为在这时使用了延迟初始化Bean。
+
+容器管理初始化Bean消除了编程实现延迟初始化，完全由容器控制，只需在需要延迟初始化的Bean定义上配置即可，比编程方式更简单，而且是无侵入代码的。
+
+```
+<bean id="helloApi"  
+class="cn.javass.spring.chapter2.helloworld.HelloImpl"  
+lazy-init="true"/>  
+
+```
+
+### 3.3.2  使用depends-on
+
+
+depends-on是指指定Bean初始化及销毁时的顺序，使用depends-on属性指定的Bean要先初始化完毕后才初始化当前Bean，由于只有“singleton”Bean能被Spring管理销毁，所以当指定的Bean都是“singleton”时，使用depends-on属性指定的Bean要在指定的Bean之后销毁。
+
+
+- 在 decorator bean初始化之前要先初始化 HelloWorld 
+- 在销毁 HelloWorld 前，要先销毁 decorator
+
+```
+  <bean id="HelloWorldDecorator" class="com.chen.spring.HelloWorldDecorator" depends-on="HelloWorld">
+        <property name="iHello" ><ref bean="HelloWorld"></ref> </property>
+</bean>
+```
+
+destroy-method="destroy"：指定销毁方法，只有“singleton”作用域能销毁，“prototype”作用域的一定不能，其他作用域不一定能
+
+```
+ <bean id="HelloWorldDecorator" class="com.chen.spring.HelloWorldDecorator" depends-on="HelloWorld"
+          init-method="init" destroy-method="destroy" scope="singleton">
+        <property name="iHello">
+            <ref bean="HelloWorld"></ref>
+        </property>
+    </bean>
+```
+
+```
+ @Test
+    public void testDecorator(){
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("chapter2/helloworld.xml");
+        IHello iHello = context.getBean("HelloWorldDecorator", IHello.class);
+
+        iHello.sayHello();
+         //一点要注册销毁回调，否则我们定义的销毁方法不执行  
+        context.registerShutdownHook();
+
+    }
+```
+
+output:
+
+```
+HelloWorld init....
+HelloWorldDecorator init....
+==========装饰一下===========
+hello world 
+==========装饰一下===========
+八月 31, 2017 11:02:52 下午 org.springframework.context.support.ClassPathXmlApplicationContext doClose
+信息: Closing org.springframework.context.support.ClassPathXmlApplicationContext@449b2d27: startup date [Thu Aug 31 23:02:51 CST 2017]; root of context hierarchy
+HelloWorldDecorator destroy...
+HelloWorld destroy...
+```
+
+### 3.3.3  自动装配
+
+自动装配的好处是减少构造器注入和setter注入配置，减少配置文件的长度。自动装配通过配置<bean>标签的“autowire”属性来改变自动装配方式。接下来让我们挨着看下配置的含义。
 
 
 
+       一、default：表示使用默认的自动装配，默认的自动装配需要在<beans>标签中使用default-autowire属性指定，
+       其支持“no”、“byName ”、“byType”、“constructor”四种自动装配，如果需要覆盖默认自动装配，请继续往下看；
+ 
+       二、no：意思是不支持自动装配，必须明确指定依赖。
+ 
+       三、byName：通过设置Bean定义属性autowire="byName"，意思是根据名字进行自动装配，只能用于setter注入。比如我们有方法“setHelloApi”，则“byName”方式Spring容器将查找名字为helloApi的Bean并注入，如果找不到指定的Bean，将什么也不注入。     
 
 
+#### ByName 
+
+HelloWorldDecorator 中 有参数 iHello
+ 
+```
+  <bean id="iHello" class="com.chen.spring.HelloWorld" init-method="init" destroy-method="destroy">
+    </bean>
+    <bean id="HelloWorldDecorator" class="com.chen.spring.HelloWorldDecorator" depends-on="iHello"
+          autowire="byName">
+    </bean>
+```
+
+在根据名字注入时，将把当前Bean自己排除在外
 
 
+#### ByType
+
+通过设置Bean定义属性autowire="byType"，意思是指根据类型注入，用于setter注入，比如如果指定自动装配方式为“byType”，而“setHelloApi”方法需要注入HelloApi类型数据，则Spring容器将查找HelloApi类型数据
+
+如果找到一个则注入该Bean，如果找不到将什么也不注入，如果找到多个Bean将优先注入<bean>标签“primary”属性为true的Bean，否则抛出异常 NoUniqueBeanDefinitionException 来表明有个多个Bean发现但不知道使用哪个.
+
+- 使用“primary”属性为true来指定某个Bean为首选Bean(只有这种方法才是绝对指定，其他方法均有可能报错 NoUniqueBeanDefinitionException)
+- 通过设置Bean定义的“autowire-candidate”属性为false来把指定Bean后自动装配候选者中移除
+
+#### constructor
+
+#### 不是所有类型都能自动装配
+
+不能自动装配的数据类型：Object、基本数据类型
+
+自动装配注入方式能和配置注入方式一同工作吗？当然可以，大家只需记住配置注入的数据会覆盖自动装配注入的数据。
+
+### 3.3.4  依赖检查
+
+依赖检查：用于检查Bean定义的属性都注入数据了，不管是自动装配的还是配置方式注入的都能检查，如果没有注入数据将报错，从而提前发现注入错误，只检查具有setter方法的属性。
+
+- none：默认方式，表示不检查；
+- objects：检查除基本类型外的依赖对象
+- simple：对基本类型进行依赖检查，包括数组类型，其他依赖不报
+- all：对所以类型进行依赖检查，配置方式为：dependency-check="all"
 
 
+```
+<bean id="helloApi" class="cn.javass.spring.chapter2.helloworld.HelloImpl"/>  
+<!-- 注意我们没有注入helloApi，所以测试时会报错 -->  
+<bean id="bean"  
+     class="cn.javass.spring.chapter3.bean.HelloApiDecorator"  
+     dependency-check="objects">  
+<property name="message" value="Haha"/>  
+</bean>  
+```
 
+### 3.3.5 方法注入
 
+所谓方法注入其实就是通过配置方式覆盖或拦截指定的方法，通常通过代理模式实现。
 
+因为Spring是通过CGLIB动态代理方式实现方法注入，也就是通过动态修改类的字节码来实现的，本质就是生成需方法注入的类的子类方式实现。
 
+[3.3.5 方法注入](http://jinnianshilongnian.iteye.com/blog/1415461)
 
+## 3.4  Bean的作用域 scope
 
+### 3.4.1  基本的作用域
 
+Spring提供“singleton”和“prototype”两种基本作用域，另外提供“request”、“session”、“global session”三种web作用域；Spring还允许用户定制自己的作用域。
 
+#### singleton
 
+- **singleton**：指“singleton”作用域的Bean只会在每个Spring IoC容器中存在一个实例，而且其完整生命周期完全由Spring容器管理。对于所有获取该Bean的操作Spring容器将只返回同一个Bean。
 
+1. 通过在类上定义静态属性保持该实例(侵入式，spring不使用这种方法)
+2.  通过注册表方式
 
+注册表实现了Spring接口“SingletonBeanRegistry”，该接口定义了操作共享的单例对象，Spring容器实现将实现此接口；所以共享单例对象通过“registerSingleton”方法注册，通过“getSingleton”方法获取，消除了编程方式单例，注意在实现中不考虑并发
 
+Spring是注册表单例设计模式的实现，在Spring容器中如果没指定作用域默认就是“singleton”
 
+Spring不仅会缓存单例对象，Bean定义也是会缓存的，对于惰性初始化的对象是在首次使用时根据Bean定义创建并存放于单例缓存池。
 
+#### prototype
 
+**prototype**即原型，指每次向Spring容器请求获取Bean都返回一个全新的Bean，相对于“singleton”来说就是不缓存Bean，每次都是一个根据Bean定义创建的全新Bean。
 
+ 
 
 
 
