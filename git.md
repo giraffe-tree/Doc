@@ -315,7 +315,9 @@ $ git push origin dev
 
 ## 如何合并
 
+## 解决冲突
 
+[解决冲突](http://www.cnblogs.com/sinojelly/archive/2011/08/07/2130172.html)
 
 
 
