@@ -218,6 +218,149 @@ Spring类型转换系统对于boolean类型进行了容错处理，除了可以�
     </bean>
 ```
 
+### 3.1.6  注入集合、数组和字典
+
+```
+<bean id  = "hello2" class="com.chen.test.HelloList">
+        <property name="strings">
+        <list>
+            <value>1</value>
+            <value>2</value>
+            <value>3</value>
+        </list>
+   </property>
+```
+
+map
+
+```
+   简写：<map>
+             <entry key="键常量" value="值常量"/>
+             <entry key-ref="键引用" value-ref="值引用"/>
+            </map>
+         全写：<map>
+             <entry><key><value>键常量</value></key><value>值常量</value></entry>
+             <entry><key><ref bean="键引用"/></key><ref bean="值引用"/></entry>
+           </map>
+```
+
+
+### 3.1.7  引用其它Bean
+
+```
+    <bean id = "beanRef" class = "com.chen.bean.demo.HelloImpl"></bean>
+
+    <bean id = "hello3" class = "com.chen.bean.demo.Hello1">
+        <constructor-arg index="0" ref = "beanRef"></constructor-arg>
+    </bean>
+```
+
+equals
+
+```
+<bean id = "beanRef" class = "com.chen.bean.demo.HelloImpl"></bean>
+
+<bean id = "hello3" class = "com.chen.bean.demo.Hello1">
+        <!-- <constructor-arg index="0" ref = "beanRef"></constructor-arg> -->
+        <!-- <constructor-arg index="0" >
+            <ref local="beanRef"/>
+        </constructor-arg> -->
+        <constructor-arg name="hello" >
+            <ref local="beanRef"/>
+        </constructor-arg>
+    </bean>
+
+```
+
+
+
+
+### 引用父容器中的Bean
+```
+    @Test
+    public void testParAndSon() {
+        ApplicationContext parentBeanContext = new ClassPathXmlApplicationContext("chapter/helloParent.xml");
+
+        // 初始化当前容器
+        BeanFactory beanContext = new ClassPathXmlApplicationContext(new String[] { "chapter/hello.xml" },
+                parentBeanContext);
+        IHello bean1 = beanContext.getBean("bean1", IHello.class);
+        bean1.hello();// 该Bean引用local bean
+        IHello bean2 = beanContext.getBean("bean2", IHello.class);
+        bean2.hello();// 该Bean引用parent bean
+    }
+```
+
+### 3.1.8  内部Bean定义
+
+内部Bean就是在<property>或<constructor-arg>内通过<bean>标签定义的Bean，该Bean不管是否指定id或name，该Bean都会有唯一的匿名标识符，而且不能指定别名，该内部Bean对其他外部Bean不可见
+
+
+```
+<bean id="bean3" class="com.chen.bean.demo.Hello1">
+        <property name="hello">
+            <bean id = "hello123" class="com.chen.bean.demo.HelloImpl">
+                <property name="name" value="cc"></property>
+            </bean>
+        </property>
+    </bean>
+```
+
+### 3.1.9  处理null值
+
+Spring通过<value>标签或value属性注入常量值，所有注入的数据都是字符串，那如何注入null值呢？通过“null”值吗？当然不是因为如果注入“null”则认为是字符串。Spring通过<null/>标签注入null值。即可以采用如下配置方式
+
+```
+<bean id="bean3" class="com.chen.bean.demo.Hello1">
+        <property name="hello">
+            <bean id = "hello123" class="com.chen.bean.demo.HelloImpl">
+                <property name="name" ><null/></property>
+            </bean>
+        </property>
+    </bean>
+```
+
+
+## 3.2 循环依赖
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
