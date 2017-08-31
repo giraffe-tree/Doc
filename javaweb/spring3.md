@@ -323,10 +323,12 @@ Spring通过<value>标签或value属性注入常量值，所有注入的数据�
 
 ## 3.2 循环依赖
 
+ 循环依赖就是循环引用，就是两个或多个Bean相互之间的持有对方，比如CircleA引用CircleB，CircleB引用CircleC，CircleC引用CircleA，则它们最终反映为一个环。
 
 
+此处不是循环调用，循环调用是方法之间的环调用。  循环调用是无法解决的，除非有终结条件，否则就是死循环，最终导致内存溢出错误
 
-
+[spring3](http://jinnianshilongnian.iteye.com/blog/1415278)
 
 
 
