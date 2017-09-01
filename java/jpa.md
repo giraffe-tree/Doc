@@ -4,6 +4,9 @@ http://blog.csdn.net/zhangjunjie789/article/details/45117913
 
 http://www.cnblogs.com/je-ge/p/6143134.html
 
+【原创】纯干货，Spring-data-jpa详解，全方位介绍。
+http://www.cnblogs.com/dreamroute/p/5173896.html
+
 ## JPA规范
 
 JPA作为一种规范——也就说JPA规范中提供的只是一些接口，显然接口不能直接拿来使用。虽然应用程序可以面向接口编程，但JPA底层一定需要某种JPA实现，否则JPA依然无法使用。
