@@ -513,15 +513,35 @@ Spring不仅会缓存单例对象，Bean定义也是会缓存的，对于惰性�
 **prototype**即原型，指每次向Spring容器请求获取Bean都返回一个全新的Bean，相对于“singleton”来说就是不缓存Bean，每次都是一个根据Bean定义创建的全新Bean。
 
  
+### 3.4.2  Web应用中的作用域
+
+request作用域：表示每个请求需要容器创建一个全新Bean
+
+session作用域：表示每个会话需要容器创建一个全新Bean。
 
 
+### 3.4.4 自定义作用域
 
 
+## 4.1 资源resource
 
 
-
-
-
+ Spring 提供一个Resource接口来统一这些底层资源一致的访问，而且提供了一些便利的接口，从而能提供我们的生产力。
+ 
+TODO：
+[4.1 资源resource](http://jinnianshilongnian.iteye.com/blog/1416319)
+ 
+ 
+ 
+ 
+## 7.1 对JDBC 的支持
+ 
+ 
+ git
+ 
+ 
+ 
+ 
 
 
 
