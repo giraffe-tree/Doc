@@ -570,3 +570,76 @@ ORM全称对象关系映射（Object/Relation Mapping），指将Java对象状�
 > http://blog.csdn.net/kris234seth/article/details/49872867
 
 
+### 8.3
+
+### 8.4  集成JPA
+
+ Spring目前提供集成Hibernate、OpenJPA、TopLink、EclipseJPA四个JPA标准实现。
+
+
+#### **LocalEntityManagerFactoryBean**
+
+适用于那些仅使用JPA进行数据访问的项目，该FactoryBean将根据JPA PersistenceProvider自动检测配置文件进行工作，一般从“META-INF/persistence.xml”读取配置信息，这种方式最简单，但不能设置Spring中定义的DataSource，且不支持Spring管理的全局事务，而且JPA 实现商可能在JVM启动时依赖于VM agent从而允许它们进行持久化类字节码转换（不同的实现厂商要求不同，需要时阅读其文档），不建议使用这种方式
+
+
+#### **LocalContainerEntityManagerFactoryBean**
+
+指定使用本地容器管理EntityManagerFactory，从而进行细粒度控制
+
+适用于所有环境的FactoryBean，能全面控制EntityManagerFactory配置,如指定Spring定义的DataSource等等。
+
+
+
+jpaVendorAdapter：  用于设置实现厂商JPA实现的特定属性
+
+>  其中最重要的属性是“database”，用来指定使用的数据库类型，
+
+```
+<property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="database" value="MYSQL" />
+                 <property name="databasePlatform" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+
+                <!-- <property name="database" value="HSQL" /> -->
+                <!-- <property name="databasePlatform" value="org.hibernate.dialect.HSQLDialect"
+                    /> -->
+            </bean>
+        </property>
+```
+
+jpaDialect：用于指定一些高级特性，如事务管理，获取具有事务功能的连接对象等
+
+```
+<property name="jpaDialect">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+        </property>
+```
+
+jpaProperties和jpaPropertyMap：指定JPA属性；如Hibernate中指定是否显示SQL的“hibernate.show_sql”属性，对于jpaProperties设置的属性自动会放进jpaPropertyMap中
+
+
+```
+
+<property name="jpaPropertyMap">
+            <map>
+                <entry key="hibernate.show_sql" value="${hibernate.show_sql}" />
+                <entry key="hibernate.format_sql" value="true" />
+                <entry key="hibernate.use_sql_comments" value="true" />
+                <entry key="javax.persistence.transactionType" value="RESOURCE_LOCAL" />
+            </map>
+        </property>
+```
+
+
+## 9.1  数据库事务概述
+
+
+EntityManager对象的事务管理方式有两种，分别为JTA和RESOURCE_LOCAL，即Java Transaction API方法和本地的事务管理。
+
+RESOURCE_LOCAL事务数据库本地的事务。它是数据库级别的事务，只能针对一种数据库，不支持分布式的事务。对于中小型的应用，可以采用RESOURCE_LOCAL管理EntityManager事务。
+
+
+
+
+
+
