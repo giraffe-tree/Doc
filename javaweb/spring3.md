@@ -342,7 +342,7 @@ Spring通过<value>标签或value属性注入常量值，所有注入的数据�
 
 
 
-## 3.3 更多的DI 
+## 3.3 更多的DI
 
 
 ### 3.3.1  延迟初始化Bean
@@ -356,9 +356,9 @@ Spring通过<value>标签或value属性注入常量值，所有注入的数据�
 容器管理初始化Bean消除了编程实现延迟初始化，完全由容器控制，只需在需要延迟初始化的Bean定义上配置即可，比编程方式更简单，而且是无侵入代码的。
 
 ```
-<bean id="helloApi"  
-class="cn.javass.spring.chapter2.helloworld.HelloImpl"  
-lazy-init="true"/>  
+<bean id="helloApi"
+class="cn.javass.spring.chapter2.helloworld.HelloImpl"
+lazy-init="true"/>
 
 ```
 
@@ -368,7 +368,7 @@ lazy-init="true"/>
 depends-on是指指定Bean初始化及销毁时的顺序，使用depends-on属性指定的Bean要先初始化完毕后才初始化当前Bean，由于只有“singleton”Bean能被Spring管理销毁，所以当指定的Bean都是“singleton”时，使用depends-on属性指定的Bean要在指定的Bean之后销毁。
 
 
-- 在 decorator bean初始化之前要先初始化 HelloWorld 
+- 在 decorator bean初始化之前要先初始化 HelloWorld
 - 在销毁 HelloWorld 前，要先销毁 decorator
 
 ```
@@ -395,7 +395,7 @@ destroy-method="destroy"：指定销毁方法，只有“singleton”作用域�
         IHello iHello = context.getBean("HelloWorldDecorator", IHello.class);
 
         iHello.sayHello();
-         //一点要注册销毁回调，否则我们定义的销毁方法不执行  
+         //一点要注册销毁回调，否则我们定义的销毁方法不执行
         context.registerShutdownHook();
 
     }
@@ -407,7 +407,7 @@ output:
 HelloWorld init....
 HelloWorldDecorator init....
 ==========装饰一下===========
-hello world 
+hello world
 ==========装饰一下===========
 八月 31, 2017 11:02:52 下午 org.springframework.context.support.ClassPathXmlApplicationContext doClose
 信息: Closing org.springframework.context.support.ClassPathXmlApplicationContext@449b2d27: startup date [Thu Aug 31 23:02:51 CST 2017]; root of context hierarchy
@@ -423,16 +423,16 @@ HelloWorld destroy...
 
        一、default：表示使用默认的自动装配，默认的自动装配需要在<beans>标签中使用default-autowire属性指定，
        其支持“no”、“byName ”、“byType”、“constructor”四种自动装配，如果需要覆盖默认自动装配，请继续往下看；
- 
+
        二、no：意思是不支持自动装配，必须明确指定依赖。
- 
-       三、byName：通过设置Bean定义属性autowire="byName"，意思是根据名字进行自动装配，只能用于setter注入。比如我们有方法“setHelloApi”，则“byName”方式Spring容器将查找名字为helloApi的Bean并注入，如果找不到指定的Bean，将什么也不注入。     
+
+       三、byName：通过设置Bean定义属性autowire="byName"，意思是根据名字进行自动装配，只能用于setter注入。比如我们有方法“setHelloApi”，则“byName”方式Spring容器将查找名字为helloApi的Bean并注入，如果找不到指定的Bean，将什么也不注入。
 
 
-#### ByName 
+#### ByName
 
 HelloWorldDecorator 中 有参数 iHello
- 
+
 ```
   <bean id="iHello" class="com.chen.spring.HelloWorld" init-method="init" destroy-method="destroy">
     </bean>
@@ -472,13 +472,13 @@ HelloWorldDecorator 中 有参数 iHello
 
 
 ```
-<bean id="helloApi" class="cn.javass.spring.chapter2.helloworld.HelloImpl"/>  
-<!-- 注意我们没有注入helloApi，所以测试时会报错 -->  
-<bean id="bean"  
-     class="cn.javass.spring.chapter3.bean.HelloApiDecorator"  
-     dependency-check="objects">  
-<property name="message" value="Haha"/>  
-</bean>  
+<bean id="helloApi" class="cn.javass.spring.chapter2.helloworld.HelloImpl"/>
+<!-- 注意我们没有注入helloApi，所以测试时会报错 -->
+<bean id="bean"
+     class="cn.javass.spring.chapter3.bean.HelloApiDecorator"
+     dependency-check="objects">
+<property name="message" value="Haha"/>
+</bean>
 ```
 
 ### 3.3.5 方法注入
@@ -512,7 +512,7 @@ Spring不仅会缓存单例对象，Bean定义也是会缓存的，对于惰性�
 
 **prototype**即原型，指每次向Spring容器请求获取Bean都返回一个全新的Bean，相对于“singleton”来说就是不缓存Bean，每次都是一个根据Bean定义创建的全新Bean。
 
- 
+
 ### 3.4.2  Web应用中的作用域
 
 request作用域：表示每个请求需要容器创建一个全新Bean
@@ -527,21 +527,46 @@ session作用域：表示每个会话需要容器创建一个全新Bean。
 
 
  Spring 提供一个Resource接口来统一这些底层资源一致的访问，而且提供了一些便利的接口，从而能提供我们的生产力。
- 
+
 TODO：
 [4.1 资源resource](http://jinnianshilongnian.iteye.com/blog/1416319)
- 
- 
- 
- 
-## 7.1 对JDBC 的支持
- 
- 
- git
- 
- 
- 
- 
 
+
+
+
+## 7.1 对JDBC 的支持
+
+### 7.1.2  Spring对JDBC的支持
+
+Spring通过抽象JDBC访问并提供一致的API来简化JDBC编程的工作量。我们只需要声明SQL、调用合适的Spring JDBC框架API、处理结果集即可。事务由Spring管理，并将JDBC受查异常转换为Spring一致的非受查异常，从而简化开发。
+
+ Spring主要提供JDBC模板方式、关系数据库对象化方式和SimpleJdbc方式三种方式来简化JDBC编程
+
+## 7.2  JDBC模板类
+
+  Spring JDBC抽象框架core包提供了JDBC模板类，其中JdbcTemplate是core包的核心类，所以其他模板类都是基于它封装完成的，JDBC模板类是第一种工作模式
+
+## 7.3 关系数据库操作对象化
+
+所谓关系数据库对象化其实就是用面向对象方式表示关系数据库操作，从而可以复用。
+
+Spring JDBC框架将数据库操作封装为一个RdbmsOperation，该对象是线程安全的、可复用的对象，是所有数据库对象的父类。而SqlOperation继承了RdbmsOperation，代表了数据库SQL操作，如select、update、call等
+
+
+## 8.1 对ORM的支持
+
+### 8.1.1  ORM框架
+
+ORM全称对象关系映射（Object/Relation Mapping），指将Java对象状态自动映射到关系数据库中的数据上，从而提供透明化的持久化支持，即把一种形式转化为另一种形式。
+
+### 8.1.2  Spring对ORM的支持
+
+### 8.2  集成Hibernate4
+
+【Spring实战】----Spring4.3.2集成Hibernate5.2.5
+> http://blog.csdn.net/honghailiang888/article/details/53418418
+
+ Spring4整合Hibernate4详细示例
+> http://blog.csdn.net/kris234seth/article/details/49872867
 
 
