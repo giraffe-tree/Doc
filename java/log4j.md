@@ -72,9 +72,13 @@ log4j.logger.org.logicalcobwebs=WARN
 
 ### BUG  不加入 commons-logging 会报错
 
-```java.lang.ClassNotFoundException: org.apache.commons.logging.LogFactory```
+```
+java.lang.ClassNotFoundException: org.apache.commons.logging.LogFactory
+
+```
 
 解决：加入jar包依赖
+
 ```
 <dependency>
     <groupId>org.slf4j</groupId>
