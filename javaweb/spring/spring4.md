@@ -86,6 +86,24 @@ IgnoringCase/IgnoresCase 不考虑大小写
 spring data JPA 将实现类和接口关联起来是基于接口名字的。
 
 
+### 排除依赖
+
+```
+<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+```
+
+
+
 
 
 
