@@ -12,7 +12,7 @@
 
 不管是哪种spring都会负责对它进行管理
 
-由 PersistencePrivider 通过不同的方法创建两种 entityManagerFactory，而entityManagerFactory 创建 entityManager(实体管理器) 
+由 PersistencePrivider 通过不同的方法创建两种 entityManagerFactory，而entityManagerFactory 创建 entityManager(实体管理器)
 
 这两种实体管理器工厂分别由对应的spring工厂bean创建
 
@@ -54,7 +54,7 @@ TODO:
 <jpa:repositories base-package="com.chen.rep" />
 
 ```
- 
+
 这个配置，会扫描扩展了 spring data jpa Repository 接口的所有接口。它会自动生成这个接口的实现。
 
 
@@ -62,7 +62,7 @@ Repository 的实现 是在spring应用启动时创建的，一共有18个方法
 
 ### 11.3.1 定义查询方法
 
-四个动词：*get*,*read* ,*find* 和 *count* 
+四个动词：*get*,*read* ,*find* 和 *count*
 
 Distinct 在生成查询记录时会确保在结果集中不包含重复记录
 
@@ -89,13 +89,23 @@ spring data JPA 将实现类和接口关联起来是基于接口名字的。
 
 
 
+## 注解大全
+
+### @PostConstruct
+
+通过 @PostConstruct 和 @PreDestroy 方法 实现初始化和销毁bean之前进行的操作
 
 
+###  @Qualifier
 
+@Autowired是根据类型进行自动装配的。如果当spring上下文中存在不止一个UserDao类型的bean时，就会抛出BeanCreationException异常;如果Spring上下文中不存在UserDao类型的bean，也会抛出BeanCreationException异常。我们可以使用@Qualifier配合@Autowired来解决这些问题。
 
+```
+@Qualifier("userServiceImpl")
+@Autowired(required = false)
+```
 
-
-
+参考:[spring @Qualifier注解](http://blog.csdn.net/clerk0324/article/details/25198457)
 
 
 
