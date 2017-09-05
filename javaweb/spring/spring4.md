@@ -1,5 +1,9 @@
 # Spring 4
 
+# 7 spring mvc高级技术
+
+
+
 
 ## 11.2 Spring 与 JPA
 
@@ -49,6 +53,8 @@ TODO:
 
 
 ## 11.3 借助spring data 实现自动化的JPA Repository
+
+参考：[基于javaconfig配置](https://www.java-success.com/spring-javaconfig-configuration-and-transactionmanager/)
 
 ```
 <jpa:repositories base-package="com.chen.rep" />
