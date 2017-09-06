@@ -2,7 +2,9 @@
 
 # 7 spring mvc高级技术
 
+[最简配置](http://blog.csdn.net/u012578322/article/details/61936505)
 
+以往都是通过配置web.xml文件来关联spring配置的，那这里的web.xml文件里面没有配置，是怎么拉起spring的呢？原因就在于这个AppInitalizer类了，继承了AbstractAnnotationConfigDispatcherServletInitializer的AppInitalizer的作用就类似以前的spring-context.xml，并且会在web项目运行初始化被自动发现并加载，这就是java config的魅力所在了，不管在哪里声明了配置了，只要继承了AbstractAnnotationConfigDispatcherServletInitializer，它就可以被自动加载。
 
 
 ## 11.2 Spring 与 JPA
