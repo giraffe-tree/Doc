@@ -14,3 +14,12 @@
 信息: Initializing Spring FrameworkServlet 'dispatcher'
 
 ```
+
+
+解决：
+
+facet 配置
+
+tomcat clean ，重启
+
+

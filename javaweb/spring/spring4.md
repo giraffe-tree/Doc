@@ -55,7 +55,8 @@ spring 提供了 WebApplicationInitializer 的基础实现 AbstractAnnotationCon
 
 就像下面一样
 
-```public class WebApplicationInitializerImpl extends AbstractAnnotationConfigDispatcherServletInitializer{
+```
+public class WebApplicationInitializerImpl extends AbstractAnnotationConfigDispatcherServletInitializer{
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
@@ -79,6 +80,7 @@ spring 提供了 WebApplicationInitializer 的基础实现 AbstractAnnotationCon
 ```
 
 AbstractAnnotationConfigDispatcherServletInitializer 会同时创建 dispatcherservlet 和 contextLoaderListener 。
+
 
 
 
