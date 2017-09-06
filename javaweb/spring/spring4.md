@@ -1,5 +1,90 @@
 # Spring 4
 
+#  5 Spring web
+
+## 5.1 Spring MVC 起步
+
+### 5.1.1 跟踪 Spring MVC 的请求
+
+dispatcherServlet
+
+### tomcat 如何启动spring？
+
+servlet 3.0 环境中，容器会在类路径下查找ServletContainerInitializer的实现类，如果能发现的话，就会用它来配置servlet容器。
+
+spring提供了这个接口的实现 SpringServletContainerInitializer
+
+```
+@HandlesTypes(WebApplicationInitializer.class)
+public class SpringServletContainerInitializer implements ServletContainerInitializer {}
+```
+
+SpringServletContainerInitializer 的 onStartup（）方法里面有这样一段代码
+```
+if (webAppInitializerClasses != null) {
+    //webAppInitializerClasses 指的是所有类路径下的类
+            for (Class<?> waiClass : webAppInitializerClasses) {
+                // Be defensive: Some servlet containers provide us with invalid classes,
+                // no matter what @HandlesTypes says...
+                //isInterface 检查是否是接口，getModifiers 检查是否是抽象类
+                //isAssignableFrom 检测是否是它的子类或者实现类
+                if (!waiClass.isInterface() && !Modifier.isAbstract(waiClass.getModifiers()) &&
+                        WebApplicationInitializer.class.isAssignableFrom(waiClass)) {
+                    try {
+                        initializers.add((WebApplicationInitializer) waiClass.newInstance());
+                    }
+                    catch (Throwable ex) {
+                        throw new ServletException("Failed to instantiate WebApplicationInitializer class", ex);
+                    }
+                }
+            }
+        }
+
+```
+
+这个 SpringServletContainerInitializer 又会去找 WebApplicationInitializer 的实现类
+
+```
+public interface WebApplicationInitializer {
+    void onStartup(ServletContext servletContext) throws ServletException;
+}
+
+```
+
+spring 提供了 WebApplicationInitializer 的基础实现 AbstractAnnotationConfigDispatcherServletInitializer ，它是个抽象类，我们可以通过继承这个抽象类来扩展它，并让tomcat发现。
+
+就像下面一样
+
+```
+public class WebApplicationInitializerImpl extends AbstractAnnotationConfigDispatcherServletInitializer{
+
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        // TODO Auto-generated method stub
+        return new Class<?>[] {RootConfig.class};
+    }
+
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        // TODO Auto-generated method stub
+        return new Class<?>[] {WebConfig.class};
+    }
+
+    @Override
+    protected String[] getServletMappings() {
+        // TODO Auto-generated method stub
+        return new String[]{"/"};
+    }
+}
+
+```
+
+AbstractAnnotationConfigDispatcherServletInitializer 会同时创建 dispatcherservlet 和 contextLoaderListener 。
+
+
+
+
+
 # 7 spring mvc高级技术
 
 [最简配置](http://blog.csdn.net/u012578322/article/details/61936505)

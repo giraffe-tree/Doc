@@ -1,4 +1,9 @@
 
+javaconfig 配置 json
+http://www.yiibai.com/spring_mvc/spring-4-mvc-contentnegotiatingviewresolver-example.html
+
+
+
 shiro servlet 实例
 - http://www.cnblogs.com/shanheyongmu/p/5740202.html
 - http://blog.csdn.net/eson_15/article/details/51787391
