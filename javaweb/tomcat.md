@@ -19,7 +19,7 @@
 解决：
 
 facet 配置
-
+把maven dependencies加入buildpath
 tomcat clean ，重启
 
 
