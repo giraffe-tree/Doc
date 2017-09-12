@@ -1,3 +1,8 @@
+deeplearning4j 教程
+https://deeplearning4j.org/cn/spark
+
+Redis 教程
+http://try.redis.io/
 
 javaconfig 配置 json
 http://www.yiibai.com/spring_mvc/spring-4-mvc-contentnegotiatingviewresolver-example.html
