@@ -1,7 +1,8 @@
 
 Beyond compare 解决冲突
 
-
+java 8
+http://www.cnblogs.com/invoker-/p/6893688.html
 
 
 deeplearning4j 教程
