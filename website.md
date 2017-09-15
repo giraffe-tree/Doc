@@ -1,3 +1,6 @@
+java 8
+http://www.cnblogs.com/invoker-/p/6893688.html
+
 deeplearning4j 教程
 https://deeplearning4j.org/cn/spark
 
