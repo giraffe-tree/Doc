@@ -1,6 +1,15 @@
+
 java 8
 http://www.cnblogs.com/invoker-/p/6893688.html
 
+
+Beyond compare 解决冲突
+
+java 8
+http://www.cnblogs.com/invoker-/p/6893688.html
+
+
+>>>>>>> 339b8ad2e9bfc323e2e82de01754e708d7ea7c69
 deeplearning4j 教程
 https://deeplearning4j.org/cn/spark
 
