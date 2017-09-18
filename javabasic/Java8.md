@@ -112,4 +112,102 @@ A default method cannot override a method from java.lang.Object
 
 
 
+## 时间和日期函数
+
+### LocalDate 
+
+1. 获取现在的日期
+	> 	LocalDate today = LocalDate.now();
+
+2. 返回指定的日期
+	>  LocalDate birthday = LocalDate.of(2009, 07, 20);
+	> LocalDate parse = LocalDate.parse("2017-07-20");
+
+
+3. 获取日期加减后的日期,可以加减一个月
+
+```
+LocalDate testMin = today.minus(1, ChronoUnit.MONTHS)
+		.minus(1,ChronoUnit.DAYS).plus(1, ChronoUnit.YEARS);
+LocalDate finalDate   = LocalDate.now().plus(Period.ofMonths(2));
+
+```
+
+4. 判断是否是闰年
+	>  boolean leapYear = LocalDate.now().isLeapYear();
+
+5. 返回一个日期是星期几，在一个月中的第几天
+	> 	DayOfWeek dayOfWeek = testMin.getDayOfWeek();
+
+
+6. 判断日期之间的前后关系，是否是同一天
+	>  boolean isAfter = testMin.isAfter(today);
+
+
+### LocalTime
+
+1. 获取现在的时间
+	> LocalTime now = LocalTime.now();
+
+2. 解析字符串，转化为时间
+	> int hour = LocalTime.parse("15:02").getHour();
+
+
+3. 创建时间
+	>  LocalTime nowTime = LocalTime.of(15, 02);
+
+4. 对时间进行加减
+	> LocalTime nextHour = LocalTime.now().plus(1, ChronoUnit.HOURS);
+
+5. 检查时间的前后关系
+	> boolean isBefore = LocalTime.now().isBefore(LocalTime.now());
+
+
+### LocalDateTime
+
+普通方法同LocalDate,LocalTime
+
+#### 日期格式化
+
+字符串转日期
+
+```
+DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
+
+LocalDateTime localDateTime = LocalDateTime.parse("2017.07.20 15:27:44", dateTimeFormatter);
+```
+
+日期转字符串
+
+```
+DateTimeFormatter dateTimeFormatter2 = DateTimeFormatter.ofPattern("yy-MM-dd");
+String today = LocalDateTime.now().format(dateTimeFormatter2);
+
+```
+
+
+计算两个时间的间隔
+
+> long between = ChronoUnit.DAYS.between(initialDate, finalDate);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
