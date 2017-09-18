@@ -108,11 +108,58 @@ Java8 允许接口中含有非抽象方法，这种在接口中使用default修�
 A default method cannot override a method from java.lang.Object 
 
 
+## 第四章 流与集合
+
+### 流和集合的区别
+
+TODO：
+流： 从支持数据处理操作的源生成的元素序列
+流的目的在于表达计算，而集合讲的数据
+集合中是以特定的时间、空间复杂度来存储和访问元素
+
+### 流只能遍历一次
+
+比如：
+
+```
+		Stream<String> stream1 = dishes.stream().map(Dish::getName);
+		stream1.forEach(System.out::println);
+		stream1.forEach(System.out::println);
+```
+
+会产生以下问题：
+
+```
+java.lang.IllegalStateException: stream has already been operated upon or closed
+```
+
+流只能消费一次，当流遍历一次后需要重新从原始的数据源获得一个流
+
+### 内部迭代
+
+当你使用外部迭代，就是显式地使用foreach，就需要我们自己进行并行实现和数据表示
+
+而java 需要一个没有迭代器的接口，且需要进行简单的并行问题，于是就有了 Stream
+
+stream是使用内部迭代的，内部迭代可以自动选择一种适合你硬件的数据表示和并行实现。
+
+### 流操作
+
+- filter
+- map
+- limit
+- sorted
+- distinct
+
+### 终端操作
+
+- forEach
+- count
+- collect 可以进行转换，
+	- 例如：转换成List:  ```collect(Collectors.toList());```
 
 
-
-
-## 时间和日期函数
+## 第4.5章 时间和日期函数
 
 ### LocalDate 
 
@@ -190,6 +237,9 @@ String today = LocalDateTime.now().format(dateTimeFormatter2);
 
 > long between = ChronoUnit.DAYS.between(initialDate, finalDate);
 
+
+
+## 第五章 使用流
 
 
 
