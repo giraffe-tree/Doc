@@ -141,7 +141,7 @@ java.lang.IllegalStateException: stream has already been operated upon or closed
 
 而java 需要一个没有迭代器的接口，且需要进行简单的并行问题，于是就有了 Stream
 
-stream是使用内部迭代的，内部迭代可以自动选择一种适合你硬件的数据表示和并行实现。
+stream是使用内部迭代的，内部迭代可以自动选择一种适合你硬件的数据表示和并行实现,你不需要进行显式地管理数据集合的迭代了
 
 ### 流操作
 
