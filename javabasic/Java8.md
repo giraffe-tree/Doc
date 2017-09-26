@@ -159,7 +159,88 @@ stream是使用内部迭代的，内部迭代可以自动选择一种适合你�
 	- 例如：转换成List:  ```collect(Collectors.toList());```
 
 
-## 第4.5章 时间和日期函数
+## 第五章 使用流
+
+### 对流进行筛选、切片
+
+- filter
+- distinct  返回不重复的元素
+- skip  跳过前面的几个元素
+- limit  限制输出
+
+### 提取转换liu
+
+- map
+- flatmap
+
+### 查找流中的元素
+
+- findFirst
+- findAny
+- allMatch
+- noneMatch
+- anyMatch
+
+### 归约
+
+- reduce
+
+可以用来计算 总和，最大值，最小值
+
+无状态操作：
+
+> 例如map，filter等不会知道这个操作之前发生了什么 
+
+有状态操作
+
+> 例如reduce,sorted，skip，limit，distinct等需要将一定的数据放入缓存才能工作
+
+### 原始类型流特化
+
+- IntStream
+- LongStream
+- DoubleStream
+
+为什么要存在这些原始类型流呢？
+> 为了效率，因为装箱的复杂，int和integer的效率差异
+
+#### 原始类型流 -> Stream
+
+> intStream.boxed()
+
+#### Stream -> 原始类型流
+
+> stream.mapToInt(...)
+
+
+### iterate 与 generate
+
+**generate**
+
+```
+Stream.generate(Math::random).limit(10).forEach(System.out::println);
+```
+
+**iterate**
+
+```
+Stream.iterate(new int[]{0,1}, t->new int[]{t[1],t[0]+t[1]}).skip(10).limit(10).forEach(t->System.out.println(t[0]+"  "+t[1]));
+```
+
+## 第6章 用流收集数据
+
+### 收集器
+
+
+
+
+
+
+
+
+
+
+## 第12章 时间和日期函数
 
 ### LocalDate 
 
@@ -239,7 +320,6 @@ String today = LocalDateTime.now().format(dateTimeFormatter2);
 
 
 
-## 第五章 使用流
 
 
 
