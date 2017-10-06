@@ -86,10 +86,48 @@
 3. tuple 可以在映射中当做键使用, 而 list 是 unhashable type
 4. tuple 比 list 快上那么一丢丢..
 
+## 第三章 使用字符串
+
+
+字符串不可变
+
+> ```help(print)```
+
+```
+print(...)
+    print(value, ..., sep=' ', end='\n', file=sys.stdout, flush=False)
+    
+    Prints the values to a stream, or to sys.stdout by default.
+    
+    Optional keyword arguments:
+    file:  a file-like object (stream); defaults to the current sys.stdout.
+    sep:   string inserted between values, default a space.
+    end:   string appended after the last value, default a newline.
+    flush: whether to forcibly flush the stream.
+    
+```
+
+
+
+### 字符串格式化
 
 
 
 
+### 字符串方法
+
+
+- find
+- join/spilt
+- lower/title/string.capwords
+- replace
+- spilt
+- strip/lstrip/rstrip
+- translate/str.maketrans(from,to)
+
+
+
+## 第四章 字典
 
 
 
