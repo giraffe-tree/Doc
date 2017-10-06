@@ -51,7 +51,7 @@
 
 ### 2.3 列表
 
-- list
+- list 转换为 list
 - del 
 - 分片赋值
 
@@ -68,16 +68,28 @@
 
 ### 2.4 元组
 
-
 - tuple 将序列转换为元组
+
+- 分片
+- max/min
+- in
+- len
+- 乘法
 
 #### 为什么元组不可替代/元组和列表的区别
 
 [Python 列表和元组的区别是什么？](http://python.jobbole.com/86661/)
 
 
-1. 元组可以砸映射中当做键使用
-2. 元组作为很多内建函数/方法的返回值存在
+1. tuple 不可变, list 可变
+2. tuple 通常由不同的数据，而 list 是相同类型的数据队列。
+3. tuple 可以在映射中当做键使用, 而 list 是 unhashable type
+4. tuple 比 list 快上那么一丢丢..
+
+
+
+
+
 
 
 
