@@ -1,6 +1,6 @@
 # Python
 
-## 第一章
+## 第一章 基础知识
 
 导入模块
 
@@ -128,6 +128,44 @@ print(...)
 
 
 ## 第四章 字典
+
+### 创建字典
+
+1 .  ```
+ages = {'cc': 123, 'dd': 12, 'ee': 14}
+```
+
+2 . ```
+items = [('cc', 12), ('dd', 15)]    
+dict(items)
+```
+
+3 . ```dict(name='cc', age=14)
+```
+
+### 字典方法
+
+- dict
+- 字典的格式化字符串 :```print("%(Alice)s"%people)```
+- del d[k]
+- clear
+- copy/deepcopy
+- fromkeys
+- get
+- in
+- items
+- keys
+- pop
+- popitems
+- setdefault
+- update
+- values
+
+## 第五章 条件,循环和其他语句
+
+
+
+
 
 
 
