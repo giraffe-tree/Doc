@@ -163,6 +163,73 @@ dict(items)
 
 ## 第五章 条件,循环和其他语句
 
+### import
+
+1. ```import math as ma```
+2. ```from math import sqrt as sq```
+
+### sequence unpacking
+
+1. ```key,value =dict1.popitem()```
+2. ```x,y,z = z,x,y```
+3. ```*a, b, c = 1, 2, 3, 4, 5```
+
+### chained assignment
+
+```x = y = 3```
+
+###  IF 语句
+
+- else 
+- elif
+- a if b else c
+- if not .. and .. or ..
+- assert 
+
+### 循环语句
+
+ - while 
+ - for 
+ - range(10,0,-1)
+ - break 
+ - continue
+ - while True/break
+ - else
+ - 列表推导式```z = [(x, y) for x in range(3) for y in range(8, 11)]```
+ - pass
+ - del 
+ - exec
+ - eval
+	```
+	eval(input('expression:'))
+	expression:2+3
+	5	
+	```
+
+### 其他函数
+
+- enumerate(seq)
+- zip(seq...)
+- chr(数字)/ord(字符)
+- reversed(seq)  返回迭代对象
+
+
+## 第六章 抽象
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
