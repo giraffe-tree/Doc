@@ -131,16 +131,19 @@ print(...)
 
 ### 创建字典
 
-1 .  ```
+1 .  
+```
 ages = {'cc': 123, 'dd': 12, 'ee': 14}
 ```
 
-2 . ```
+2 . 
+```
 items = [('cc', 12), ('dd', 15)]    
 dict(items)
 ```
 
-3 . ```dict(name='cc', age=14)
+3 .
+ ```dict(name='cc', age=14)
 ```
 
 ### 字典方法
@@ -247,7 +250,7 @@ dict(items)
 - map
 - functools.reduce
 - 函数式编程
-- 
+
 
 
 
