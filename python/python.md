@@ -293,6 +293,14 @@ dict(name='cc', age=14)
 
 ## 第八章 异常
 
+- traceback
+- raise
+- 自定义异常
+- try  except  else  finally
+- 多使用 try except ,可以略微提升性能
+
+
+## 第九章 魔法方法,属性和迭代器
 
 
 
