@@ -300,7 +300,27 @@ dict(name='cc', age=14)
 - 多使用 try except ,可以略微提升性能
 
 
-## 第九章 魔法方法,属性和迭代器
+
+-------
+
+以下为 python编程:从入门到实践 的内容
+
+-------
+
+## 第九章 类
+
+
+- super().__init_(...)
+- from ...  import  ...	
+	- 需要从一个模块中导入很多类时，最好导入整个模块，并使用 module_name.class_name 语法来访问类
+	- from module_name import *
+
+
+## 第十章 文件与异常
+
+
+
+
 
 
 
