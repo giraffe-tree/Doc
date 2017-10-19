@@ -1,3 +1,13 @@
+
+quartz spring 集成
+
+- http://blog.csdn.net/u010648555/article/details/54891264
+- http://blog.csdn.net/defonds/article/details/49496895
+
+
+quartz 使用
+http://www.cnblogs.com/drift-ice/p/3817269.html
+
 https://github.com/wizardforcel/think-dast-zh
 
 
@@ -54,3 +64,4 @@ http://mp.weixin.qq.com/s/S6rncM3Rx64yT7imecU6Og
 使用搜索引擎
 
 http://mp.weixin.qq.com/s/DJGY4hGIGK78GPUjFrhCsw
+
