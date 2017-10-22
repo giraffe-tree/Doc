@@ -66,6 +66,9 @@
 	- reverse/reversed
 	- sort/sorted
 
+- 列表生成式  ```[x for x in range(100)]```
+
+
 ### 2.4 元组
 
 - tuple 将序列转换为元组
@@ -353,6 +356,140 @@ with open(path) as file:
 - json.load(file) 从文件读取数据
 
 
+## 函数式编程
+
+函数式编程的一个特点就是，允许把函数本身作为参数传入另一个函数，还允许返回一个函数！
+
+把函数作为参数传入，这样的函数称为高阶函数，函数式编程就是指这种高度抽象的编程范式。
+
+### higher-order function
+
+即在函数中使用函数作为参数,都属于高阶函数
+如: map/reduce,filter,sorted
+
+
+### lambda
+
+例一:
+
+```
+func1 = lambda: 123
+func1()
+# return 123
+
+func2 = lambda x: x + 1
+func2(100) 
+# return 101
+
+```
+
+### map
+
+在 bulitins.py 中
+
+
+### reduce
+
+```
+from functools import reduce
+result3 = reduce(lambda x,y:x+y,[1,2,3,4])
+
+```
+
+### filter
+
+```
+x = filter(lambda x:x%2==0, [1, 2, 3, 4, 5, 6, 7])
+```
+
+### sorted
+
+经过 sorted 排序的原序列不变,且返回的是一个新的列表
+
+```
+s1 = sorted(['bob', 'about', 'Zoo', 'Credit'], key=str.lower, reverse=True)
+
+s2 = sorted([36, 5, -12, 9, -21], key=abs)
+
+s3 = sorted([36, 5, -12, 9, -21], key=lambda x:x**2+20*x)
+
+```
+
+### 返回函数
+
+```
+def lazy_sum(*args):
+    def sum():
+        ax = 0
+        for n in args:
+            ax = ax + n
+        return ax
+    return sum
+
+x =lazy_sum(1,2,3,4,5,5)
+print(x())
+
+```
+
+
+## 第 15 章 生成数据
+
+### matplotlib
+
+使用的是两个列表,组成点的集合
+
+- plot 绘制线条
+- scatter 绘制点
+- c ,cmap 绘制颜色不同的点
+
+```
+import matplotlib.pyplot as plt
+
+values= [0,1,2,3,4,5]
+squares = [0,1,4,9,16,25]
+
+plt.plot(values,squares,linewidth = 5)
+plt.title("Square Numbers",fontsize = 24)
+plt.xlabel("value",fontsize = 14)
+plt.ylabel("Square of value",fontsize = 14)
+
+plt.tick_params(axis='both',which = 'major',labelsize = 14)
+
+plt.scatter(values,squares,s=150)
+
+
+plt.show()
+
+```
+
+### pygal
+
+使用一个列表
+
+- pygal.Bar() 柱状图
+- hist.render_to_file('die_visual2.svg') 保存 svg 图片,使用浏览器打开
+
+
+```
+frequencies = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+hist = pygal.Bar()
+
+hist.title = 'Results of rolling D6 and D10 50000 times'
+hist.x_labels = ['2', '3', '4', '5', '6','7', '8', '9', '10', '11', '12','13','14','15','16']
+hist.x_title = 'result'.title()
+hist.y_title = 'frequency of result'.title()
+
+hist.add('D6+D10', frequencies)
+hist.render_to_file('die_visual2.svg')
+
+```
+
+## 第16章 下载数据
+
+
+### csv
+
+### json
 
 
 
@@ -364,10 +501,6 @@ with open(path) as file:
 
 
 
-
-
-
-	
 	
 
 
