@@ -311,6 +311,375 @@ dict(name='cc', age=14)
 -------
 -------
 
+## 第三章  List 列表
+
+### 增删改查
+
+1. 添加到列表尾 append
+
+	```
+	list.append('ds')
+	```
+
+2. 在列表中插入元素 insert
+	
+	> 在某个位置插入一个元素,使其他元素后移
+	
+	```
+		list.insert(1,"ss")
+	```
+
+3. 删除一个或者多个元素 del
+
+	```
+	# 这个 del 并没有返回值
+	del list[2]
+	del list[2:4:1]
+	```
+
+4. 删除列表末尾/指定位置的元素,并返回 pop
+
+	```
+	last  = list.pop()
+	the_third = list.pop(2)
+	```	
+
+5.  删除指定值,不返回 remove 
+
+	```
+	# remove 只删除了第一个指定的值
+	x = list.remove('c')
+	# x 为 None
+	```
+
+
+### 组织列表
+
+1. 给列表永久排序,不返回值  sort
+
+
+	```
+	# L.sort(key=None, reverse=False) -> None -- stable sort *IN PLACE*
+
+	x = list.sort()
+	# x 为 None
+	```
+	
+	给字典列表排序
+	
+	```
+	a = [{'x': 3}, {'x': 6}, {'x': 2}]
+	a.sort(key=lambda d: d['x'])
+	print(a)
+
+	```
+	
+	忽略大小写排序
+	
+	```
+	b = list("xa12.124xeqXQeE26")
+	b.sort(key=lambda x:x.upper())
+	print(b)
+	```
+
+2. 临时排序,返回排序后的列表 sorted() 
+
+	```
+	# 这个其实不是 list 的方法
+	# sorted(iterable, /, *, key=None, reverse=False)
+	a = list("dad14d9xjjaAA09jjxKODJXND")
+	x = sorted(a)
+	print(x)
+	```
+
+3. 倒序,没有返回值 reverse 
+
+	```
+	list.reverse()
+	```
+
+4. 列表长度 len 
+
+	> 如果一个类表现得像一个list，要获取有多少个元素，就得用 len() 函数。
+要让 len() 函数工作正常，类必须提供一个特殊方法__len__()，它返回元素的个数
+
+	```
+	a = [1,2,4,24,5,2]
+	size = len(a)
+	# size = 6
+	```
+	
+5. 列表索引错误 IndexError
+
+	```
+	a = [1,2,3,4]
+	print(a[4])
+	# IndexError: list index out of range
+	```
+
+	```
+	# 当 list 为空时,访问最后一个元素也会引发 indexError
+	b =[]
+	print(b[-1])
+	# IndexError: list index out of range
+	```
+
+
+## 第四章 操作列表
+
+1. 遍历列表
+
+	```
+	a = list("dasd23d")
+
+	for x in a :
+    	print(x,end=" ")
+	```
+
+2. 求列表的最大值/最小值/总和
+
+	```
+	x = [1,2,3,4,5,6]
+
+	max = max(x)
+	min = min(x)
+	sum = sum(x)
+
+	print(max,end=" ")
+	print(min,end=" ")
+	print(sum,end=" ")
+	
+	# 6 1 21 
+	```
+
+3. 列表解析
+
+	> 使用 for 可以生成列表 
+
+	```
+	sq = [x**2 for x in range(1,11)]
+	print(sq)	
+	```
+
+4. 切片
+
+	```
+	x = [x for x in range(10)]
+	print(x)
+	print(x[-5:1:-1])
+	print(x[1:5:1])
+	
+	# [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+	# [5, 4, 3, 2]
+	# [1, 2, 3, 4]
+	```
+
+5. 复制列表
+
+	```
+	x = [x for x in range(10)]
+
+	# 同一个引用,x 改变 y 也改变
+	y = x
+	
+	# 不同引用, 也就是数值的复制 x 改变 y 不改变
+	y = x[:]
+	
+	```
+
+
+
+### range 的使用
+
+> range(stop) -> range object
+
+> range(start, stop[, step]) -> range object
+
+1. range(5)
+
+	```
+	for x in range(5):
+	    print(x,end=" ")
+	
+	# 0 1 2 3 4 
+	```
+
+2. range(start, stop) 取左不取右
+
+	```
+	for x in range(1,5):
+    	print(x,end=" ")
+	# 1 2 3 4 
+	```
+
+3. range(start, stop, step)
+
+	```
+	for x in range(1,11,2):
+   		print(x,end=" ")
+   	# 1 3 5 7 9 
+	```
+
+
+4. 将 range 对象转为 list , list(range(5)) 
+
+	```
+	x = range(5)
+	y  = list(x)
+	print(y)
+	```
+
+### 不可变的元组 tuple
+
+### zip
+
+zip(iter1 [,iter2 [...]]) --> zip object
+
+1. 两个 list 转 dict
+
+	```
+	a = [1,2,3]
+	b = list("abc")
+	x = zip(a,b)
+	print(dict(x))
+	for q,s in zip(a,b):
+    	print(q,s)
+	```
+	
+2. 矩阵转置
+
+	```
+	
+	matrix = [
+    [1, 2, 3, 4],
+    [5, 6, 7, 8],
+    [9, 10, 11, 12],
+	]
+
+	l1 = list(zip(*matrix))
+	print(l1)
+	
+	# [[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]
+	```
+
+
+
+
+## 第六章 字典 dict
+
+1. 字典解析
+
+	```
+	x1 = [1,2,3,4,5]
+	x2 = list("abcde")
+
+	y = {a:b for (a,b) in zip(x1, x2)}
+	```
+
+2. 遍历 key
+
+	```
+	y = {a:b for (a,b) in zip(x2, x1)}
+	
+	for key in y.keys():
+    	print(key)
+	```
+
+	遍历 value
+	
+	```
+	for value in y.values():
+   		print(value)
+	```
+	
+
+3. 遍历 key,value
+
+	```
+	y = {a:b for (a,b) in zip(x2, x1)}
+	
+	for key,value in y.items():
+	   print(key,value)
+
+	```
+
+4. 去除 value 中重复的值, 使用 set
+
+	```
+	for value in set(y.values()):
+   		print(value)
+	```
+	
+	set 在 list 中也可以使用
+	
+	```
+	x= list("abcdefab")
+	y=set(x)
+	print(y)
+	# {'c', 'd', 'b', 'a', 'e', 'f'}
+
+	y1 = list(y)
+	print(y1)
+	# ['c', 'd', 'b', 'a', 'e', 'f']
+	```
+	
+
+
+## 第七章 input and while
+
+while 循环
+
+```
+	x = 0
+	while x < 10:
+	    x = x + 1
+	    if x == 8:
+	        break
+	    if x % 2 == 0:
+	        continue
+	    print(x, end=" ")
+
+	# 输出 1 3 5 7 
+```
+
+## 第八章 函数
+
+1. 多个参数 * 
+
+	> 当成 list 使用
+
+	```
+	def ptNames(*name):
+	    for x in name:
+	        print(x,end=" ")
+	
+	ptNames("x","y","z")
+	
+	# x y z 
+	```
+
+2. 任意数量的关键字参数 ** 
+
+	> 当成 dict 使用
+
+	```
+	def keyNames(**name):
+	   	for x,y in name.items():
+	   		print(x,':',y)
+
+	keyNames(name='cc',info="i am programmer")
+
+	# name : cc
+	# info : i am programmer
+	```
+
+3. 规范
+
+	> 在定义函数,或者调用函数时,使用关键字参数,等于号(=)两边不要有空格
+
+
+
+
 ## 第九章 类
 
 
