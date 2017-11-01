@@ -29,8 +29,27 @@ CriteriaQuery接口：代表一个specific的顶层查询对象，它包含着�
 调用CriteriaQuery的from方法可以获得Root实例
 
 
+### 给findAll排序
 
 
+  ```
+  import org.springframework.data.domain.Sort;
+
+   @Repository
+   public class StudentServiceImpl implements StudentService {
+       @Autowired
+       private StudentDAO studentDao;
+
+       @Override
+       public List<Student> findAll() {
+           return studentDao.findAll(sortByIdAsc());
+       }
+
+       private Sort sortByIdAsc() {
+           return new Sort(Sort.Direction.ASC, "id");
+       }
+   } 
+  ```
 
 
 
