@@ -422,26 +422,264 @@
 ## Shape Manipulation 操作形状
 
 
+1. 创建随机数组
+
+	```
+	# 注意这里 3,4 外的括号要加上
+	a = np.floor(10*np.random.random((3,4)))
+
+	```
+
+	```
+	# such as 由于是随机数组每次生成的数组都不一样
+	[[ 6.  4.  9.  0.]
+ 	[ 1.  2.  7.  0.]
+ 	[ 9.  9.  1.  8.]]
+	
+	```
+
+
+2. 返回改变的数组,不改变原数组
+
+	> The shape of an array can be changed with various commands. Note that the following three commands all return a modified array, but do not change the original array:
+	
+	1. ravel
+
+		>  returns the array, flattened
+
+		```
+		print(a.ravel())
+		# such as ... 
+		#  [ 3.  6.  1.  3.  2.  0.  2.  8.  2.  1.  9.  3.]
+		```
+		
+		> The order of the elements in the array resulting from ravel() 		is normally “C-style”, that is, the rightmost index “changes 		the fastest”, so the element after a[0,0] is a[0,1]. If the 		array is reshaped to some other shape, again the array is 		treated as “C-style”. NumPy normally creates arrays stored in 		this order, so ravel() will usually not need to copy its 		argument, but if the array was made by taking slices of another 		array or created with unusual options, it may need to be 		copied. The functions ravel() and reshape() can also be 		instructed, using an optional argument, to use FORTRAN-style 		arrays, in which the leftmost index changes the fastest.
 
 
 
+	2.  reshape
+		
+		> returns the array with a modified shape
+		
+		```
+		x = a.reshape(6,2)
+		print(x)
+		
+		# such as ...
+		# [[ 8.  2.  0.  2.  8.  2.]
+		#	[ 4.  4.  8.  0.  0.  0.]]
+		
+		```
+	
+	3. T 转置矩阵
 
+		> returns the array, transposed
+		
+		```
+		print(a.T)
+		# [[ 2.  4.  5.]
+			[ 6.  5.  8.]
+			[ 8.  3.  9.]
+			[ 0.  1.  1.]]
+		
+		```
 
+3. 改变原数组
 
+	1. resize 
 
+		> the ndarray.resize method modifies the array itself:
+		
+		> 如果给定的形状过大,会用0填充,过小,则舍去剩余元素 
+		
+		```
+		a = np.floor(10*np.random.random((3,4)))
+		x = a.resize((6,2))
 
+		print("\n - -- - -- - - \n")
+		print(x)
+		print(a)
+		
+		```
 
+		```
+		# 输出:
+		None
+		[[ 4.  2.]
+		 [ 2.  3.]
+		 [ 3.  8.]
+		 [ 4.  8.]
+		 [ 1.  6.]
+		 [ 4.  3.]]
+		
+		```
 
+4. 堆叠矩阵  Stacking together different arrays
 
+	1. vstack,hstack 
 
+		> 不改变原来的 array
 
+		```
+		a = np.floor(10 * np.random.random((2, 2)))
+		b = np.floor(10 * np.random.random((2, 2)))
+		
+		x = np.vstack((a,b))
+		print(x.shape)
+		print(x)
+				
+		y = np.hstack((a,b))
+		print(y.shape)
+		print(y)
+		```
+		
+		```
+		# output:
+		(4, 2)
+		[[ 2.  5.]
+		 [ 8.  7.]
+		 [ 1.  0.]
+		 [ 5.  5.]]
+		(2, 4)
+		[[ 2.  5.  1.  0.]
+		 [ 8.  7.  5.  5.]]
+		
+		```
+		
+		```
+    	vstack: Stack arrays in sequence vertically (row wise) 
+		vstack(tup)
+			tup : sequence of ndarrays
+		
+		hstack: Stack arrays in sequence horizontally (column wise).
+		hstack(tup)
+			tup : sequence of ndarrays
+		```
 
+	2. column_stack
 
+		> The function column_stack stacks 1D arrays as columns into a 			2D array. It is equivalent to hstack only for 2D arrays:
+		
+		```
+		q = np.array([1,2])
+		p = np.array([3,4])
+		
+		qp = np.column_stack((q,p))
+		print(qp)
+		
+		```
+		
+		```
+		output:
+		[[1 3]
+		 [2 4]]
+		```
+		
+		but use hstack()
+		
+		```
+		print(np.hstack((q,p)))
+		```
+		
+		```
+		output:
+		[1 2 3 4]
+		```
+		
+		other 第二种和第三种一样
+		
+		```
+		print(q[:,np.newaxis])
+		
+		test = np.column_stack((q[:,np.newaxis],p[:,np.newaxis]))
+		print(test)
+		
+		print(np.hstack((a[:,newaxis],b[:,newaxis])))
+		```
+		
+		```
+		# output:
+		
+		[[1]
+ 		 [2]]
+ 		# 分割线...... 
+ 		[[1 3]
+ 		 [2 4]]
+		# 分割线......
+ 		[[1 3]
+		 [2 4]]
+		```
+		
+	3. row_stack
 
+		> On the other hand, the function **row_stack** is equivalent 		to **vstack** for any input arrays. In general, for arrays of 		with more than two dimensions, hstack stacks along their second 		axes, vstack stacks along their first axes, and concatenate 		allows for an optional arguments giving the number of the axis 		along which the concatenation should happen.
+		
+		
+	4.  concatenate
 
+		```
+		a = np.array([[1, 2], [3, 4]])
+		b = np.array([[5, 6]])
+		
+		x = np.concatenate((a, b), axis=0)
+		print(x)
+		
+		y  = np.concatenate((a, b.T), axis=1)
+		print(y)
+		```
+		
+		```
+		output:
+		[[1 2]
+		 [3 4]
+		 [5 6]]
+		[[1 2 5]
+		 [3 4 6]]
+		
+		```
+		
+	5. r_ and c_
+		
+		
+		```
+		a = np.r_[1:4,0,4]
+		print(a)		
+		
+		b = np.c_[np.array([1,2,3]), np.array([4,5,6])]
+		print(b)
+		
+		c = np.c_[np.array([1,2,3])]
+		print(c)
 
-
-
-
-
+		# 注意这里多了个方括号
+		d = np.c_[np.array([[1, 2, 3]]), 0, 0, np.array([[4, 5, 6]])]
+		print(d)
+		```
+		
+		```
+		output:
+		# 分割线 a:
+		[1 2 3 0 4]
+		# 分割线 b:
+		[[1 4]
+		 [2 5]
+		 [3 6]]
+		 # 分割线 c:
+		[[1]
+		 [2]
+		 [3]]
+		 # 分割线 d:
+		 [[1 2 3 0 0 4 5 6]]
+		```
+	
+5. 分割矩阵 Splitting one array into several smaller ones
+	
+	
+	
+	
+	
+		
+		
+		
+		
 
