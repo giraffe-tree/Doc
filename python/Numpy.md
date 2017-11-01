@@ -1,7 +1,10 @@
 # Numpy
 
+参考:
 
-## 基础
+> [https://docs.scipy.org/doc/numpy-1.13.0/user/quickstart.html](https://docs.scipy.org/doc/numpy-1.13.0/user/quickstart.html)
+
+## 基础和通用函数
 
 1. 创建 N-dimensional array (ndarray)
 
@@ -225,6 +228,217 @@
 	# [ 0.          1.04719755  2.0943951 ]
 
 	```
+
+11. ndarray: sum,max,min,cumsum
+
+	> cumsum: cumulative sum along each row 沿行累计和
+	
+	> axis=0 一列一列算 axis=1 一行一行算
+	
+	```
+	a = np.arange(0, 15).reshape((3, 5))
+	print(a)
+	# [[ 0  1  2  3  4]
+ 	#  [ 5  6  7  8  9]
+  	#  [10 11 12 13 14]]
+	
+	print(a.max(axis=1))
+	# [ 4  9 14]
+	
+	print(a.min(axis=0))
+	# [0 1 2 3 4] 
+	
+	print(a.sum(axis=0))
+	# [15 18 21 24 27]
+	
+	print(a.sum(axis=1))
+	# [10 35 60]
+	
+	print(a.cumsum(axis=1))
+	# [10 21 33 46 60]]
+	
+	```
+
+12. Universal Functions (ufunc)
+
+	> sin cos exp sqrt add dot
+	
+
+
+	
+##  Indexing, Slicing and Iterating 索引切片和迭代
+
+1. 一维 索引/分片/迭代
+
+	> One-dimensional arrays can be indexed, sliced and iterated over, much like lists and other Python sequences.
+	
+	
+	```
+	# 索引
+	print(a[8])
+	# 8
+	
+	# 分片
+	a = np.arange(10)
+	# [0 1 2 3 4 5 6 7 8 9]
+	
+	print(a[1:7:2])
+	# [1 3 5]
+	
+	print(a[::-2])
+	# [9 7 5 3 1]
+	```
+
+
+	```
+	<!--迭代-->
+	for i in a:
+   		print(i**2,end=" ")	
+   	
+   	# 0 1 4 9 16 25 36 49 64 81
+	```
+
+	```
+	# 赋值
+	a[:6:2] = -10
+	# [-10   1 -10   3 -10   5   6   7   8   9]
+	
+	```
+
+
+2. 多维数组
+
+	> Multidimensional arrays can have one index per axis. These indices are given in a tuple separated by commas:
+
+
+	```
+	
+	def lin(x, y):
+    	return 10 * x + y
+	b = np.fromfunction(lin,(5,4),dtype=int)
+	
+	#  [[ 0  1  2  3]
+	#   [10 11 12 13]
+	#   [20 21 22 23]
+	#   [30 31 32 33]
+	#   [40 41 42 43]]
+	
+	```
+
+	```
+	print(b[2,3])
+	# 23
+	
+	print(b[0:3,2])
+	# [2 12 22]
+	
+	print(b[:,1])
+	# [ 1 11 21 31 41]
+		
+	print(b[1:3,1:3])
+	#[[11 12]
+ 	# [21 22]]
+	```
+	
+	> 当使用 b[i]时会被当做 b[i,:]
+	
+	> 当使用 ```...``` 时会代表许多行
+	
+	> The dots (...) represent as many colons as needed to produce a complete indexing tuple. 
+	
+	```
+	print(b[-1])
+	# [40 41 42 43]
+		
+	print(b[-2,...])
+	# [30 31 32 33]
+	
+	```
+	
+	```
+	x[1,2,...] is equivalent to x[1,2,:,:,:],
+	x[...,3] to x[:,:,:,:,3] and
+	x[4,...,5,:] to x[4,:,:,5,:].
+
+	```
+
+3.  三维数组
+
+	```
+	c = np.array([[[0,1,2],[10,12,13]],
+               [[100,101,102],[110,112,113]]])
+	c.shape
+	# (2,2,3)
+	
+	```
+	
+	```
+	# c
+	[[[  0   1   2]
+	  [ 10  12  13]]
+	
+	 [[100 101 102]
+	  [110 112 113]]]
+	
+	```
+	
+	
+	```
+	# 分片
+	print(c[0,...])
+	print(" - - - - - - - - ")
+	print(c[:,0,:])
+	print(" - -- -- - -- --  ")
+	print(c[:,:,0])
+	
+	print(' -- - - - --  --  ')
+	print(c[...,2])
+	
+	```
+	
+	```
+	# 结果
+	[ 0  1  2]
+	 [10 12 13]]
+	 - - - - - - - - 
+	[[  0   1   2]
+	 [100 101 102]]
+	 - -- -- - -- --  
+	[[  0  10]
+	 [100 110]]
+	 -- - - - --  --  
+	[[  2  13]
+	 [102 113]]
+	```
+
+	```
+	# 遍历,迭代
+	for element in c.flat:
+    	print(element,end=" ")
+	
+	# 0 1 2 10 12 13 100 101 102 110 112 113 
+	```
+	
+## Shape Manipulation 操作形状
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
