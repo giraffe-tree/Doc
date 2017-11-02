@@ -674,12 +674,140 @@
 	
 5. 分割矩阵 Splitting one array into several smaller ones
 	
+	1. hsplit(a,?)
+
+		```
+		a = np.floor(10*np.random.random((2,12)))
+		
+		print(a)
+		
+		b = np.hsplit(a,3)
+		print(type(b))
+		
+		for key in b:
+		    print(key)
+		    print(" - -- - - -- - - ")
+		```
+	
+		```
+		output:
+		[[ 7.  9.  6.  3.  2.  1.  3.  5.  3.  1.  3.  7.]
+		 [ 9.  6.  6.  3.  1.  5.  6.  5.  6.  6.  6.  1.]]
+		<class 'list'>
+		[[ 7.  9.  6.  3.]
+		 [ 9.  6.  6.  3.]]
+		 - -- - - -- - - 
+		[[ 2.  1.  3.  5.]
+		 [ 1.  5.  6.  5.]]
+		 - -- - - -- - - 
+		[[ 3.  1.  3.  7.]
+		 [ 6.  6.  6.  1.]]
+		 - -- - - -- - - 
+		
+		```
+	
+	2. hsplit(a,(?,?))
+		
+		```
+		a = np.floor(10 * np.random.random((2, 12)))
+
+		print(a)
+		
+		c = np.hsplit(a, (3, 4))
+		for item in c:
+		    print(item)
+		    print(" -- - - - -- - ")
+		```
+
+
+		```
+		output:
+		[[ 1.  9.  9.  6.  0.  9.  0.  0.  7.  3.  4.  9.]
+		 [ 9.  7.  7.  4.  5.  5.  2.  6.  4.  0.  6.  8.]]
+		[[ 1.  9.  9.]
+		 [ 9.  7.  7.]]
+		 -- - - - -- - 
+		[[ 6.]
+		 [ 4.]]
+		 -- - - - -- - 
+		[[ 0.  9.  0.  0.  7.  3.  4.  9.]
+		 [ 5.  5.  2.  6.  4.  0.  6.  8.]]
+		
+		```
+		
+	3. vsplit splits along the vertical axis, and array_split allows one to specify along which axis to split.
+		
+	
+	4. split
+
+		```
+		x = np.arange(9.0)
+		print(x)
+		y = np.split(x,3)
+		print(type(y))
+		for key in y :
+		    print(key)
+		    print(" -- - - -")
+
+		```
+		
+		```
+		output:
+		
+		[ 0.  1.  2.  3.  4.  5.  6.  7.  8.]
+		<class 'list'>
+		[ 0.  1.  2.]
+		 -- - - -
+		[ 3.  4.  5.]
+		 -- - - -
+		[ 6.  7.  8.]
+		 -- - - -
+		```
+		
+		```
+		x = np.arange(8.0)
+
+		print(x)
+		y = np.split(x,[3,5,6,10])
+		print(type(y))
+		
+		for key in y:
+		    print(key)
+		    print("- - - - --  - ")
+
+		```
+		
+		```
+		output:
+		[ 0.  1.  2.  3.  4.  5.  6.  7.]
+		<class 'list'>
+		[ 0.  1.  2.]
+		- - - - --  - 
+		[ 3.  4.]
+		- - - - --  - 
+		[ 5.]
+		- - - - --  - 
+		[ 6.  7.]
+		- - - - --  - 
+		[]
+		- - - - --  - 		
+		```
+
+
+6. 复制和视图 Copies and Views 
+
+	**When operating and manipulating arrays, their data is sometimes copied into a new array and sometimes not. This is often a source of confusion for beginners**
+	
+	当我们操作数组时,有些操作会返回一个新的数组,有些则是不返回(而是改变他们自身),这常常是初学者混淆的根源之一.
+
 	
 	
 	
-	
-		
-		
-		
-		
+
+
+
+
+
+
+
 
