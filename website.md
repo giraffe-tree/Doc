@@ -1,4 +1,8 @@
 
+线性代数应该这样学 参考答案
+- http://linearalgebras.com/1a.html
+
+
 quartz spring 集成
 
 - http://blog.csdn.net/u010648555/article/details/54891264
