@@ -800,14 +800,175 @@
 	
 	当我们操作数组时,有些操作会返回一个新的数组,有些则是不返回(而是改变他们自身),这常常是初学者混淆的根源之一.
 
+	1. Simple assignments make no copy of array objects or of their data
+
+	```
+	a = np.arange(12)
+
+	b = a
+	print(b is a)
+	
+	b.shape = 3,4
+	print(b.shape)
+	print(a.shape)
+
+	```
+	```
+	True
+	(3, 4)
+	(3, 4)
+	```
+
+	> Python passes mutable objects as references, so function calls make no copy.
+	
+	python 将可变对象作为引用传递
 	
 	
-	
+	2. View or Shallow Copy 浅复制
+
+		```
+		a = np.arange(12.0)
+
+		# shallow copy
+		c =a.view()
+		
+		print(a)
+		print(" - - -- - - ")
+		print(c)
+		print(' - -- - - -')
+		
+		print(c is a)
+		
+		# c is a view of the data owned by a
+		print(c.base is a )
+
+		```
+
+		```
+		output:
+		[  0.   1.   2.   3.   4.   5.   6.   7.   8.   9.  10.  11.]
+		 - - -- - - 
+		[  0.   1.   2.   3.   4.   5.   6.   7.   8.   9.  10.  11.]
+		 - -- - - -
+		False
+		True
+		
+		```
+		
+		> ndarray.flags.owndata : The array owns the memory it uses or borrows it from another object.
+
+		```
+		print(c.flags)
+		b =a 
+		print(b.flags)
+		
+		```
+
+		```
+		outpt:
+		
+		  C_CONTIGUOUS : True
+		  F_CONTIGUOUS : True
+		  OWNDATA : False
+		  WRITEABLE : True
+		  ALIGNED : True
+		  UPDATEIFCOPY : False
+		  
+		  C_CONTIGUOUS : True
+		  F_CONTIGUOUS : True
+		  OWNDATA : True
+		  WRITEABLE : True
+		  ALIGNED : True
+		  UPDATEIFCOPY : False
+		```
+
+		当 c 为 a.view() 时,改变 c 的 shape 并不会影响 a, 但是改变 c 中的元素内容,会影响 a ; 相同地,改变 a 中的元素内容,也会影响 c
+		
+		```
+		a = np.arange(12)
+		a.shape = 3,4
+		c = a.view()
+		
+		print(c.shape)
+		
+		c.shape = 2,6
+		
+		print(c)
+		print(c.shape)
+		
+		print('- - - -- - ')
+		
+		print(a)
+		print(a.shape)
+		
+		print('- - - -- - ')
+		
+		c[0,4] = 123
+		print(c)
+		print('- - - -- - ')
+		
+		print(a)
+		
+		print('- - - -- - ')
+		
+		```
+		
+		```
+		output:
+		(3, 4)
+		[[ 0  1  2  3  4  5]
+		 [ 6  7  8  9 10 11]]
+		(2, 6)
+		- - - -- - 
+		[[ 0  1  2  3]
+		 [ 4  5  6  7]
+		 [ 8  9 10 11]]
+		(3, 4)
+		- - - -- - 
+		[[  0   1   2   3 123   5]
+		 [  6   7   8   9  10  11]]
+		- - - -- - 
+		[[  0   1   2   3]
+		 [123   5   6   7]
+		 [  8   9  10  11]]
+		- - - -- - 
+		```
+		
+	3. deep copy
+
+		The copy method makes a complete copy of the array and its data.
+
+		无论 d 怎样改变, a 都不会发生变化
+		
+				
+		```
+		a = np.arange(12).reshape(3,4)
+
+		d = a.copy()
+		print(d.base is a)
+		
+		```
+		
+		```
+		output:
+		
+		False
+		```
+		
+		
+## 进阶 Less Basic
+
+### 广播机制 Broadcasting rules
 
 
 
 
 
 
+
+		
+		
+		
+		
 
 
