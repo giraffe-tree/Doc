@@ -1,4 +1,7 @@
 
+python编写质量的代码
+- https://read.douban.com/reader/ebook/8712705/
+
 线性代数应该这样学 参考答案
 - http://linearalgebras.com/1a.html
 
