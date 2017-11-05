@@ -1,6 +1,6 @@
 # My Daily
 
-## 11.4
+## 11.5
 
 ### 预计
 
@@ -23,7 +23,7 @@
 2. 完成 numpy 30个练习 [100 exercises for numpy](https://github.com/rougier/numpy-100/blob/master/100%20Numpy%20exercises.md)
 
 
-## 11.5 
+## 11.6 
 
 ### 想做的
 
@@ -32,5 +32,19 @@
 	- [第一篇文章地址](http://aosabook.org/en/500L/a-template-engine.html)
 
 
-2. 
+2. 看 python 学习文档
+
+
+### 一周计划
+
+1. python 连接 mysql, python 的时间操作类
+2. python 数据结构和设计模式 [python设计模式](https://github.com/faif/python-patterns)
+3. 500 line or less 
+
+
+
+
+
+
+
 
