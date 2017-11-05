@@ -191,7 +191,7 @@
 	# 这里要使用欧拉公式
 	```
 
-10. linspace
+10. linspace 均分,产生数组
 
 	> linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None)
 	
@@ -960,11 +960,284 @@
 
 ### 广播机制 Broadcasting rules
 
+> **Broadcasting allows universal functions to deal in a meaningful way with inputs that do not have exactly the same shape.**
+
+> 广播允许通用函数以有意义的方式处理不完全相同形状的输入。
+
+> 参考: [broadcaset rules](https://docs.scipy.org/doc/numpy-1.13.0/user/basics.broadcasting.html)
+
+1. 让所有输入数组都向其中shape最长的数组看齐，shape中不足的部分都通过在前面加1补齐
+2. 输出数组的shape是输入数组shape的各个轴上的最大值
+3. 如果输入数组的某个轴和输出数组的对应轴的长度相同或者其长度为1时，这个数组能够用来计算，否则出错
+4. 当输入数组的某个轴的长度为1时，沿着此轴运算时都用此轴上的第一组值
+
+示例参考:[点击链接](http://scipy.github.io/old-wiki/pages/EricsBroadcastingDoc)
+
+
+### 花式索引及其技巧 Fancy indexing and index tricks
+
+#### argmax(axis= ?)
+
+对于二维的数组来说
+	
+1. axis = 0 求每一列之中最大值的索引 同:axis = -2
+2. axis = 1 求每一行之中最大值的索引 同:axis = -1
+
+#### 快速改变一个数组中的值
+
+```
+def assign():
+    a = np.arange(5)
+    a[[1,2]] = 111
+    print(a)
+```
+
+或者
+
+```
+def assign():
+    a = np.arange(5)
+    a[[1,2]] = [112,113]
+    print(a)
+
+```
+
+#### 使用 += , *= 等
+
+```
+def add_equal_array():
+    a = np.arange(5)
+    a[[0,1,2]]+=10
+    print(a)
+
+add_equal_array()
+
+# output:
+[10 11 12  3  4]
+
+```
+
+```
+def mul_equal_array():
+    a = np.arange(5)
+    a[[1,2]]*=11
+    print(a)
+
+mul_equal_array()
+
+# output:
+[ 0 11 22  3  4]
+```
+
+#### 使用布尔类型的数组 Indexing with Boolean Arrays
+
+例一:
+
+```
+def boolean_array():
+    a = np.arange(12).reshape(3,4)
+    b = a%3==0
+    print(b)
+	 print(a[b])
+  	 a[b] = 9999
+    print(a)
+
+boolean_array()
+
+# output:
+[[ True False False  True]
+ [False False  True False]
+ [False  True False False]]
+[0 3 6 9]
+[[9999    1    2 9999]
+ [   4    5 9999    7]
+ [   8 9999   10   11]]
+```
+
+例二:
+
+```
+def boolean_array2():
+    a  =np.arange(12).reshape(3,4)
+    print(a)
+
+    b1 = np.array([False,True,True])
+    b2 = np.array([True,False,True,False])
+    x = a[b1]
+    print(x)
+    print(' -- - - -- - -')
+    print(a[b1,:])
+    print(' - -- -- - -')
+    print(a[:,b2])
+    print('-  --- -- - - -- - ')
+    print(a[b1,b2])
+
+boolean_array2()
+
+# output:
+[[ 0  1  2  3]
+ [ 4  5  6  7]
+ [ 8  9 10 11]]
+[[ 4  5  6  7]
+ [ 8  9 10 11]]
+ -- - - -- - -
+[[ 4  5  6  7]
+ [ 8  9 10 11]]
+ - -- -- - -
+[[ 0  2]
+ [ 4  6]
+ [ 8 10]]
+-  --- -- - - -- - 
+[ 4 10]
+```
+
+#### The ix_() function
+
+The ix_ function can be used to combine different vectors so as to obtain the result for each n-uplet. 
+
+This function takes N 1-D sequences and returns N outputs with N dimensions each, such that the shape is 1 in all but one dimension and the dimension with the non-unit shape value cycles through all N dimensions.
+
+```
+def ix_fuc_test():
+    a = np.array([1,2,3])
+    b = np.array([4,5,6])
+    c = np.array([7,8,9])
+
+    ax,bx,cx = np.ix_(a,b,c)
+    print(ax,ax.shape)
+    print('  -- -- - --  - -  ')
+    print(bx,bx.shape)
+    print(' - -- -- - - - - -- ')
+    print(cx,cx.shape)
+    print('- - - - -- - -')
+    result = ax+bx*cx
+    print(result)
+    print(result[1,2,2],a[1]+b[2]*c[2])
+
+
+# output:
+[[[1]]
+
+ [[2]]
+
+ [[3]]] (3, 1, 1)
+  -- -- - --  - -  
+[[[4]
+  [5]
+  [6]]] (1, 3, 1)
+ - -- -- - - - - -- 
+[[[7 8 9]]] (1, 1, 3)
+- - - - -- - -
+[[[29 33 37]
+  [36 41 46]
+  [43 49 55]]
+
+ [[30 34 38]
+  [37 42 47]
+  [44 50 56]]
+
+ [[31 35 39]
+  [38 43 48]
+  [45 51 57]]]
+56 56
+```
+
+
+### 线性代数 Linear Algebra
+
+#### Simple Array Operations
+
+```
+import numpy as np
+
+a = np.array([[1, 2],
+              [3, 4]])
+
+# 转置
+print(a.transpose())
+
+# 计算矩阵的逆
+x = np.linalg.inv(a)
+print(x)
+
+# 单位矩阵
+# Return a 2-D array with ones on the diagonal and zeros elsewhere.
+u = np.eye(4)
+print(u)
+
+# 矩阵 点乘
+j = np.array([[0.0, -1.0], [1.0, 0.0]])
+j1 = np.dot(j, j)
+print(j1)
+
+# 返回对角线元素之和
+trace1 = np.trace(u)
+print(trace1)
+
+
+# 解线性矩阵方程或线性标量方程组
+y = np.array([[5.], [7.]])
+result_y = np.linalg.solve(a, y)
+
+print(result_y)
+
+# 正方形数组的特征值和右特征向量的计算
+result_eig = np.linalg.eig(j)
+print(result_eig)
+
+```
+
+
+### Tricks and Tips
+
+
+#### “Automatic” Reshaping
+
+```
+a = np.arange(30)
+
+# -1 means "whatever is needed"
+a.shape = 2,-1,3
+print(a.shape)
+print(a)
+```
+
+#### Vector Stacking 矢量叠加
+
+```
+x = np.arange(0,10,2)                     # x=([0,2,4,6,8])
+y = np.arange(5)                          # y=([0,1,2,3,4])
+m = np.vstack([x,y])                      # m=([[0,2,4,6,8],
+                                          #     [0,1,2,3,4]])
+xy = np.hstack([x,y])                    
+# xy =([0,2,4,6,8,0,1,2,3,4])
+
+print(m)
+print(xy)
+```
+
+#### Histograms 直方图
+
+```
+
+def test2():
+    mu, sigma = 2, 0.5
+    v = np.random.normal(mu, sigma, 10000)
+    plt.hist(v, bins=50, normed=1)
+    plt.show()
+
+```
 
 
 
 
 
+
+
+
+
+		
+		
 
 		
 		
