@@ -42,6 +42,10 @@
 3. 500 line or less 
 
 
+### 已做
+
+1. mybatis 本地连接 mysql
+
 
 
 
