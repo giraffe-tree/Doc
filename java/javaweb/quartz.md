@@ -60,6 +60,10 @@ http://blog.csdn.net/u012572955/article/details/51656270
 [作业调度框架 Quartz 学习笔记(四) -- 接收参数和维护状态
 ](http://blog.csdn.net/lnara/article/details/8646155)
 
+原理:
+
+1. 首先要在数据库中初始化值,放入 jobDataMap
+2. 在 实现了 job 的类中,读取 jobDataMap ,进行 service 操作,然后改变它,再放入jobDataMap
 
 
 
