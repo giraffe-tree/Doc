@@ -55,4 +55,16 @@ http://blog.csdn.net/u012572955/article/details/51656270
 
 **解决:** 换成 ``` org.quartz.jobStore.driverDelegateClass:org.quartz.impl.jdbcjobstore.PostgreSQLDelegate ```
 
+## job 传入参数的问题
+
+[作业调度框架 Quartz 学习笔记(四) -- 接收参数和维护状态
+](http://blog.csdn.net/lnara/article/details/8646155)
+
+
+
+
+
+
+
+
 

@@ -318,8 +318,34 @@ String today = LocalDateTime.now().format(dateTimeFormatter2);
 
 > long between = ChronoUnit.DAYS.between(initialDate, finalDate);
 
+#### localdate 转 date
+
+1）使用ZonedDateTime将LocalDate转换为Instant。
+2）使用from（）方法从Instant对象获取Date的实例
+
+```
+		ZoneId zoneId = ZoneId.systemDefault();
+        LocalDate localDate = LocalDate.now();
+        ZonedDateTime zdt = localDate.atStartOfDay(zoneId);
+
+        Date date = Date.from(zdt.toInstant());
+```
 
 
+#### date 转 localdate
+
+1）将java.util.Date转换为ZonedDateTime。
+2）使用它的toLocalDate（）方法从ZonedDateTime获取LocalDate。
+
+
+```
+ 		Date date = new Date();
+        Instant instant = date.toInstant();
+        ZoneId zoneId = ZoneId.systemDefault();
+
+        // atZone()方法返回在指定时区从此Instant生成的ZonedDateTime。
+        LocalDate localDate = instant.atZone(zoneId).toLocalDate();
+```
 
 
 
