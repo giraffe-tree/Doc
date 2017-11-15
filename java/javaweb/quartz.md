@@ -65,7 +65,9 @@ http://blog.csdn.net/u012572955/article/details/51656270
 1. 首先要在数据库中初始化值,放入 jobDataMap
 2. 在 实现了 job 的类中,读取 jobDataMap ,进行 service 操作,然后改变它,再放入jobDataMap
 
+### job trigger的关系
 
+一个Job可以有多个Trigger，但多个Job不能对应同一个Trigger。
 
 
 
