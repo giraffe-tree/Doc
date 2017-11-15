@@ -69,7 +69,7 @@ http://blog.csdn.net/u012572955/article/details/51656270
 
 一个Job可以有多个Trigger，但多个Job不能对应同一个Trigger。
 
-
+[Quartz:Job和Trigger的关系](http://blog.csdn.net/alexhendar/article/details/23367123)
 
 
 
