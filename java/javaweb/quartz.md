@@ -71,6 +71,10 @@ http://blog.csdn.net/u012572955/article/details/51656270
 
 [Quartz:Job和Trigger的关系](http://blog.csdn.net/alexhendar/article/details/23367123)
 
+### job 持久化到数据库
+
+1. 当job运行一段时间停止后,jobdetail中的数据都会存到数据库中,下次执行时,会接着上次的jobdetail数据接着执行
+2. 两个同class的不同名称的Job,jobdetail互不干扰
 
 
 
