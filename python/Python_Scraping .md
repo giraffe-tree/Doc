@@ -112,23 +112,152 @@ else:
 
 #### 使用 find/findAll
 
-![](img/span_class_demo1.png)
+find 
 
 ```
 def find(self, name=None, attrs={}, recursive=True, text=None,
              **kwargs)
 ```
 
+findAll
 
 ```
 def find_all(self, name=None, attrs={}, recursive=True, text=None,
                  limit=None, **kwargs)
 ```
 
+#### 属性介绍
+
+- recursive: 若为 True, 则方法会去查找所有的子标签;若为 False 则只查找一层标签
+- text : 匹配为标签中的文本,必须完全匹配,否则不起作用. 默认 True
+- limit : 只有 findAll 有, 限制返回的个数
+
+#### 示例
+
+如查找下面的所有标签:
+
+<img src="img/span_class_demo1.png" width="70%" height="70%">
+
+```
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+
+html = urlopen("http://www.pythonscraping.com/pages/warandpeace.html")
+bsObj = BeautifulSoup(html,"html.parser")
 
 
+list1 = bsObj.findAll("span",{"class":"green"})
+
+for obj in list1:
+    print(obj.get_text())
+
+```
+
+### 子标签和后代标签
+
+子标签是父标签的下一级标签
+
+后代标签是父标签下面所有的标签,包括子标签,子标签的子标签....
+
+例如:
+
+```
+html = urlopen("http://www.pythonscraping.com/pages/page3.html")
+bsObj = BeautifulSoup(html, "html.parser")
+
+for child in bsObj.find("table",{"id":"giftList"}).children:
+    print(child)
+
+# for obj in list1.children:
+#     print(obj)
+
+print("\n- -- - -- - -- - -\n")
+
+for descendant in bsObj.find("table",{"id":"giftList"}).descendants:
+    print(descendant)
+
+```
+
+### 兄弟标签
+
+```
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+
+html = urlopen("http://www.pythonscraping.com/pages/page3.html")
+bsObj = BeautifulSoup(html, "html.parser")
+
+# sibling 兄弟姐妹
+
+for sibling in bsObj.find("table",{"id":"giftList"}).tr.next_siblings:
+    print(sibling)
 
 
+```
+
+### 父标签
+
+
+```
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+
+html = urlopen("http://www.pythonscraping.com/pages/page3.html")
+bsObj = BeautifulSoup(html, "html.parser")
+
+x = bsObj.find("img", {"src": "../img/gifts/img1.jpg"}).parent.previous_sibling.get_text()
+
+print(x)
+
+```
+
+
+### 正则表达式
+
+最经典的用途就是,识别邮箱地址
+
+具体用途如下图:
+
+![](img/regex.jpeg)
+
+
+### 正则表达式与 BeautifulSoup
+
+示例:
+
+```
+rom urllib.request import urlopen
+from bs4 import BeautifulSoup
+import re
+
+html = urlopen("http://www.pythonscraping.com/pages/page3.html")
+bsObj = BeautifulSoup(html, "html.parser")
+
+x = bsObj.findAll("img", {"src":re.compile("\.\.\/img\/gifts\/img.*\.jpg")})
+
+for img in x :
+    print(img.attrs)
+    print(img["src"])
+```
+
+
+### 用 lambda 表达式
+
+示例:
+
+```
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+
+html = urlopen("http://www.pythonscraping.com/pages/page3.html")
+bsObj = BeautifulSoup(html, "html.parser")
+
+x = bsObj.findAll(lambda tag:len(tag.attrs)==2)
+
+for obj in x :
+    print(obj.attrs)
+
+```
 
 
 
