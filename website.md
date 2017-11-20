@@ -1,3 +1,6 @@
+- 爬取知乎信息 
+	- http://blog.csdn.net/forezp/article/details/68951699
+
 
 python编写质量的代码
 - https://read.douban.com/reader/ebook/8712705/
@@ -71,4 +74,6 @@ http://mp.weixin.qq.com/s/S6rncM3Rx64yT7imecU6Og
 使用搜索引擎
 
 http://mp.weixin.qq.com/s/DJGY4hGIGK78GPUjFrhCsw
+
+
 
