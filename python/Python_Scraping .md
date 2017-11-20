@@ -6,6 +6,7 @@
 
 **以下是我的个人总结:**
 
+我的代码在这里: [github.com/cc19941109/PythonDemo](https://github.com/cc19941109/PythonDemo/tree/master/com/chen/python_scraping)
 
 ## 第一章 初见网络爬虫
 
@@ -258,6 +259,97 @@ for obj in x :
     print(obj.attrs)
 
 ```
+
+## 第三章 开始采集
+
+
+### 采集 kevin_Bacon 的 wiki
+
+首先,看看下面的示例
+
+目的是找出所有的跳转词条的 url
+
+<img src="img/chapter3_a_demo.png" width="70%" height="70%">
+
+```
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+
+html = urlopen("http://en.wikipedia.org/wiki/Kevin_Bacon")
+bsObj = BeautifulSoup(html, "html.parser")
+
+for link in bsObj.find("a"):
+    if 'href' in link.attrs:
+        print(link.attrs['href'])
+
+```
+
+
+
+#### 你可能遇到的问题
+
+```
+<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed 
+```
+
+**解决办法:**由于我是在 mac 上运行的,我只需要执行```/Applications/Python\ 3.6/Install\ Certificates.command```这个文件就可以解决这个问题
+
+1. 具体的原因参见下面引自 Stack Overflow的参考.
+2. 另外在```/Applications/Python\ 3.6/ReadMe.rtf ```中也提到了这个问题.
+
+参考:[urllib and “SSL: CERTIFICATE_VERIFY_FAILED” Error
+](https://stackoverflow.com/questions/27835619/urllib-and-ssl-certificate-verify-failed-error)
+
+
+#### 改进
+
+另外,我们发现其实很多的链接对于我们都是没有用的,那怎么办呢
+
+```
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+import re
+
+html = urlopen("http://en.wikipedia.org/wiki/Kevin_Bacon")
+bsObj = BeautifulSoup(html, "html.parser")
+
+for link in bsObj.find("div",{"id":"bodyContent"}).findAll("a",href = re.compile("^(/wiki/)((?!:).)*$")):
+    if 'href' in link.attrs:
+        print(link.attrs['href'])
+
+```
+
+
+### 总结一下如何使用 urllib 进行爬虫
+
+1. 爬取的一般是 html 元素
+2. 我们通过 ```urllib.request.urlopen("你要爬的网址")```
+
+	> 这里返回的其实是一个上下文管理器的对象
+	
+	> This function always returns an object which can work as a context
+    manager 
+
+
+3. 再通过 BeautifulSoup 处理这个对象 ```bsObj = BeautifulSoup(html, "html.parser")```,返回一个 BeautifulSoup对象
+
+4. 这时候,我们可以通过 ```find/findAll``` 方法来进行查找
+
+5. 常用的方法是使用正则表达式
+
+	```
+	# 你需要导入 re 包 import re
+	bsObj.find("div",{"id":"bodyContent"}).findAll("a",href = re.compile("^(/wiki/)((?!:).)*$")
+	```
+6. 找到链接后,你可以取找各种你想获取的信息
+
+
+
+
+
+
+
+
 
 
 
