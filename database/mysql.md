@@ -275,3 +275,9 @@
 			(select city_id from city where city_id  = 111) and address_id>0;
 		当不使用主键进行更新时，会产生安全错误
 
+
+###  Error: Too big precision 14 specified for 'time'. Maximum is 6.
+
+In old versions of MySQL you could specify a display width up to 19 after a temporal type. This was removed in 5.5, and in 5.6 the parameter to a temporal type doesn't mean display width anymore but now means fractional second precision, with a maximum of 6 indicating microsecond precision. 
+
+[mysql:reference](https://forums.mysql.com/read.php?20,597551,597552)
