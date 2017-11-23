@@ -1,5 +1,13 @@
 # TensorFlow
 
+## 资料参考
+
+
+- [如何理解神经网络里面的反向传播算法](https://www.zhihu.com/question/24827633)
+- [CNN(卷积神经网络)、RNN(循环神经网络)、DNN(深度神经网络)的内部网络结构有什么区别？](https://www.zhihu.com/question/34681168)
+- 
+
+
 ## Goals
 
 1. 理解 TF 图形计算方法
@@ -78,7 +86,7 @@ FtrlOptimizer
 ### tensorboard
 
 
-
+### 
 
 
 
