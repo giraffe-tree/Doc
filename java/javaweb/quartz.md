@@ -1,5 +1,17 @@
 # Quartz
 
+## 参考网址
+
+[官网配置](http://www.quartz-scheduler.org/documentation/quartz-2.2.x/configuration/)
+
+[cron 表达式判断](http://itindex.net/detail/53315-spring-quartz-%E7%AE%A1%E7%90%86)
+
+[misfire](http://www.jianshu.com/p/634d2a6fae7b)
+
+[原文](https://dzone.com/articles/quartz-scheduler-misfire)
+
+withMisfireHandlingInstructionIgnoreMisfires
+
 ## job bean 的实现
 
 [参考](http://blog.csdn.net/x6582026/article/details/52947878)
@@ -75,6 +87,36 @@ http://blog.csdn.net/u012572955/article/details/51656270
 
 1. 当job运行一段时间停止后,jobdetail中的数据都会存到数据库中,下次执行时,会接着上次的jobdetail数据接着执行
 2. 两个同class的不同名称的Job,jobdetail互不干扰
+
+
+## Quartz Quick Start Guide
+
+[Quartz Quick Start Guide](http://www.quartz-scheduler.org/documentation/quartz-2.2.x/quick-start.html)
+
+[Quartz Configuration Reference](http://www.quartz-scheduler.org/documentation/quartz-2.2.x/configuration/)
+
+
+#### 静态引入
+
+1. import static 包名.类名.静态成员变量;
+2. import static 包名.类名.静态成员函数;
+　　
+
+*注意导入的是成员变量和方法名*
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
 
 
 
