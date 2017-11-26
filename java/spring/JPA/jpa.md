@@ -110,7 +110,38 @@ CriteriaQuery接口：代表一个specific的顶层查询对象，它包含着�
 ```
    
    
-  
+## 一. 动态查询
+
+[spring-data-examples SpringJpa官方示例](https://github.com/spring-projects/spring-data-examples)
+
+[Spring Data JPA Tutorial: Creating Database Queries With the JPA Criteria API](https://www.petrikainulainen.net/programming/spring-framework/spring-data-jpa-tutorial-part-four-jpa-criteria-queries/)
+
+[JpaSpecificationExecutor java api doc](https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/JpaSpecificationExecutor.html)
+
+首先需要我们知道的是要使用动态查询必须要用到```JpaSpecificationExecutor ```接口
+
+下面是这个接口的定义,已经我加上的英文注释(来自 api 文档)
+```
+public interface JpaSpecificationExecutor<T> {
+    //Returns a single entity matching the given Specification or Optional.empty() if none found.
+    T findOne(Specification<T> var1);
+    
+    //Returns all entities matching the given Specification.
+    List<T> findAll(Specification<T> var1);
+    
+    //Returns a Page of entities matching the given Specification.
+    Page<T> findAll(Specification<T> var1, Pageable var2);
+    
+    //Returns all entities matching the given Specification and Sort.
+    List<T> findAll(Specification<T> var1, Sort var2);
+    
+    //Returns the number of instances that the given Specification will return.
+    long count(Specification<T> var1);
+}
+```
+
+
+
 
 
 
