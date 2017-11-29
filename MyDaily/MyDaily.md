@@ -98,9 +98,16 @@
 2. maven 基本操作
 	
 	- mvn clean compile
-	- 
+	- mvn clean test
+	- mvn clean package
+	- mvn clean install 把 jar 包放入本地仓库
+	- java -jar 
+	- mvn archetype:generate
 
-3. 使用 gif brewery3 制作 gif
+3. 使用 gif brewery3 制作 gif 
+
+	- 传到了 git 上
+
 
 
 
