@@ -74,6 +74,39 @@
 1. jpa
 
 
+## 11.28 
+
+1. 听 google 方法论
+2. python cookbook 1.1 -1.4
+	
+	- 分解序列
+	- 保存最后的几个历史记录 collections.deque
+	- 找到最大的几个元素 heapq.nlargest/nsmallest
+	
+3. spring 
+
+	- Don't Repeat Yourself
+	- 框架的是什么,怎么产生的
+	- 框架的作用
+	- 框架掌握整个程序的控制权，我们必须一定程度上把程序流程的控制权交给框架，这样框架才能更好的帮助我们。
+
+
+
+## 11.29
+
+1. two sum [问题解析](https://leetcode.com/articles/two-sum/)
+2. maven 基本操作
+	
+	- 
+
+
+
+
+
+
+
+
+
 
 
 

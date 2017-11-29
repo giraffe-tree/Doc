@@ -39,7 +39,7 @@
 
 https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.multiple-modules.types
 
-
+https://www.petrikainulainen.net/programming/spring-framework/spring-data-jpa-tutorial-part-four-jpa-criteria-queries/
 
 
 
