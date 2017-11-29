@@ -6,3 +6,5 @@
 
 
  如果不声明依赖的范围,那么默认就是 compile
+
+![](gif/add_junit.gif)

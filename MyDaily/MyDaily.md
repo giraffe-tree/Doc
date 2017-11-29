@@ -102,7 +102,6 @@
 
 3. 使用 gif brewery3 制作 gif
 
-![](gif/add_junit.gif)
 
 
 
