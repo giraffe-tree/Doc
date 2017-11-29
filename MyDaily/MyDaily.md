@@ -97,10 +97,12 @@
 1. two sum [问题解析](https://leetcode.com/articles/two-sum/)
 2. maven 基本操作
 	
+	- mvn clean compile
 	- 
 
+3. 使用 gif brewery3 制作 gif
 
-
+![](gif/add_junit.gif)
 
 
 
