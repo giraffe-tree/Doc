@@ -101,14 +101,46 @@
 	- mvn clean test
 	- mvn clean package
 	- mvn clean install 把 jar 包放入本地仓库
-	- java -jar 
-	- mvn archetype:generate
+	- java -jar 执行 jar
+	- mvn archetype:generate 产生 maven 原型
 
 3. 使用 gif brewery3 制作 gif 
 
 	- 传到了 git 上
 
 
+## 11.30
+
+1. 回顾昨天的 maven 内容
+2. maven 坐标与依赖
+
+	- pom 定义
+	- 依赖范围 ```compile test provided runtime system ```
+	- 传递性依赖
+	- 依赖调解 2个原则 
+	- 排除依赖 ```exclusions```
+	- 归类依赖  使用 ```properties ```
+	- 优化依赖 ```mvn dependency:list / tree / analyze```
+
+
+### think
+
+今天在下班的班车上想到一个问题,假如计算机先开始什么都不知道,但能够通过一次次的运算,开始建立模型,通过计算判断它的模型的准确性,慢慢完善模型,那么最后是否能找到一个完美的模型呢
+
+模型---> 黑盒子函数---> true/false
+
+例如最简单的,数字判断,1-100,共有100个数,计算机随便猜,黑盒子函数会返回结果(-1,0,1)
+
+通过概率来判断,直到计算机输入数字,返回全为1,则结束
+
+1. 计算机需要自己能记住自己做了什么
+2. 赢的概率大的胜出
+
+
+从一个事物所能做到的极限进行思考
+
+
+## 第六章 仓库
 
 
 
