@@ -157,7 +157,19 @@
 	
 	> 或者我更想说的是把 java/ pyhon/ ... 当成一个工具,而不是深入的了解它的每个细节, 因为我们需要的是解决这个问题,而不是这个工具的所有构成. 当然新的解决方案的产生,可能本身就带来了一种新的技术.站在巨人的肩膀上.
 
-2. 
+2. 看 zookeeper
+3. 事务
+
+	- 事务的4个特性 ACID 
+	- 几个问题:脏读,不可重复读,幻读
+	- 4个隔离等级:read uncommited/commited,repeatable read,serializable
+
+4. 2PC,3PC,拜占庭将军问题,paxos 问题
+
+	- lamport 这个人好有趣
+
+
+
 
 
 ### think
