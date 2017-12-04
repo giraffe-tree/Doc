@@ -180,9 +180,9 @@
 
 ## 12.4
 
-1. 安装 ubuntu ...然后又删了,最后装了 CentOS
+1. 安装 CentOS 7
 2. 安装 linux java , tomcat 
-
+3. learn vim
 
 
 
