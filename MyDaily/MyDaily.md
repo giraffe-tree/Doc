@@ -178,8 +178,10 @@
 
 
 
+## 12.4
 
-
+1. 安装 ubuntu ...然后又删了,最后装了 CentOS
+2. 安装 linux java , tomcat 
 
 
 
