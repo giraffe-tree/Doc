@@ -4,4 +4,18 @@
 
 ## 入门
 
+[vim 简单实用教程](https://www.cnblogs.com/lijia0511/p/5644566.html)
+
+```su root ```获取 root 权限
+
+```ll /etc/profile.d```
+
+```rpm -qa | grep java``` 查看安装的软件中包含 ```java```的软件
+
+```ls -l```即```ll```
+
+```mv mydata/java/ /usr/java``` 移动一个文件夹
+
+
+
 
