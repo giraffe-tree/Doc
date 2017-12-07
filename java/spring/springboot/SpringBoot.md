@@ -133,9 +133,14 @@
 
 <img src="../../gif/spring_condition_config.jpg" width="70%" height="70%">
 
+#### 日志配置
+
+请参考 [Spring Boot干货系列：（七）默认日志logback配置解析](http://tengj.top/2017/04/05/springboot7/)
 
 
+## 第七章 actuator
 
+[关于springboot-actuator监控的401无权限访问](http://blog.csdn.net/u013076044/article/details/60780151)
 
 
 
