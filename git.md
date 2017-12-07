@@ -137,11 +137,23 @@ use "git reset HEAD <file>..." to unstage
 
 **将本地仓库与远程仓库关联**
 
+**关联**:
+
+这里要注意的是 git 地址最好使用 ssh, 如果使用 https 则需要输入密码
+
 -  git remote add origin https://github.com/xxxx.git
 - git remote add origin https://github.com/cc19941109/Doc.git
 - 添加后,远程库的名字就是origin
+
+**查看**: 
+
 - 查看当前所有远程仓库：git remote -v
+
+**解除**:
+
 - 解除其中一个远程仓库: git remote rm <远程库名>
+- 如: git remote remove origin
+
 #### 本地多个ssh
 - http://blog.csdn.net/chaihuasong/article/details/37886139
 
