@@ -4,6 +4,9 @@
 
 这本书是我大学快毕业的时候,在学校旁边的二手书店买的,书是59块钱,打的四折,而且书还很新.但买回来才发现书是盗版书.希望作者原谅我吧.还好印刷还算可读,今天剩下的时间就读读这本书吧.
 
+
+
+
 ## 第一章 入门
 
 ### spring boot 核心
@@ -132,6 +135,14 @@
 关于 conditional注解的配置
 
 <img src="../../gif/spring_condition_config.jpg" width="70%" height="70%">
+
+#### @Qualifier
+
+当一个接口有多个实现时, 用于匹配要使用的 bean
+
+#### 加载/获取属性文件中的属性
+
+[springboot 加载属性](http://blog.csdn.net/yeyincai/article/details/51702059)
 
 #### 日志配置
 
