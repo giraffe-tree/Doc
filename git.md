@@ -154,6 +154,18 @@ use "git reset HEAD <file>..." to unstage
 - 解除其中一个远程仓库: git remote rm <远程库名>
 - 如: git remote remove origin
 
+#### 示例
+
+```
+echo "# 这里写项目的简述" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin git@github.com:cc19941109/项目名.git
+git push -u origin master 或者 git push --set-upstream origin master
+```
+
+
 #### 本地多个ssh
 - http://blog.csdn.net/chaihuasong/article/details/37886139
 
