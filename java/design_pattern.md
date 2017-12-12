@@ -9,6 +9,8 @@
 3. 静态内部类
 4. 饿汉式 静态私有变量
 
+Java使用double check（双重检查）实现单例模式时，单例变量要使用volatile修饰 [原因](http://blog.csdn.net/u010660307/article/details/69922320)
+
 ## 工厂模式 (2种模式)
 
 1. 简单工厂模式
