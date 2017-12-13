@@ -1,4 +1,7 @@
 
+eureka 注册中心 测试
+
+- http://eureka.didispace.com/
 
 spring 监听器启动 https://www.cnblogs.com/ssslinppp/p/7607509.html
 
