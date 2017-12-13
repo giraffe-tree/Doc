@@ -1,6 +1,10 @@
 
-- http://www.baeldung.com/configuration-properties-in-spring-boot
 
+spring 监听器启动 https://www.cnblogs.com/ssslinppp/p/7607509.html
+
+Spring Boot 配置优先级顺序 https://www.cnblogs.com/softidea/p/5759180.html
+
+- http://www.baeldung.com/configuration-properties-in-spring-boot
 
 
 - 爬取知乎信息 
