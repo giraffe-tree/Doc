@@ -1,4 +1,18 @@
 
+#### eureka 常见问题:
+
+- http://blog.csdn.net/jdhanhua/article/details/55002191
+
+
+#### 深入理解 eureka
+
+- http://blog.csdn.net/forezp/article/details/73017664
+
+#### ribbon 实现 负载均衡的原理
+
+http://blog.csdn.net/Jeson0725/article/details/70058910
+
+
 eureka 注册中心 测试
 
 - http://eureka.didispace.com/
