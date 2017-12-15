@@ -1,4 +1,8 @@
 
+#### idea 常用插件
+
+- https://www.cnblogs.com/huaxingtianxia/p/6703315.html
+
 #### eureka 常见问题:
 
 - http://blog.csdn.net/jdhanhua/article/details/55002191
