@@ -225,6 +225,19 @@ Garbage Collection
 ## 3.5 垃圾收集器
 
 
+# 第9章 类加载及直性子系统的案例与实战
+
+### 9.2.3 字节码生成, 动态代理
+
+javac 就是一个有 java 语言写成的程序
+
+实现了可以在原始类和接口还未知的时候,就确定代理类的代理行为 <---通过实现 invocationHandler 接口
+
+
+
+
+
+
 
 
 # 第12章 java 内存模型与线程
@@ -233,6 +246,62 @@ Garbage Collection
 
 ## 12.2 硬件的效率与一致性
 
+## 12.3  java内存模型
+
+Java Memory Model ,JMM
+
+#### 作用
+
+用于屏蔽各种硬件和操作系统的内存访问差异
+
+
+### 12.3.1 主内存和工作内存
+
+### 12.3.2 内存交互操作
+
+对于主内存和工作内存之间具体的交互协议, JMM 定义了8中操作来完成
+
+#### lock,unlock
+
+#### read  load
+
+read 读取
+
+#### use assign
+
+#### store write 
+
+
+### 12.3.3 volitile 型变量的特殊规则
+
+
+### 12.3.4 对于 double,long 型变量的特殊规则
+
+非原子性协定
+
+
+### 12.3.5 原子性,可见性和有序性
+
+#### 原子性
+
+monitorenter
+
+monitorexit
+
+
+#### 可见性
+
+volatile,final,synchronized这三个关键字都可以实现可见性
+
+
+#### 有序性
+
+### 12.3.6 先行发生原则
+
+
+
+
+## 12.4 java 与线程
 
 
 
@@ -249,4 +318,3 @@ Garbage Collection
 
 
 
-**
