@@ -347,7 +347,11 @@ String today = LocalDateTime.now().format(dateTimeFormatter2);
         LocalDate localDate = instant.atZone(zoneId).toLocalDate();
 ```
 
+## 其他参考
 
+#### 深入理解Java 8 Lambda（语言篇——lambda，方法引用，目标类型和默认方法）
+
+http://www.cnblogs.com/figure9/p/java-8-lambdas-insideout-language-features.html
 
 
 
