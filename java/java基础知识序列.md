@@ -1,4 +1,4 @@
-# 2016-2017寒假实习面试总结（java后台）
+# 2016-2017面试总结（java后台）
 
 [来源:](https://zhuanlan.zhihu.com/p/25725929)
 
@@ -6,34 +6,75 @@
 
 基本数据类型 8种 大小
 
-java内存模型
-多态（重载重写）
-object方法
-类访问权限
-sleep、notify、wait 联系、区别
-String、stringbuffer、stringbuilder 联系、区别、源码
-Volatile 原理、源码、与syn区别
-线程间通信方式
-线程的各种状态
-等等等等
+1. java内存模型
+
+	- 8种操作
+	- volatile 变量 改变的3个步骤
+
+2. 多态（重载重写）
+
+	- 继承
+	- 重写
+	- 父类引用子类对象
+	
+3. object方法
+
+	- 一个构造方法
+	- 一个私有方法
+	- protected 方法 2个
+	- public 方法 9个
+	- finalize  垃圾回收的机制,是否有必要去调用
+
+4. final,static
+
+5. 类访问权限
+
+6. sleep、notify、wait 联系、区别
+
+	- sleep 是 thread 类中的方法,不影响锁
+	- notify、wait是 object 类中的方法
+
+7. 线程的各种状态
+	
+	- new 
+	- runnable
+	- blocked 
+	- waiting 等待
+	- time_waiting 超时等待
+	- terminated
+
+8. String、stringbuffer、stringbuilder 联系、区别、源码
+
+	- 所有用加号连接的string运算都隐式的改写成stringbuilder
+
+9. Volatile 原理、源码、与syn区别
+
+10. transient
+
+11. 线程间通信方式
+
+	-  线程间的通信目的主要是用于线程同步，所以线程没有像进程通信中的用于数据交换的通信机制。
+
+
 
 ## 集合框架
 
-List
+### List
 
-ArrayList
-LinkedList
-Vector
+1. ArrayList
+2. LinkedList
+3. Vector
+
 三者区别，联系，源码
 
-Set
+### Set
 
 HashSet
 LinkedHashSet
 TreeSet
 基于什么实现，内部数据结构，适用场景，源码
 
-Map
+### Map
 
 HashMap
 weakHashMao
