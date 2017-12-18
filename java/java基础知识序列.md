@@ -42,6 +42,7 @@
 	- waiting 等待
 	- time_waiting 超时等待
 	- terminated
+	- 同步阻塞,等待阻塞
 
 8. String、stringbuffer、stringbuilder 联系、区别、源码
 
@@ -69,18 +70,19 @@
 
 ### Set
 
-HashSet
-LinkedHashSet
-TreeSet
+1. HashSet
+2. LinkedHashSet
+3. TreeSet
+
 基于什么实现，内部数据结构，适用场景，源码
 
 ### Map
 
-HashMap
-weakHashMao
-LinkedHashMap
-TreeMap
-HashMap与hashtable的区别
+1. HashMap
+2. weakHashMao
+3. LinkedHashMap
+4. TreeMap
+5. HashMap与hashtable的区别
 
 内部实现原理、源码、适用场景
 
@@ -128,10 +130,12 @@ ThreadPoolExecutor
 
 ## 虚拟机
 
-JVM五大区
+### JVM五大区
 
-每个区的存储、作用
-JVM内存模型
+1. 每个区的存储、作用
+2. JVM内存模型
+	
+	- 主内存,工作内存
 
 类加载机制
 双亲委派模型
@@ -147,13 +151,28 @@ JVM优化
 
 ## IO流
 
-BIO
+### BIO
 
-字节流：类型、适用场景
-字符流：类型、适用场景
-NIO
+1. 字节流：类型、适用场景
+
+	- inputStream
+	- outputStream
+	
+2. 字符流：类型、适用场景
+
+	- reader
+	- writer	
+	
+### NIO
+
+- Channels
+- Buffers
+- Selectors
+
 类型、适用场景
+
 三大组件的联系、使用
+
 内存情况
 
 ## 大数据
@@ -220,14 +239,20 @@ mybatis
 
 ## 设计模式
 
-单例模式
-工厂模式
-观察者模式
-适配器模式
-模仿方法模式
-策略模式
-责任链模式
-装饰者模式
+1. 单例模式
+2. 工厂模式
+3. 观察者模式
+4. 适配器模式
+5. 模仿方法模式
+6. 策略模式
+7. 责任链模式
+8. 装饰者模式
+9. 代理模式
+
+	- InvocationHandler
+	- Proxy.newProxyInstance
+	
+
 常用的八种掌握就行，原理，使用
 单例、工厂、观察者重点
 
