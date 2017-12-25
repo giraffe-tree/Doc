@@ -16,6 +16,13 @@ http://www.epubit.com.cn/book/onlinechapter/33966
 
 https://www.cnblogs.com/ityouknow/p/5748830.html
 
+####  homebrew 安装 redis
+
+http://blog.csdn.net/chenshuai1993/article/details/51519384
+
+#### redis 教程
+
+https://www.cnblogs.com/joeblackzqq/p/6229387.html
 
 ## 比较
 
@@ -25,6 +32,15 @@ redis和memcache比较
 2. Redis支持master-slave(主-从)模式应用
 3. Redis支持数据持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用。
 4. Redis单个value的最大限制是1GB，memcached只能保存1MB的数据。
+
+## 命令
+
+```
+redis-server 启动
+redis-cli
+redis-cli -h 127.0.0.1 -p 6379 -a "mypass"
+PING
+```
 
 ## 基本数据结构
 
