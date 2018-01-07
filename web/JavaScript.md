@@ -357,13 +357,106 @@ html dom : 当网页被加载时,浏览器会创建页面的文档对象模型
 
 ```
 
+#### dom 事件
+
+dom eventListener
+
+1. addEventListener()
+2. removeEventListener()
+
+为句柄添加多个事件,不会覆盖,即 dom 2 级事件处理
+
+```
+<script>
+    var x = document.getElementById("btn");
+    x.addEventListener("click",hello);
+    x.addEventListener("click",world);
+    function hello() {
+        alert("hello");
+    }
+    function world() {
+        alert("world");
+    }
+</script>
+```
+
+#### 事件流
+
+1. 事件流,在页面中接受事件的顺序
+2. 事件冒泡,由最具体的元素接受,然后逐级向上传播至最不具体的元素的节点
+3. 事件捕获,最不具体的节点先接受事件,而最具体的节点应该最后接受事件
+
+#### 事件的处理
+
+1. html 事件处理
+
+	```
+	<button id="btn" onclick="hello()">hello</button>
+	```
+
+2. ie 事件处理程序
+
+	- attachEvent
+	- detachEvent
 
 
+3. dom 0 级事件处理
+
+	- 把一个函数赋值给一个事件处理程序属性
+	- 会被覆盖
+
+	```
+		<button id="btn">hello</button>
+	<script>
+	
+	    var btn1 = document.getElementById("btn");
+	    btn1.onclick = function (ev) { alert("hello world dom 0 级") }
+	    btn1.onclick = function (ev) { alert("前面的事件,被覆盖了") }
+	    
+	</script>
+	```
+
+4. dom 2 级事件处理
+
+	- addEventListener(事件名,函数名,布尔值)
+	- true 事件捕获
+	- false 事件冒泡
+	- removeEventListener
 
 
+### 对象
+
+#### 创建对象
+
+1. new Object()
+
+	```
+	 people = new Object();
+    people.name = "chen";
+    people.age = "23";
+    document.write("name:"+people.name);
+	```
+
+2. obj={ ... }
 
 
+	```
+	people ={name:"chen",age:"dasd"};
 
+    document.write("name:"+people.name);
+	```
+
+3. 函数创建
+
+	```
+	function people(name,age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    son = new people("chen",12);
+    document.write(son.name+" "+son.age);
+	```
 
 
 
