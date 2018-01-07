@@ -458,6 +458,95 @@ dom eventListener
     document.write(son.name+" "+son.age);
 	```
 
+### string对象
+
+1. 可以使用单引号/双引号
+2. 方法/属性
+
+	- str.length 
+	- indexOf(searchString: string, position?: number): number;
+	- match(regexp: string | RegExp): RegExpMatchArray | null;
+	- replace(searchValue: string | RegExp, replacer: (substring: string, ...args: any[]) => string): string;
+	- toUpperCase(): string;
+	- split(separator: string | RegExp, limit?: number): string[];
 
 
+### 时间对象
+
+创建时间
+
+	```
+	var x = new Date();
+    document.write(x);
+    var y = x.setFullYear(2018,1,1);
+    document.write(x);
+	```
+	
+定时	
+	
+	```
+	 function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        checkTime(h);
+        checkTime(m);
+        checkTime(s);
+        document.getElementById("timeid").innerHTML = h+":"+m+":"+s;
+        t = setTimeout(function () {
+            startTime();
+        },500);
+
+    }
+	```
+
+### 数组对象
+
+1. array 对象
+
+	```
+	var x = ["cc","dd","ee"];
+	```
+	
+2. 使用下标访问数组
+3. 数组方法
+
+	 - concat() 合并数组 concat(...items: (T | ReadonlyArray<T>)[]): T[];
+	 - sort() 排序 sort(compareFn?: (a: T, b: T) => number): this;
+
+		```
+		y = [1,3,4,2,7,9,5];
+    document.write(y.sort(function (a,b) { return b-a }));
+
+		```
+	 
+	 - push 末尾添加 push(...items: T[]): number; 返回长度 
+	 - reverse 反转 everse(): T[]; 返回数组
+
+### Math 对象
+
+#### 常见方法
+
+1. Math.round() 四舍五入
+
+2. Math.random() 从0到1
+	
+	- parseInt
+
+3. Math.max()/min()/abs()
+
+
+### 事件对象
+
+1. type 事件类型
+2. target 事件目标
+3. stopPropagation() 阻止事件冒泡
+4. preventDefault() 阻止默认行为
+
+
+	
+	
+	
+	
 
