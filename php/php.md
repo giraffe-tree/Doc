@@ -246,3 +246,49 @@ include 和 require 语句是相同的，除了错误处理方面：
 	include 只生成警告（E_WARNING），并且脚本会继续
 
 
+	```
+	include 'filename';
+	require 'filename';
+	```
+
+
+
+### @
+
+@是可以屏蔽函数执行过程中遇到问题而产生的一些错误、警告信息，这样用户就看不到程序的出错信息。这样除了用户界面会友好一些外，更重要的是安全性，因为屏蔽了出错文件的路径等信息。
+
+
+### 传址调用
+
+
+### php 不支持 curl 的终极解决方案
+
+[ php 不支持 curl 的终极解决方案](http://blog.csdn.net/etongs/article/details/73321929)
+
+
+## http请求
+
+
+### GET
+
+```
+require_once(__DIR__. "/../action.php");
+
+$url='http://localhost:8888/user/1';
+//$html = file_get_contents($url);
+//$user = json_decode($html);
+
+$action1 = new Action();
+$html =  $action1->curl_get($url);
+$user = json_decode($html);
+
+echo $user -> name;
+
+```
+
+
+### POST
+
+
+### 回调函数
+
