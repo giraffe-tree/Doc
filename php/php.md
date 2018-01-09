@@ -289,6 +289,66 @@ echo $user -> name;
 
 ### POST
 
+### 遍历关联数组
+
+```
+$age = array("zhangshan"=>14,"lisi"=>15,"sharejs"=>16);
+foreach($age as $name=>$value){
+  echo $name . "=" . $value;
+  echo "\n";
+}
+```
+
 
 ### 回调函数
+
+#### array_map
+
+```
+function myfunction($v)
+{
+    return($v*$v);
+}
+$a=array(1,2,3,4,5);
+$square2 = array_map("myfunction",$a);
+
+foreach ($square2 as $value) {
+
+    echo $value . " ";
+}
+```
+
+#### array_reduce
+
+```
+function sum($carry, $item)
+{
+    $carry += $item;
+    return $carry;
+}
+
+$a = array(1, 2, 3, 4, 5);
+$x1 = array_reduce($a, "sum");
+
+echo $x1;
+```
+
+#### call_user_func
+
+```
+$gethello = function ($param) {
+    echo "hello ".$param;
+};
+
+call_user_func($gethello,"chen");
+
+```
+
+
+
+
+
+
+
+
 
