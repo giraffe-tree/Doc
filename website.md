@@ -1,4 +1,12 @@
 
+#### 弱类型、强类型、动态类型、静态类型语言的区别是什么？
+
+https://www.zhihu.com/question/19918532
+
+#### php性能测试
+
+http://www.oneapm.com/ai/php.html
+
 #### brain cache
 
 #### springboot实战demo  + spring4翻译+ swagger

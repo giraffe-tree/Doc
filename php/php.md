@@ -246,3 +246,109 @@ include 和 require 语句是相同的，除了错误处理方面：
 	include 只生成警告（E_WARNING），并且脚本会继续
 
 
+	```
+	include 'filename';
+	require 'filename';
+	```
+
+
+
+### @
+
+@是可以屏蔽函数执行过程中遇到问题而产生的一些错误、警告信息，这样用户就看不到程序的出错信息。这样除了用户界面会友好一些外，更重要的是安全性，因为屏蔽了出错文件的路径等信息。
+
+
+### 传址调用
+
+
+### php 不支持 curl 的终极解决方案
+
+[ php 不支持 curl 的终极解决方案](http://blog.csdn.net/etongs/article/details/73321929)
+
+
+## http请求
+
+
+### GET
+
+```
+require_once(__DIR__. "/../action.php");
+
+$url='http://localhost:8888/user/1';
+//$html = file_get_contents($url);
+//$user = json_decode($html);
+
+$action1 = new Action();
+$html =  $action1->curl_get($url);
+$user = json_decode($html);
+
+echo $user -> name;
+
+```
+
+
+### POST
+
+### 遍历关联数组
+
+```
+$age = array("zhangshan"=>14,"lisi"=>15,"sharejs"=>16);
+foreach($age as $name=>$value){
+  echo $name . "=" . $value;
+  echo "\n";
+}
+```
+
+
+### 回调函数
+
+#### array_map
+
+```
+function myfunction($v)
+{
+    return($v*$v);
+}
+$a=array(1,2,3,4,5);
+$square2 = array_map("myfunction",$a);
+
+foreach ($square2 as $value) {
+
+    echo $value . " ";
+}
+```
+
+#### array_reduce
+
+```
+function sum($carry, $item)
+{
+    $carry += $item;
+    return $carry;
+}
+
+$a = array(1, 2, 3, 4, 5);
+$x1 = array_reduce($a, "sum");
+
+echo $x1;
+```
+
+#### call_user_func
+
+```
+$gethello = function ($param) {
+    echo "hello ".$param;
+};
+
+call_user_func($gethello,"chen");
+
+```
+
+
+
+
+
+
+
+
+
