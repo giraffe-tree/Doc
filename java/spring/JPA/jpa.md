@@ -241,6 +241,36 @@ logging:
 ```
 
 
+### 怎么样初始化懒加载的元素
+
+很快地,我遇到一个问题,怎么去加载一个懒加载的元素.
+
+原来我想到的方案是改变 fetchType ,从而改变加载,找了很久没有这个解决方案.
+
+1. join fetch in JPQL
+
+	[how to use fetch join in jpql](https://stackoverflow.com/questions/15359306/how-to-load-lazy-fetched-items-from-hibernate-jpa-in-my-controller/27879324)
+
+2. join fetch in CriteriaQuery
+
+
+3. named entity graph
+
+4. dynamic entity graph
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
