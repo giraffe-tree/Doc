@@ -142,6 +142,108 @@ public interface JpaSpecificationExecutor<T> {
 
 
 
+# learn
+
+## Java
+
+### @RequestHeader的作用
+
+http://blog.csdn.net/yhjyumi/article/details/48105331
+
+### produces/consumes在@requestMapping中的使用方式和作用
+
+1. ```produces="application/json"```
+
+
+	```
+    @GetMapping(path = "/titles/{titleid}", produces = MediaType.APPLICATION_JSON_VALUE+";charset=utf-8;")
+	```
+
+2. ```consumes="application/json"```
+
+### inner join
+
+```
+SELECT * FROM title_option as t1 inner join title on t1.title_id = title.id where title.type_id =1;
+```
+
+
+```
+    @OneToOne(fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            mappedBy = "user")
+    private UserProfile userProfile;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+```
+
+在profile的表中会多出现一个字段 ```user_id```
+
+
+```
+Hibernate: select user0_.id as id1_4_0_, user0_.email as email2_4_0_, user0_.first_name as first_na3_4_0_, user0_.last_name as last_nam4_4_0_, user0_.password as password5_4_0_, userprofil1_.id as id1_3_1_, userprofil1_.address1 as address2_3_1_, userprofil1_.address2 as address3_3_1_, userprofil1_.city as city4_3_1_, userprofil1_.country as country5_3_1_, userprofil1_.dob as dob6_3_1_, userprofil1_.gender as gender7_3_1_, userprofil1_.phone_number as phone_nu8_3_1_, userprofil1_.state as state9_3_1_, userprofil1_.street as street10_3_1_, userprofil1_.user_id as user_id12_3_1_, userprofil1_.zip_code as zip_cod11_3_1_ 
+
+from users user0_ left outer join user_profiles userprofil1_ 
+on user0_.id=userprofil1_.user_id 
+where user0_.id=?
+
+```
+
+
+[参考](http://blog.csdn.net/JE_GE/article/category/6528500)
+
+
+https://www.callicoder.com/hibernate-spring-boot-jpa-one-to-one-mapping-example/
+
+https://www.callicoder.com/hibernate-spring-boot-jpa-one-to-many-mapping-example/
+
+关于fetchType
+
+https://howtoprogramwithjava.com/hibernate-eager-vs-lazy-fetch-type/
+
+
+- orphanRemoval:如：一级分类删除，是否自动删除和该一级分类外键的二级分类及关联的商品对象，true代表自动删除
+- fetch:加载策略，如懒加载，因功能需要设置，如果我们需要查询一级分类的时候就把二级分类查出来，就不用懒加载
+
+### java.lang.StackOverflowError
+
+级联循环...然后堆栈溢出
+
+### 
+
+
+### mysql 常用配置
+
+```
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/mydb2?useSSL=false
+    username: root
+    password: admin
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+      database: MYSQL
+      properties:
+        hibernate:
+          format_sql: true
+          show_sql: true
+          hbm2ddl:
+            auto: update
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type: TRACE
+
+```
+
+
+
+
+
 
 
 
