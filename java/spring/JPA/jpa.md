@@ -259,6 +259,50 @@ logging:
 4. dynamic entity graph
 
 
+### @lob
+
+
+### 多外键问题
+
+PropertyReferenceException: No property typeId found for type Title! 
+
+可能是由于repository 初始化的问题
+
+
+### how to order join fetch
+
+@OrderBy("optionOrder asc ")
+
+https://stackoverflow.com/questions/5903774/ordering-a-join-fetched-collection-in-jpa-using-jpql-hql
+
+### how to rename json objectsvariables name in springboot
+
+https://stackoverflow.com/questions/38635472/how-to-rename-json-objectsvariables-name-in-spring-boot
+
+```@JsonProperty("type_id")```
+
+
+### update
+
+TODO:
+
+1. 查询更新
+2. 使用@query, @modify,update...
+
+### how to convert page to list 
+
+```
+Page<Video> videos = videoRepository.findAllVideos(new PageRequest(1, 50));
+List<Video> videosList = videos.getContent();
+```
+
+### how to get page count
+
+```
+Page<Industry> industries = industryRepository.findAll(pageable);
+int totalPages = industries.getTotalPages();
+```
+
 
 
 
