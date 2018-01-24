@@ -303,7 +303,11 @@ Page<Industry> industries = industryRepository.findAll(pageable);
 int totalPages = industries.getTotalPages();
 ```
 
+### mysql 跳过
 
+```
+SELECT * FROM foo LIMIT 10, 50
+```
 
 
 
