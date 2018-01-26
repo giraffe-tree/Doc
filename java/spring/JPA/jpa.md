@@ -261,8 +261,11 @@ logging:
 
 ### @lob
 
+大文本
 
 ### 多外键问题
+
+TODO:
 
 PropertyReferenceException: No property typeId found for type Title! 
 
@@ -309,8 +312,12 @@ int totalPages = industries.getTotalPages();
 SELECT * FROM foo LIMIT 10, 50
 ```
 
+### in JPA 2.2 – Stream the result of a Query execution
 
+```
+Stream<Object[]> books = session.createNativeQuery("SELECT b.title,b.publishingDate FROM book b").stream();
 
+```
 
 
 
