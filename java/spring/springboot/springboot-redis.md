@@ -212,4 +212,31 @@ http://www.roncoo.com/article/detail/131302
 https://github.com/JeffLi1993/springboot-learning-example
 
 
+## 注解
+
+### cacheable
+
+```
+  @Cacheable(value="users", key="#user.id")
+   public User find(User user) {
+      returnnull;
+   }
+
+   @Cacheable(value="users", key="#p0.id")
+   public User find(User user) {
+      returnnull;
+   } 
+```
+
+### cacheput
+
+[参考](https://www.foreach.be/blog/spring-cache-annotations-some-tips-tricks)
+
+```
+@CachePut(value = "users", key = "#result.id", condition = "#result != null")
+
+```
+
+
+
 
