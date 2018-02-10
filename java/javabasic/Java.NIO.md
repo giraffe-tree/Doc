@@ -75,17 +75,16 @@ The easiest way to create a Path Object is to use the java.nio.files.Paths facto
 ### reading files with the NIO API
 
 ```
-try(
-      BufferedReader reader = Files.newBufferedReader(path, Charset.forName("UTF-8"))
-        ){
-            String currentLine = null;
+try(BufferedReader reader = Files.newBufferedReader(path, Charset.forName("UTF-8"))){
 
-            while((currentLine = reader.readLine()) != null){//while there is content on the current line
-                System.out.println(currentLine); // print the current line
-            }
-        }catch(IOException ex){
-            ex.printStackTrace(); //handle an exception here
-        }
+    String currentLine = null;
+    while((currentLine = reader.readLine()) != null{        
+    	System.out.println(currentLine); 
+	}
+    
+}catch(IOException ex){
+    ex.printStackTrace(); //handle an exception here
+}
 ```
 
 
@@ -94,6 +93,17 @@ try(
 ```try-with-resources statement``` ，它会自动关闭括号内的资源（resources），不用手动添加代码   ```xx.close();```  了。
 
 
+### Using NIO API with streams  -- Java 8
+
+```
+Path path = Paths.get("src/main/java/com/chen/apidemo/nio/data/nio-data.txt");
+
+try {
+    Files.lines(path).forEach(System.out::println);
+} catch (IOException ex) {
+    ex.printStackTrace();//handle exception here
+}
+```
 
 
 
