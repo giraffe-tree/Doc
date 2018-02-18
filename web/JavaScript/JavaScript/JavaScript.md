@@ -278,6 +278,123 @@ console.log('abc'.length);
 
 在 js 中,数值的内部结构为64位浮点小数
 
+#### 数值类
+
+Number 类,和字符串类相似.
+
+#### 数值 < -- > 字符串
+
+```
+var x1 = (1).toString();
+console.log(typeof x1);
+```
+
+```
+var n1 = Number('1');
+console.log(typeof n1); // number
+```
+
+若 ```字符串->数字``` 转换失败,则返回 NaN (not a number)
+
+#### 特殊值
+
+```
+console.log(Number.POSITIVE_INFINITY);
+console.log(Number.NEGATIVE_INFINITY);
+console.log(Number.NaN);
+```
+
+NaN
+
+```
+console.log(NaN == NaN); // false
+console.log(NaN === NaN); // false
+```
+
+Finite
+
+```
+console.log(isFinite(1)); // true
+```
+
+
+### 布尔型
+
+布尔类是布尔型的包装类型.
+
+### null 型 / Undefined 型
+
+```
+var x = null;
+console.log(typeof x); // object
+```
+
+### function
+
+```
+var y = function (a,b) {
+        return a+b;
+    }
+console.log(typeof y); // function
+```
+
+
+### 数据类型转换
+
+```
+console.log(parseInt('12x')); // 12
+console.log(parseInt('0x12')); // 12
+console.log('100'-1); // 99
+console.log('100'-'1'); // 99
+```
+
+以下均会输出 Boolean类: false
+
+```
+console.log(new Boolean(''));
+console.log(new Boolean(NaN));
+console.log(new Boolean(0));
+console.log(new Boolean(null));
+console.log(new Boolean(undefined));
+```
+
+或者输出 false
+
+```
+console.log(!!undefined);
+```
+
+
+## 第四章 语句,表达式和运算符
+
+### switch-case 语句
+
+switch-case 语句是通过 ```===```判断的.
+
+```
+var s = '1';
+switch (s) {
+    case 1:
+        console.log('1');
+        break;
+    case 2:
+        console.log('2');
+        break;
+    default:
+        console.log('default');
+}
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 
