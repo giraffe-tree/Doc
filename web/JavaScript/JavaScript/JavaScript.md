@@ -385,6 +385,110 @@ switch (s) {
 }
 ```
 
+### 遍历 js 对象
+
+```
+var value = {x: 'aa', y: 'cc'};
+console.log(value);
+for (var k in value) {
+    console.log(value[k]);
+    document.write(value[k]);
+}
+```
+
+### 异常
+
+js 中, catch 子句 不能根据异常的类型不同判断是否捕获异常,一个 try 语句只能使用一个 catch 子句.
+
+### debug
+
+```
+debugger; // 运行会在此处暂停
+```
+
+### == 和 ===
+
+```
+	var x = {k: 1}; 
+    var y = {k: 2};
+    var z = x;
+    z.k = 2;
+    console.log(x.k);  // 2
+    console.log(z.k);  // 2
+    console.log(x==y);  // false
+    console.log(x===y);  // false
+    console.log(x==z);  // true
+    console.log(x===z);  // true
+
+    console.log('- -- -- - -- - --- ');
+    
+    var str1 = 'abc';
+    var str2 = 'abc';
+    var str3 = str2;
+    
+    console.log(str1==str2);  // true
+    console.log(str1===str2);  // true
+    console.log(str1==str3);  // true
+    console.log(str1===str3);  // true
+
+    console.log();
+    str3 = 'efg';
+    console.log(str1);  // abc
+```
+
+### 比较
+
+```
+	var x = '100';
+    var y = '99';
+    var z = 99;
+    console.log(x>y);  // false  字符串比较, 9 的编码值 比 1 大
+    console.log(x>z); // true  数字比较
+```
+
+### in / instanceof
+
+
+### 赋值 
+
+在 if 中赋值
+
+```
+var x = 1;
+var y;
+if(y=x) {
+    console.log('y='+y);   // x = 1时输出  y=1
+}else {
+    console.log('else: y='+y); // x = 0时输出  else: y=0
+}
+```
+
+### 逗号
+
+逗号操作符用于: 依次对其左操作数,右操作数求值
+
+## 第五章 变量与对象
+
+### 5.1 变量的声明
+
+如果 a 已经具有某个值了(某个可以为 true 的值),则继续使用,否则 a=7
+
+```
+var a = a || 7;
+```
+
+### 5.3 变量和属性
+
+#### 全局变量 / 局部变量
+
+	全局变量: 最外层代码中声明的变量
+	
+	局部变量: 在函数内部声明的变量
+
+
+
+
+
 
 
 
