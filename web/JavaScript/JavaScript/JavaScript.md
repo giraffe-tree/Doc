@@ -485,31 +485,222 @@ var a = a || 7;
 	
 	局部变量: 在函数内部声明的变量
 
+全局变量是全局对象的属性
+
+### 5.6 对象
+
+js 通过基于原型的形式来实现继承
+
+#### 函数中的对象
+
+函数接受对象,并提供默认值
+
+```
+// var x = {a: 1, b: 2};
+var x;
+console.log(x);
+console.log(sqrt(x));
+function sqrt(x) {
+    x = x || {a: 0, b: 0};
+    return x.a * x.a + x.b *x.b;
+}
+```
+
+也可以返回一个对象
+
+```
+function get() {
+    return {name: 'cc', age: '18'};
+}
+console.log(get());
+```
+
+返回一个函数,也可以把函数放在对象中
+
+```
+function getFnc() {
+    return function (x, y) {
+        return x + y;
+    }
+}
+console.log(getFnc()(1,2));
+```
+
+#### 构造函数
+
+1. 构造函数与普通函数声明形式相同
+2. 构造函数通过 new 来调用
+3. 构造函数的 new 表达式的值为 (被新生成的)对象的引用
+
+```
+function ObjectFunction(x,y) {
+    this.x = x;
+    this.y = y;
+}
+
+var obj1= new ObjectFunction(1, 2);
+console.log(obj1);
+```
+
+#### 构造函数注意
+
+1. 任意函数都可以作为构造函数,使用 new 调用.
+2. 构造函数的名称一般以大写字母开头.
+3. 构造函数在最后会隐式地执行 ```return this```,如果使用 return 返回,可能会出错.
+
+	 - 返回 基本类型 --> 依旧会 ```return this```
+	 - 返回 其他对象 --> 返回 其他对象 
+
+#### 构造函数和类
+
+```
+function MyClass(name,age) {
+    this.name = name;
+    this.age = age;
+    this.show = function () {
+        console.log('hello, i am '+name+". i am "+age +' years old');
+    }
+}
+
+var people = new MyClass('chen', 19);
+people.show(); // hello, i am chen. i am 19 years old
+```
+
+1. 所有实例都是赋值了同一个方法所定义的实体,所以效率(内存效率&执行效率)低下
+2. 无法对属性进行访问控制(private,protected)
+
+第一个问题可以通过原型继承来解决,第二个问题可以通过闭包来解决.
+
+#### 访问对象的属性
+
+1. 用点运算符  -> 比较方便
+2. 使用中括号  -> 比较通用 如 属性名为'foo-bar',使用点运算符会出错
+
+```
+var x = {name:1};
+console.log(x.name);
+console.log(x['name]);
+```
+
+#### 属性枚举
+
+属性可以分为直接属性以及继承于原型的属性
+
+```
+var obj = {name: 'cc', age : 18};
+for(var key in obj) {
+    console.log(key,obj[key]);
+}
+
+delete obj.name;
+console.log(obj.name); // undefined
+```
+
+#### 原型继承
+
+一种对象继承其他对象的属性并将其作为自身的属性
+
+```
+function HisClass(){}
+
+HisClass.prototype.name = 'chen';
+var obj = new HisClass();
+console.log(obj.name); // chen 
+
+delete obj.name;
+console.log(obj.name); // chen 通过原型继承的属性无法被 delete
+```
+
+#### 原始对象
+
+```
+var x = {};
+console.log('toString' in x); // true 
+
+for(var value in x) {
+    console.log(value);  // but nothing out 
+}
+```
+
+虽然对象有 ```toString```方法,但是 ```for in``` 并不能枚举出来
+
+即使用 in 检测关联数组(对象) 的键是否存在,就会发生与原型继承而来的属性相关的问题.
+
+我们可以通过 ```hasOwnProperty```来判断,这更加安全
+
+```
+var x ={};
+console.log(x.hasOwnProperty('toString'));  // false
+```
+
+#### 属性的属性
+
+1. **value :**	The property's value.  
+2. **writable :**	When true, the property's value can be changed.
+3. **enumerable :**	When true, the property shows in some loop constructs, such as for-in Loop. [see JS: Access Property]
+4. **configurable :**	If false, attempts to delete the property, change the property to be an accessor property, or change its attributes (other than [[Value]], or changing [[Writable]] to false) will fail.
+5. **get**
+6. **set**
+
+**中文:**
+
+1. **writable**  可以改写属性
+2. **enumerable** 可以通过 for in 语句枚举
+3. **configurable** 可以改变属性的属性,可以删除属性
 
 
+```
+var x = {name:'chen'};
+Object.defineProperty(x, 'name', {
+    enumerable:false,
+    writable:false,
+    configurable:false
+});
+
+console.log(x.name); // chen
+x.name = 'cc';
+console.log(x.name); // chen  不可改变
+```
 
 
+### 5.11 垃圾回收
 
+不再使用的对象的内存将会自动回收
 
+### 5.12 不可变对象
+ 
+1. 通过改变 enumerable / writable / configurable
+2. ```preExtensions```方法,不能新增属性,可以删除,修改
 
+	>
+	```
+	 var x = {name: 'chen', age: 18};
+    Object.preventExtensions(x);
+    x.school = 'HelloWorldSchool';
+    x.age = 20;
+    delete x.name;
+    for(var value in x) {
+        console.log(x[value]);  // out: 20
+    }
+	```
+	
+3. ```seal``` 方法,不能新增/删除,可以更改
+4. ```freeze```方法,不能新增/删除/更改
 
+	>
+	```
+	var y = {name: 'chen', age: 18};
+    Object.freeze(y);
+    y.age  = 20;
+    delete y.name;
+    for(var value in y) {
+        console.log(y[value]);  // out: chen  18
+    }
+	```
 
+最后,建议尽可能不使用 ```不可变对象```,尽可能减少开销.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+### 5.13 方法
 
 
 
