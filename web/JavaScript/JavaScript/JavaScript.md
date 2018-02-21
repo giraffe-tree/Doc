@@ -31,21 +31,21 @@ Acid : [acid3.acidtests.org](acid3.acidtests.org)
 
 1. 本地对象
 
-	js中的内部(本地)对象包括Array、Boolean、Date、Function、Global、Math、Number、Object、RegExp、String以及各种错误类对象，包括Error、EvalError、RangeError、ReferenceError、SyntaxError和TypeError。
+	> js中的内部(本地)对象包括Array、Boolean、Date、Function、Global、Math、Number、Object、RegExp、String以及各种错误类对象，包括Error、EvalError、RangeError、ReferenceError、SyntaxError和TypeError。
 	
 	其中Global和Math这两个对象又被称为“内置对象”，这两个对象在脚本程序初始化时被创建，不必实例化这两个对象。
 
  
 2. 宿主对象
 
-	宿主对象就是执行JS脚本的环境提供的对象。对于嵌入到网页中的JS来说，其宿主对象就是浏览器提供的对象，所以又称为浏览器对象，如IE、Firefox等浏览器提供的对象。不同的浏览器提供的宿主对象可能不同，即使提供的对象相同，其实现方式也大相径庭！这会带来浏览器兼容问题，增加开发难度。
+	> 宿主对象就是执行JS脚本的环境提供的对象。对于嵌入到网页中的JS来说，其宿主对象就是浏览器提供的对象，所以又称为浏览器对象，如IE、Firefox等浏览器提供的对象。不同的浏览器提供的宿主对象可能不同，即使提供的对象相同，其实现方式也大相径庭！这会带来浏览器兼容问题，增加开发难度。
 	
 	浏览器对象有很多，如Window和Document等等。
 
 
 3. 自定义对象
 
-	顾名思义，就是开发人员自己定义的对象。JS允许使用自定义对象，使JS应用及功能得到扩充
+	> 顾名思义，就是开发人员自己定义的对象。JS允许使用自定义对象，使JS应用及功能得到扩充
 
 ### 源代码压缩
 
@@ -256,21 +256,20 @@ console.log('abc'.length);
 
 1. charAt
 
+	> 
 	```
 	var x = 'abcde';
 	console.log(x.charAt(1)); // b
-
 	```
 
 2. String
 
+	> 
 	```
 	var y = new String('adc');
     console.log(typeof y);  // object
-    
     var z = String('adc');
     console.log(typeof z); // string
-    
     console.log('abc'[1]); // b 包含了隐式类型转换
 	```
 
@@ -702,10 +701,24 @@ console.log(x.name); // chen  不可改变
 
 ### 5.13 方法
 
+### 5.14 this 引用
+
+#### this 引用规则
+
+1. 在最外层代码, this 引用的是全局对象
+2. 在函数内, this 引用根据函数调用方式的不同而有所不同
+
+	>
+	|调用方式|this 所引用对象|
+	| --- |---|
+	|构造函数调用|所生成对象|
+	|方法调用|接收方对象|
+	|apply或 call 调用|有 apply 或 call 的参数指定的对象|
+	|其他方式的调用|全局对象|
 
 
-
-
+	>  apply / call 用于显式指定接收方对象
+	
 
 
 
