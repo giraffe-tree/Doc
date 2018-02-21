@@ -719,6 +719,235 @@ console.log(x.name); // chen  不可改变
 
 	>  apply / call 用于显式指定接收方对象
 	
+	下面是一些注意点及示例:	
+	
+	-  示例1
+	
+		> ```
+		var obj = {
+		    name: 'chen',
+		    doit: function () {
+		        console.log('hello ' + this.name);
+		    }
+		};
+		obj.doit(); // hello chen
+		```
+		> 这里的 this 引用了接收方对象
+	
+	- 续示例1
+	
+		> ```
+		var fn = obj.doit;
+	    fn(); // hello
+	    var name = "cc";
+	    fn(); // hello cc
+		```
+		
+		> 这里的 this 引用的是全局变量
+		
+	- 在 java 中常常可以省略 this, 因为在查找方法内的名称时,总是会在同一个类的域名与方法名中搜索.而 js 中就不能省略 this 了,因为省略之后,默认查找 全局变量中的值
+	
+	- 方法内部调用方法
+	
+		> 也需要加 this
+	
+### 5.15 apply & call
+
+#### apply
+
+```
+function f(a,b) {
+    console.log('hello ',this.name,a+b);
+}
+
+var obj1 = {name: 'cc'};
+f.apply(obj1,[1,2]);  // hello  cc 3
+```
+
+apply 中第一个参数为 被传递的对象 ,第二个参数为函数的参数数组
+
+#### call
+
+```
+f.call(obj1, 'hello', 'world'); // hello  cc helloworld
+```
+
+call 中第一个参数为 被传递的对象, 第二个参数及以后为函数的参数
+
+### 5.16 原型继承
+
+```
+function FirstClass(x,y) {
+    this.x = x;
+    this.y = y;
+    this.see = function () {
+        console.log('hello',this.x,this.y);
+    }
+}
+
+var a1 = new FirstClass(1, 2);
+
+function SecondClass(x,y) {
+    this.x = x;
+    this.y = y;
+}
+SecondClass.prototype.see = function () {
+    console.log('hello',this.x,this.y);
+};
+
+var a2 = new SecondClass(1, 2);
+a1.see();  // hello 1 2
+a2.see();  // hello 1 2
+```
+
+```a2```的```see```方法是从 ```SecondClass.prototype``` 的属性中继承过来的
+
+#### 原型链
+
+使用原型链有两个条件
+
+1. 所有函数/对象都具有名为 prototype 的属性
+
+2. 所有对象都含有一个隐藏的连接,用以指向在对象生成过程中所使用的构造函数
+
+```
+function AClass() {
+}
+AClass.prototype.z = 'chen';
+
+// 1
+var proto = AClass.prototype;
+var obj = new AClass();
+// 2
+var proto2 = Object.getPrototypeOf(obj);
+// 3
+console.log(obj.__proto__);
+```
+
+#### 原型对象 
+
+```__proto__```
+
+### 5.17 对象与数据类型
+
+#### constructor 
+
+可以通过 ```obj.constructor```,经过原型链,找到构造函数.
+
+
+#### 数据类型的判定
+
+通过 **instance**  或 **isPrototypeOf** 判断
+
+```
+var d = new Date();
+console.log(d.constructor);
+
+console.log(d instanceof Date);  
+```
+
+#### 继承 ??
+
+```
+function FatherClass() {}
+function SonClass() {}
+
+SonClass.prototype = new FatherClass();
+
+var obj = new SonClass();
+console.log(obj instanceof FatherClass);  // true
+
+console.log(SonClass.prototype.isPrototypeOf(obj)); // true
+console.log(FatherClass.prototype.isPrototypeOf(obj)); // true
+console.log(Object.prototype.isPrototypeOf(obj)); // true
+```
+
+#### 鸭子类型 --> 数据类型判断
+
+即直接通过分析对象的操作,以判断其类型的方法  --> 俗称:鸭子类型判断
+
+如: 使用 in 操作
+
+#### 枚举直接属性
+
+```
+var x = {age: 18};
+for(var key in obj ) {
+    if(obj.hasOwnProperty(key)) {
+        console.log(key);
+    }
+}
+```
+
+#### getOwnPropertyNames
+
+```
+console.log(Object.getOwnPropertyNames(Object.prototype));
+```
+
+return : 
+
+```
+["constructor", "__defineGetter__", "__defineSetter__", "hasOwnProperty", "__lookupGetter__", "__lookupSetter__", "isPrototypeOf", "propertyIsEnumerable", "toString", "valueOf", "__proto__", "toLocaleString"]
+```
+
+### 5.18 Object 类
+
+#### create  
+
+继承..
+
+```
+var x = Object.create(Object.prototype);  // 同 var x = {};
+x.name = 'chen';
+console.log(x); 
+
+var y = Object.create(x);
+console.log(y.name);  // chen
+```
+
+other:
+
+```
+var a1 = {q: 1, p: 2};
+var a2 = Object.create(Object.prototype,
+    {
+        q: {value: 1, writable: false, enumerable: true, configurable: true},
+        p: {value: 2, writable: true, enumerable: true, configurable: true}
+    }
+);
+
+console.log(a1.q);  // 1
+a1.q = 'hello';
+console.log(a1.q);  // hello
+
+console.log(a2.q);  // 1
+a2.q = 'hello';
+console.log(a2.q); // 1  ,由于 writable 设置为 false ,所以不可更改
+```
+
+
+#### 访问器 
+
+只要将 get/set 属性指定为相应函数,就可以定义一个只能够通过访问器```getter/setter``` 来访问值得属性
+
+只要能写出正确的 getter 访问器函数,就能以此为基础设计出一个不可变对象
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
