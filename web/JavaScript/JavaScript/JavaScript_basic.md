@@ -482,7 +482,7 @@ dom eventListener
     document.write(x);
 	```
 	
-定时	
+定时,显示当前时间	
 	
 	```
 	 function startTime() {
@@ -543,6 +543,14 @@ dom eventListener
 2. target 事件目标
 3. stopPropagation() 阻止事件冒泡
 4. preventDefault() 阻止默认行为
+
+
+
+
+
+
+
+
 
 
 	
