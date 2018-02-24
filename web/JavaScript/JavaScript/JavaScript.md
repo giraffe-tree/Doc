@@ -931,8 +931,22 @@ console.log(a2.q); // 1  ,由于 writable 设置为 false ,所以不可更改
 
 只要将 get/set 属性指定为相应函数,就可以定义一个只能够通过访问器```getter/setter``` 来访问值得属性
 
-只要能写出正确的 getter 访问器函数,就能以此为基础设计出一个不可变对象
+只要能写出正确的 getter/setter 访问器函数,就能以此为基础设计出一个不可变对象
 
+```
+var obj = Object.create(Object.prototype,
+    {x:{get:function () {
+                return 18;
+            },
+        set: function () {
+        }},
+    }
+);
+
+console.log(obj.x); // 18
+obj.x = 20;
+console.log(obj.x);  // 18   --> x的值没有变化
+```
 
 
 
