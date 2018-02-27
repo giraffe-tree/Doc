@@ -197,6 +197,31 @@ find . -size +1M -ls  //查看该目录下,所有大于1mb 的文件
 
 http://www.ee.surrey.ac.uk/Teaching/Unix/unix7.html
 
+listener.tcp.default = 127.0.0.1:1883
+
+ps -ef | grep beam.smp
+
+
+# Common commands
+
+## yum
+
+### 查询
+
+```
+yum list 
+
+
+```
+
+
+
+
+
+
+
+
+
 
 
 

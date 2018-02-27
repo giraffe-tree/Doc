@@ -36,6 +36,11 @@ vmq-admin listener start address=47.97.199.139 port=1884 --mountpoint /test --nr
 
 vernemq config effective
 
+// 服务器重新初始化
+ssh-keygen -R 服务器端的ip地址
+
+vmq-passwd [-c | -D] passwordfile username
+
 ```
 
 
