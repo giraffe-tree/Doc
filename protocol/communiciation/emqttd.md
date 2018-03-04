@@ -2,7 +2,6 @@
 
 ## command
 
-
 ```
 [root@iZbp193yy46icaga1srlt6Z ~]# emqttd_ctl
 Usage: emqttd_ctl
@@ -91,8 +90,42 @@ admins del <Username>                           # Delete dashboard user
 
 ```
 ./bin/emqttd_ctl plugins load emq_auth_username
+```
 
+## emqttd_bench
 
 ```
+./emqtt_bench_sub -c 1000 -i 10 -t bench/%i -q 0 -u proton -P proton123
+
+./emqtt_bench_sub -h 106.14.93.227 -p 1883 -c 500 -i 10 -t bench/%i -q 0 -u proton -P proton123
+
+```
+
+```
+./emqtt_bench_pub -c 3000 -I 1000 -t bench/%i -s 256 -u proton -P proton123
+
+./emqtt_bench_pub -h 106.14.93.227 -p 1883 -c 500 -I 1000 -t bench/%i -s 256 -u proton -P proton123
+```
+
+## 内存
+
+```
+free -m
+``` 
+
+2核 4G 
+
+1000 1000 -> 35%  35% 
+
+3000 3000 -> 95%  40% 
+
+4000 4000 -> 99%  65% 
+
+
+
+
+
+
+
 
 
