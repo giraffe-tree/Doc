@@ -285,5 +285,177 @@ public class GlobalExceptionHander {
 ```
 
 
+### cacheput 中 使用unless
+
+```
+@Cacheable(value = "snoreUser",key = "'snore_user_'+#username",unless = "#result == null")
+public User findUserByUsername(String username) {
+    return userRepository.findByUserName(username);
+}
+```
+
+###  排序
+
+```
+Pageable pageable = new PageRequest(page - 1, pageSize, new Sort(new Sort.Order(Sort.Direction.DESC, "reportStartTime")));
+```
+
+### 分页缓存
+
+TODO:
+
+### redis 缓存 LocalDate/LocalDateTime
 
 
+
+```
+package com.proton.snoreorigin;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CachingConfigurerSupport;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.interceptor.KeyGenerator;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericToStringSerializer;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+
+@Configuration
+@EnableCaching
+public class RedisConfig extends CachingConfigurerSupport {
+
+    @Bean
+    public KeyGenerator normalKG() {
+        return (target, method, params) -> {
+            StringBuilder sb = new StringBuilder();
+            sb.append(target.getClass().getName());
+            sb.append(method.getName());
+            for (Object obj : params) {
+                sb.append(obj.toString());
+            }
+            return sb.toString();
+        };
+    }
+
+    @Bean
+    public CacheManager cacheManager(RedisTemplate<?, ?> redisTemplate) {
+        return new RedisCacheManager(redisTemplate);
+    }
+
+    @Bean
+    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory factory) {
+        RedisTemplate<Object, Object> template = new RedisTemplate<>();
+        template.setConnectionFactory(factory);
+
+        Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Object>(
+                Object.class);
+        ObjectMapper om = new ObjectMapper();
+        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+
+        om.registerModule(new ParameterNamesModule())
+                .registerModule(new Jdk8Module())
+                .registerModule(new JavaTimeModule()); // new module, NOT JSR310Module
+        om.findAndRegisterModules();
+
+        jackson2JsonRedisSerializer.setObjectMapper(om);
+
+        template.setKeySerializer(new GenericToStringSerializer<Object>(Object.class));
+        template.setHashKeySerializer(new GenericToStringSerializer<Object>(Object.class));
+        template.setValueSerializer(jackson2JsonRedisSerializer);
+        template.afterPropertiesSet();
+        return template;
+    }
+
+
+//    static class JsonRedisSerializer implements RedisSerializer<Object>{
+//
+//        private final ObjectMapper om;
+//
+//        public JsonRedisSerializer(){
+//            this.om =new ObjectMapper();
+//            om.findAndRegisterModules();
+//
+////            this.om.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+////            JavaTimeModule module = new JavaTimeModule();
+////            module.addSerializer(LocalDateTime.class, LocalDateTimeSerializer.INSTANCE);
+////            module.addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE);
+////
+////            module.addSerializer(LocalDate.class, LocalDateSerializer.INSTANCE);
+////            module.addDeserializer(LocalDate.class, LocalDateDeserializer.INSTANCE);
+////            this.om.registerModule(module);
+//
+//        }
+//
+//        @Override
+//        public byte[] serialize(Object o) throws SerializationException {
+//            try {
+//                return om.writeValueAsBytes(o);
+//            } catch (JsonProcessingException e) {
+//                throw new SerializationException(e.getMessage(), e);
+//            }
+//        }
+//
+//        @Override
+//        public Object deserialize(byte[] bytes) throws SerializationException {
+//            if(bytes == null){
+//                return null;
+//            }
+//            try {
+//                return om.readValue(bytes, Object.class);
+//            } catch (IOException e) {
+//                throw new SerializationException(e.getMessage(), e);
+//            }
+//        }
+//    }
+
+
+}
+
+```
+
+
+config 
+
+
+```
+server:
+  port: 8801
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/snore?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&useSSL=false
+    username: root
+    password: 
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+      database: MYSQL
+      properties:
+        hibernate:
+          format_sql: false
+          show_sql: true
+          dialect: org.hibernate.dialect.MySQL5Dialect
+          hbm2ddl:
+            auto: none
+  redis:
+    database: 8
+    host: 
+    password: 
+    pool:
+      max-active: 1000
+      max-idle: 20
+      max-wait: -1
+      min-idle: 5
+    port: 6379
+    timeout: 0
+
+```
