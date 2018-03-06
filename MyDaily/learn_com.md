@@ -218,6 +218,8 @@ ssh -l root -p 22 ip地址
 
 ### dozer bean转化
 
+支持 localdatetime
+
 ```
 <dependency>
     <groupId>io.craftsman</groupId>
@@ -227,6 +229,60 @@ ssh -l root -p 22 ip地址
 ```
 
 
+### RequestRaram 参数验证
+
+1. controller 加上```@Validated```注解
+
+```
+@RestController
+@Validated
+public class UserController {
+
+  ... 
+}
+```
+
+2. 在参数中加上验证注解
+
+比如: ```@NotBlank``` ,```@Size```,```@Length```
+
+```
+  @PostMapping(path = "user/login")
+  public RetObj loginIn(@NotBlank(message = "用户名不能为空") @RequestParam(value = "username") String userName,
+                        @NotBlank(message = "密码不能为空") @RequestParam(value = "password") String password) {
+
+}
+```
+
+
+3. 配置全局异常捕获
+
+```
+@ControllerAdvice
+@Component
+public class GlobalExceptionHander {
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public RetObj paramErrorHandler(ConstraintViolationException exception) {
+        Set<ConstraintViolation<?>> violations = exception.getConstraintViolations();
+        StringBuilder strBuilder = new StringBuilder();
+        for (ConstraintViolation<?> violation : violations ) {
+            strBuilder.append(violation.getMessage()).append(";");
+        }
+        return RetObj.fail(strBuilder.toString());
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public RetObj jsonErrorHandler(HttpServletRequest req, Exception e) {
+        return RetObj.fail("服务器内部错误");
+    }
+}
+
+```
 
 
 
