@@ -481,7 +481,7 @@ Could not read JSON: Can not construct instance of com.xxx.xxx.controller.TestOb
 
 解决:
 
-1. 需要加入无参构造器
+1. 在序列化的对象中,需要加入无参构造器
 2. 其他配置
 
 ```
