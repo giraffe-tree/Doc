@@ -459,3 +459,61 @@ spring:
     timeout: 0
 
 ```
+
+### @RequestParam 接受localdatetime
+
+参考: [Spring Boot LocalDateTime格式处理](http://blog.csdn.net/junlovejava/article/details/78112240)
+
+```
+@GetMapping("date")
+public Object date(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime date) {
+    return date;
+}
+```
+
+### 设置 jackson bean 改变 responseBody 
+
+### redis 序列化错误
+
+```
+Could not read JSON: Can not construct instance of com.xxx.xxx.controller.TestObj: no suitable constructor found, can not deserialize from Object value (missing default constructor or creator, or perhaps need to add/enable type information?)
+```
+
+解决:
+
+1. 需要加入无参构造器
+2. 其他配置
+
+```
+@Bean
+  public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory factory) {
+      RedisTemplate<Object, Object> template = new RedisTemplate<>();
+      template.setConnectionFactory(factory);
+
+      Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Object>(
+              Object.class);
+      ObjectMapper om = new ObjectMapper();
+      om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+      om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+
+      om.registerModule(new ParameterNamesModule())
+              .registerModule(new Jdk8Module())
+              .registerModule(new JavaTimeModule()); // new module, NOT JSR310Module
+      om.findAndRegisterModules();
+
+      om.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+
+      jackson2JsonRedisSerializer.setObjectMapper(om);
+
+      template.setKeySerializer(new GenericToStringSerializer<>(Object.class));
+      template.setHashKeySerializer(new GenericToStringSerializer<>(Object.class));
+
+      template.setValueSerializer(jackson2JsonRedisSerializer);
+
+      template.afterPropertiesSet();
+      return template;
+  }
+```
+
+
+
