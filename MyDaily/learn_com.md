@@ -306,124 +306,6 @@ TODO:
 
 ### redis 缓存 LocalDate/LocalDateTime
 
-
-
-```
-package com.proton.snoreorigin;
-
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
-import org.springframework.cache.CacheManager;
-import org.springframework.cache.annotation.CachingConfigurerSupport;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.cache.interceptor.KeyGenerator;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.GenericToStringSerializer;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-
-@Configuration
-@EnableCaching
-public class RedisConfig extends CachingConfigurerSupport {
-
-    @Bean
-    public KeyGenerator normalKG() {
-        return (target, method, params) -> {
-            StringBuilder sb = new StringBuilder();
-            sb.append(target.getClass().getName());
-            sb.append(method.getName());
-            for (Object obj : params) {
-                sb.append(obj.toString());
-            }
-            return sb.toString();
-        };
-    }
-
-    @Bean
-    public CacheManager cacheManager(RedisTemplate<?, ?> redisTemplate) {
-        return new RedisCacheManager(redisTemplate);
-    }
-
-    @Bean
-    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory factory) {
-        RedisTemplate<Object, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(factory);
-
-        Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Object>(
-                Object.class);
-        ObjectMapper om = new ObjectMapper();
-        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-
-        om.registerModule(new ParameterNamesModule())
-                .registerModule(new Jdk8Module())
-                .registerModule(new JavaTimeModule()); // new module, NOT JSR310Module
-        om.findAndRegisterModules();
-
-        jackson2JsonRedisSerializer.setObjectMapper(om);
-
-        template.setKeySerializer(new GenericToStringSerializer<Object>(Object.class));
-        template.setHashKeySerializer(new GenericToStringSerializer<Object>(Object.class));
-        template.setValueSerializer(jackson2JsonRedisSerializer);
-        template.afterPropertiesSet();
-        return template;
-    }
-
-
-//    static class JsonRedisSerializer implements RedisSerializer<Object>{
-//
-//        private final ObjectMapper om;
-//
-//        public JsonRedisSerializer(){
-//            this.om =new ObjectMapper();
-//            om.findAndRegisterModules();
-//
-////            this.om.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-////            JavaTimeModule module = new JavaTimeModule();
-////            module.addSerializer(LocalDateTime.class, LocalDateTimeSerializer.INSTANCE);
-////            module.addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE);
-////
-////            module.addSerializer(LocalDate.class, LocalDateSerializer.INSTANCE);
-////            module.addDeserializer(LocalDate.class, LocalDateDeserializer.INSTANCE);
-////            this.om.registerModule(module);
-//
-//        }
-//
-//        @Override
-//        public byte[] serialize(Object o) throws SerializationException {
-//            try {
-//                return om.writeValueAsBytes(o);
-//            } catch (JsonProcessingException e) {
-//                throw new SerializationException(e.getMessage(), e);
-//            }
-//        }
-//
-//        @Override
-//        public Object deserialize(byte[] bytes) throws SerializationException {
-//            if(bytes == null){
-//                return null;
-//            }
-//            try {
-//                return om.readValue(bytes, Object.class);
-//            } catch (IOException e) {
-//                throw new SerializationException(e.getMessage(), e);
-//            }
-//        }
-//    }
-
-
-}
-
-```
-
-
 config 
 
 
@@ -460,7 +342,6 @@ spring:
 
 ```
 
-<<<<<<< HEAD
 ### @RequestParam 接受localdatetime
 
 参考: [Spring Boot LocalDateTime格式处理](http://blog.csdn.net/junlovejava/article/details/78112240)
@@ -516,7 +397,6 @@ Could not read JSON: Can not construct instance of com.xxx.xxx.controller.TestOb
   }
 ```
 
-=======
->>>>>>> b4f145c2fc0ee8a033b42285fa6d1cfa4e3f266e
+
 
 
