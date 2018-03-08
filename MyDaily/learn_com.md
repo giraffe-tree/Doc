@@ -442,13 +442,15 @@ public class ThreadPoolConfig {
   private ExecutorService executorService;
 
   public void test(){
-  
+
     executorService.execute(() -> {
                 //更新
                 testService.update();
             });
   }
   ```
+
+注意: 在高并发情况下会出问题,重复写
 
 
 

@@ -8,7 +8,7 @@
 
 
 
-##  简介
+# 第一章 redis入门, 简介
 
 ### 总览
 
@@ -59,7 +59,6 @@ SET|包含字符串的无序收集器（unordered collection），并且被包�
 HASH|包含键值对的无序散列表|添加、获取、移除单个键值对；获取所有键值对
 ZSET|字符串成员（member）与浮点数分值（score）之间的有序映射，元素的排列顺序由分值的大小决定|添加、获取、删除单个元素；根据分值范围（range）或者成员来获取元素
 
-## Command 
 
 ### String
 
@@ -106,5 +105,139 @@ mset a 1 b 2
 6. LINDEX key index
 
 	summary: Get an element from a list by its index
+
+
+### zset
+
+#### zinterstore
+
+ZINTERSTORE destination numkeys key [key ...] [WEIGHTS weight] [AGGREGATE SUM|MIN|MAX]
+  
+  summary: Intersect multiple sorted sets and store the resulting sorted set in a new key
+
+```
+zinterstore sum_books 2 groups:books score:goods
+--> (integer) 3
+zrange sum_books 0 -1 withscores
+--> 1) "book:1"
+2) "234"
+3) "book:3"
+4) "246"
+5) "book:5"
+6) "251"
+
+```
+
+
+
+
+### 总结
+
+1. String  -  get set del 
+2. Linked List  - rpush lpush rpop lpop lrange lindex  
+3. Set  - sadd srem sismember smembers  sinter sunion sdiff 
+4. hash 散列  -  hget hset hgetall hdel
+5. zset 既可以根据成员访问元素,又可以根据分值/分值排序访问元素
+
+	zadd zrange [withscores]  zrem 
+	zrangebyscore zset 0 -1 withscores
+	zscore zset key
+	zincrby zset num key
+	zrange zset 0 -1 withscores
+	zrevrange zset start stop withscores
+
+
+注意:
+
+1. 在添加/删除/修改元素时,应当考虑事务
+
+
+# 第二章 解决问题
+
+### 投票问题
+
+### token 存储
+
+### 浏览记录
+
+### 购物车
+
+### 静态网页缓存
+
+### 数据行缓存
+
+# 第三章 redis 命令
+
+## 3.1 字符串
+
+### 自增自减
+
+#### incr decr
+
+1. 如果redis对一个不存在的键或者空字符串的键,进行自加自减,则会将这个原始值当做 0 来使用
+
+整数 
+
+```
+127.0.0.1:6379> set hello 1
+OK
+127.0.0.1:6379> incr hello
+(integer) 2
+127.0.0.1:6379> get hello
+"2"
+```
+
+浮点数
+
+```
+127.0.0.1:6379> set hello 1.21
+OK
+127.0.0.1:6379> get hello
+"1.21"
+127.0.0.1:6379> incr hello
+(error) ERR value is not an integer or out of range
+```
+
+### incrby decrby
+
+```
+127.0.0.1:6379> set hello 1
+OK
+127.0.0.1:6379> incrby hello 21313
+(integer) 21314
+```
+
+### incrbyfloat
+
+```
+127.0.0.1:6379> set hello 1.2
+OK
+127.0.0.1:6379> incrbyfloat hello 13.23   // 这个值可以是负数
+"14.43"
+
+```
+
+## 处理子串 
+
+### append 
+
+将一个字符串追加到另一个字符串的末尾
+
+```
+127.0.0.1:6379> set hello world
+OK
+127.0.0.1:6379> get hello
+"world"
+127.0.0.1:6379> append hello 23232
+(integer) 10
+127.0.0.1:6379> get hello
+"world23232"
+
+```
+
+
+
+
+
 
 
