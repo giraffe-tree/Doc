@@ -284,6 +284,19 @@ public class GlobalExceptionHander {
 
 ```
 
+4. 这步还没有验证要不要做
+
+```
+@Configuration
+public class ValidationConfig {
+
+    @Bean
+    public MethodValidationPostProcessor methodValidationPostProcessor() {
+        return new MethodValidationPostProcessor();
+    }
+}
+```
+
 
 ### cacheput 中 使用unless
 
@@ -397,6 +410,45 @@ Could not read JSON: Can not construct instance of com.xxx.xxx.controller.TestOb
   }
 ```
 
+
+### 数据库使用 localdatetime  精度丢失
+
+mysql 中使用 datetime(3) 或者 timestamp(3),精确到秒后3位
+
+@Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
+
+### 多线程处理
+
+
+1. 配置线程池
+
+```
+@Configuration
+public class ThreadPoolConfig {
+
+    @Bean
+    public ExecutorService getThreadPool() {
+        // return Executors.newFixedThreadPool(5);
+        return Executors.newCachedThreadPool();
+    }
+}
+
+```
+
+2. 使用```ExecutorService```
+
+  ```
+  @Autowired
+  private ExecutorService executorService;
+
+  public void test(){
+  
+    executorService.execute(() -> {
+                //更新
+                testService.update();
+            });
+  }
+  ```
 
 
 
