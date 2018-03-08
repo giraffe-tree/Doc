@@ -235,6 +235,34 @@ OK
 
 ```
 
+### getrange
+
+获取一个子串
+
+GETRANGE key start end
+
+  summary: Get a substring of the string stored at a key
+
+```
+127.0.0.1:6379> getrange hello 3 5
+"orl"
+127.0.0.1:6379> get hello
+"1 world"
+```
+
+
+### setrange 
+
+```
+127.0.0.1:6379> get hello
+"1 world"
+127.0.0.1:6379> setrange hello 3 aaa
+(integer) 7
+127.0.0.1:6379> get hello
+"1 waaad"
+```
+
+## 列表
 
 
 
