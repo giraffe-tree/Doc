@@ -437,20 +437,25 @@ public class ThreadPoolConfig {
 
 2. 使用```ExecutorService```
 
-  ```
-  @Autowired
-  private ExecutorService executorService;
+```
+@Autowired
+private ExecutorService executorService;
 
-  public void test(){
+public void test(){
 
-    executorService.execute(() -> {
-                //更新
-                testService.update();
-            });
-  }
-  ```
+  executorService.execute(() -> {
+              //更新
+              testService.update();
+          });
+}
+```
 
 注意: 在高并发情况下会出问题,重复写
 
+### mqtt springboot 
+
+https://dzone.com/articles/message-processing-spring
+
+https://stackoverflow.com/questions/28313985/spring-integration-mqtt-publish-subscribe-to-multiple-topics
 
 
