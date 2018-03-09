@@ -458,4 +458,6 @@ https://dzone.com/articles/message-processing-spring
 
 https://stackoverflow.com/questions/28313985/spring-integration-mqtt-publish-subscribe-to-multiple-topics
 
+spring message  callback
+
 https://stackoverflow.com/questions/42765741/spring-integration-callback-on-message-received
