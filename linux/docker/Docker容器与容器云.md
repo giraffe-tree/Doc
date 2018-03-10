@@ -44,6 +44,8 @@ docker 可在容器内部快速自动化地部署应用,并通过操作系统内
 
 ### docker run
 
+docker run 命令用来基于特定的镜像,创建一个容器,并依据选项来控制该容器.
+
 ```
 Usage:	docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 
@@ -145,17 +147,99 @@ Options:
 ```
 
 
+### docker start/stop/restart
+
+```docker run``` 命令可以新建一个容器来运行,而对于已经存在的容器,可以通过 ```docker start/stop/restart```来启动,停止,重启.
+
+docker start 可以使用 -i 来开启交互模式,时钟保持输入流开放.
+
+docker stop/restart 使用 -t 选项来设定容器停止前的等待时间.
+
+### docker registry 
+
+docker registry 是存储容器镜像的仓库,用户可以通过 docker client 与 docker registry 进行通信,由此完成镜像的搜索,下载,上传等操作.
+
+### docker pull
+
+主要用于从 docker registry 中拉取 image/repository .
+
+docker 不仅可以从官方的dockerHub 中的镜像库中拉取,也可以从私有服务器中获取镜像资源.
+
+### docker push
+
+### docker images 
+
+可以列出主机上的镜像
+
+### docker rmi / docker rm 
+
+docker rmi 用于删除镜像
+
+docker rm 用于删除容器
+
+它们可以同时删除多个镜像/容器
+
+如果已经由基于镜像 a 的容器 b 启动,则要先删除 容器 b ,才能删除镜像 a
+
+### docker 运维操作
+
+### docker attach
+
+它可以连接到正在运行的容器,观察该容器的运行情况,或者与容器主进程进行交互
+
+```	docker attach [OPTIONS] CONTAINER```
 
 
+### docker inspect 
+
+用来查看镜像和容器的详细信息,可以通过 --format 指定输出模板格式.
+
+```
+Usage:  docker inspect [OPTIONS] NAME|ID [NAME|ID...] [flags]
+```
+
+### docker ps
+
+CONTAINER ID   容器id
+IMAGE          镜像     
+COMMAND        
+CREATED             
+STATUS              
+PORTS               
+NAMES
+
+```
+Usage:	docker ps [OPTIONS]
+
+List containers
+
+Options:
+  -a, --all             Show all containers (default shows just running)
+  -f, --filter filter   Filter output based on conditions provided
+      --format string   Pretty-print containers using a Go template
+  -n, --last int        Show n last created containers (includes all states) (default -1)
+  -l, --latest          Show the latest created container (includes all states)
+      --no-trunc        Don't truncate output
+  -q, --quiet           Only display numeric IDs
+  -s, --size            Display total file sizes
+```
+
+### docker commit
+
+可以将一个容器固化为一个新的镜像.
+
+### events,history,logs 
+
+events   打印实时的系统实践
+histtory   打印指定镜像的历史版本信息
+logs     打印出容器中进程的运行日志
 
 
-
-
-
-
-
-
-
+```
+docker events [OPTIONS]
+docker history [OPTIONS] IMAGE
+docker logs [OPTIONS] CONTAINER
+```
 
 
 
