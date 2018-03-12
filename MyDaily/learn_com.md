@@ -166,6 +166,12 @@ TODO:
 
 @vaild bindresult
 
+```
+if (bindingResult.hasErrors()) {
+            return RetObj.fail(bindingResult.getFieldError().getDefaultMessage());
+        }
+```
+
 ### caching is not working in spring interceptor
 
 另外添加到一个service中
@@ -452,6 +458,11 @@ public class ThreadPoolConfig {
 
 注意: 在高并发情况下会出问题,重复写
 
+### 部署
 
+1、mvn clean
+2、mvn -f prod_pom.xml package
+3、scp target/snore-0.0.1-SNAPSHOT.war root@192.2.1.109:/project/2018/mar/snore/snore.jar
 
+### 
 
