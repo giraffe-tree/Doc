@@ -228,6 +228,95 @@ http {
 
 ```
 
+## 2.3 Nginx 服务的基本配置
+
+nginx 在运行时,至少要加载几个核心模块和一个事件类模块
+
+这些模块在运行时所支持的配置项,即为基本配置
+
+按照用户使用时的预期功能分成以下4类
+
+1. 用于调试/定位问题的配置项
+2. 正常运行的必备配置项
+3. 优化性能的配置项
+4. 事件类配置项
+
+### 2.3.1 用于调试/定位问题的配置项
+
+#### 1. 是否以守护进程方式运行 nginx
+
+默认: 
+
+```
+daemon on;  
+# daemon off;
+```
+
+#### 2. 以 master/worker 方式工作
+
+默认:
+
+```
+master_process on;
+```
+
+#### 3. error 日志设置
+
+语法: ```error_log /path/file level;```
+
+```
+# error_log logs/error.log error;
+error_log /var/log/nginx/error.log;
+```
+
+日志的输出级别: 
+
+```
+debug
+info
+notice
+warn
+error
+crit
+alert
+emerg
+```
+
+#### 4. 是否处理几个特殊的调试点
+
+语法:```debug_point [stop|abort]```
+
+#### 5. 仅对指定客户端输出 debug 级别的日志
+
+语法:```debug_connection [IP|CIDR]```
+
+```
+events {
+	debug_onnection 10.224.66.14;
+	debug_onnection 10.224.66.1;
+
+}
+```
+
+在使用 debug_connection 之前,确保在指定 configure 时已经加入 ```--with-debug```
+
+
+#### 6. 限制 coredump 核心转储文件大小
+
+```worker_rlimit_core size;```
+
+限制记录出错的文件的大小
+
+#### 7. 指定 coredump 文件生成位置
+
+```working_directory path;```
+
+worker进程的工作目录
+
+### 2.3.2 正常运行的配置
+
+#### 1. 定义环境变量
+
 
 
 
