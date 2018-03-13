@@ -317,6 +317,93 @@ worker进程的工作目录
 
 #### 1. 定义环境变量
 
+```env VAR=VALUE```
+
+这个配置项,可以让用户直接设置操作系统上的环境变量
+
+```
+env TESTPATH=/tmp/
+```
+
+#### 2. 嵌入其他配置文件
+
+```include /path/file```
+
+
+```
+include mime.types
+include vhost/*.conf
+```
+
+#### 3. pid 文件的路径
+
+```pid path/file```
+
+默认:
+
+```pid logs/nginx.pid```
+
+
+#### 4. Nginx Worker 进程运行的用户及用户组
+
+```user username [groupname]```
+
+```
+username nobody nobody
+```
+
+#### 5. 指定 nginx worker 进程可以打开的最大句柄描述符个数
+
+worker_rlimit_sigpending limit;
+
+设置每个用户发往 nginx 的信号队列大小.
+
+
+### 2.3.3 优化性能的配置
+
+#### 1. Nginx worker 进程个数
+
+```worker_processes number;```
+
+默认:
+
+```
+worker_processes 1;
+```
+
+多 worker 进程可以充分多核系统架构,但若 worker 进程的数量多于 cpu 内核数,那么会增大进程间切换带来的消耗(Linux 是抢占式内核).
+
+#### 2. Nginx 进程绑定到指定 cpu 内核
+
+```worker_cpu_affinity cpumask```
+
+```
+worker_processes 4;
+worker_cpu_affinity 1000 0100 0010 0001;
+```
+
+#### 3. ssl 硬件加速
+
+```ssl_engine device```
+
+#### 4. 系统调用 gettimeofday 频率
+
+```timer_resolution t```
+
+#### 5. Nginx worker 进程优先级设置
+
+```worker_priority nice;```
+
+默认:
+
+```
+worker_prority 0;
+```
+
+nice 的值为 -20 ~ 19 , -20 为最高优先级
+
+### 2.3.4 事件类配置项
+
 
 
 
