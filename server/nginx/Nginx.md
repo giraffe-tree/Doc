@@ -404,13 +404,121 @@ nice 的值为 -20 ~ 19 , -20 为最高优先级
 
 ### 2.3.4 事件类配置项
 
+#### 1. 是否打开 accept 锁
+
+默认:
+
+```
+accept_mutext on;
+```
+
+accept_mutext 是 nginx 的负载均衡锁
+
+#### 2. lock 文件路径
+
+默认:
+
+```
+lock_file logs/nginx.lock
+```
+
+文件锁,只有由于编译系统,操作系统架构等因素导致 nginx 不支持原子锁,才会使用文件锁实现 accept 锁,这样 lock 文件才会生效
+
+#### 3. 使用 accept 锁到真正建立连接之间的延迟时间
+
+默认:
+
+```
+accept_mutex_delay 500ms;
+```
+
+在使用 accept 锁后,同一时间只有一个 worker 进程能够取到accept 锁.
+
+当一个 worker 进程试图取得 accept 锁,却没有取到时,它至少要等待 accept_mutex_delay 之后才能再次取锁
+
+#### 4. 批量建立连接
+
+default:
+
+```
+multi_accept off;
+```
+
+#### 5. 选择事件模型
+
+语法:
+
+```
+use [ poll | epoll | select ] 
+```
+
+nginx 会自动使用最适合的事件模型,epoll 性能最高
+
+#### 6. 每个 worker的最大连接数
 
 
+```
+worker_connections number ;
+```
+
+## 2.4 用 http 核心模块配置一个静态 web 服务器
+
+静态 web 服务器的主要功能有 ngx_http_core_module 模块实现.
+
+nginx 为配置一个完整的静态 web 服务器提供了非常多的功能,主要分为八大类
+
+1. 虚拟主机与请求的分发
+2. 文件路径的定义
+3. 内存及磁盘资源的分配
+4. 网络连接的设置
+5. MIME 类型的设置
+6. 对客户端请求的限制
+7. 文件操作的优化
+8. 对客户端请求的特殊处理
+
+### 2.4.1 虚拟主机与请求的分发
+
+每一个 server 块就是一个虚拟主机
+
+#### 1. 监听端口
+
+listen 8801;
+
+#### 2. 主机名称
+
+```
+server_name snore;
+```
+
+使用 server_name 与 host 匹配
+
+#### 3.  server_names_hash_bucket_size
+
+```
+server_names_hash_bucket_size 32|64|128;
+```
+
+#### 4. server_names_hash_max_size
+
+default:
+
+```
+server_names_hash_max_size 512;
+```
+
+#### 5. 重定向主机名称的处理
+
+default:
+
+```
+server_name_in_redirect on;
+```
+
+#### 6. location 
 
 
+### 2.4.2 文件路径的定义
 
-
-
-
+#### 1. 以 root 方式设置资源路径
 
 
