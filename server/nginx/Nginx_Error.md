@@ -8,9 +8,28 @@
 
 #### 配置转发端口
 
+主配置文件：
+
 ```
 	location /snore/{
 		proxy_pass http://localhost:8801/;
 	}
+```
 
+子配置文件：
+
+```
+server {
+        listen 80;
+        server_name 47.97.xxx.xxx;
+        # root         /usr/share/nginx/html;
+
+        # location / {
+        # }
+
+        location /snore/ {
+            proxy_pass http://localhost:8801/;
+        }
+
+}
 ```
