@@ -262,7 +262,90 @@ GETRANGE key start end
 "1 waaad"
 ```
 
-## 列表
+## 3.2 列表
+
+TODO:
+
+## 3.7 其他命令
+
+### 3.7.1 排序
+
+### 3.7.2 基本的 redis 事务
+
+### 3.7.3 键的过期时间
+
+# 第四章 数据安全与性能保障
+
+主要内容:
+
+1. 数据持久化
+2. 将数据复制到其他机器
+3. 处理系统故障
+4. redis 事务
+5. 非事务型流水线
+6. 诊断性能问题
+
+## 4.1 持久化选项
+
+1. 快照 snotshotting 
+
+	它可以将存在某一个时刻的所有数据都写入硬盘
+	
+	当数据大时,可能会带来大量数据的丢失.
+
+2. 追加文件 append-only file (AOF)
+
+	在执行写命令时,将执行命令复制到硬盘里面.
+	
+	AOF 持久化可以将丢失数据的时间窗口降低至1秒,但当 redis 不断将命令写入 AOF 文件时,文件体积不断增大.redis 重启执行还原操作的时间可能会非常长.
+	
+	
+## TODO
+
+## 4.6 性能
+
+#### 性能测试
+ 
+```
+redis-benchmark -c l -q
+```
+
+2核4G
+
+```
+PING_INLINE: 21901.01 requests per second
+PING_BULK: 21272.07 requests per second
+SET: 20136.93 requests per second
+GET: 22366.36 requests per second
+INCR: 21244.96 requests per second
+LPUSH: 21331.06 requests per second
+RPUSH: 21312.87 requests per second
+LPOP: 20924.88 requests per second
+RPOP: 21649.71 requests per second
+SADD: 22537.75 requests per second
+HSET: 20251.11 requests per second
+SPOP: 21372.09 requests per second
+LPUSH (needed to benchmark LRANGE): 21710.81 requests per second
+LRANGE_100 (first 100 elements): 15696.12 requests per second
+LRANGE_300 (first 300 elements): 9242.14 requests per second
+LRANGE_500 (first 450 elements): 7174.12 requests per second
+LRANGE_600 (first 600 elements): 5779.34 requests per second
+MSET (10 keys): 20521.24 requests per second
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
