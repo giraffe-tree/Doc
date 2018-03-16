@@ -46,12 +46,12 @@ Kaa is a production-ready, multi-purpose middleware platform for building comple
 
 ## 3.15 解决方案
 
-
 HBase / HitsDB  --> clickhouse 
 
 Kafka
 
 mqtt
+
 
 
 
