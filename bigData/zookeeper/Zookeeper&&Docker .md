@@ -151,6 +151,11 @@ $ docker run --name zookeeper1.0 --restart always -d -v $(pwd)/zoo.cfg:/conf/zoo
 
 [基于docker部署的微服务架构（五）： docker环境下的zookeeper和kafka部署](https://www.jianshu.com/p/263164fdcac7)
 
+成功:
+
+http://blog.csdn.net/u011537073/article/details/70767064
+
+
 zookeeper
 
 ```
@@ -610,6 +615,38 @@ logs:
 [2018-03-17 15:14:34,241] INFO [KafkaServer id=1001] started (kafka.server.KafkaServer)
 ```
 
+```
+bin/kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic test
+```
+
+--> ``` Created topic "test".```
+
+进入:
+
+```
+docker exec -it ${CONTAINER ID} /bin/bash   
+```
+
+查看 topic 列表
+
+```
+bin/kafka-topics.sh --list --zookeeper zookeeper:2181
+```
+
+--> test
+
+发送消息
+
+```
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+```
+
+
+接受消息
+
+```
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
+```
 
 
 
