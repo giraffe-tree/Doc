@@ -37,6 +37,6 @@ docker run -d  --name snore -p 8801:8080  -v /data/testPackage:/usr/local/tomcat
 
 http://blog.csdn.net/github_37600255/article/details/56484235
 
-docker run -d -p 8080:8801 --name snore1.0 snore:1.0
+docker run -d -p 8801:8801 --name snore1.1 snore:1.1
 
 docker run -d -p 8801:8801 --name snore1.1 -v /etc/localtime:/etc/localtime:ro snore:1.0

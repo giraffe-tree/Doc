@@ -464,5 +464,7 @@ public class ThreadPoolConfig {
 2、mvn -f prod_pom.xml package
 3、scp target/snore-0.0.1-SNAPSHOT.war root@192.2.1.109:/project/2018/mar/snore/snore.jar
 
-### 
+### Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.proton.snoreorigin.dao.UserSessionRepository.
+
+
 
