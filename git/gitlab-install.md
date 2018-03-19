@@ -3,6 +3,7 @@
 ## 参考
 
 http://blog.csdn.net/michael_base/article/details/77966647
+
 https://hub.docker.com/r/beginor/gitlab-ce/
 
 ## 命令
