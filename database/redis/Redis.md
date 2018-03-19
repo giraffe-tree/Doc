@@ -6,6 +6,9 @@
 
 2. https://redis.io/commands
 
+3. 阿里云Redis开发规范
+
+	https://yq.aliyun.com/articles/531067?utm_content=m_43801
 
 
 # 第一章 redis入门, 简介
