@@ -22,9 +22,13 @@ docker run \
 ```
 
 注意，每次修改gitlab.rb配置文件之后，或者在容器里执行
-gitlab-ctl reconfigure
+
+```gitlab-ctl reconfigure```
 
 命令，或者重启容器以让新配置生效。
+
+```docker exec -it gitlab update-permissions```
+
 
 ```
 docker run \
