@@ -8,6 +8,8 @@ https://github.com/apache/kafka
 
 http://kafka.apache.org/
 
+http://zqhxuyuan.github.io/2017/12/31/Kafka-Book-Resources/#%E6%B5%81%E5%A4%84%E7%90%86%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B
+
 ## 准备
 
 
@@ -316,6 +318,12 @@ localhost:9092 --topic chen
 ## 9.7 不安全的操作
 
 # 第十章 监控 kafka
+
+## 10.1 度量指标基础
+
+### 10.1.1 度量指标在哪里
+
+
 
 
 
