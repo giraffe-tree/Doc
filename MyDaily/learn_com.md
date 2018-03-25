@@ -467,4 +467,41 @@ public class ThreadPoolConfig {
 ### Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.proton.snoreorigin.dao.UserSessionRepository.
 
 
+### left join ,  group by 
 
+```
+select u.id,u.realname,u.created,reportCount,model from ecg.v_user as u 
+left join ecg.v_session as s on s.uid = u.id 
+left join (
+  select count(*) as reportCount ,r.creator as u1 from ecg.u_report as r group by r.creator 
+) as result1  on result1.u1 = s.uid
+where  u.realname like '%%' and u.mobile like '%15%' and u.created > '2018-1-1' and u.created < '2018-3-1'
+    and s.model like '%iPhone%'
+order by u.created desc limit 1,10;
+```
+
+```
+select * from ecg.v_user as u 
+left join (select count(*) as c1 ,r.creator as u1 from ecg.u_report as r group by r.creator ) as result1 
+on result1.u1 = u.id 
+where mobile like "%1%"; 
+```
+
+spring data jpa 1.9
+
+Cannot use native queries with dynamic sorting and/or pagination in method
+
+@Query(value = "select u.id,u.realname,u.created,reportCount,model from ecg.v_user as u \n" +
+      "left join ecg.v_session as s on s.uid = u.id \n" +
+      "left join (\n" +
+      "select count(*) as reportCount ,r.creator as u1 from ecg.u_report as r group by r.creator \n" +
+      ") as result1  on result1.u1 = s.uid\n" +
+      "where  u.realname like %:realname% and u.mobile like %:mobile% and u.created > :startTime and u.created < :endTime \n" +
+      "and s.model like '%iPhone%' limit :sindex,:eindex;")
+  List<Object[]> findCustom(@Param("realname")String realname,
+                   @Param("mobile")String mobile,
+                   @Param("startTime")Date startTime,
+                   @Param("endTime")Date endTime,
+                @Param("sindex")int start,
+                @Param("eindex")int end
+                  );
