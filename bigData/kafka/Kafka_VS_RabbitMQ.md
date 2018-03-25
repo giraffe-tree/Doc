@@ -6,6 +6,10 @@ RabbitMQ是一个AMQP实现，传统的messaging queue系统实现，基于Erlan
 
 Kafka是linkedin开源的MQ系统，主要特点是基于Pull的模式来处理消息消费，追求高吞吐量，一开始的目的就是用于日志收集和传输，0.8开始支持复制，不支持事务，适合产生大量数据的互联网服务的数据收集业务。
 
+参考: 
+
+[Kafka、RabbitMQ、RocketMQ等消息中间件的对比 —— 消息发送性能和优势](https://blog.csdn.net/yunfeng482/article/details/72856762)
+
 ## 参考
 
 ####  日志：每个软件工程师都应该知道的有关实时数据的统一概念
@@ -17,5 +21,18 @@ https://github.com/oldratlee/translations/blob/master/log-what-every-software-en
 [Apache kafka](http://kafka.apache.org/)
 
 A distributed streaming platform .
+
+## AWS kinesis
+
+https://aws.amazon.com/cn/kinesis/
+
+实时轻松收集、处理和分析视频和数据流
+
+
+
+
+
+
+
 
 
