@@ -491,6 +491,7 @@ spring data jpa 1.9
 
 Cannot use native queries with dynamic sorting and/or pagination in method
 
+```
 @Query(value = "select u.id,u.realname,u.created,reportCount,model from ecg.v_user as u \n" +
       "left join ecg.v_session as s on s.uid = u.id \n" +
       "left join (\n" +
@@ -505,3 +506,19 @@ Cannot use native queries with dynamic sorting and/or pagination in method
                 @Param("sindex")int start,
                 @Param("eindex")int end
                   );
+```
+
+### kafka java
+
+```
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: 47.97.199.139:9092,47.97.199.139:9093,47.97.199.139:9094
+      group-id: 1
+      client-id: 1
+    producer:
+      bootstrap-servers: 47.97.199.139:9092,47.97.199.139:9093,47.97.199.139:9094
+      key-serializer: org.apache.kafka.common.serialization.IntegerDeserializer
+      value-serializer: org.apache.kafka.common.serialization.StringDeserializer
+```
