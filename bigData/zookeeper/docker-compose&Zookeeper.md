@@ -4,6 +4,7 @@
 
 https://segmentfault.com/a/1190000006907443
 
+http://haofly.net/kafka/
 
 ## 搭建 zookeeper 集群
 
@@ -69,7 +70,7 @@ services:
     build: .
     container_name: kafka1
     ports:
-      - "9092"
+      - "9092:9092"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ADVERTISED_HOST_NAME: 47.97.199.139
@@ -82,7 +83,7 @@ services:
 	build: .
 	container_name: kafka2
 	ports:
-	  - "9093"
+	  - "9093:9092"
 	environment:
 	  KAFKA_BROKER_ID: 2
 	  KAFKA_ADVERTISED_HOST_NAME: 47.97.199.139
@@ -95,7 +96,7 @@ services:
 	build: .
 	container_name: kafka3
 	ports:
-	  - "9094"
+	  - "9094:9092"
 	environment:
 	  KAFKA_BROKER_ID: 3
 	  KAFKA_ADVERTISED_HOST_NAME: 47.97.199.139
@@ -111,6 +112,15 @@ services:
 ```
 COMPOSE_PROJECT_NAME=zkafka docker-compose up -d
 ```
+
+
+### 消费者
+
+```
+bin/kafka-console-consumer.sh --zookeeper 47.97.199.139:2181 \
+--topic hello --from-beginning
+```
+
 
 
 
