@@ -6,6 +6,8 @@ https://segmentfault.com/a/1190000006907443
 
 http://haofly.net/kafka/
 
+https://docs.spring.io/spring-kafka/reference/html/_introduction.html
+
 ## 搭建 zookeeper 集群
 
 #### docker-compose.yml

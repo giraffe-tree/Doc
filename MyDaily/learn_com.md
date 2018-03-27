@@ -522,3 +522,5 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.IntegerDeserializer
       value-serializer: org.apache.kafka.common.serialization.StringDeserializer
 ```
+
+
