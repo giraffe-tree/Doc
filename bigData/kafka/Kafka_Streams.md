@@ -161,10 +161,33 @@ StreamsConfig config = new StreamsConfig(streamsSettings);
 
 ## Streams DSL
 
+### 一. input 
+
+#### 1. input topics → KStream
+
+#### 2. input topic → KTable
+
+#### 3. input topic → GlobalKTable
+
+### 二. TRANSFORM A STREAM
+
+### 第一部分 Stateless transformations
+
+#### 1. KStream → KStream[]
+
+#### 2. KStream → KStream && KTable → KTable
+
+#### 
+
+#### 
+
+#### 
 
 
+### 第二部分 Stateful transformations
 
+#### 
 
-
+#### 
 
 	
