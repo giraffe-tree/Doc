@@ -135,8 +135,34 @@ http://kafka.apache.org/11/documentation/streams/developer-guide/config-streams
 
 | 属性名 | 默认值 | 作用 |
 | ---- | :---: | :---:|
-| replication.factor	 | 1| The replication factor for changelog topics and repartition topics created by the application.	| 
+| replication.factor	 | 1| The replication factor for changelog topics and repartition topics created by the application. Increase the replication factor to 3 to ensure that the internal Kafka Streams topic can tolerate up to 2 broker failures	| 
 |state.dir	| /var/lib/kafka-streams |Directory location for state stores.|
+
+
+#### Kafka consumers and producer configuration parameters
+
+```
+Properties streamsSettings = new Properties();
+// Example of a "normal" setting for Kafka Streams
+streamsSettings.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka-broker-01:9092");
+// Customize the Kafka consumer settings of your Streams application
+streamsSettings.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 60000);
+StreamsConfig config = new StreamsConfig(streamsSettings);
+```
+
+### Recommended configuration parameters for resiliency
+
+
+|Parameter Name|Corresponding Client	| Default value| Consider setting to|
+| ---- |:--:|:--:|:--:|
+|acks	|Producer	|acks=1	|acks=all|
+|replication.factor|	Streams|	1|	3|
+|min.insync.replicas|	Broker|	1|	2|
+
+## Streams DSL
+
+
+
 
 
 
