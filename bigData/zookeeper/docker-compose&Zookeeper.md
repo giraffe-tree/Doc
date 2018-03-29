@@ -8,6 +8,10 @@ http://haofly.net/kafka/
 
 https://docs.spring.io/spring-kafka/reference/html/_introduction.html
 
+https://www.landoop.com/blog/2017/01/mqtt-kafka-connect-with-ais-data/
+
+http://kafka.apache.org/10/documentation/streams/developer-guide/
+
 ## 搭建 zookeeper 集群
 
 #### docker-compose.yml
@@ -58,6 +62,10 @@ telnet localhost 2183
 ```
 
 ## 搭建 kafka 集群
+
+目录 
+
+/2018/april/platform/zookafka/v1
 
 ```
 version: '2'
@@ -122,6 +130,16 @@ COMPOSE_PROJECT_NAME=zkafka docker-compose up -d
 bin/kafka-console-consumer.sh --zookeeper 47.97.199.139:2181 \
 --topic hello --from-beginning
 ```
+
+发送消息
+
+```
+bin/kafka-console-producer.sh --broker-list \
+47.97.199.139:9092 --topic test \
+--property "parse.key=true" \
+--property "key.separator=:"
+```
+
 
 
 

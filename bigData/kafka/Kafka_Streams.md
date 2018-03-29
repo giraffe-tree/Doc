@@ -59,4 +59,86 @@ StreamsConfig config = new StreamsConfig(new HashMap<>());
 KafkaStreams streams = new KafkaStreams(topology, config);
 ```
 
+# 使用 kafka streams
 
+## 1. KafkaStreams 的产生
+
+```
+StreamsBuilder builder = ...;  // when using the DSL
+Topology topology = builder.build();
+
+StreamsConfig config = ...;
+
+KafkaStreams streams = new KafkaStreams(topology, config);
+```
+
+## 2. 开始关闭
+
+```
+KafkaStreams.start()
+KafkaStreams.close()
+```
+
+```
+Runtime.getRuntime().addShutdownHook(new Thread(streams::close));
+```
+
+> After an application is stopped, Kafka Streams will migrate any tasks that had been running in this instance to available remaining instances.
+
+
+## 3. 配置
+
+#### reference
+
+http://kafka.apache.org/11/documentation/streams/developer-guide/config-streams
+
+### 必须设置
+
+#### application.id
+
+#### bootstrap.servers
+
+### 可选配置 
+
+### 对性能影响较小的属性
+
+| 属性名 | 默认值 | 作用 |
+| ---- | :---: | :---:|
+|application.server | "" | | 
+| buffered.records.per.partition |1000 | The maximum number of records to buffer per partition.| 
+|	commit.interval.ms	|30000 ms|用于保存任务的位置（源主题中的偏移量）的频率。|
+|metric.reporters		|	空列表|	A list of classes to use as metrics reporters.|
+|	metrics.num.samples	|	The number of samples maintained to compute metrics.| 2|
+|metrics.recording.level|INFO	|The highest recording level for metrics|
+|metrics.sample.window.ms	|30000 ms|The window of time a metrics sample is computed over|
+|partition.grouper	|DefaultPartitionGrouper|	Partition grouper class that implements the PartitionGrouper interface.|
+|poll.ms	|100 ms|	The amount of time in milliseconds to block waiting for input.|
+|state.cleanup.delay.ms	|6000000 ms|The amount of time in milliseconds to wait before deleting state when a partition has migrated.|
+|windowstore.changelog.additional.retention.ms|1 day|Added to a windows maintainMs to ensure data is not deleted from the log prematurely. Allows for clock drift.|
+
+### 对性能有一定影响的属性
+
+| 属性名 | 默认值 | 作用 |
+| ---- | :---: | :---:|
+|cache.max.bytes.buffering	 |10485760 bytes|Maximum number of memory bytes to be used for record caches across all threads.| 
+|client.id |""|An ID string to pass to the server when making requests. (This setting is passed to the consumer/producer clients used internally by Kafka Streams.)| 
+|default.deserialization.exception.handler | DefaultProductionExceptionHandler |Exception handling class that implements the DeserializationExceptionHandler interface. 还有一种是  LogAndContinueExceptionHandler| 
+|default.production.exception.handler	 | DefaultProductionExceptionHandler |Exception handling class that implements the ProductionExceptionHandler interface| 
+|key.serde|Serdes.ByteArray().getClass().getName()| Default serializer/deserializer class for record keys| 
+|num.standby.replicas		 |0|The number of standby replicas for each task.| 
+|num.stream.threads		 |1|The number of threads to execute stream processing.| 
+|timestamp.extractor|FailOnInvalidTimestamp|Timestamp extractor class that implements the TimestampExtractor interface.| 
+|value.serde		|Serdes.ByteArray().getClass().getName()|Default serializer/deserializer class for record values, implements the Serde interface (see also key.serde)| 
+
+
+### 对性能影响较大的属性
+
+| 属性名 | 默认值 | 作用 |
+| ---- | :---: | :---:|
+| replication.factor	 | 1| The replication factor for changelog topics and repartition topics created by the application.	| 
+|state.dir	| /var/lib/kafka-streams |Directory location for state stores.|
+
+
+
+
+	
