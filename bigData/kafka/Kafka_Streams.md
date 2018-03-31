@@ -175,19 +175,64 @@ StreamsConfig config = new StreamsConfig(streamsSettings);
 
 #### 1. KStream → KStream[]
 
+branch
+
 #### 2. KStream → KStream && KTable → KTable
 
-#### 
+filter
 
-#### 
+#### 3. filternot KStream → KStream && KTable → KTable
 
-#### 
+inverse filter  -> filternot
 
+#### 4. flatmap
+
+会导致 key 改变,记录重新分区
+
+#### 5. flatMapValues KSream  -> KSream
+
+#### 6. foreach KSream/KTable  -> void
+
+#### 7. GroupByKey kstream -> kgroupedStream
+
+#### 8. GroupBy
+
+会导致重新分区
+
+#### 9. Map  KStream -> KStream
+
+会导致重新分区
+
+#### 10. mapValues
+
+#### 11. peek
+
+performs a stateless action on each record ,and return an unchanged stream
+
+#### 12. print 
+
+等同于 foreach 输出
+
+#### 13. selectKey 
+
+为流分配一个新的 key ,会使得数据重新分区
+
+#### 14. toStream  KTable -> KStream 
+
+table 转 stream
 
 ### 第二部分 Stateful transformations
 
-#### 
+主要用法
+
+1. aggregating
+2. joining
+3. windowing
+4. custom processors 
 
 #### 
 
-	
+
+#### 
+
+
