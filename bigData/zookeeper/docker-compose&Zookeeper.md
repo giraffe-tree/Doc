@@ -123,6 +123,12 @@ services:
 COMPOSE_PROJECT_NAME=zkafka docker-compose up -d
 ```
 
+### 创建主题
+
+```
+bin/kafka-topics.sh --zookeeper zookeeper:2181 \
+--topic streams-input2
+```
 
 ### 消费者
 
