@@ -6,6 +6,10 @@
 
 http://kafka.apache.org/documentation/#connect
 
+https://www.confluent.io/blog/building-real-time-streaming-etl-pipeline-20-minutes/
+
+https://community.mapr.com/community/exchange/blog/2017/05/29/building-kafka-connect-connectors-between-data-systems-and-kafka
+
 ### Stream Reactor  较新,收费
 
 [github.com/Landoop/stream-reactor](https://github.com/Landoop/stream-reactor)
@@ -52,9 +56,11 @@ mvn install:install-file -Dfile=kafka-connect-mqtt-1.1-SNAPSHOT.jar -DgroupId=co
 ### 分布式 connect 配置
 
 1. group.id
-2. config.storage.topic
-3. offset.storage.topic
-4. status.storage.topic
+2. config.storage.topic  connect-configs  1 partition 3 replicated
+3. offset.storage.topic   connect-offsets    3 partition   3 replicated
+4. status.storage.topic   connect-status    3 partition   3  replicated
+
+
 
 
 
