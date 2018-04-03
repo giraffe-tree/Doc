@@ -143,7 +143,10 @@ send:
     "key.converter": "org.apache.kafka.connect.json.JsonConverter",
     "value.converter": "org.apache.kafka.connect.json.JsonConverter",
     "mqtt.topic": "hello",
-    "topic": "hello"
+    "kafka.topic": "hello",
+    "mqtt.user": "xxx",
+    "mqtt.password": "xxx",
+    "message_processor_class": "com.evokly.kafka.connect.mqtt.sample.DumbProcessor"
   }
 }
 ```
