@@ -121,4 +121,138 @@ libs needs to be added to CLASSPATH:
 
 	if used with ssl there are more.. (./gradlew copyRuntimeLibs copies all runtime libs to ./build/output/lib)
 
+将需要的jar包加入: docker容器中的地址 - ```/opt/kafka_2.12-1.0.1/libs```
+
+
+## 管理
+
+### GET /connectors 
+
+- return a list of active connectors
+
+### POST /connectors 
+
+- create a new connector; the request body should be a JSON object containing a string name field and an object config field with the connector configuration parameters
+
+send: 
+
+```
+{
+  "name":"mqtt-connector",
+  "config":{
+    "connector.class":"com.evokly.kafka.connect.mqtt.MqttSourceConnector",
+    "tasks.max": "5",
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "mqtt.topic": "hello",
+    "kafka.topic": "hello",
+    "mqtt.user": "xxx",
+    "mqtt.password": "xxx",
+    "message_processor_class": "com.evokly.kafka.connect.mqtt.sample.DumbProcessor"
+  }
+}
+```
+
+### GET /connectors/{name} 
+
+- get information about a specific connector
+
+
+```
+{
+    "name": "mqtt-connector",
+    "config": {
+        "connector.class": "com.evokly.kafka.connect.mqtt.MqttSourceConnector",
+        "tasks.max": "5",
+        "name": "mqtt-connector",
+        "topic": "hello",
+        "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "mqtt.topic": "hello"
+    },
+    "tasks": [
+        {
+            "connector": "mqtt-connector",
+            "task": 0
+        }
+    ],
+    "type": "source"
+}
+```
+
+### GET /connectors/{name}/config 
+
+- get the configuration parameters for a specific connector
+
+### PUT /connectors/{name}/config 
+
+- update the configuration parameters for a specific connector
+
+### GET /connectors/{name}/status 
+
+- get current status of the connector, including if it is running, failed, paused, etc., which worker it is assigned to, error information if it has failed, and the state of all its tasks
+
+```
+{
+    "name": "mqtt-connector",
+    "connector": {
+        "state": "RUNNING",
+        "worker_id": "172.21.0.3:8083"
+    },
+    "tasks": [
+        {
+            "state": "RUNNING",
+            "id": 0,
+            "worker_id": "172.21.0.3:8083"
+        }
+    ],
+    "type": "source"
+}
+```
+
+### GET /connectors/{name}/tasks 
+
+- get a list of tasks currently running for a connector
+
+### GET /connectors/{name}/tasks/{taskid}/status 
+
+- get current status of the task, including if 
+it is running, failed, paused, etc., which worker it is assigned to, and error information if it has failed
+
+```
+{
+    "state": "RUNNING",
+    "id": 0,
+    "worker_id": "172.21.0.3:8083"
+}
+```
+
+### PUT /connectors/{name}/pause 
+
+- pause the connector and its tasks, which stops message processing until the connector is resumed
+
+### PUT /connectors/{name}/resume 
+
+- resume a paused connector (or do nothing if the connector is not paused)
+
+### POST /connectors/{name}/restart 
+
+- restart a connector (typically because it has failed)
+
+### POST /connectors/{name}/tasks/{taskId}/restart 
+
+- restart an individual task (typically because it has failed)
+
+### DELETE /connectors/{name} 
+
+- delete a connector, halting all tasks and deleting its configuration
+Kafka Connect also provides a REST API for getting information about connector plugins:
+
+### GET /connector-plugins
+
+- return a list of connector plugins installed in the Kafka Connect cluster. Note that the API only checks for connectors on the worker that handles the request, which means you may see inconsistent results, especially during a rolling upgrade if you add new connector jars
+
+### PUT /connector-plugins/{connector-type}/config/validate 
+
+- validate the provided configuration values against the configuration definition. This API performs per config validation, returns suggested values and error messages during validation.
 
