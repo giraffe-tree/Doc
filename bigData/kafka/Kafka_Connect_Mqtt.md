@@ -119,6 +119,9 @@ libs needs to be added to CLASSPATH:
 
 	if used with ssl there are more.. (./gradlew copyRuntimeLibs copies all runtime libs to ./build/output/lib)
 
+将需要的jar包加入: docker容器中的地址 - ```/opt/kafka_2.12-1.0.1/libs```
+
+
 ## 管理
 
 ### GET /connectors 
