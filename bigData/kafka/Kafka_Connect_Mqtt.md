@@ -10,6 +10,8 @@ https://www.confluent.io/blog/building-real-time-streaming-etl-pipeline-20-minut
 
 https://community.mapr.com/community/exchange/blog/2017/05/29/building-kafka-connect-connectors-between-data-systems-and-kafka
 
+https://gerardnico.com/dit/kafka/connect/connector
+
 ### Stream Reactor  较新,收费
 
 [github.com/Landoop/stream-reactor](https://github.com/Landoop/stream-reactor)
