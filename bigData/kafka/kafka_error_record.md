@@ -19,7 +19,7 @@
 
 #### 原因 
 
-可能是在一个程序中用了多个相同配置的streams , id/groupid等等相同导致
+可能是在一个程序中用了多个相同配置的streams , clientId/groupid等等相同导致
 
 #### 解决
 
@@ -47,10 +47,22 @@ org.apache.kafka.connect.errors.DataException: Invalid type for STRING: class [B
 
 #### 原因 
 
+数据格式转换错误
+
 mqtt 数据格式 转换成 kafka 数据格式出错
 
 #### 解决
 
 将```Schema.STRING_SCHEMA, message.getPayload() ``` 改成 ```Schema.BYTES_SCHEMA, message.getPayload()``` 后解决.
+
+
+### The group member's supported protocols are incompatible with those of existing members or first group member tried to join with empty protocol type or empty protocol list.
+
+#### 可能的原因
+
+可能有2个消费者在消费这个topic，只能有1个消费。
+
+http://orchome.com/482
+
 
 
