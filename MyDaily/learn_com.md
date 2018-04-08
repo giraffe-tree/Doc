@@ -528,3 +528,20 @@ spring:
 
 与 bytes 转化
 
+### kafka 管理
+
+####  zkUtils 操作
+
+https://www.cnblogs.com/huxi2b/p/6592862.html
+
+#### adminClient 操作
+
+adminClient
+
+http://kafka.apache.org/10/javadoc/org/apache/kafka/clients/admin/KafkaAdminClient.html
+
+## 启动
+
+docker run -d -p 8001:8080 -v /data/vcare-test:/usr/local/tomcat/webapps -v /etc/localtime:/etc/localtime:ro --name vcare_test tomcat:8-jre8
+
+
