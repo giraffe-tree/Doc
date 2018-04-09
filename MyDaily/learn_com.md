@@ -542,6 +542,6 @@ http://kafka.apache.org/10/javadoc/org/apache/kafka/clients/admin/KafkaAdminClie
 
 ## 启动
 
-docker run -d -p 8001:8080 -v /data/vcare-test:/usr/local/tomcat/webapps -v /etc/localtime:/etc/localtime:ro --name vcare_test tomcat:8-jre8
+docker run -d -p 8001:8080 -v /data/vcare-test:/usr/local/tomcat/webapps -v /etc/localtime:/etc/localtime:ro -v /etc/timezone:/etc/timezone --name vcare_test tomcat:8-jre8
 
 
