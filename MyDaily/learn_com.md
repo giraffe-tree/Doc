@@ -545,3 +545,6 @@ http://kafka.apache.org/10/javadoc/org/apache/kafka/clients/admin/KafkaAdminClie
 docker run -d -p 8001:8080 -v /data/vcare-test:/usr/local/tomcat/webapps -v /etc/localtime:/etc/localtime:ro -v /etc/timezone:/etc/timezone --name vcare_test tomcat:8-jre8
 
 
+## 服务器配置
+
+![kafka config](../img/kafka/kafka_config.jpg)
