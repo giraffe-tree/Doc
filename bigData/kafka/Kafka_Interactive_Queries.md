@@ -12,7 +12,7 @@ http://kafka.apache.org/11/documentation/streams/developer-guide/interactive-que
 groupedByWord.count(Materialized.<String, String, KeyValueStore<Bytes, byte[]>as("CountsKeyValueStore"));
 ```
 
-->
+修改为
 
 ```
 kStream1.groupBy((key, value) -> value,Serialized.with(stringSerde,stringSerde))
