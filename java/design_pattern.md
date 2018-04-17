@@ -4,9 +4,33 @@
 
 ## 单例模式
 
+https://yq.aliyun.com/articles/11333
+
 1. 懒汉式 synchronized
 2. 双重检查
-3. 静态内部类
+3. 静态内部类 比1,2要好
+
+	```
+	public class Singleton {
+
+    private Singleton(){}
+    /**
+     *    类级的内部类，也就是静态的成员式内部类，该内部类的实例与外部类的实例
+     *    没有绑定关系，而且只有被调用到时才会装载，从而实现了延迟加载。
+     */
+    private static class SingletonHolder{
+        /**
+         * 静态初始化器，由JVM来保证线程安全
+         */
+        private static Singleton instance = new Singleton();
+    }
+
+    public static Singleton getInstance(){
+        return SingletonHolder.instance;
+    }
+}
+	```
+
 4. 饿汉式 静态私有变量
 
 Java使用double check（双重检查）实现单例模式时，单例变量要使用volatile修饰 [原因](http://blog.csdn.net/u010660307/article/details/69922320)
@@ -21,7 +45,7 @@ Java使用double check（双重检查）实现单例模式时，单例变量要�
 
 ## 建造者模式
 
-参考:[Java设计模式（二）----建造者模式 by汤高](https://yq.aliyun.com/articles/11334)
+[Java设计模式（二）----建造者模式 by汤高](https://yq.aliyun.com/articles/11334)
 
 - 抽象建造者（Builder）角色 ----> 接口,有一个具体的实现
 - 导演者（Director）角色  ----> 聚合(contains)了 一个具体的Builder
