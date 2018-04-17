@@ -548,3 +548,9 @@ docker run -d -p 8001:8080 -v /data/vcare-test:/usr/local/tomcat/webapps -v /etc
 ## 服务器配置
 
 ![kafka config](../img/kafka/kafka_config.jpg)
+
+## spring bean 与 线程安全
+
+http://www.importnew.com/27440.html
+
+
