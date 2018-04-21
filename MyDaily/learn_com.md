@@ -553,4 +553,47 @@ docker run -d -p 8001:8080 -v /data/vcare-test:/usr/local/tomcat/webapps -v /etc
 
 http://www.importnew.com/27440.html
 
+## gradle 
+
+jcenter
+
+发布jar
+
+## 将一个流分成多个流
+
+kafka streams branch
+
+
+curl -v --basic -u proton:proton123 -k http://localhost:8080/api/v2/nodes/emq@127.0.0.1/clients
+
+## emqttd dashboard 
+
+https://github.com/emqtt/emq-dashboard/issues/215
+
+## Collection removeIf
+
+ConcurrentModificationException
+
+Collection 默认方法
+
+```
+default boolean removeIf(Predicate<? super E> filter) {
+        Objects.requireNonNull(filter);
+        boolean removed = false;
+        final Iterator<E> each = iterator();
+        while (each.hasNext()) {
+            if (filter.test(each.next())) {
+                each.remove();
+                removed = true;
+            }
+        }
+        return removed;
+    }
+```
+
+## Spliterator
+
+
+
+
 
