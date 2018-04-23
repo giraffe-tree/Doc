@@ -593,7 +593,20 @@ default boolean removeIf(Predicate<? super E> filter) {
 
 ## Spliterator
 
+https://segmentfault.com/q/1010000007087438
 
+stream 流迭代器
 
+## 二维数组
 
+```
+String[][] keys = new String[][]{
+            new String[]{"rt", "sn"},
+            new String[]{"bat", "sn"},
+            new String[]{"ht", "time", "sn"}
+    };
+String[] s = keys[1];
+System.out.println(ArrayUtils.toString(s));
+
+```
 
