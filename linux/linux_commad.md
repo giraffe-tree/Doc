@@ -215,7 +215,20 @@ yum list
 ```
 
 
+## 文件
 
+#### 文件夹 远程
+
+```
+scp -r /home/administrator/test/ root@192.168.1.100:/root/
+```
+
+#### 文件夹 创建
+
+```
+## 创建多级文件夹
+mkdir -p data/2018/april/
+```
 
 
 

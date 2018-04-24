@@ -610,3 +610,19 @@ System.out.println(ArrayUtils.toString(s));
 
 ```
 
+## kafka 集群连接不上 其他node
+
+```
+ WARN [Controller id=1, targetBrokerId=2] Connection to node 2 could not be established. Broker may not be available. (org.apache.kafka.clients.NetworkClient)
+```
+
+由于 node 2的```advertised.host.name```写错了.所以 zookeeper 连接上了,但是kafka broker 却搜索不到
+
+## Error Path:/config/brokers Error:KeeperErrorCode = NodeExists for /config/brokers
+
+2888,3888 端口未打开
+
+
+## 
+
+
