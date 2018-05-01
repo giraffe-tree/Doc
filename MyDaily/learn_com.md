@@ -548,3 +548,81 @@ docker run -d -p 8001:8080 -v /data/vcare-test:/usr/local/tomcat/webapps -v /etc
 ## 服务器配置
 
 ![kafka config](../img/kafka/kafka_config.jpg)
+
+## spring bean 与 线程安全
+
+http://www.importnew.com/27440.html
+
+## gradle 
+
+jcenter
+
+发布jar
+
+## 将一个流分成多个流
+
+kafka streams branch
+
+
+curl -v --basic -u proton:proton123 -k http://localhost:8080/api/v2/nodes/emq@127.0.0.1/clients
+
+## emqttd dashboard 
+
+https://github.com/emqtt/emq-dashboard/issues/215
+
+## Collection removeIf
+
+ConcurrentModificationException
+
+Collection 默认方法
+
+```
+default boolean removeIf(Predicate<? super E> filter) {
+        Objects.requireNonNull(filter);
+        boolean removed = false;
+        final Iterator<E> each = iterator();
+        while (each.hasNext()) {
+            if (filter.test(each.next())) {
+                each.remove();
+                removed = true;
+            }
+        }
+        return removed;
+    }
+```
+
+## Spliterator
+
+https://segmentfault.com/q/1010000007087438
+
+stream 流迭代器
+
+## 二维数组
+
+```
+String[][] keys = new String[][]{
+            new String[]{"rt", "sn"},
+            new String[]{"bat", "sn"},
+            new String[]{"ht", "time", "sn"}
+    };
+String[] s = keys[1];
+System.out.println(ArrayUtils.toString(s));
+
+```
+
+## kafka 集群连接不上 其他node
+
+```
+ WARN [Controller id=1, targetBrokerId=2] Connection to node 2 could not be established. Broker may not be available. (org.apache.kafka.clients.NetworkClient)
+```
+
+由于 node 2的```advertised.host.name```写错了.所以 zookeeper 连接上了,但是kafka broker 却搜索不到
+
+## Error Path:/config/brokers Error:KeeperErrorCode = NodeExists for /config/brokers
+
+2888,3888 端口未打开
+
+
+## 
+
+
