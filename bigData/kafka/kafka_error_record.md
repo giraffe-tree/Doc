@@ -65,5 +65,10 @@ mqtt 数据格式 转换成 kafka 数据格式出错
 
 http://orchome.com/482
 
+### replication factor 与 broker 数不匹配
+
+```
+Could not create internal topics: Found only 2 brokers,  but replication factor is 3. Decrease replication factor for internal topics via StreamsConfig parameter "replication.factor" or add more brokers to your cluster.
+```
 
 
