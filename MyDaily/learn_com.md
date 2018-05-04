@@ -623,6 +623,40 @@ System.out.println(ArrayUtils.toString(s));
 2888,3888 端口未打开
 
 
-## 
+## mkdir  
+
+多级目录
+
+mkdir -p data/2018/april/
+
+## vim 查找
+
+我们通常在vim下要查找字符串的时候， 都是输入 / 或者 ？  加 需要查找的字符串来进行搜索，比如想搜索 super 这个单词， 可以输入  /super  或者  ？super，  两者的区别是前者是从上往下搜索，后者是从下往上搜索。
+
+      那么如果我想搜索本行中某个单词，并且这个单词很长的时候， 手动输入该字符串是非常麻烦的， 当然可以使用模糊匹配(如* 或 ？)来做， 不过这样可能搜得到很多其他的，不完全匹配的字符串。
+
+      可以使用如下方式来实现快速查找：
+
+1， 最快的方式是让光标停留在想要查找的单词的任意一个字母上面， 然后输入Shift + *  ，即可快速选中该单词，并且可以通过 n  或  N 进行上一个或下一个的匹配。
+
+
+## mirror
+
+```
+<mirror>
+        <id>nexus-aliyun</id>
+        <mirrorOf>central</mirrorOf>
+        <name>Nexus aliyun</name>
+        <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+</mirror>
+```
+
+## shell exec
+
+https://www.cnblogs.com/yjf512/p/6492746.html
+
+exec是用新的进程去代替原先的进程，原先的进程就消失了。
+
+
 
 
