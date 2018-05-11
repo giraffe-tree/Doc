@@ -657,6 +657,83 @@ https://www.cnblogs.com/yjf512/p/6492746.html
 
 exec是用新的进程去代替原先的进程，原先的进程就消失了。
 
+## vim 显示行号
+
+```:set nu```
+
+```:set number```
+
+## 接口的静态方法
+
+接口的静态方法,不能继承
+
+https://www.zhihu.com/question/36734911
+
+## java 重载
+
+1. java语言中,重载除了要和原方法具有相同的简单名称之外,还要求必须有一个和原方法不同的特征签名.
+2. 特征签名就是一个方法中各个参数在常量池中的字段符号引用的集合,而且返回值并不会包含在特征签名中,即java中无法依靠返回值的不同来进行重载.
+3. 但是在class文件中,特征签名的范围更大一些, 两个方法拥有相同的名称和特征签名,但是返回值不同,也是可以共存在一个Class文件中的.
+
+## exception handler
+
+```
+
+@RestControllerAdvice
+public class ErrorHandler {
+
+    //参数缺失
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ReturnObject missingServletRequestParameter(MissingServletRequestParameterException ex) {
+        return ReturnObject.fail("param - " + ex.getParameterName() + " is missing");
+    }
+
+    //参数类型转换错误
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ReturnObject methodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex) {
+        return ReturnObject.fail("param - " + ex.getName() + " type error");
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ReturnObject httpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException ex) {
+        return ReturnObject.fail("http method error");
+    }
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public ReturnObject noHandlerFoundException(NoHandlerFoundException ex) {
+        String requestURL = ex.getRequestURL();
+        return ReturnObject.fail(requestURL + " - " + ex.getHttpMethod() + " not found");
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ReturnObject exceptionHandler() {
+        return ReturnObject.fail("server error -.-");
+    }
+
+}
+```
+
+## Spring Boot Remove Whitelabel Error Page
+
+```
+@RestController
+@RequestMapping("/error")
+public class CustomErrorController implements ErrorController {
+
+    @GetMapping
+    public ReturnObject getError() {
+        return ReturnObject.fail("你可能走到了一个死胡同 (╥╯^╰╥)");
+    }
+
+    @Override
+    public String getErrorPath() {
+        return "/error";
+    }
+}
+```
+
+
+
 
 
 
