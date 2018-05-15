@@ -18,5 +18,16 @@ http://erlang.org/doc/reference_manual/data_types.html
 - 输出可被外部调用的函数 ```-export([double/1]).```
 - 列表 ```[E1, E2 | R] = [1,2,3,4,5,6,7].```
 
+#### List
+
+List还支持查询式
+
+NewList = [Expression || GeneratorExp1, GeneratorExp2, ..., GeneratorExpN, Condition1, Condition2, ... ConditionM]
+
+```
+[{X,Y}||X<-[1,5],Y<-[6,7],(X+Y) rem 3 =:=0].
+```
+
+
 
 

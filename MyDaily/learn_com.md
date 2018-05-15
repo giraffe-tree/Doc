@@ -744,4 +744,16 @@ curl http://xxxxx -u user:password
 
 按大写的G 跳到最后一行。 然后按小写的字母o键，增加一行。
 
+### 磁盘占用
+
+```df -h```
+
+```df -hl```
+
+### 查找文件
+
+```
+find / -name emqtt_bench_pub 
+```
+
 
