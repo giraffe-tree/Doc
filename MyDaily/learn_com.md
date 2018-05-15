@@ -733,7 +733,15 @@ public class CustomErrorController implements ErrorController {
 ```
 
 
+### curl basic auth
+
+```
+curl http://xxxxx -u user:password
+```
 
 
+### vim 添加一行
+
+按大写的G 跳到最后一行。 然后按小写的字母o键，增加一行。
 
 
