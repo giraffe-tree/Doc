@@ -623,6 +623,137 @@ System.out.println(ArrayUtils.toString(s));
 2888,3888 端口未打开
 
 
-## 
+## mkdir  
+
+多级目录
+
+mkdir -p data/2018/april/
+
+## vim 查找
+
+我们通常在vim下要查找字符串的时候， 都是输入 / 或者 ？  加 需要查找的字符串来进行搜索，比如想搜索 super 这个单词， 可以输入  /super  或者  ？super，  两者的区别是前者是从上往下搜索，后者是从下往上搜索。
+
+      那么如果我想搜索本行中某个单词，并且这个单词很长的时候， 手动输入该字符串是非常麻烦的， 当然可以使用模糊匹配(如* 或 ？)来做， 不过这样可能搜得到很多其他的，不完全匹配的字符串。
+
+      可以使用如下方式来实现快速查找：
+
+1， 最快的方式是让光标停留在想要查找的单词的任意一个字母上面， 然后输入Shift + *  ，即可快速选中该单词，并且可以通过 n  或  N 进行上一个或下一个的匹配。
+
+
+## mirror
+
+```
+<mirror>
+        <id>nexus-aliyun</id>
+        <mirrorOf>central</mirrorOf>
+        <name>Nexus aliyun</name>
+        <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+</mirror>
+```
+
+## shell exec
+
+https://www.cnblogs.com/yjf512/p/6492746.html
+
+exec是用新的进程去代替原先的进程，原先的进程就消失了。
+
+## vim 显示行号
+
+```:set nu```
+
+```:set number```
+
+## 接口的静态方法
+
+接口的静态方法,不能继承
+
+https://www.zhihu.com/question/36734911
+
+## java 重载
+
+1. java语言中,重载除了要和原方法具有相同的简单名称之外,还要求必须有一个和原方法不同的特征签名.
+2. 特征签名就是一个方法中各个参数在常量池中的字段符号引用的集合,而且返回值并不会包含在特征签名中,即java中无法依靠返回值的不同来进行重载.
+3. 但是在class文件中,特征签名的范围更大一些, 两个方法拥有相同的名称和特征签名,但是返回值不同,也是可以共存在一个Class文件中的.
+
+## exception handler
+
+```
+
+@RestControllerAdvice
+public class ErrorHandler {
+
+    //参数缺失
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ReturnObject missingServletRequestParameter(MissingServletRequestParameterException ex) {
+        return ReturnObject.fail("param - " + ex.getParameterName() + " is missing");
+    }
+
+    //参数类型转换错误
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ReturnObject methodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex) {
+        return ReturnObject.fail("param - " + ex.getName() + " type error");
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ReturnObject httpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException ex) {
+        return ReturnObject.fail("http method error");
+    }
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public ReturnObject noHandlerFoundException(NoHandlerFoundException ex) {
+        String requestURL = ex.getRequestURL();
+        return ReturnObject.fail(requestURL + " - " + ex.getHttpMethod() + " not found");
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ReturnObject exceptionHandler() {
+        return ReturnObject.fail("server error -.-");
+    }
+
+}
+```
+
+## Spring Boot Remove Whitelabel Error Page
+
+```
+@RestController
+@RequestMapping("/error")
+public class CustomErrorController implements ErrorController {
+
+    @GetMapping
+    public ReturnObject getError() {
+        return ReturnObject.fail("你可能走到了一个死胡同 (╥╯^╰╥)");
+    }
+
+    @Override
+    public String getErrorPath() {
+        return "/error";
+    }
+}
+```
+
+
+### curl basic auth
+
+```
+curl http://xxxxx -u user:password
+```
+
+
+### vim 添加一行
+
+按大写的G 跳到最后一行。 然后按小写的字母o键，增加一行。
+
+### 磁盘占用
+
+```df -h```
+
+```df -hl```
+
+### 查找文件
+
+```
+find / -name emqtt_bench_pub 
+```
 
 
