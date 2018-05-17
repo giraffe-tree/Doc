@@ -756,4 +756,10 @@ curl http://xxxxx -u user:password
 find / -name emqtt_bench_pub 
 ```
 
+### javap
+
+```
+javap -verbose Hello
+```
+
 
