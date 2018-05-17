@@ -762,4 +762,50 @@ find / -name emqtt_bench_pub
 javap -verbose Hello
 ```
 
+### long++ int++
+
+```
+public long test1(long x){
+  return x++;
+}
+
+public long test1(long);
+  descriptor: (J)J
+  flags: ACC_PUBLIC
+  Code:
+    stack=6, locals=3, args_size=2
+       0: lload_1
+       1: dup2
+       2: lconst_1
+       3: ladd
+       4: lstore_1
+       5: lreturn
+    LineNumberTable:
+      line 23: 0
+
+```
+
+```
+public int test2(int x){
+      return x++;
+}
+
+public int test2(int);
+  descriptor: (I)I
+  flags: ACC_PUBLIC
+  Code:
+    stack=1, locals=2, args_size=2
+       0: iload_1
+       1: iinc          1, 1
+       4: ireturn
+    LineNumberTable:
+      line 27: 0
+
+```
+
+
+## 博客
+
+https://hexo.io/
+
 
