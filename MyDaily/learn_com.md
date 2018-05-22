@@ -808,4 +808,21 @@ public int test2(int);
 
 https://hexo.io/
 
+## 查看端口占用 port
+
+```lsof -i:80```
+
+```netstat -tunlp```
+
+## dokuwiki 
+
+```
+./lampp reloadapache
+
+```
+
+## 内联样式
+
+```
+<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://cdnjs.cloudflare.com ">
 
