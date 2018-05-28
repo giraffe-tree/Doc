@@ -851,5 +851,9 @@ spring.datasource.hikari.connection-timeout=30000
 spring.datasource.hikari.connection-test-query=SELECT 1
 ```
 
+### redis 删除指定前缀的key
 
+```
+./redis-cli KEYS "Device_3102*" | xargs ./redis-cli DEL
+```
 
