@@ -857,3 +857,13 @@ spring.datasource.hikari.connection-test-query=SELECT 1
 ./redis-cli KEYS "Device_3102*" | xargs ./redis-cli DEL
 ```
 
+## 集合类详解
+
+
+http://www.cnblogs.com/lighten/default.html?page=3
+
+## 关于CMS、G1垃圾回收器
+
+https://www.zhihu.com/question/37028283/answer/78008095
+
+
