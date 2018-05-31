@@ -49,4 +49,11 @@ read 深入理解java虚拟机
 	 ```javac -encoding utf-8 Test.java```
 
 6. 查看 javac 源码
+7. 编译器插件
+8. 从表及里学习jvm
+	
+	- https://www.douban.com/doulist/2545443/
+	- 自制编程语言
+
+
 
