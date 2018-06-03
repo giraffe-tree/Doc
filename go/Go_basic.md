@@ -8,5 +8,16 @@ Go 程序设计语言
 
 ### Go 是编译型语言
 
+```
+go run hello.go
+go build hello.go
+go fmt hello.go 
+```
+
+
+
+
+
+
 
 
