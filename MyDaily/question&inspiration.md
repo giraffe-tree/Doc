@@ -55,6 +55,19 @@ read 深入理解java虚拟机
 	- https://www.douban.com/doulist/2545443/
 	- 自制编程语言
 
+## 2018/06/01
+
+1. kotlin 
+
+	- hello world √
+	- spring boot √
+
+2. java 语法糖
+	
+	- 自动拆装箱
+	- 泛型
+	- switch String
+
 ## 2018/06/03
 
 1. 算法基础
@@ -70,6 +83,10 @@ read 深入理解java虚拟机
 5. java.lang包 不用导 
 6. 句柄 指针的指针
 
+## 2018/06/04
 
+1. kotlin koans
+
+	https://github.com/Kotlin/kotlin-koans
 
 
