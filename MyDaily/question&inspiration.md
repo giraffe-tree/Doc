@@ -90,3 +90,17 @@ read 深入理解java虚拟机
 	https://github.com/Kotlin/kotlin-koans
 	https://try.kotlinlang.org/#/Kotlin%20Koans/Introduction/Hello,%20world!/Task.kt
 
+## 2018/06/05
+
+1. kotlin 编译慢  √
+
+	org.gradle.daemon=true
+	kotlin.incremental=true 
+
+	https://droidyue.com/blog/2018/01/31/how-to-speed-up-kotlin-compilation/
+
+## 2018/06/06
+
+
+
+
