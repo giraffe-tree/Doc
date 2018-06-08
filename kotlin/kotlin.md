@@ -1,5 +1,7 @@
 # Kotlin
 
+1..1
+
 ## 参考
 
 https://try.kotlinlang.org/#/Kotlin%20Koans/Introduction/Java%20to%20Kotlin%20conversion/Task.kt
@@ -13,8 +15,17 @@ https://try.kotlinlang.org/#/Kotlin%20Koans/Introduction/Java%20to%20Kotlin%20co
 
 ![Apache Commons ArrayUtils 重载](https://github.com/giraffe-tree/Doc/blob/master/img/kotlin/ArrayUtilsOverload.png)
 
+对于这些方法,在kotlin中我们可以这样定义
 
+```
+fun indexOf(a: DoubleArray, b: Double, c: Int = 0, d: Double=1.0) {
+    // xxxx
+}
+```
 
+对于这些方法,我们可以使用指定默认值来减少函数的书写.
+
+### 
 
 
 

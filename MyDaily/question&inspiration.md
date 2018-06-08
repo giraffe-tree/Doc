@@ -107,5 +107,7 @@ read 深入理解java虚拟机
 
 1. kotlin 20小时
 
+	将对象和函数分开
 
+2. codewars 刷题
 
