@@ -890,3 +890,19 @@ docker run \
     -d --privileged \
     hwdsl2/ipsec-vpn-server
 ```
+
+## inteceptor 中返回 json
+
+```
+response.setContentType("application/json;charset=utf-8");
+RetObj returnObject = new RetObj("FAIL", "哈哈哈哈哈哈哈");
+response.getWriter().print(JSON.toJSONString(returnObject));
+return false;
+```
+
+## mysql 自增
+
+```
+AUTO_INCREMENT=10000
+```
+
