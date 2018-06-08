@@ -891,7 +891,7 @@ docker run \
     hwdsl2/ipsec-vpn-server
 ```
 
-## inteceptor 中返回 json
+## interceptor 中返回 json
 
 ```
 response.setContentType("application/json;charset=utf-8");
