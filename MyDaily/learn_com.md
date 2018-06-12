@@ -855,6 +855,8 @@ spring.datasource.hikari.connection-test-query=SELECT 1
 
 ```
 ./redis-cli KEYS "Device_3102*" | xargs ./redis-cli DEL
+redis-cli KEYS "Device_1" | xargs redis-cli get
+
 ```
 
 ## 集合类详解
@@ -879,6 +881,7 @@ docker run \
     -d --privileged \
     hwdsl2/ipsec-vpn-server
 ```
+
 ```
 docker run \
     --name ipsec3 \
@@ -905,4 +908,33 @@ return false;
 ```
 AUTO_INCREMENT=10000
 ```
+
+## 关于 redis-cli auth 成功 -a 失败
+
+```
+redis-cli -a "mypassword" KEYS "key*"
+```
+
+一直提示 ```(error) NOAUTH Authentication required.```
+
+但我确定我的密码是正确的, 直接 ```redis-cli``` 然后 ```auth "mypassword"``` 是可以操作的.
+
+我感觉我的操作都是正确的, 但不知道为什么验证失败.
+
+后来我在 stackoverflow 上找到一篇
+
+  - https://stackoverflow.com/questions/35745481/redis-cli-with-password
+
+它上面说的是密码中包含 ```$``` 会验证失败,可以修改密码去掉```$```,或者可以使用单引号.
+
+虽然我的密码中,并没有包含```$```,但我也去尝试了下,果然成功了.
+
+- 我使用的redis版本 3.0.7
+- 我的密码包含: ```%*-_!``` ,猜测可能是某个标点的问题
+
+## 批量删除
+
+https://www.cnblogs.com/DreamDrive/p/5772198.html
+
+
 

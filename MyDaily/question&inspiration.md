@@ -108,6 +108,20 @@ read 深入理解java虚拟机
 1. kotlin 20小时
 
 	将对象和函数分开
+	2 + 
 
 2. codewars 刷题
 
+## 2018/06/11
+
+1. redis 密码验证失败,可能原因排查  √
+	
+	密码加单引号解决
+
+2. mysql 事务是怎么实现的
+
+	https://www.cnblogs.com/songjy2116/p/7881294.html
+
+## 2018/06/12
+
+1. 
