@@ -130,4 +130,30 @@ read 深入理解java虚拟机
 
 	```listOf("args:",*args)```
 
+## 2018/06/13
+
+1. java8还提供了parallelStream()来启动并行流式处理，parallelStream()本质上基于java7的Fork-Join框架实现，其默认的线程数为宿主机的内核数
+
+2.
+
+## 2018/0614
+
+1. lambda 匿名函数的区别
+	
+	- 匿名类中 this代表类本身,而lambda中代表的是包含类
+	- 匿名类可以屏蔽包含类的变量,而lambda不能屏蔽,而且会报编译错误
+	- http://dig.cs.illinois.edu/papers/lambdaRefactoring.pdf
+
+2. lambda debug 困难
+
+3. 默认方法和多继承
+
+4. 二进制级兼容性, 源代码,函数行为
+
+5. 抽象接口,必须由接口继承
+
+6. 函数式接口只含有一个抽象方法,默认方法是非抽象方法
+
+
+
 
