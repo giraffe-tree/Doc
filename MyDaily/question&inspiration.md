@@ -131,3 +131,12 @@ read 深入理解java虚拟机
 	```listOf("args:",*args)```
 
 
+## 2018/06/14
+
+1. ForkJoinPool
+
+2. Java中普通lambda表达式和方法引用本质上有什么区别？
+
+	https://www.zhihu.com/question/51491241/answer/126232275
+
+3. https://stackoverflow.com/tags/scala/info
