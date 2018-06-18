@@ -936,5 +936,9 @@ redis-cli -a "mypassword" KEYS "key*"
 
 https://www.cnblogs.com/DreamDrive/p/5772198.html
 
+## 清除浏览器缓存
+
+Ctrl + F5
+
 
 
