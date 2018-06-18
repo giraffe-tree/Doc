@@ -138,6 +138,14 @@ read 深入理解java虚拟机
 
 ## 2018/06/14
 
+1. ForkJoinPool
+
+2. Java中普通lambda表达式和方法引用本质上有什么区别？
+
+	https://www.zhihu.com/question/51491241/answer/126232275
+
+3. https://stackoverflow.com/tags/scala/info
+
 1. lambda 匿名函数的区别
 	
 	- 匿名类中 this代表类本身,而lambda中代表的是包含类
@@ -153,6 +161,7 @@ read 深入理解java虚拟机
 5. 抽象接口,必须由接口继承
 
 6. 函数式接口只含有一个抽象方法,默认方法是非抽象方法
+
 
 
 ## 2018/06/15
@@ -187,15 +196,11 @@ read 深入理解java虚拟机
 	- 多线程的上下文切换
 	- 线程间的调度和切换的成本远远小于进程
 
-	
+## 2018/06/18
 
+1. transient 与序列化
 
-## 2018/06/14
+2. java 泛型数组,避免对象游离(利于垃圾回收)
 
-1. ForkJoinPool
+3. 
 
-2. Java中普通lambda表达式和方法引用本质上有什么区别？
-
-	https://www.zhihu.com/question/51491241/answer/126232275
-
-3. https://stackoverflow.com/tags/scala/info
