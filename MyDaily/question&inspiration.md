@@ -278,7 +278,14 @@ read 深入理解java虚拟机
 	https://www.jetbrains.com/help/idea/contract-annotations.html
 
 
-# 2018/06/20
+## 2018/06/20
+
+1. ```Class JavaLaunchHelper is implemented in both```
+
+	```idea.no.launcher=true```
+
+2. 
+
 
 
 

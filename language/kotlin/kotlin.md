@@ -155,4 +155,32 @@ class People : Eat {
 
 内部类使用 ```this@类名``` 来访问外部类
 
+### sealed 密封类
+
+```sealed class``` 隐含这个类是一个 open 类
+
+可以配合```when```使用
+
+### 构造函数
+
+```
+// 私有构造函数
+open class User private constructor(var name: String)
+
+// 构造函数重载
+open class Door {
+    constructor(name: String) : this(name, 12)
+    constructor(name: String, size: Int) {
+    }
+}
+```
+
+### 接口属性
+
+java 中的接口定义属性,默认是 ```public static final``` , 默认方法不能改变这个属性
+
+
+
+
+
 
