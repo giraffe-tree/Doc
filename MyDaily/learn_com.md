@@ -940,5 +940,17 @@ https://www.cnblogs.com/DreamDrive/p/5772198.html
 
 Ctrl + F5
 
+## -source 1.2 不支持 diamond 运算符
+
+```
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-compiler-plugin</artifactId>
+<configuration>
+    <source>1.8</source>
+    <target>1.8</target>
+</configuration>
+<plugin/>
+```
 
 
