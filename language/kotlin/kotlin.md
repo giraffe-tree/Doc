@@ -144,5 +144,15 @@ class People : Eat {
 1. kotlin 中没有包私有的可见性
 2. java中外部类能访问内部类的私有变量,而kotlin不行
 
+### 内部类/嵌套类
+
+对应关系
+
+|类别|java|kotlin|
+|:---:|:---:|:---:|
+|嵌套类|静态内部类 static class A|class A|
+|内部类|class A|inner class A|
+
+内部类使用 ```this@类名``` 来访问外部类
 
 

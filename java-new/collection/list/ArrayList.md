@@ -17,7 +17,7 @@ private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
 // 数组最大的长度,但某些虚拟机会在数组中保留一些头信息.
 // 如果尝试去分配更大的数组,可能会导致OutOfMemoryError,超出VM的数组限制
 private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
-// 不可序列化的数据数组
+// 不可序列化的数据数组,
 transient Object[] elementData;
 // 元素个数
 private int size;
