@@ -274,3 +274,16 @@ read 深入理解java虚拟机
 	
 
 
+
+## 2018/06/19 续
+
+1. @Contract(value="",pure=true)
+
+	https://zhuanlan.zhihu.com/p/24778947
+
+	https://www.jetbrains.com/help/idea/contract-annotations.html
+
+2. 
+
+
+
