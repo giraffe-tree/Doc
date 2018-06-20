@@ -202,5 +202,75 @@ read 深入理解java虚拟机
 
 2. java 泛型数组,避免对象游离(利于垃圾回收)
 
-3. 
+## 2018/06/19
+
+1. 静态内部类和内部类
+
+	反编译后:
+
+	```
+	class Test$NormalTest {
+	    Test$NormalTest(Test var1) {
+	        this.this$0 = var1;
+	    }
+	}
+	class Test$StaticTest {
+	    Test$StaticTest() {
+	    }
+	}
+	```
+
+2. java中的逆变与协变 covariant
+
+	```
+	List<? extends Number> list = new ArrayList<Number>();
+        list.add(new Integer(1)); //error
+	```
+
+	协变就是用一个窄类型替代宽类型
+	逆变则用宽类型覆盖窄类型。
+
+	故此处用```? super Number```
+
+	https://blog.csdn.net/u014717036/article/details/52234679
+
+3. Java OutOfMemoryError 
+
+	```int[] ints = new int[Integer.MAX_VALUE];```
+	```java -Xmx10M Test```
+
+4. alibaba 编码规约
+
+	插件下载
+
+5. ```MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;```
+
+6. 为什么 ArrayList 中使用```Object[]```存储元素,而不是使用泛型```E[]```
+	
+	https://stackoverflow.com/questions/25695011/why-does-arraylist-use-object-instead-of-e-internally
+
+	不能创建泛型数组
+
+
+	```
+		public class Apple<T> {
+	    int capacity;
+	    T[] ts;
+	    @SuppressWarnings(value = "unchecked")
+	    public Apple(Class<T> clazz, int capacity) {
+	        this.capacity = capacity;
+	        this.ts = (T[]) Array.newInstance(clazz, capacity);
+	    }
+	```
+
+7. 在jvm上实现 generics
+
+8. scala 的起源 
+
+	https://www.artima.com/scalazine/articles/origins_of_scala.html
+
+9. 泛型和协变的关系
+
+	
+
 
