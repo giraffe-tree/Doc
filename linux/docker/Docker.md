@@ -6,6 +6,16 @@ http://www.docker.org.cn/book/docker/docker-getting-started-14.html
 
 https://yq.aliyun.com/articles/63517
 
+## install
+
+https://docs.docker.com/install/linux/docker-ce/centos/#install-docker-ce
+
+### 启动
+
+```
+systemctl start docker
+```
+
 ## docker 命令
 
 ```

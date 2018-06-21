@@ -284,6 +284,15 @@ read 深入理解java虚拟机
 
 	```idea.no.launcher=true```
 
+
+## 2018/06/21
+
+1. mysql 正则 
+
+	```
+	SELECT * FROM report where algorithm regexp '\"xxxx\":[1-9]';
+	```
+
 2. 
 
 
