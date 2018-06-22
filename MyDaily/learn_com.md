@@ -953,4 +953,33 @@ Ctrl + F5
 <plugin/>
 ```
 
+## 自定义 vim 格式
+
+```~/.vimrc```
+
+```
+set nu
+syntax on
+set ts=4 
+set expandtab
+```
+
+## alias 命令别名
+
+```
+alias vi='vim'
+```
+
+## docker.sock
+
+https://stackoverflow.com/questions/35110146/can-anyone-explain-docker-sock
+
+简单的来讲,docker启动的子容器, 可以通过```docker.sock```来执行 docker 命令.
+
+更加深入地来讲, docker启动的子容器获得了更高的权限,需要注意使用.
+
+## vim 复制到系统剪贴板
+
+```+6yy```
+```p```
 

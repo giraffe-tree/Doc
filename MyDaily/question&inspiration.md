@@ -293,7 +293,15 @@ read 深入理解java虚拟机
 	SELECT * FROM report where algorithm regexp '\"xxxx\":[1-9]';
 	```
 
-2. 
+## 2018/06/22
+
+1. debian
+
+2. dry for docker 
+
+3. 
+
+
 
 
 
