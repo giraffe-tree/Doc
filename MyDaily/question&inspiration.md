@@ -299,9 +299,14 @@ read 深入理解java虚拟机
 
 2. dry for docker 
 
-3. 
+3. 为什么要直接 return 一个语句
 
+	- https://segmentfault.com/q/1010000008683475
+	- 会多执行2个指令
+	- i_store 弹出操作数栈栈顶元素,保存到局部变量表 
+	- i_load 加载局部变量表的元素到操作数栈栈顶
 
+4. 
 
 
 

@@ -983,3 +983,6 @@ https://stackoverflow.com/questions/35110146/can-anyone-explain-docker-sock
 ```+6yy```
 ```p```
 
+## java 加载变量
+
+当int取值-1~5采用iconst指令，取值-128~127采用bipush指令，取值-32768~32767采用sipush指令，取值-2147483648~2147483647采用 ldc 指令。
