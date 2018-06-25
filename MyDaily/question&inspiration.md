@@ -308,7 +308,17 @@ read 深入理解java虚拟机
 
 ## 2018/06/24
 
-1. 
+1. docker attach/events 能不能查看日志
+
+2. redis 主从配置 
+
+	mysql 的主从配置
+
+3. 
+
+
+
+
 
 
 
