@@ -314,8 +314,14 @@ read 深入理解java虚拟机
 
 	mysql 的主从配置
 
-3. 
+3. docker 隔离
 
+	- 进程隔离 namespace
+	- 文件系统隔离  mount 共享/从属/私有/不可绑定
+	- 网络隔离 network namespace
+	- 用户隔离 id
+	- 主机域名
+	- inter-Process communication 进程间通信- 信号量/消息队列/共享内存
 
 ## 2018.06.26
 
@@ -329,6 +335,26 @@ read 深入理解java虚拟机
 	- 单表 path 字段
 	- 两表 id,root_id,depth,is_leaf,node_id
 
+3. 用户id
 
+	```id -a```
 
+4. 消息队列
+
+	```
+	ipcmk -Q
+	ipcs -q
+	```
+
+## 2018.6.26
+
+1. pid,tgid,pgid,sid 的区别
+
+	https://www.cnblogs.com/hazir/p/linux_kernel_pid.html
+
+## 2018.6.27
+
+1. docker 数据备份/恢复
+
+2. 
 
