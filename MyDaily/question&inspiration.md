@@ -317,8 +317,17 @@ read 深入理解java虚拟机
 3. 
 
 
+## 2018.06.26
 
+1. SIGINT、SIGQUIT、 SIGTERM、SIGSTOP 区别
+	
+	https://blog.csdn.net/pmt123456/article/details/53544295
 
+2. 如何在关系型数据库中建立树状结构
+
+	- 单表 parent 字段
+	- 单表 path 字段
+	- 两表 id,root_id,depth,is_leaf,node_id
 
 
 

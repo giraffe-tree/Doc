@@ -986,3 +986,12 @@ https://stackoverflow.com/questions/35110146/can-anyone-explain-docker-sock
 ## java 加载变量
 
 当int取值-1~5采用iconst指令，取值-128~127采用bipush指令，取值-32768~32767采用sipush指令，取值-2147483648~2147483647采用 ldc 指令。
+
+## docker logs 
+
+```
+docker logs --since 6h30m --until 6h0m container_name
+docker logs --since "2018-06-10T01:30:00" --until "2018-06-10T09:30:00"  container_name | grep -i error
+``` 
+
+
