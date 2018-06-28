@@ -356,5 +356,26 @@ read 深入理解java虚拟机
 
 1. docker 数据备份/恢复
 
-2. 
+2. 分布式系统唯一ID生成方案
+	
+	- 数据库自增字段
+	- uuid
+	- 时间id,机器id,自增id
+
+3. 中文 string 的长度
+	
+
+## 2018.6.28
+
+1. mysql 表的限制
+
+	https://dev.mysql.com/doc/refman/5.7/en/general-tablespaces.html
+
+2. awesome-mysql
+
+	http://shlomi-noach.github.io/awesome-mysql/
+
+3. 
+
+
 
