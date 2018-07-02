@@ -373,14 +373,21 @@ read 深入理解java虚拟机
 
 2. awesome-mysql
 
-	http://shlomi-noach.github.io/awesome-mysql/
+	http://shlomi-noach.github.io/awesome-mysql/ 
 
+<<<<<<< HEAD
 
 ## 2018.7.1
 
 1. 如何模拟IP
 
+2. vim 括号自动补全
+
+	https://www.cnblogs.com/songdechiu/p/5844073.html
+	
+## 2018.7.2
 
 
 
+ 
 
