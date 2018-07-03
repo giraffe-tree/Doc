@@ -375,8 +375,6 @@ read 深入理解java虚拟机
 
 	http://shlomi-noach.github.io/awesome-mysql/ 
 
-<<<<<<< HEAD
-
 ## 2018.7.1
 
 1. 如何模拟IP
@@ -385,9 +383,17 @@ read 深入理解java虚拟机
 
 	https://www.cnblogs.com/songdechiu/p/5844073.html
 	
+
 ## 2018.7.2
 
+1. ASTQueryTranslatorFactory 作用
+	
+	为什么加载慢
 
+2. 两个 list 进行 join
 
- 
+ 	```
+	macList.stream().map(...).collect(Collectors.toMap(...));
+ 	```
+
 
