@@ -396,4 +396,24 @@ read 深入理解java虚拟机
 	macList.stream().map(...).collect(Collectors.toMap(...));
  	```
 
+## 2018.7.3
+
+1. believe in miracles
+
+
+## 2018.7.4
+
+1. You can't specify target table 'xxx' for update in FROM clause
+
+	- 不能先select出同一表中的某些值，再update这个表
+	- 使用中间表过渡
+	- https://blog.csdn.net/qq_29672495/article/details/72668008
+
+2. 镜像的占用少? √
+
+3. Nginx 高并发调优
+
+	https://www.cnblogs.com/shirly1981/p/5613955.html
+
+
 
