@@ -67,6 +67,14 @@ docker 默认开启OOM control,超出内存最大限额,进程就会收到oom信
 #### - 
 
 ```
+sudo docker build - < Dockerfile
+```
+
+#### url
 
 ```
+docker build github.com/creack/docker-firefox
+```
+
+### 
 
