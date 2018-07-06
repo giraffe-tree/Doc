@@ -377,19 +377,49 @@ read 深入理解java虚拟机
 
 ## 2018.7.1
 
-1. vim 括号自动补全
+1. 如何模拟IP
+
+2. vim 括号自动补全
 
 	https://www.cnblogs.com/songdechiu/p/5844073.html
 	
-2. vim 向左光标移到上一行末尾
+3. vim 向左光标移到上一行末尾
 
 	```set whichwrap+=<,>,[,]```
 
 
+## 2018.7.2
+
+1. ASTQueryTranslatorFactory 作用
+	
+	为什么加载慢
+
+2. 两个 list 进行 join
+
+ 	```
+	macList.stream().map(...).collect(Collectors.toMap(...));
+ 	```
+
+## 2018.7.3
+
+1. believe in miracles
 
 
+## 2018.7.4
+
+1. You can't specify target table 'xxx' for update in FROM clause
+
+	- 不能先select出同一表中的某些值，再update这个表
+	- 使用中间表过渡
+	- https://blog.csdn.net/qq_29672495/article/details/72668008
+
+2. 镜像的占用少? √
+
+3. Nginx 高并发调优
+
+	https://www.cnblogs.com/shirly1981/p/5613955.html
 
 
-
+## 2018.7.5
 
 
