@@ -1002,3 +1002,12 @@ List<String> collect = list.stream().sorted((v1, v2) -> {
         }).limit(1L).collect(Collectors.toList());
 ```
 
+## spring boot 2.0 test
+
+```
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Application.class)
+public class ReportTimeTest {
+}
+```
+

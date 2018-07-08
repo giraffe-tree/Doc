@@ -418,4 +418,22 @@ read 深入理解java虚拟机
 
 ## 2018.7.5
 
+## 2018.7.6
+
+1. ddos 如何防护
+
+2. 只有5.6之后的版本才能使用CURRENT_TIMESTAMP作为DATETIME的默认值。 
+
+	- ALTER TABLE t_user ADD update_time TTMESTAMP DEFAULT CURRENT_TIMESTAMP
+	- https://www.cnblogs.com/JiangLe/p/6956865.html
+	- explicit_defaults_for_timestamp
+
+## 2018.7.8
+
+1. thread 的可重入性
+
+	https://www.cnblogs.com/cielosun/p/6684775.html
+
+2. 
+
 
