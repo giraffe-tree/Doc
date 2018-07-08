@@ -383,6 +383,10 @@ read 深入理解java虚拟机
 
 	https://www.cnblogs.com/songdechiu/p/5844073.html
 	
+3. vim 向左光标移到上一行末尾
+
+	```set whichwrap+=<,>,[,]```
+
 
 ## 2018.7.2
 
