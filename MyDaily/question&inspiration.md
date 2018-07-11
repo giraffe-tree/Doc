@@ -1,4 +1,4 @@
-# question & inspiration
+	# question & inspiration
 
 ## 2018/05/28
 
@@ -439,6 +439,20 @@ read 深入理解java虚拟机
 	https://www.cnblogs.com/cielosun/p/6684775.html
 
 2. 
+
+## 2018.7.10
+
+1. ThreadPoolExecutor
+
+	https://blog.csdn.net/qq_25806863/article/details/71126867
+
+2. RejectedExecutionException
+
+	https://www.cnblogs.com/waytobestcoder/p/5323130.html
+
+3.  4种拒绝策略 AbortPolicy
+
+4. JVM初始分配的内存由-Xms指定，默认是物理内存的1/64；JVM最大分配的内存由-Xmx指 定，默认是物理内存的1/4。默认空余堆内存小于 40%时，JVM就会增大堆直到-Xmx的最大限制
 
 
 ## 2018.7.9
