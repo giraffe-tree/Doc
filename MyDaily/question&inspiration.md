@@ -438,7 +438,10 @@ read 深入理解java虚拟机
 
 	https://www.cnblogs.com/cielosun/p/6684775.html
 
-2. 
+## 2018.7.9
+
+1. mysql 备份
+
 
 ## 2018.7.10
 
@@ -454,7 +457,25 @@ read 深入理解java虚拟机
 
 4. JVM初始分配的内存由-Xms指定，默认是物理内存的1/64；JVM最大分配的内存由-Xmx指 定，默认是物理内存的1/4。默认空余堆内存小于 40%时，JVM就会增大堆直到-Xmx的最大限制
 
+## 2018.7.11
 
-## 2018.7.9
+1. kafka streams 运行, 却不消费数据
 
-1. mysql 备份
+	消费者崩溃
+	https://www.cnblogs.com/rainwang/p/7496147.html
+
+2. SSH,SSL,SASL等协议
+
+
+3. mysql中日期类型DATETIME和TIMESTAMP的区别
+
+	- https://blog.csdn.net/u013399093/article/details/52294619
+	- DATETIME的日期范围是1001——9999年，TIMESTAMP的时间范围是1970——2038年。
+	- DATETIME使用8字节的存储空间，TIMESTAMP的存储空间为4字节
+
+4. http://matt33.com/archives/
+
+	
+
+
+

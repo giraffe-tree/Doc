@@ -1040,7 +1040,13 @@ timestamp 和 datetime 均适用
 
 ## Dispatcher has no subscribers 
 
+```
 org.springframework.messaging.MessageDeliveryException: Dispatcher has no subscribers for channel
+```
+
+## 一个消费者使用多个线程
+
+  按照规则, 一个消费者只使用一个线程. 不过我们可以把我们的处理逻辑封装在自己的对象中,然后使用线程池来处理.
 
 
 
