@@ -1,4 +1,4 @@
-# question & inspiration
+	# question & inspiration
 
 ## 2018/05/28
 
@@ -422,9 +422,46 @@ read 深入理解java虚拟机
 
 ## 2018.7.5
 
- 
+## 2018.7.6
+
+1. ddos 如何防护
+
+2. 只有5.6之后的版本才能使用CURRENT_TIMESTAMP作为DATETIME的默认值。 
+
+	- ALTER TABLE t_user ADD update_time TTMESTAMP DEFAULT CURRENT_TIMESTAMP
+	- https://www.cnblogs.com/JiangLe/p/6956865.html
+	- explicit_defaults_for_timestamp
+
+## 2018.7.8
+
+1. thread 的可重入性
+
+	https://www.cnblogs.com/cielosun/p/6684775.html
 
 
+## 2018.7.9
 
+1. mysql 备份
+
+
+## 2018.7.10
+
+1. ThreadPoolExecutor
+
+	https://blog.csdn.net/qq_25806863/article/details/71126867
+
+2. RejectedExecutionException
+
+	https://www.cnblogs.com/waytobestcoder/p/5323130.html
+
+3.  4种拒绝策略 AbortPolicy
+
+4. JVM初始分配的内存由-Xms指定，默认是物理内存的1/64；JVM最大分配的内存由-Xmx指 定，默认是物理内存的1/4。默认空余堆内存小于 40%时，JVM就会增大堆直到-Xmx的最大限制
+
+## 2018.7.12.5
+
+1. 确保单个线程对共享的volatile变量执行写入操作,那么就可以安全地在这些共享的volatile变量上执行"读取-修改-写入".
+
+	volatile关键字保证了变量的可见性,即其他线程能看到最新的值
 
 

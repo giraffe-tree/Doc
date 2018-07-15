@@ -1002,3 +1002,45 @@ List<String> collect = list.stream().sorted((v1, v2) -> {
         }).limit(1L).collect(Collectors.toList());
 ```
 
+## spring boot 2.0 test
+
+```
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Application.class)
+public class ReportTimeTest {
+}
+```
+
+## Mysql 最大显示宽度
+
+M表示最大显示宽度, 建表若设置了zerofill(0填充), 会在数字前面补充0.
+
+> tinyint(M), M默认为4; 
+> SMALLINT(M), M默认为6;
+> MEDIUMINT(M), M默认为9;
+> INT(M),M默认为11;
+> BIGINT(M),M默认为20.
+
+## msyql 计算时间差
+
+timestamp 和 datetime 均适用
+
+  ```SELECT TIMESTAMPDIFF(MONTH,starttime,endtime);```
+
+  FRAC_SECOND。表示间隔是毫秒
+  SECOND。秒
+  MINUTE。分钟
+  HOUR。小时
+  DAY。天
+  WEEK。星期
+  MONTH。月
+  QUARTER。季度
+  YEAR。年
+
+
+## Dispatcher has no subscribers 
+
+org.springframework.messaging.MessageDeliveryException: Dispatcher has no subscribers for channel
+
+
+
