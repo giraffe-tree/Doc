@@ -1058,4 +1058,8 @@ org.springframework.messaging.MessageDeliveryException: Dispatcher has no subscr
 
 返回结果为空,则不会存在缓存中.
 
+## volatile
 
+确保单个线程对共享的volatile变量执行写入操作,那么就可以安全地在这些共享的volatile变量上执行"读取-修改-写入".
+
+  volatile关键字保证了变量的可见性,即其他线程能看到最新的值

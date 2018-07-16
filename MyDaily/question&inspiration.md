@@ -438,6 +438,10 @@ read 深入理解java虚拟机
 
 	https://www.cnblogs.com/cielosun/p/6684775.html
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b84f65e07cdada83e83a1bdcfd4e23166f48c952
 ## 2018.7.9
 
 1. mysql 备份
@@ -456,6 +460,7 @@ read 深入理解java虚拟机
 3.  4种拒绝策略 AbortPolicy
 
 4. JVM初始分配的内存由-Xms指定，默认是物理内存的1/64；JVM最大分配的内存由-Xmx指 定，默认是物理内存的1/4。默认空余堆内存小于 40%时，JVM就会增大堆直到-Xmx的最大限制
+
 
 ## 2018.7.11
 
@@ -504,6 +509,12 @@ read 深入理解java虚拟机
 
 	quasar
 	vert.x
+
+
+
+## 2018.7.16
+
+1. @Cacheable  value 值的意义
 
 
 
