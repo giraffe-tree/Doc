@@ -475,7 +475,36 @@ read 深入理解java虚拟机
 
 4. http://matt33.com/archives/
 
-	
+	kafka 解析
+
+## 2018.7.12
+
+1. entering strict repository configuration mode!
+
+2. is not eligible for getting processed by
+
+3. spring boot 2.0 redis 配置
+
+4.  缓存结果与事务
+
+5. hibernate 使用数据库默认值
+
+## 2018.7.13
+
+1.kafka 接入 Flink
+
+	ksql 和 flink 的比较
+	https://www.cnblogs.com/huxi2b/p/9154130.html
+
+2. kylin 
+
+3. 数据库通过设计冗余字段来加快检索, 但很多冗余字段会降低表的扩展性
+
+4. 协程 与 异步无阻塞
+
+	quasar
+	vert.x
+
 
 
 

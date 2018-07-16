@@ -1049,4 +1049,13 @@ org.springframework.messaging.MessageDeliveryException: Dispatcher has no subscr
   按照规则, 一个消费者只使用一个线程. 不过我们可以把我们的处理逻辑封装在自己的对象中,然后使用线程池来处理.
 
 
+## redis cache namespace
+
+```
+ @Cacheable(value = "Hospital", key = "'Hospital:Session:user_'+#userId+':client_'+#client"
+            , unless = "#result==null")
+```
+
+返回结果为空,则不会存在缓存中.
+
 
