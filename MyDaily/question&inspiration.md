@@ -534,3 +534,6 @@ read 深入理解java虚拟机
 
 6. 多线程/事务
 
+	ExecutorService 执行失败回滚/放入队列
+
+
