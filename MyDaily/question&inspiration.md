@@ -438,10 +438,6 @@ read 深入理解java虚拟机
 
 	https://www.cnblogs.com/cielosun/p/6684775.html
 
-<<<<<<< HEAD
-=======
-
->>>>>>> b84f65e07cdada83e83a1bdcfd4e23166f48c952
 ## 2018.7.9
 
 1. mysql 备份
@@ -501,6 +497,9 @@ read 深入理解java虚拟机
 	ksql 和 flink 的比较
 	https://www.cnblogs.com/huxi2b/p/9154130.html
 
+	ksql 入门
+	https://mp.weixin.qq.com/s?__biz=MzA3MjQ1NDYzOQ==&mid=2660384703&idx=1&sn=80f47463b8bc107c59991d7282786280&chksm=8478873fb30f0e297b6df551d07bb50bea4c8e58023e6a0b330ba8c9417d1a220f07d11112af&mpshare=1&scene=23&srcid=0716NnZA0f9z2ULV0g9VZNiS#rd
+
 2. kylin 
 
 3. 数据库通过设计冗余字段来加快检索, 但很多冗余字段会降低表的扩展性
@@ -511,11 +510,27 @@ read 深入理解java虚拟机
 	vert.x
 
 
-
 ## 2018.7.16
 
 1. @Cacheable  value 值的意义
 
+2. redis 为单个键值对设置过期时间
 
+3. redis 缓存事务回滚
 
+## 2018.7.17
+
+1. redis 列表缓存
+
+2. redis set TTL
+
+3. 阿里云教学直播 
+	
+	https://yq.aliyun.com/webinar
+
+4. 了解 mysql workbench 表的option
+
+5. 表情使用 utfmb4 来进行存储，注意它与 utf-8 编码的区别
+
+6. 多线程/事务
 
