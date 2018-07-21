@@ -536,4 +536,39 @@ read 深入理解java虚拟机
 
 	ExecutorService 执行失败回滚/放入队列
 
+7. spring jpa 自定义查询
+
+	https://blog.csdn.net/zhu562002124/article/details/75097682
+
+## 2018.7.19
+
+1. hibernate 复杂sql
+
+2. redis CacheEvict 清除多个缓存
+		
+	https://www.cnblogs.com/ClassNotFoundException/p/6523274.html
+	```@caching()```
+	好像做不到很方便的删除,能不能做个插件regex查询所有键,然后删除
+
+
+3. HTTP OPTIONS 作用
+
+4. mysql 根据时间段 分组
+
+	```
+	SELECT date_format(created_time,'%Y-%m') as created_date,count(*) FROM user
+	group by date_format(created_time,'%Y-%m')
+	```
+
+## 2018.7.20
+
+1. 权限认证使用interceptor
+
+2. spring 读取文件
+
+3. request.getRemoteHost()
+
+
+
+
 

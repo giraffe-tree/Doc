@@ -1063,3 +1063,8 @@ org.springframework.messaging.MessageDeliveryException: Dispatcher has no subscr
 确保单个线程对共享的volatile变量执行写入操作,那么就可以安全地在这些共享的volatile变量上执行"读取-修改-写入".
 
   volatile关键字保证了变量的可见性,即其他线程能看到最新的值
+
+## 集线器、交换机、路由器、网关的作用与区别
+
+https://blog.csdn.net/shujun19941226/article/details/50903384
+
