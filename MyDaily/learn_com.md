@@ -1068,3 +1068,8 @@ org.springframework.messaging.MessageDeliveryException: Dispatcher has no subscr
 
 https://blog.csdn.net/shujun19941226/article/details/50903384
 
+## mysql 8.0
+
+https://blog.csdn.net/ycxzuoxin/article/details/80908447
+
+
