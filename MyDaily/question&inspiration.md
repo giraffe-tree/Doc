@@ -578,7 +578,32 @@ read 深入理解java虚拟机
 	https://blog.csdn.net/m0_37739193/article/details/72638074
 
 
+## 2018.7.23
+
+1. mysql lock
+	
+	```
+	LOCK TABLES `version_docker` WRITE;
+	UNLOCK TABLES;
+	```
 
 
+2. 鸟哥的Linux私房菜 - 服务器架设篇(第三版)
+
+	 http://cn.linux.vbird.org/linux_server/
+
+
+3. man xxx 查看手册
+
+4. 找一台新的主机 查看 docker 的配置
+
+5. docker busybox 
+
+	BusyBox 是一个集成了三百多个最常用Linux命令和工具的软件。
+
+6. /etc/resolv.conf
+
+	DNS客户机配置文件
+	nameserver    //定义DNS服务器的IP地址
 
 
