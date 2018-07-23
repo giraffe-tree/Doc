@@ -438,7 +438,6 @@ read 深入理解java虚拟机
 
 	https://www.cnblogs.com/cielosun/p/6684775.html
 
-
 ## 2018.7.9
 
 1. mysql 备份
@@ -458,12 +457,125 @@ read 深入理解java虚拟机
 
 4. JVM初始分配的内存由-Xms指定，默认是物理内存的1/64；JVM最大分配的内存由-Xmx指 定，默认是物理内存的1/4。默认空余堆内存小于 40%时，JVM就会增大堆直到-Xmx的最大限制
 
-## 2018.7.12.5
 
-1. 确保单个线程对共享的volatile变量执行写入操作,那么就可以安全地在这些共享的volatile变量上执行"读取-修改-写入".
+## 2018.7.11
 
-	volatile关键字保证了变量的可见性,即其他线程能看到最新的值
+1. kafka streams 运行, 却不消费数据
 
+	消费者崩溃
+	https://www.cnblogs.com/rainwang/p/7496147.html
+
+2. SSH,SSL,SASL等协议
+
+
+3. mysql中日期类型DATETIME和TIMESTAMP的区别
+
+	- https://blog.csdn.net/u013399093/article/details/52294619
+	- DATETIME的日期范围是1001——9999年，TIMESTAMP的时间范围是1970——2038年。
+	- DATETIME使用8字节的存储空间，TIMESTAMP的存储空间为4字节
+
+4. http://matt33.com/archives/
+
+	kafka 解析
+
+## 2018.7.12
+
+1. entering strict repository configuration mode!
+
+2. is not eligible for getting processed by
+
+3. spring boot 2.0 redis 配置
+
+4.  缓存结果与事务
+
+5. hibernate 使用数据库默认值
+
+## 2018.7.13
+
+1.kafka 接入 Flink
+
+	ksql 和 flink 的比较
+	https://www.cnblogs.com/huxi2b/p/9154130.html
+
+	ksql 入门
+	https://mp.weixin.qq.com/s?__biz=MzA3MjQ1NDYzOQ==&mid=2660384703&idx=1&sn=80f47463b8bc107c59991d7282786280&chksm=8478873fb30f0e297b6df551d07bb50bea4c8e58023e6a0b330ba8c9417d1a220f07d11112af&mpshare=1&scene=23&srcid=0716NnZA0f9z2ULV0g9VZNiS#rd
+
+2. kylin 
+
+3. 数据库通过设计冗余字段来加快检索, 但很多冗余字段会降低表的扩展性
+
+4. 协程 与 异步无阻塞
+
+	quasar
+	vert.x
+
+
+## 2018.7.16
+
+1. @Cacheable  value 值的意义
+
+2. redis 为单个键值对设置过期时间
+
+3. redis 缓存事务回滚
+
+## 2018.7.17
+
+1. redis 列表缓存
+
+2. redis set TTL
+
+3. 阿里云教学直播 
+	
+	https://yq.aliyun.com/webinar
+
+4. 了解 mysql workbench 表的option
+
+5. 表情使用 utfmb4 来进行存储，注意它与 utf-8 编码的区别
+
+6. 多线程/事务
+
+	ExecutorService 执行失败回滚/放入队列
+
+7. spring jpa 自定义查询
+
+	https://blog.csdn.net/zhu562002124/article/details/75097682
+
+## 2018.7.19
+
+1. hibernate 复杂sql
+
+2. redis CacheEvict 清除多个缓存
+		
+	https://www.cnblogs.com/ClassNotFoundException/p/6523274.html
+	```@caching()```
+	好像做不到很方便的删除,能不能做个插件regex查询所有键,然后删除
+
+
+3. HTTP OPTIONS 作用
+
+4. mysql 根据时间段 分组
+
+	```
+	SELECT date_format(created_time,'%Y-%m') as created_date,count(*) FROM user
+	group by date_format(created_time,'%Y-%m')
+	```
+
+## 2018.7.20
+
+1. 权限认证使用interceptor
+
+2. spring 读取文件
+
+3. request.getRemoteHost()
+
+
+## 2018.7.22
+
+1. tar.gz 是什么
+
+2. Linux中profile、bashrc、bash_profile之间的区别和联系
+
+	https://blog.csdn.net/m0_37739193/article/details/72638074
 
 
 

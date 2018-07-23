@@ -814,6 +814,10 @@ https://hexo.io/
 
 ```netstat -tunlp```
 
+## 查看 pid 的工作目录
+
+```lsof -p pid```
+
 ## dokuwiki 
 
 ```
@@ -1040,7 +1044,56 @@ timestamp 和 datetime 均适用
 
 ## Dispatcher has no subscribers 
 
+```
 org.springframework.messaging.MessageDeliveryException: Dispatcher has no subscribers for channel
+```
 
+## 一个消费者使用多个线程
+
+  按照规则, 一个消费者只使用一个线程. 不过我们可以把我们的处理逻辑封装在自己的对象中,然后使用线程池来处理.
+
+
+## redis cache namespace
+
+```
+ @Cacheable(value = "Hospital", key = "'Hospital:Session:user_'+#userId+':client_'+#client"
+            , unless = "#result==null")
+```
+
+返回结果为空,则不会存在缓存中.
+
+## volatile
+
+确保单个线程对共享的volatile变量执行写入操作,那么就可以安全地在这些共享的volatile变量上执行"读取-修改-写入".
+
+  volatile关键字保证了变量的可见性,即其他线程能看到最新的值
+
+## 集线器、交换机、路由器、网关的作用与区别
+
+https://blog.csdn.net/shujun19941226/article/details/50903384
+
+## nginx
+
+https://www.cnblogs.com/jimisun/p/8057156.html
+
+```
+/usr/local/nginx/sbin/nginx -t
+/usr/local/nginx/sbin/nginx -s reload
+cp /usr/local/nginx/sbin/nginx /usr/local/sbin/nginx
+```
+
+## zookeeper
+
+Cannot open channel to 1 at election address /0.0.0.0:3888
+
+## docker restart
+
+```
+sudo systemctl start docker
+```
+
+## mysql 8.0
+
+https://blog.csdn.net/ycxzuoxin/article/details/80908447
 
 
