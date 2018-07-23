@@ -569,6 +569,11 @@ read 深入理解java虚拟机
 3. request.getRemoteHost()
 
 
+## 2018.7.22
 
+1. tar.gz 是什么
 
+2. Linux中profile、bashrc、bash_profile之间的区别和联系
+
+	https://blog.csdn.net/m0_37739193/article/details/72638074
 

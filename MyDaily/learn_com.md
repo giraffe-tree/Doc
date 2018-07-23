@@ -814,6 +814,10 @@ https://hexo.io/
 
 ```netstat -tunlp```
 
+## 查看 pid 的工作目录
+
+```lsof -p pid```
+
 ## dokuwiki 
 
 ```
@@ -1067,4 +1071,25 @@ org.springframework.messaging.MessageDeliveryException: Dispatcher has no subscr
 ## 集线器、交换机、路由器、网关的作用与区别
 
 https://blog.csdn.net/shujun19941226/article/details/50903384
+
+## nginx
+
+https://www.cnblogs.com/jimisun/p/8057156.html
+
+```
+/usr/local/nginx/sbin/nginx -t
+/usr/local/nginx/sbin/nginx -s reload
+cp /usr/local/nginx/sbin/nginx /usr/local/sbin/nginx
+```
+
+## zookeeper
+
+Cannot open channel to 1 at election address /0.0.0.0:3888
+
+## docker restart
+
+```
+sudo systemctl start docker
+```
+
 
