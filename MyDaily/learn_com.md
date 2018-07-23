@@ -1096,4 +1096,15 @@ sudo systemctl start docker
 
 https://blog.csdn.net/ycxzuoxin/article/details/80908447
 
+## iptables
+
+```
+iptables -L -n
+```
+
+## ping
+
+ICMP 协议
+
+TCP、UDP属于传输层，ICMP 、IP属于网络层协议，而ICMP主要用于在主机与路由器之间传递控制信息
 
