@@ -1092,4 +1092,8 @@ Cannot open channel to 1 at election address /0.0.0.0:3888
 sudo systemctl start docker
 ```
 
+## mysql 8.0
+
+https://blog.csdn.net/ycxzuoxin/article/details/80908447
+
 
