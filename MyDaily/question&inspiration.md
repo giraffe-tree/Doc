@@ -607,3 +607,14 @@ read 深入理解java虚拟机
 	nameserver    //定义DNS服务器的IP地址
 
 
+## 2018.7.23.5
+
+1. confd 远程修改配置文件
+
+2. what is etcd?
+
+
+
+
+
+ 
