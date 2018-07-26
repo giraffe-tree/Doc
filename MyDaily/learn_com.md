@@ -1108,3 +1108,10 @@ ICMP 协议
 
 TCP、UDP属于传输层，ICMP 、IP属于网络层协议，而ICMP主要用于在主机与路由器之间传递控制信息
 
+## git 本地覆盖远程
+
+```
+git fetch origin
+git merge -s ours origin/master
+```
+
