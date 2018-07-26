@@ -607,3 +607,24 @@ read 深入理解java虚拟机
 	nameserver    //定义DNS服务器的IP地址
 
 
+## 2018.7.23.5
+
+1. confd 远程修改配置文件
+
+2. what is etcd?
+
+## 2018.7.25.5
+
+1. mac 层 mac 地址和网关是什么关系?
+
+2. ARP 协议和网关
+
+3. 局域网内可以使用本地的地址 mac 进行沟通
+
+4. 路由表 , 路由表 OSPF , BGP
+
+5. ```yum makecache```
+
+
+
+ 
