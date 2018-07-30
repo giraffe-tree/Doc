@@ -645,6 +645,12 @@ read 深入理解java虚拟机
 
 1. default,static 接口的继承与实现 -> todo:文章
 
+2. 静态类和内部类的区别
+
+3. annotation aliasfor 获取不到
+
+	https://www.jianshu.com/p/f43a01513a79
+	```AccessAuth accessAuth2 = AnnotationUtils.getAnnotation(accessAuth, AccessAuth.class);```
 
 
 
