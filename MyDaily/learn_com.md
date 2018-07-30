@@ -1115,3 +1115,24 @@ git fetch origin
 git merge -s ours origin/master
 ```
 
+## nginx 反向代理后ip读取不出
+
+```
+proxy_set_header Host $host;
+proxy_set_header X-Real-IP $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+```
+
+## 连上 vpn 之后,连接mysql未断开
+
+查看 mysql 服务器 ,连接数过多.
+
+尝试 kill 所有没有关闭的连接后,使用正常.
+
+
+
+
+
+
+
+
