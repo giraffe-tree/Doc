@@ -1136,7 +1136,23 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 多个 requestBody 
 
 
+## mysql int 字段长度
 
+占用字节:
+
+1. tinyint   1 字节
+2. smallint  2 字节
+3. mediumint 3 字节
+4. int       4 字节
+5. bigint    8 字节
+
+## mysql duration/fetch time
+
+Fetch time - measures how long transferring fetched results take, which has nothing to do with query execution. I would not consider it as sql query debugging/optimization option since fetch time depends on network connection, which itself does not have anything to do with query optimization. If fetch time is bottleneck then more likely there's some networking problem.
+
+Note: fetch time may vary on each query execution.
+
+Duration time - is the time that query needs to be executed. You should try to minimize it when optimizing performance of sql query.
 
 
 
