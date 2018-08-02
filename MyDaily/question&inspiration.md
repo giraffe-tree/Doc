@@ -652,7 +652,21 @@ read 深入理解java虚拟机
 	https://www.jianshu.com/p/f43a01513a79
 	```AccessAuth accessAuth2 = AnnotationUtils.getAnnotation(accessAuth, AccessAuth.class);```
 
+## 2018.7.31
+
+1. enum 类 使用 equals 和 == 的结果都是一样的
+
+2. 数据库查询出的列表是null,还是一个空的list
+
+## 2018.8.1
+
+1. spring 不传null值
+
+	spring.jackson.serialization-inclusion=NON_NULL
+
+2. 
 
 
 
- 
+
+

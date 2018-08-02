@@ -1129,7 +1129,11 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 
 尝试 kill 所有没有关闭的连接后,使用正常.
 
+## requestBody 嵌套验证
 
+在需要验证的参数上加 ```@Valid```
+
+多个 requestBody 
 
 
 
