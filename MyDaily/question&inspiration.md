@@ -664,8 +664,13 @@ read 深入理解java虚拟机
 
 	spring.jackson.serialization-inclusion=NON_NULL
 
-2. 
+## 2018.8.2
 
+1. JSESSIONID 什么意思
+
+2. group by 效率怎么样?
+
+3. java stream 中使用 stream 会有什么问题?
 
 
 

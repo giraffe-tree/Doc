@@ -1155,4 +1155,7 @@ Note: fetch time may vary on each query execution.
 Duration time - is the time that query needs to be executed. You should try to minimize it when optimizing performance of sql query.
 
 
+## Arrays.stream()
+
+数组 stream
 
