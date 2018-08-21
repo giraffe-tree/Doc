@@ -473,7 +473,8 @@ read 深入理解java虚拟机
 	- https://blog.csdn.net/u013399093/article/details/52294619
 	- DATETIME的日期范围是1001——9999年，TIMESTAMP的时间范围是1970——2038年。
 	- DATETIME使用8字节的存储空间，TIMESTAMP的存储空间为4字节
-
+	- datetime 5字节
+	
 4. http://matt33.com/archives/
 
 	kafka 解析
@@ -531,6 +532,8 @@ read 深入理解java虚拟机
 4. 了解 mysql workbench 表的option
 
 5. 表情使用 utfmb4 来进行存储，注意它与 utf-8 编码的区别
+
+	utf8mb4是utf8的超集，emoji表情以及部分不常见汉字在utf8下会表现为乱码，故需要升级至utf8mb4。
 
 6. 多线程/事务
 
@@ -684,6 +687,18 @@ read 深入理解java虚拟机
 3. 超越数有什么用?
 
 4. 圆 和 直线是什么关系
+
+## 2018.8.10
+
+1. 通过设计冗余字段, 来加快查询
+
+2. stream 中 map(Integer::toString)
+
+## 2018.8.20
+
+1. Specified key was too long; max key length is 767 bytes
+
+
 
 
 

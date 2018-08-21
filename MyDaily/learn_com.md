@@ -1159,3 +1159,47 @@ Duration time - is the time that query needs to be executed. You should try to m
 
 数组 stream
 
+## 缓存预热
+
+减少数据库负担
+
+## 数据库如何实现 事务加1
+
+redis 好像可以实现
+
+
+## redis 
+
+存储列表,使用 list 
+
+## mysql 字符串索引
+
+事情的起因是线上日志发现的mysql慢查询。100万数据量的标准，联合查询全部走索引的情况下，尽然要600多毫秒。很不解，但是将索引列由varchar(50)型改为bigint型后，数据提升了30倍。究其原因就索引树上搜索时要进行大量的比较操作，而字符串的比较比整数的比较耗时的多。
+
+所以建议一般情况下不要在字符串列建立索引，如果非要使用字符串索引，可以采用以下两种方法
+
+1.只是用字符串的最左边n个字符建立索引，推荐n<=10;比如index left(address,8),但是需要知道前缀索引不能在order by中使用，也不能用在索引覆盖上。
+
+2.对字符串使用hash方法将字符串转化为整数，address_key=hashToInt(address)，对address_key建立索引，查询时可以用如下查询where address_key = hashToInt(‘beijing,china’) and address = ‘beijing,china’
+
+## 索引长度过长
+
+Specified key was too long; max key length is 767 bytes
+
+https://stackoverflow.com/questions/1814532/1071-specified-key-was-too-long-max-key-length-is-767-bytes
+
+mysql 5.6 中限定了最大 767个字节, 而由于字符集 utfmb4 的单个字符字节数最大为4, 故索引最大为 191个字符(767/4).
+
+mysql 5.7 及以后, 将这个限制提高到了 3072 个字节
+
+## 自定义 request param
+
+通常我们会将 前端传进来的参数封装在一个对象中, 而对象的命名我们一般使用驼峰命名法, 但我们很难在一个对象中自定义所要接受的参数
+
+HandlerMethodArgumentResolver 
+
+https://stackoverflow.com/questions/8986593/how-to-customize-parameter-names-when-binding-spring-mvc-command-objects
+
+@datetimeformat
+@PageableDefault(sort = "id") Pageable pageable
+
