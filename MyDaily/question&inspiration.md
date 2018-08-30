@@ -553,6 +553,11 @@ read 深入理解java虚拟机
 	```@caching()```
 	好像做不到很方便的删除,能不能做个插件regex查询所有键,然后删除
 
+```java
+@Caching(evict = {
+            @CacheEvict(value="cacheName",key="#info.id+'_baojia'",beforeInvocation=true),
+            @CacheEvict(value="cacheName2",key="#info.id+'_fenlei'",beforeInvocation=true) })
+```
 
 3. HTTP OPTIONS 作用
 
@@ -699,6 +704,8 @@ read 深入理解java虚拟机
 1. Specified key was too long; max key length is 767 bytes
 
 
+## 2018.8.29
 
+1. 阿里redis开发规范 https://yq.aliyun.com/articles/531067
 
 

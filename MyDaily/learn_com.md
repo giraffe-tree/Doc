@@ -1203,3 +1203,10 @@ https://stackoverflow.com/questions/8986593/how-to-customize-parameter-names-whe
 @datetimeformat
 @PageableDefault(sort = "id") Pageable pageable
 
+## grep 短杠
+
+```
+grep -- "---"
+```
+
+
