@@ -708,4 +708,17 @@ read 深入理解java虚拟机
 
 1. 阿里redis开发规范 https://yq.aliyun.com/articles/531067
 
+## 2018.9.5
 
+1. spring boot http nio 线程池如何分配
+
+2. org.springframework.cache.support.NullValue  能否改成 ```{}```
+
+3. cache redis transactionAware 
+
+4. 方法级别的cache
+	
+	https://my.oschina.net/wnjustdoit/blog/644311
+
+	重写 RedisCacheManager
+	 https://www.cnblogs.com/nyvi/p/8613065.html
