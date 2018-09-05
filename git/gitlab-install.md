@@ -41,3 +41,10 @@ docker run \
     --volume /mnt/sda1/gitlab/data:/var/opt/gitlab \
     beginor/gitlab-ce:10.4.3-ce.0
 ```
+
+关于更改端口, 迁移 gitlab
+
+https://stackoverflow.com/questions/19335444/how-do-i-assign-a-port-mapping-to-an-existing-docker-container
+
+
+
