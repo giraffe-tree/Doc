@@ -719,6 +719,30 @@ read 深入理解java虚拟机
 4. 方法级别的cache
 	
 	https://my.oschina.net/wnjustdoit/blog/644311
-
+	设置有效时间和自动刷新缓存
+	https://www.jianshu.com/p/e53c1b60c6e1
 	重写 RedisCacheManager
 	 https://www.cnblogs.com/nyvi/p/8613065.html
+
+
+## 2018.9.6
+
+1. null 对象如何缓存
+
+2. traceroute
+
+3. import static 静态引入
+
+## 2018.9.7
+
+1. hprof 文件
+	
+	检查内存泄漏
+
+2. jvisualvm 的使用
+
+
+
+
+
+

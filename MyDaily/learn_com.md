@@ -1104,7 +1104,7 @@ iptables -L -n
 
 ## ping
 
-ICMP 协议
+ICMP 协议 ping traceroute
 
 TCP、UDP属于传输层，ICMP 、IP属于网络层协议，而ICMP主要用于在主机与路由器之间传递控制信息
 
@@ -1204,9 +1204,13 @@ https://stackoverflow.com/questions/8986593/how-to-customize-parameter-names-whe
 @PageableDefault(sort = "id") Pageable pageable
 
 ## grep 短杠
-
 ```
 grep -- "---"
 ```
 
+## tracert
+
+traceroute
+
+主要通过 icmp 的错误码进行工作, 简单的来讲欺骗服务器.
 
