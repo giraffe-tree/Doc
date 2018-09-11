@@ -703,6 +703,7 @@ read 深入理解java虚拟机
 
 1. Specified key was too long; max key length is 767 bytes
 
+	mysql 索引字段那过长
 
 ## 2018.8.29
 
@@ -731,7 +732,13 @@ read 深入理解java虚拟机
 
 2. traceroute
 
+	欺骗服务器, 达到获取所有路径信息
+
 3. import static 静态引入
+
+	如: import static ...Math.*
+	就可以直接使用 cos(), sin() 这些函数了
+	但要注意的是会污染命名空间, 需要谨慎使用.
 
 ## 2018.9.7
 
@@ -742,7 +749,21 @@ read 深入理解java虚拟机
 2. jvisualvm 的使用
 
 
+## 2018.9.10
 
+1. hikari - Thread starvation or clock leap detected
 
+2. git tag 如何使用
 
+## 2018.9.11
+
+1. 如何检查 hibernate 已经使用事务
+
+2. idea debug 命令 解释
+
+3. 127.0.0.1 
+
+4. KeyValueRepository redis 使用
+
+5. pouch 运维 docker 容器
 

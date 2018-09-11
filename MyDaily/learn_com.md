@@ -1214,3 +1214,28 @@ traceroute
 
 主要通过 icmp 的错误码进行工作, 简单的来讲欺骗服务器.
 
+## http header
+
+不区分大小写
+
+## javax.annotation.meta.When not found
+
+https://stackoverflow.com/questions/11104667/java-compilation-error-using-findbugs-com-sun-tools-javac-code-symbolcompletio
+
+findbugs 插件需要以下依赖:
+
+```
+<dependency>
+    <groupId>com.google.code.findbugs</groupId>
+    <artifactId>jsr305</artifactId>
+    <version>3.0.2</version>
+</dependency>
+```
+
+## grep 正则 或
+
+```
+tar --help | grep -- -E "-z|-x|-v-|-f"
+```
+
+
