@@ -4,6 +4,10 @@
 
 从 nginx 下载, 到模块安装
 
+## 关于为什么不使用 ngx_http_upstream_module
+
+
+
 ## 使用版本
 
 ```sh
@@ -168,5 +172,7 @@ server {
 2018/09/11 19:46:44 [error] 18107#0: recv() failed (104: Connection reset by peer)
 2018/09/11 19:46:51 [error] 18107#0: enable check peer: 127.0.0.1:8081 
 ```
+
+
 
 

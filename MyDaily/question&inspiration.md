@@ -758,12 +758,23 @@ read 深入理解java虚拟机
 ## 2018.9.11
 
 1. 如何检查 hibernate 已经使用事务
+	
+	spring 事务如何实现
 
 2. idea debug 命令 解释
 
-3. 127.0.0.1 
+3. 127.0.0.1 到底是什么
 
 4. KeyValueRepository redis 使用
 
 5. pouch 运维 docker 容器
+
+## 2018.9.12
+
+1. ddl, dml
+
+2. Docker ADD vs VOLUME
+	
+	https://stackoverflow.com/questions/27735706/docker-add-vs-volume
+
 
