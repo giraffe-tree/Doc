@@ -764,14 +764,22 @@ read 深入理解java虚拟机
 2. idea debug 命令 解释
 
 3. 127.0.0.1 到底是什么
+	
+	127.0.0.1 是绑定在 loopback 接口上的地址
 
 4. KeyValueRepository redis 使用
+	
+	其实就是 redisRepository 使用
 
 5. pouch 运维 docker 容器
 
 ## 2018.9.12
 
 1. ddl, dml
+
+	- DDL（data definition language）数据库定义语言: 在创建表的时候用到的一些sql，比如说：CREATE、ALTER、DROP等
+	- DML（data manipulation language）数据操纵语言：增删改查
+	- DCL（Data Control Language）数据库控制语言：用来设置或更改数据库用户或角色权限的语句，包括（grant,deny,revoke等）语句
 
 2. Docker ADD vs VOLUME
 	
