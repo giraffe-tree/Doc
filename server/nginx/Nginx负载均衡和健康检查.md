@@ -6,7 +6,7 @@
 
 ## 关于为什么不使用 ngx_http_upstream_module
 
-
+测试过 ngx_http_upstream_module 这个模块, 在应用稳定的情况下做做负载均衡还可以. 但一旦某一服务出现异常, 异常的发现和服务重启之后的恢复都比较缓慢.
 
 ## 使用版本
 
