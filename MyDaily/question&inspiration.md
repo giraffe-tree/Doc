@@ -785,4 +785,14 @@ read 深入理解java虚拟机
 	
 	https://stackoverflow.com/questions/27735706/docker-add-vs-volume
 
+## 2018.9.16
+
+1. CIDR
+
+2. MTU mac 头部14字节, 尾部4字节 -- 一共 1518字节
+
+3. NAT(network address transfer) 将私有 ip 送上internet
+
+4. DHCP
+
 
