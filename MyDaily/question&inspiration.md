@@ -801,4 +801,8 @@ read 深入理解java虚拟机
 
 2. 100.64.0.0 Shared Address Space	保留地址,私有ip
 
+3. dns文件 /etc/resolv.conf
+
+	特权端口文件: /etc/services
+
 
