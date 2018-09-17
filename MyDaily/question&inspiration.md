@@ -799,6 +799,6 @@ read 深入理解java虚拟机
 
 1. wireshark 网络分析就这么简单
 
-2. 100.64.0.0 Shared Address Space	保留地址
+2. 100.64.0.0 Shared Address Space	保留地址,私有ip
 
 
