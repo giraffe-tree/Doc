@@ -785,6 +785,7 @@ read 深入理解java虚拟机
 	
 	https://stackoverflow.com/questions/27735706/docker-add-vs-volume
 
+<<<<<<< HEAD
 ## 2018.9.13
 
 1. jpa stream
@@ -820,6 +821,24 @@ read 深入理解java虚拟机
 2. redis 16 个db
 
 
+## 2018.9.16
 
+1. CIDR
+
+2. MTU mac 头部14字节, 尾部4字节 -- 一共 1518字节
+
+3. NAT(network address transfer) 将私有 ip 送上internet
+
+4. DHCP
+
+## 2018.9.17
+
+1. wireshark 网络分析就这么简单
+
+2. 100.64.0.0 Shared Address Space	保留地址,私有ip
+
+3. dns文件 /etc/resolv.conf
+
+	特权端口文件: /etc/services
 
 
