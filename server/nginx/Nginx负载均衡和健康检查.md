@@ -6,7 +6,7 @@
 
 ## 关于为什么不使用 ngx_http_upstream_module
 
-
+测试过 ngx_http_upstream_module 这个模块, 在应用稳定的情况下做做负载均衡还可以. 但一旦某一服务出现异常, 异常的发现和服务重启之后的恢复都比较缓慢.
 
 ## 使用版本
 
@@ -35,9 +35,9 @@ tar -zxvf nginx-1.14.0.tar.gz
 
 ```sh
 └── opt
-	└── nginx
-	    ├── nginx-1.14.0
-	    └── nginx-1.14.0.tar.gz
+    └── nginx
+        ├── nginx-1.14.0
+        └── nginx-1.14.0.tar.gz
 ```
 
 ### 下载 nginx-upstream-fair
@@ -66,7 +66,9 @@ rm master.zip
 还是在 nginx-1.14.0 文件夹下
 
 ```sh
-patch -p1 < ./nginx_upstream_check_module-master/upstream_fair.patch
+cd nginx_upstream_check_module-master
+patch -p1 < ../nginx_upstream_check_module-master/upstream_fair.patch
+cd ..
 patch -p1 < ./nginx_upstream_check_module-master/check_1.12.1+.patch
 ```
 
@@ -81,8 +83,8 @@ Perhaps you used the wrong -p or --strip option?
 The text leading up to this was:
 --------------------------
 |diff -burN nginx-1.14.0.orig/src/http/modules/ngx_http_upstream_hash_module.c nginx-1.14.0/src/http/modules/ngx_http_upstream_hash_module.c
-|--- nginx-1.14.0.orig/src/http/modules/ngx_http_upstream_hash_module.c	2018-06-28 21:30:48.891580738 +0000
-|+++ nginx-1.14.0/src/http/modules/ngx_http_upstream_hash_module.c	2018-06-28 21:40:41.801180483 +0000
+|--- nginx-1.14.0.orig/src/http/modules/ngx_http_upstream_hash_module.c 2018-06-28 21:30:48.891580738 +0000
+|+++ nginx-1.14.0/src/http/modules/ngx_http_upstream_hash_module.c  2018-06-28 21:40:41.801180483 +0000
 ```
 
 没有仔细研究过 nginx , 但使用 ```check_1.12.1+.patch```的时候, 成功了
@@ -136,8 +138,8 @@ upstream backend {
     server 127.0.0.1:8081;
     server 127.0.0.1:8082;
     check interval=3000 rise=2 fall=5 timeout=1000 type=http;
-	check_http_send "GET /status.html HTTP/1.1\r\nHost: 127.0.0.1\r\n\r\n";
-	check_http_expect_alive http_2xx http_3xx ;
+    check_http_send "GET /status.html HTTP/1.1\r\nHost: 127.0.0.1\r\n\r\n";
+    check_http_expect_alive http_2xx http_3xx ;
 }
 
 server {

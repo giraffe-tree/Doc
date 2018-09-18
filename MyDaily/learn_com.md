@@ -1238,4 +1238,28 @@ findbugs 插件需要以下依赖:
 tar --help | grep -- -E "-z|-x|-v-|-f"
 ```
 
+## jpa stream
+
+org.springframework.dao.InvalidDataAccessApiUsageException: You're trying to execute a streaming query method without a surrounding transaction that keeps the connection open so that the Stream can actually be consumed. Make sure the code consuming the stream uses @Transactional or any other way of declaring a (read-only) transaction.
+
+
+## spring-data-jpa-2.0.9.RELEASE.jar
+
+SimpleJpaRepository
+
+```
+  @Transactional
+  public <S extends T> List<S> saveAll(Iterable<S> entities) {
+
+    Assert.notNull(entities, "The given Iterable of entities not be null!");
+
+    List<S> result = new ArrayList<S>();
+
+    for (S entity : entities) {
+      result.add(save(entity));
+    }
+
+    return result;
+  }
+```
 

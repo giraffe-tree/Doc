@@ -785,4 +785,41 @@ read 深入理解java虚拟机
 	
 	https://stackoverflow.com/questions/27735706/docker-add-vs-volume
 
+## 2018.9.13
+
+1. jpa stream
+
+	http://knes1.github.io/blog/2015/2015-10-19-streaming-mysql-results-using-java8-streams-and-spring-data.html
+
+2. spring 自动做了 url 加解码的工作
+
+3. one stream -> two stream
+
+4. jpa 异步查询
+
+	https://docs.spring.io/spring-data/jpa/docs/2.0.10.RELEASE/reference/html/#repositories.query-async
+
+5. slf4j 和 logback 等 关系
+
+6. JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+
+7. docker build 指定 Dockerfile
+
+	```docker build -t project:1.1 -f Dockerfile-dev .```
+
+8. spring-data-jpa-2.0.9
+
+	saveall
+
+## 2018.9.14
+
+1. springboot 快速开发配置指南
+
+	docker
+
+2. redis 16 个db
+
+
+
+
 
