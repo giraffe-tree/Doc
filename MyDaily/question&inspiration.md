@@ -846,3 +846,14 @@ read 深入理解java虚拟机
 1. ```godoc -http=:8888```
 
 	只想说..这也太6了吧
+
+## 2018.9.21
+
+1. mysql 浮点数
+
+	如 ```float(7,4)```
+
+2. jpa底层 对 date 类型做了什么操作?
+
+	转成 sql.timestamp
+
