@@ -878,3 +878,13 @@ read 深入理解java虚拟机
 3. 图床工具 picgo
 
 	https://github.com/Molunerfinn/PicGo
+	好像还不如直接传到 OSS ...
+
+## 2018.9.27
+
+1. 编写文档 https://docsify.js.org
+
+2. 让机器学习去找算法 
+
+
+
