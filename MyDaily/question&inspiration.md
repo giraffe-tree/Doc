@@ -886,5 +886,7 @@ read 深入理解java虚拟机
 
 2. 让机器学习去找算法 
 
+4. tidb 兼容 mysql 
 
+5. ansible 配置管理工具
 
