@@ -900,4 +900,16 @@ read 深入理解java虚拟机
 
 ## 2018.10.8
 
-1. 
+1. tensorflow for go 
+
+	https://blog.csdn.net/qiansg123/article/details/80129848
+
+2. want 
+	
+	- bilibili 微积分的本质
+	- 深度学习 ppt
+	- https://www.slideshare.net/tw_dsconf/ss-62245351?qid=108adce3-2c3d-4758-a830-95d0a57e46bc&v=&b=&from_search=3
+
+3. 感觉 csp 模式, 很适合 deep learning 中向前传递函数/值
+
+
