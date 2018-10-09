@@ -909,6 +909,8 @@ read 深入理解java虚拟机
 	- bilibili 微积分的本质
 	- 深度学习 ppt
 	- https://www.slideshare.net/tw_dsconf/ss-62245351?qid=108adce3-2c3d-4758-a830-95d0a57e46bc&v=&b=&from_search=3
+	- 配合...
+	- https://blog.csdn.net/qq_32690999/article/details/78904546#%E8%AE%AD%E7%BB%83%E9%9B%86%E4%B8%8A%E6%95%88%E6%9E%9C%E5%A5%BD%E7%9A%84%E5%9F%BA%E7%A1%80%E4%B8%8A%E6%B5%8B%E8%AF%95%E9%9B%86%E4%B8%8A%E6%95%88%E6%9E%9C%E5%B7%AE
 
 3. 感觉 csp 模式, 很适合 deep learning 中向前传递函数/值
 
