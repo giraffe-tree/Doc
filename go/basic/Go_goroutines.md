@@ -51,6 +51,14 @@ Goroutine其实就是前面GreenThread系列解决方案的一种演进和实现
 
 Go通过Goroutine的调度解决了CPU利用率的问题。但遇到其他的瓶颈资源如何处理？比如带锁的共享资源，比如数据库连接等。互联网在线应用场景下，如果每个请求都扔到一个Goroutine里，当资源出现瓶颈的时候，会导致大量的Goroutine阻塞，最后用户请求超时。这时候就需要用Goroutine池来进行控流，同时问题又来了：池子里设置多少个Goroutine合适？
 
+### Actor
+
+### Actor & Goroutine
+
+```
+Don’t communicate by sharing memory, share memory by communicating
+不要通过共享内存进行通信，通过通信共享内存
+```
 
 
 
