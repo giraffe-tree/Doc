@@ -69,5 +69,27 @@ OO 语言最重要的三个方面分别是：封装，继承和多态，在 Go �
 
 Go 更倾向于其他的方式，在诸多比较合适的范式中，有个被称作 Communicating Sequential Processes（顺序通信处理）（CSP, C. Hoare 发明的）还有一个叫做 message passing-model（消息传递）（已经运用在了其他语言中，比如 Erlang）。
 
+## defer
+
+defer仅在函数返回时才会执行，在循环的结尾或其他一些有限范围的代码内不会执行。
+
+## new & make
+
+- 切片、映射和通道，使用make
+- 数组、结构体和所有的值类型，使用new 
+
+## slice
+
+在第4.9小节，我们已经知道，切片实际是一个指向潜在数组的指针。我们常常需要把切片作为一个参数传递给函数是因为：实际就是传递一个指向变量的指针，在函数内可以改变这个变量，而不是传递数据的拷贝。
+
+因此应该这样做：
+
+ ```  func findBiggest( listOfNumbers []int ) int {}```
+
+而不是：
+
+   ```func findBiggest( listOfNumbers *[]int ) int {}```
+
+当切片作为参数传递时，切记不要解引用切片。
 
 
