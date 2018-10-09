@@ -912,4 +912,15 @@ read 深入理解java虚拟机
 
 3. 感觉 csp 模式, 很适合 deep learning 中向前传递函数/值
 
+4. Keras:基于Python的深度学习库
+
+	- 用户友好：Keras是为人类而不是天顶星人设计的API。
+	- 中文文档
+	- https://keras-cn.readthedocs.io/en/latest/
+	- 简易和快速的原型设计（keras具有高度模块化，极简，和可扩充特性）
+	- 支持CNN和RNN，或二者的结合
+	- 无缝CPU和GPU切换
+
+
+
 
