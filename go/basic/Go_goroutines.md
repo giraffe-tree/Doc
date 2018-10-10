@@ -60,5 +60,19 @@ Don’t communicate by sharing memory, share memory by communicating
 不要通过共享内存进行通信，通过通信共享内存
 ```
 
+### Goroutine or lock
+
+使用锁的情景：
+
+- 访问共享数据结构中的缓存信息
+- 保存应用程序上下文和状态信息数据
+
+使用通道的情景：
+
+- 与异步操作的结果进行交互
+- 分发任务
+- 传递数据所有权
+
+
 
 
