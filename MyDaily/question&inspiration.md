@@ -937,6 +937,21 @@ read 深入理解java虚拟机
 
 3. 圆 和 直线是什么关系
 
-4. test
+4. 感觉 golang 中的 chan 很适合做深度学习
+
+5. 以字典做base, 做阅读理解?
+
+6. 以机器学习来帮助人们学习/记忆?
+
+7. 人的记忆, 或者说理解一样东西, 需要一个长时间的 `处理`? ,过了一段时间才能理解它
+
+8. git  回退
+	
+	git reset --hard/soft
+	git revert HEAD^3  有提交记录
+
+9. git dog 
+
+	https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs
 
 
