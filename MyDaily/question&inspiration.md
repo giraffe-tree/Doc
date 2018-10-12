@@ -954,4 +954,25 @@ read 深入理解java虚拟机
 
 	https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs
 
+## 2018.10.12
+
+1. 在写代码/看文章时, 你的手会做出一些无意识的操作?
+
+2. git 代码恢复
+
+	- git reset --hard 之后, add 过的文件可以通过 ``` git fsck --lost-found```找到
+	- 但是没有add 过的文件就真的找不到了
+	- 参考:(关于git reset --hard这个命令的惨痛教训)[https://www.cnblogs.com/hope-markup/p/6683522.html]
+
+3. 张成空间是包含这组向量的最小子空间
+
+4. 自建神经元?
+	
+	类似于人体细胞的分化/分裂
+
+
+
+
+
+
 
