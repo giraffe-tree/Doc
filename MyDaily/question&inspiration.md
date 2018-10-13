@@ -948,10 +948,15 @@ read 深入理解java虚拟机
 8. git  回退
 	
 	git reset --hard/soft
-	git revert HEAD^3  有提交记录
 
-9. git dog 
 
-	https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs
+## 2018.10.11
+
+1. 李宏毅 DL/ML 
+
+	- http://speech.ee.ntu.edu.tw/~tlkagk/talk.html
+	- https://www.bilibili.com/video/av9770302
+	- https://www.youtube.com/channel/UC2ggjtuuWvxrHHHiaDH1dlQ/playlists
+
 
 
