@@ -1,4 +1,4 @@
-	# question & inspiration
+# question & inspiration
 
 ## 2018/05/28
 
@@ -397,7 +397,7 @@ read 深入理解java虚拟机
 2. 两个 list 进行 join
 
  	```
-	macList.stream().map(...).collect(Collectors.toMap(...));
+​	macList.stream().map(...).collect(Collectors.toMap(...));
  	```
 
 ## 2018.7.3
@@ -497,7 +497,7 @@ read 深入理解java虚拟机
 
 	ksql 和 flink 的比较
 	https://www.cnblogs.com/huxi2b/p/9154130.html
-
+	
 	ksql 入门
 	https://mp.weixin.qq.com/s?__biz=MzA3MjQ1NDYzOQ==&mid=2660384703&idx=1&sn=80f47463b8bc107c59991d7282786280&chksm=8478873fb30f0e297b6df551d07bb50bea4c8e58023e6a0b330ba8c9417d1a220f07d11112af&mpshare=1&scene=23&srcid=0716NnZA0f9z2ULV0g9VZNiS#rd
 
@@ -548,7 +548,7 @@ read 深入理解java虚拟机
 1. hibernate 复杂sql
 
 2. redis CacheEvict 清除多个缓存
-		
+	​	
 	https://www.cnblogs.com/ClassNotFoundException/p/6523274.html
 	```@caching()```
 	好像做不到很方便的删除,能不能做个插件regex查询所有键,然后删除
@@ -975,9 +975,15 @@ read 深入理解java虚拟机
 	
 	类似于人体细胞的分化/分裂
 
+## 2018.10.13
+
+1. 神经元像元素一样被重组, 再次组成一个网络/生命
 
 
 
+## 2018.10.14
+
+1. 
 
 
 
