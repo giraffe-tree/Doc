@@ -997,3 +997,8 @@ read 深入理解java虚拟机
 	- 经过以上步骤, 基本在mac 上跑通, 但在另外一台 win7 上还遇到了一些问题
 	- 
 
+3. 在 win10上 安装了最新 18.1 的 pipenv, 结果出现了一大堆问题
+
+	 - https://github.com/pypa/pipenv/issues/2924
+	 - 好像2中 win7 的问题, 也是因为这里的bug
+
