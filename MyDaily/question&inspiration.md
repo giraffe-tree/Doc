@@ -981,9 +981,19 @@ read 深入理解java虚拟机
 
 
 
-## 2018.10.14
+## 2018.10.15
 
-1. 
+1. java 虚方法
+	
+	- 实现面向对象语言多态性的
 
-
+2. 安装 python, pipenv,想运行 ```https://github.com/eriklindernoren/ML-From-Scratch``` 中的demo
+	
+	- 遇到了以下问题
+	- 环境依赖错误,同```https://github.com/eriklindernoren/ML-From-Scratch/issues/45```
+	- pipenv 使用, 环境, 依赖
+	- pip 安装过慢, ```read time out```异常, 换源```https://www.cnblogs.com/sunnydou/p/5801760.html```
+	- matplotlib 错误, solve:```https://stackoverflow.com/questions/21784641/installation-issue-with-matplotlib-python```
+	- 经过以上步骤, 基本在mac 上跑通, 但在另外一台 win7 上还遇到了一些问题
+	- 
 
