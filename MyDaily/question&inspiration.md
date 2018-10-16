@@ -1006,8 +1006,14 @@ read 深入理解java虚拟机
          python -m ensurepip
          python -m pip install --upgrade pip
          python -m pip install --upgrade pip==18.0```
-         ```
      - 最后吐槽一句, 作为一个第一天使用 pipenv 的新手来说, 真的算不上一次很好的体验.
 
+
+## 2018.10.16
+
+1. 关于在Git中, 是否要上传 Pipfile.lock
+	
+	- https://github.com/pypa/pipenv/issues/598
+	- 虽然开发者们最后认为应该上传```Pipfile.lock```, 但我自己感觉还是为了平台的无关性, 不上传比较好, 为了避免出现一些奇怪的问题.
 
 
