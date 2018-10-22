@@ -156,7 +156,9 @@ b: (Const): /job:localhost/replica:0/task:0/device:GPU:0
 另外提供一个程序, 用于检查 gpu 是否能够使用
 
 ```
+from tensorflow.python.client import device_lib
 
+print(device_lib.list_local_devices())
 ```
 
 输出如下:
@@ -181,6 +183,7 @@ locality {
 incarnation: 5806263935802981584
 physical_device_desc: "device: 0, name: GeForce GTX 1060 5GB, pci bus id: 00009:00.0, compute capability: 6.1"
 ]
+
 ```
 
 
