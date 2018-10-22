@@ -52,7 +52,6 @@ incarnation: 293956486851505770
 ```
 
 发现并没有成功, 检查了下版本, 我下载了默认的 cuda10.0, 看tensorflow的文档, 感觉可能是 cuda10.0 不支持, 就换回了 cuda9.0
-​	
 	- 我这边直接下载的 9.0, 并没有下载新的 9.2, 怕不兼容
 	- 下载地址如下: 
 	- https://developer.nvidia.com/cuda-90-download-archive?target_os=Windows&target_arch=x86_64&target_version=10
@@ -155,7 +154,7 @@ b: (Const): /job:localhost/replica:0/task:0/device:GPU:0
 
 另外提供一个程序, 用于检查 gpu 是否能够使用
 
-```
+```python
 from tensorflow.python.client import device_lib
 
 print(device_lib.list_local_devices())
