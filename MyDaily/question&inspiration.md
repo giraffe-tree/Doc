@@ -1000,13 +1000,13 @@ read 深入理解java虚拟机
 3. 在 win10上 安装了最新 18.1 的 pipenv, 结果出现了一大堆问题
 
     - https://github.com/pypa/pipenv/issues/2924
-     - 好像2中 win7 的问题, 也是因为这里的bug
-     - 然后 pip 使用时, 出现了```ModuleNotFoundError: No module named 'pip'```的问题
-     - ```
+    - 好像2中 win7 的问题, 也是因为这里的bug
+    - 然后 pip 使用时, 出现了```ModuleNotFoundError: No module named 'pip'```的问题
+    - ```
          python -m ensurepip
          python -m pip install --upgrade pip
          python -m pip install --upgrade pip==18.0```
-     - 最后吐槽一句, 作为一个第一天使用 pipenv 的新手来说, 真的算不上一次很好的体验.
+    - 最后吐槽一句, 作为一个第一天使用 pipenv 的新手来说, 真的算不上一次很好的体验.
 
 
 ## 2018.10.16
