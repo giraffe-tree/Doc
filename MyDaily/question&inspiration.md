@@ -1027,3 +1027,13 @@ read 深入理解java虚拟机
 	- https://stackoverflow.com/questions/19412204/how-do-you-make-the-radio-button-text-to-be-clickable-too
 	- https://stackoverflow.com/questions/6293588/how-to-create-an-html-checkbox-with-a-clickable-label
 
+## 2018.10.23
+
+1. sun.misc.Unsafe 
+
+	- 仿佛打开了新世界的大门...
+
+2. asmtools
+	
+	- http://hg.openjdk.java.net/code-tools/asmtools/archive/tip.zip
+	- https://blog.csdn.net/hengyunabc/article/details/81122760
