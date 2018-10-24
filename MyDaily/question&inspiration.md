@@ -1020,4 +1020,10 @@ read 深入理解java虚拟机
 
 1. 测试 springboot 服务器性能
 
+## 2018.10.23
+
+1. radio, checkbox 点击优化
+
+	- https://stackoverflow.com/questions/19412204/how-do-you-make-the-radio-button-text-to-be-clickable-too
+	- https://stackoverflow.com/questions/6293588/how-to-create-an-html-checkbox-with-a-clickable-label
 

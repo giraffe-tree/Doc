@@ -16,7 +16,14 @@ Dep 是 Go 的一个包管理工具, 它就如 maven/gradle 对于 java , pip/pi
 
 ## 使用
 
+## go get 使用 http 代理
 
+```
+set http_proxy=127.0.0.1:1080
+set https_proxy=127.0.0.1:1080
+```
+
+https://my.oschina.net/idufei/blog/710198
 
 
 ## 参考
