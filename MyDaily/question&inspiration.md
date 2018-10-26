@@ -1027,7 +1027,7 @@ read 深入理解java虚拟机
 	- https://stackoverflow.com/questions/19412204/how-do-you-make-the-radio-button-text-to-be-clickable-too
 	- https://stackoverflow.com/questions/6293588/how-to-create-an-html-checkbox-with-a-clickable-label
 
-## 2018.10.23
+## 2018.10.24
 
 1. sun.misc.Unsafe 
 
@@ -1037,3 +1037,24 @@ read 深入理解java虚拟机
 	
 	- http://hg.openjdk.java.net/code-tools/asmtools/archive/tip.zip
 	- https://blog.csdn.net/hengyunabc/article/details/81122760
+
+
+## 2018.10.25
+
+1. JVM会统计每个方法被调用了多少次，超过多少次，那就是热点方法。(还有个循环回边计数器，用来编译热循环的。)默认的分层编译应该是达到两千调C1，达到一万五调C2。
+
+2. 如何了解 jvm 即时编译, 输出?
+
+3. jvm 中指定了操作数栈的字长为 32 bit, 并不依赖于平台.
+
+	- https://stackoverflow.com/questions/31766491/jvm-word-size-and-operand-stack
+	- https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-2.html#jvms-2.6.2
+	- At any point in time, an operand stack has an associated depth, where a value of type long or double contributes two units to the depth and a value of any other type contributes one unit.
+	- https://www.zhihu.com/question/29833675
+
+
+## 2018.10.26
+
+1. stack=2, locals=1, args_size=1 含义
+
+
