@@ -112,6 +112,30 @@ offset.flush.interval.ms=10000
 plugin.path=/data/k1
 ```
 
+### 日志配置
+
+文件路径 `/opt/kafka_2.12-1.1.0/config/connect-log4j.properties` 
+
+```
+log4j.rootLogger=INFO, stdout, kafkaConnector 
+
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=[%d] %p %m (%c:%L)%n
+
+log4j.appender.kafkaConnector=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.kafkaConnector.DatePattern='.'yyyy-MM-dd-HH
+log4j.appender.kafkaConnector.File=${kafka.logs.dir}/connector.log
+log4j.appender.kafkaConnector.layout=org.apache.log4j.PatternLayout
+log4j.appender.kafkaConnector.layout.ConversionPattern=[%d] %p %m (%c)%n
+
+log4j.logger.org.apache.zookeeper=ERROR
+log4j.logger.org.I0Itec.zkclient=ERROR
+log4j.logger.org.reflections=ERROR
+
+```
+
+
 ### NoClassDefFoundError 
 
 libs needs to be added to CLASSPATH:

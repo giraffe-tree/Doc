@@ -1057,4 +1057,21 @@ read 深入理解java虚拟机
 
 1. stack=2, locals=1, args_size=1 含义
 
+## 2018.10.30
+
+1. java stream 延拓
+
+	- branch
+	- peek/map 先处理全部的, 再用 to 处理每个的
+
+	- 运算延拓
+
+## 2018.10.31
+
+1. AtomicBoolean
+
+## 2018.11.1 
+
+1. map initialCapacity 为 11
+
 
