@@ -86,6 +86,13 @@ github: [https://github.com/openmessaging/specification/](https://github.com/ope
 
 清晰明了,简单通用,可优化.
 
+#### 如何减少gc
+
+提问环节提到了如何减少频繁的gc
+
+1. 使用 redis等缓存
+2. 使用 sql 
+
 ### 阿里
 
 主要讲了 flink 的资源分配, 不过没讲啥实现的东西, 没怎么听.
