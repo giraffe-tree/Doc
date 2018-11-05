@@ -683,7 +683,6 @@ read 深入理解java虚拟机
 
 ## 2018.8.9
 
-<<<<<<< Updated upstream
 1. π 为什么是无理数
 
 2. 什么是超越数?
@@ -786,7 +785,6 @@ read 深入理解java虚拟机
 	
 	https://stackoverflow.com/questions/27735706/docker-add-vs-volume
 
-<<<<<<< HEAD
 ## 2018.9.13
 
 1. jpa stream
@@ -1073,5 +1071,28 @@ read 深入理解java虚拟机
 ## 2018.11.1 
 
 1. map initialCapacity 为 11
+
+## 2018.11.2
+
+1. `@Transactional`这个 Spring 注解可以用在 `private`方法上么
+
+	- https://stackoverflow.com/questions/4396284/does-spring-transactional-attribute-work-on-a-private-method
+
+2. https://flink-china.org/doc/index.html
+
+	- flink 官网上线
+
+## 2018.11.5
+
+1. `Call to 'super()' must be first statement in constructor body`
+
+	- 可以在 super() 中调用函数
+	- 这看起来像是多此一举?
+	- https://stackoverflow.com/questions/1168345/why-do-this-and-super-have-to-be-the-first-statement-in-a-constructor
+
+2. 什么时候使用 volatile
+
+	- volatile 只保证 可见性, 不能保证原子性
+	
 
 

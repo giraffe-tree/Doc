@@ -116,6 +116,7 @@ plugin.path=/data/k1
 
 文件路径 `/opt/kafka_2.12-1.1.0/config/connect-log4j.properties` 
 
+
 ```
 log4j.rootLogger=INFO, stdout, kafkaConnector 
 

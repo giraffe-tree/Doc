@@ -10,6 +10,12 @@ https://www.cnblogs.com/dolphin0520/p/3920373.html
 
 《Java 中的双重检查（Double-Check）》 http://blog.csdn.net/dl88250/article/details/5439024
 
+### 什么时候使用 volatile
+
+满足以下两个条件时, 在多线程环境中才能使用 volatile 变量
+
+1. 对变量的写入操作不依赖变量的当前值
+2. 该变量不会与其他状态变量一起纳入不变性条件中.
 
 
 ## yield
@@ -21,6 +27,8 @@ Java线程中的Thread.yield( )方法，译为线程让步。顾名思义，就�
 ## atomicInteger
 
 在java 1.5的java.util.concurrent.atomic包下提供了一些原子操作类，即对基本数据类型的 自增（加1操作），自减（减1操作）、以及加法操作（加一个数），减法操作（减一个数）进行了封装，保证这些操作是原子性操作。atomic是利用CAS来实现原子性操作的（Compare And Swap），CAS实际上是利用处理器提供的CMPXCHG指令实现的，而处理器执行CMPXCHG指令是一个原子性操作。
+
+
 
 
 
