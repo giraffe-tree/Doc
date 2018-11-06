@@ -1093,6 +1093,13 @@ read 深入理解java虚拟机
 2. 什么时候使用 volatile
 
 	- volatile 只保证 可见性, 不能保证原子性
-	
+
+## 2018.11.6
+
+1. Comparison method violates its general contract!
+
+	- https://blog.csdn.net/ghsau/article/details/42012365
+
+
 
 
