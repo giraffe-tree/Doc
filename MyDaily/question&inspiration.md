@@ -1100,6 +1100,7 @@ read 深入理解java虚拟机
 
 	- https://blog.csdn.net/ghsau/article/details/42012365
 
+2. `-XX:+UseCondCardMark`
 
-
-
+	
+	
