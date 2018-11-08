@@ -1102,5 +1102,11 @@ read 深入理解java虚拟机
 
 2. `-XX:+UseCondCardMark`
 
+
+## 2018.11.08
+
+1. redis 哨兵, 检查服务器是否在线
+
 	
-	
+
+
