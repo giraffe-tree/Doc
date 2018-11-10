@@ -1107,6 +1107,21 @@ read 深入理解java虚拟机
 
 1. redis 哨兵, 检查服务器是否在线
 
+2. `top -c -p $(pgrep -d',' -f string_to_match_in_cmd_line)`
+
+	- 用于查询指定内容
+
+3. `docker run -v /2018/nov/redis/redis.conf:/usr/local/etc/redis/redis.conf --name redis -d -p 6379:6379 redis redis-server /usr/local/etc/redis/redis.conf`
 	
+	- docker for redis
+
+4. want:
+
+	1. redis 数据结构
+	2. 如何保证 kafka 只消费一次
+	3. jvm 参考 github 笔记
+
+
+
 
 
