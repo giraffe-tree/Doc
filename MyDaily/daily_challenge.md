@@ -27,6 +27,10 @@ https://www.physicsforums.com/threads/electric-charges-scatter-light.83761/
 		- https://zh.wikipedia.org/wiki/%E5%BA%B7%E6%99%AE%E9%A0%93%E6%95%A3%E5%B0%84
 
 
+## 2018.11.13
+
+JAVA Future
+
 
 
 
