@@ -1140,6 +1140,49 @@ read 深入理解java虚拟机
 
 1. 100年后, 我丧失了记忆回到了这里.
 
+## 2018.11.15
 
+1. Quasar
+	
+	- 轻量级线程
+
+2. 单线程的 coroutine 1对多 是相对容易实现的
+
+	- go goroutine 的多对多,感觉实现起来很复杂, 还有很多 work-steal 的东西.
+
+3. idea 内存占用与实际不符 ?
+
+4. Unsafe 
+	
+	- http://www.docjar.com/html/api/sun/misc/Unsafe.java.html
+
+5. `FutureTask`  -> `Unsafe`  -> `ConcurrentMap`
+
+
+## 2018.11.16
+
+1. 了解一下 `&` 运算符的新语法, 来自 `Map.Entry`
+	
+```java
+public static <K, V extends Comparable<? super V>> Comparator<Map.Entry<K,V>> comparingByValue() {
+        return (Comparator<Map.Entry<K, V>> & Serializable)
+            (c1, c2) -> c1.getValue().compareTo(c2.getValue());
+    }
+```
+
+相当于
+
+```java
+return (Comparator<Map.Entry<K, V>>) (Serializable)
+(c1, c2) -> c1.getKey().compareTo(c2.getKey());
+```
+
+2. `>>>` 移位符号, 优先级比 `+` , `-`低
+
+3. `docker logs -f --tail 2000 tomcat2 |  grep -E ".*2018-11-16.*update.*"`
+
+	- `grep -E "regexp expression"` 正则匹配
+
+4. 
 
 
