@@ -26,6 +26,15 @@ https://www.physicsforums.com/threads/electric-charges-scatter-light.83761/
 	2. Compton scattering
 		- https://zh.wikipedia.org/wiki/%E5%BA%B7%E6%99%AE%E9%A0%93%E6%95%A3%E5%B0%84
 
+## 2018.11.12
+
+了解一下 NIO
+
+
+## 2018.11.13
+
+做一个简单的 windows 应用?
+
 
 ## 2018.11.13
 
