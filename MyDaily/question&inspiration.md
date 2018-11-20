@@ -1183,6 +1183,28 @@ return (Comparator<Map.Entry<K, V>>) (Serializable)
 
 	- `grep -E "regexp expression"` 正则匹配
 
-4. 
+## 2018.11.19
+
+1. search commit code in git 
+
+	- https://stackoverflow.com/questions/2928584/how-to-grep-search-committed-code-in-the-git-history/2928721#2928721
+
+2. cas
+
+	- http://hg.openjdk.java.net/jdk8/jdk8/hotspot/file/87ee5ee27509/src/share/vm/oops/oop.inline.hpp
+
+## 2018.11.20
+
+1. ```gcc test.cpp -lstdc++ -o main```
+
+	- 会输出 `main.exe`
+	- `-lstdc++` 使用 `c++` 
+
+2. jni
+
+	 - https://segmentfault.com/a/1190000010066701
+	 - https://zhuanlan.zhihu.com/p/25554150
+	 - https://zhuanlan.zhihu.com/p/25048760
+	 - https://zh.wikipedia.org/wiki/Java%E6%9C%AC%E5%9C%B0%E6%8E%A5%E5%8F%A3
 
 
