@@ -1233,3 +1233,7 @@ return (Comparator<Map.Entry<K, V>>) (Serializable)
 
 	- http://www.importnew.com/28263.html
 
+7. idea + vs
+
+	- https://www.cnblogs.com/lucychen/p/9771236.html
+
