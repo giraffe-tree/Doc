@@ -2,10 +2,14 @@
 
 ## 参考
 
+### 版本
+
+1. jdk 1.8
+
 ### 基础知识
 
 1. 数组, 链表, 红黑树
-2. Unsafe 包 CAS 操作
+2. Unsafe 包 CAS 操作,
 3. `volatile` 关键字
 
 ### 《Java源码分析》：ConcurrentHashMap JDK1.8
@@ -267,8 +271,12 @@ final V putVal(K key, V value, boolean onlyIfAbsent) {
         addCount(1L, binCount)
 
 ```
+
+
+```java
 private final void addCount(long x, int check) {
         CounterCell[] as; long b, s;
+        // 在没有竞争时使用 cas 
         if ((as = counterCells) != null ||
             !U.compareAndSwapLong(this, BASECOUNT, b = baseCount, s = b + x)) {
             CounterCell a; long v; int m;
@@ -304,7 +312,7 @@ private final void addCount(long x, int check) {
             }
         }
     }
-```
+
 
         return null;
     }

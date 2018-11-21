@@ -1202,9 +1202,34 @@ return (Comparator<Map.Entry<K, V>>) (Serializable)
 
 2. jni
 
+	`javah  -d com/github/giraffetree/springjni/utils/jni com.github.giraffetree.springjni.utils.jni.WinAPI`
 	 - https://segmentfault.com/a/1190000010066701
 	 - https://zhuanlan.zhihu.com/p/25554150
 	 - https://zhuanlan.zhihu.com/p/25048760
 	 - https://zh.wikipedia.org/wiki/Java%E6%9C%AC%E5%9C%B0%E6%8E%A5%E5%8F%A3
 
+## 2018.11.21
+
+1. Variable Handles
+
+	- jdk 9 中将 `sun.misc.Unsafe` 的实现替换为 `java.lang.invoke.VarHandle`
+	- http://openjdk.java.net/jeps/193
+
+2. 并发 random 包 
+	
+	- ThreadLocalRandom
+
+3. 解决 cas 中 ABA 问题
+
+	- AtomicStampedReference
+
+4. cas, synchronized 优劣
+
+	- https://www.jianshu.com/p/736c532869a3
+
+5. `jmh` 基准测试
+
+6. concurrentHashMap
+
+	- http://www.importnew.com/28263.html
 
