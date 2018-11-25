@@ -46,4 +46,11 @@ JAVA Future
 
 	- 应用在 concurrentHashMap 
 
+## 2018.11.19
+
+了解一下 `concurrentHashMap` 中的 `compute` 和 `merge`
+
+	 - 未完成
+
+
 
