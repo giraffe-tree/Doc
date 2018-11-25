@@ -40,6 +40,10 @@ https://www.physicsforums.com/threads/electric-charges-scatter-light.83761/
 
 JAVA Future
 
+## 2018.11.15
 
+1. 红黑树
+
+	- 应用在 concurrentHashMap 
 
 
