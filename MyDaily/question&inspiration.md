@@ -1134,11 +1134,27 @@ read 深入理解java虚拟机
 
 1. 每天做一件有挑战性的事情 ?
 
+## 2018.11.13
 
+1. ```npm install mqtt --save``` 
+	
+	- 这里的 `--save` 是什么意思
+
+npm install 在安装 npm 包时，有两种命令参数可以把它们的信息写入 package.json 文件，一个是npm install--save另一个是 npm install –save-dev，他们表面上的区别是--save 会把依赖包名称添加到 package.json 文件 dependencies 键下，--save-dev 则添加到 package.json 文件 devDependencies 键下
+
+2. electron  jQuery is not defined
+	
+	- https://stackoverflow.com/questions/32621988/electron-jquery-is-not-defined
 
 ## 2018.11.14
 
 1. 100年后, 我丧失了记忆回到了这里.
+
+2. Creating src/theme.config (LESS config) src/theme.config
+
+	- win10 `gulp install` 卡住不动
+	- https://github.com/Semantic-Org/Semantic-UI/issues/6641
+	- https://nodejs.org/download/release/v10.11.0/
 
 ## 2018.11.15
 
@@ -1182,6 +1198,13 @@ return (Comparator<Map.Entry<K, V>>) (Serializable)
 3. `docker logs -f --tail 2000 tomcat2 |  grep -E ".*2018-11-16.*update.*"`
 
 	- `grep -E "regexp expression"` 正则匹配
+
+## 2018.11.17
+
+1. webStorm `v-bind is not bound`
+
+	- https://blog.csdn.net/sinat_35512245/article/details/53956560
+
 
 ## 2018.11.19
 
