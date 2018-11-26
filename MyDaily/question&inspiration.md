@@ -1272,11 +1272,50 @@ return (Comparator<Map.Entry<K, V>>) (Serializable)
 	}
 	```
 
-	2. 编码问题
-		
-		我加上了编译选项 /utf-8 
+2. 编码问题
+	
+	我加上了编译选项 /utf-8 
 
-2. 
 
+## 2018.11.26
+
+1. `GOROOT` 是什么作用
+
+2. golang 在 windows 上编译 linux 的程序
+
+	```
+	set GOARCH=amd64
+	set GOOS=linux
+	go build
+	```
+
+3. `jni.h` 竟然和 netscape 公司有关...惊了. 
+
+4. `C++`获取时间
+
+	```
+	// linux 
+	#include <sys/time.h>
+	// win
+	#include <time.h>
+	```
+
+5. 计算机怎么处理 乘法 ?
+
+6. `System.arraycopy`
+
+7. c++ `vector` to `double[]`
+
+	 - https://stackoverflow.com/questions/2923272/how-to-convert-vector-to-array
+
+8. jni 控制台输出
+
+	- C++ 有自己的缓存区, java也有自己的缓存区, 由于缓存区不同所导致
+	- https://blog.csdn.net/hnlylyb/article/details/80708880
+
+
+9. jni 库加载路径
+
+	- https://upload-images.jianshu.io/upload_images/1915271-ba2274d50c038375.png
 
 
