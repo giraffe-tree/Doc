@@ -1236,4 +1236,24 @@ return (Comparator<Map.Entry<K, V>>) (Serializable)
 7. idea + vs
 
 	- https://www.cnblogs.com/lucychen/p/9771236.html
+	- https://www.cnblogs.com/lucychen/p/9783418.html
+
+## 2018.11.22
+
+1. C++ 
+
+	1. 下面的注释加上会报错, 我把注释移到了 for(;;) 的上一行
+	```for(;;) // 我是注释
+	{
+		...
+	}
+	```
+
+	2. 编码问题
+		
+		我加上了编译选项 /utf-8 
+
+2. 
+
+
 
