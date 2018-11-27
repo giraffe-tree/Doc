@@ -1318,4 +1318,23 @@ return (Comparator<Map.Entry<K, V>>) (Serializable)
 
 	- https://upload-images.jianshu.io/upload_images/1915271-ba2274d50c038375.png
 
+10. jni 泛型的关系
+
+## 2018.11.27
+
+1. 在 jni 中避免内存泄漏
+
+	- https://www.ibm.com/developerworks/cn/java/j-lo-jnileak/
+
+2. jni 局部引用, 全局引用和弱全局引用
+
+	- https://blog.csdn.net/xyang81/article/details/44657385
+
+3. redis 5.0 docker 部署
+
+	```
+	docker run --name redis -p 6379:6379 --privileged=true -d -v /data/projects/redis/redis.conf:/usr/local/etc/redis/redis.conf -v /data/projects/redis/data:/data --restart always --sysctl net.core.somaxconn=1024 redis redis-server /usr/local/etc/redis/redis.conf
+	```
+
+
 
