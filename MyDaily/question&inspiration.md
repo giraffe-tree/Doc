@@ -1304,6 +1304,8 @@ return (Comparator<Map.Entry<K, V>>) (Serializable)
 
 6. `System.arraycopy`
 
+	- 线程不安全
+
 7. c++ `vector` to `double[]`
 
 	 - https://stackoverflow.com/questions/2923272/how-to-convert-vector-to-array
@@ -1335,6 +1337,85 @@ return (Comparator<Map.Entry<K, V>>) (Serializable)
 	```
 	docker run --name redis -p 6379:6379 --privileged=true -d -v /data/projects/redis/redis.conf:/usr/local/etc/redis/redis.conf -v /data/projects/redis/data:/data --restart always --sysctl net.core.somaxconn=1024 redis redis-server /usr/local/etc/redis/redis.conf
 	```
+
+## 2018.11.29
+
+1. 现实不就是一个大型创造游戏么..
+	
+	- 假如我们是被创造出来的..所谓的物理就是这个世界的法则
+	- 站在更高的格局上, 宇宙是什么?
+
+2. 一个巨大的游戏
+	
+	- 每个人都能开发游戏
+
+3. `CopyOnWriteArrayList`
+
+4. byte & 0xff
+
+```
+byte value = 0xfe; // corresponds to -2 (signed) and 254 (unsigned)
+int result = value & 0xff;
+```
+
+(The point is that conversion to int happens before the & operator is applied.)
+
+## 2018.11.30
+
+1. java 回调
+
+	- https://cloud.tencent.com/developer/article/1110576
+	- CompletableFuture 
+	- CountDownLatch
+	- https://juejin.im/post/5abc9e59f265da239f077460
+	- 含义:
+	- http://www.jcodecraeer.com/a/chengxusheji/java/2017/1226/9011.html
+
+2. OSS 授权某个文件
+
+	- https://help.aliyun.com/knowledge_detail/58905.html
+
+## 2018.12.1
+
+1. 算法任务
+
+	- `CompletableFuture`
+	- 异常处理 jni,future
+
+2. coder -> algorithm or
+
+	- https://www.zhihu.com/question/51039416
+
+
+## 2018.12.3
+
+1. 如何中断 `CompletableFuture` 的链路
+
+	- How to interrupt underlying execution of CompletableFuture
+	- https://stackoverflow.com/questions/29013831/how-to-interrupt-underlying-execution-of-completablefuture
+	- Canceling a CompletableFuture chain
+	- https://stackoverflow.com/questions/25417881/canceling-a-completablefuture-chain
+
+2. 
+
+```
+@Valid AlgorithmConfigVO algorithmConfigVO,
+            BindingResult bindingResult
+// 跟顺序有关, 在 bindingResult 前加入参数, 会导致错误?
+```
+
+3. `CompletableFuture.applyToEitherAsync`
+
+	- 哪个先返回, 就用哪个
+
+
+## 2018.12.4
+
+1. `The server time zone value 'ÖÐ¹ú±ê×¼Ê±¼ä' is unrecognized or represents more than one time zone.`
+
+	- `set global time_zone='+8:00'`
+
+2. 在构造函数中初始化
 
 
 
