@@ -1438,4 +1438,22 @@ int result = value & 0xff;
 
 	- https://github.com/wagoodman/dive
 
+## 2018.12.07
+
+1. 频繁GC (Allocation Failure)
+
+2. MetaSpaceSize 
+
+	- Full GC (Metadata GC Threshold)
+	- `-XX:MetaspaceSize=256m`
+	- `-XX:MaxMetaspaceSize=256m`
+	- [JVM参数MetaspaceSize的误解](https://blog.csdn.net/u011381576/article/details/79635867)
+
+3. jstat
+
+	- https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jstat.html
+
+4. GC overhead limit exceeded
+
+
 
