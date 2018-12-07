@@ -1418,4 +1418,24 @@ int result = value & 0xff;
 2. 在构造函数中初始化
 
 
+## 2018.12.5
+
+1. spring 初始化 bean 单线程? 如何实现的?
+
+## 2018.12.6
+
+1. 多态在 JVM 中是如何实现的?
+
+2. `page` 可以用 `iterator`???
+
+`public interface Page<T> extends Slice<T>`
+
+`public interface Slice<T> extends Iterable<T>`
+
+3. 数据库访问 callback ?
+
+4. hive 查看 docker 内部层次
+
+	- https://github.com/wagoodman/dive
+
 
