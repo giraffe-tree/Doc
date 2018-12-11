@@ -1454,6 +1454,72 @@ int result = value & 0xff;
 	- https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jstat.html
 
 4. GC overhead limit exceeded
+	
+	- Gc 超过限制
+
+## 2018.12.08
+
+1.  <Java Reference Objects>
+
+	- http://www.kdgregory.com/index.php?page=java.refobj
+
+2. `String` `@stable` field
+
+-XX:+PrintStringTableStatistic
+
+3. Heap:
+
+	- PSYoungGen
+	- ParOldGen
+	- Metaspace
+
+4. BearyChat cool chat ???
+
+## 2018.12.10
+
+1. 线程池和轻量级线程 区别 优劣?
+
+	- 使用协程的好处?
+
+2. 对就是那个少年
+
+3. JNI 多线程
+
+	- https://blog.csdn.net/booirror/article/details/37778283
+
+
+## 2018.12.11
+
+1. `@Nullable`可为空, `@NotNull` 不可为空
+
+2. CMS 
+
+	- Concurrent Mark Sweep
+
+3. ExecutorService
+
+```java
+public ExecutorService getThreadPool() {
+        BasicThreadFactory basicThreadFactory = new BasicThreadFactory.Builder()
+                .namingPattern("processor-%d").daemon(true).build();
+        return new ThreadPoolExecutor(5, 20, 100L,
+                TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(2048),
+                basicThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+    }
+```
+
+4. `git add -u` 添加 tracked file
+
+`git reset --hard` 清除暂存区和工作区的内容
+
+`git mv readme readme.md` git 重命名
+
+`git log -n4 --oneline` 当前分支的历史
+
+`git log --all --graph` 图像化的 git
+
+
+
 
 
 
