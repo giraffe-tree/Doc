@@ -1518,8 +1518,15 @@ public ExecutorService getThreadPool() {
 
 `git log --all --graph` 图像化的 git
 
+`gitk -all` 图形化界面 
+
+	- 乱码问题
+	- `git config --global gui.encoding utf-8`
 
 
+5. 享元模式
 
+	- 享元模式尝试重用现有的同类对象，如果未找到匹配的对象，则创建新对象。
+	- JAVA 字符串缓存池
 
 

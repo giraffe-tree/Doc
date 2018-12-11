@@ -31,9 +31,9 @@ d0f3f1e41cc1        apache/rocketmq-broker:4.3.0    "/bin/sh -c 'cd ${RO…"   5
 5fe13a55b08c        apache/rocketmq-namesrv:4.3.0   "/bin/sh -c 'cd ${RO…"   6 seconds ago       Up 5 seconds        0.0.0.0:9876->9876/tcp                                                                                                                          rmqnamesrv
 ```
 
-感叹一句, docker 真的强大, 啥都没干就完成了就搭好了.
+OK,结束了. 感叹一句, docker 真的强大, 啥都没干就搭好了.
 
-
+## 
 
 
 
