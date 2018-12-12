@@ -1231,6 +1231,8 @@ return (Comparator<Map.Entry<K, V>>) (Serializable)
 	 - https://zhuanlan.zhihu.com/p/25048760
 	 - https://zh.wikipedia.org/wiki/Java%E6%9C%AC%E5%9C%B0%E6%8E%A5%E5%8F%A3
 
+	 - http://notes.maxwi.com/2017/04/19/java-jni-cpp-hello/
+
 ## 2018.11.21
 
 1. Variable Handles
@@ -1519,7 +1521,49 @@ public ExecutorService getThreadPool() {
 `git log --all --graph` 图像化的 git
 
 
+## 2018.12.12
+
+1. `.so`,`.dll`
+
+	- http://gernotklingler.com/blog/creating-using-shared-libraries-different-compilers-different-operating-systems/
+
+2. C++ “std::string has not been declared” error
+	
+	- https://stackoverflow.com/questions/17040098/c-stdstring-has-not-been-declared-error
+	- gcc用法以及静态/动态链接
+	- https://www.jianshu.com/p/31b33e5c48d7 
+	- linux jni
+	- https://www.jianshu.com/p/e175d5417e05
+
+3. jni 使用问题
+
+	- 编译版本问题, C++ 代码在不同 VS 下表现不一致
+	- Release/Debug 版本速度差异巨大, 30ms/5s
+	- 文件编码问题 C/C++ -> 命令行 -> 其他选项 -> /utf-8 
+	- 预编译头问题  C/C++ -> 预编译头 -> 不使用预编译头
 
 
+4. winscp transfer file to local Windows
+
+5. Dockerfile 详解
+
+	- https://yeasy.gitbooks.io/docker_practice/image/build.html
+
+6. AUFS 
+
+	- advanced multi-layered unification filesystem，高级多层统一文件系统
+
+7. Dockerfile 中的VOLUME 和 -v
+
+8. `java [-options] -jar jarfile [args...]`
+
+	- https://stackoverflow.com/questions/5045608/proper-usage-of-java-d-command-line-parameters
+
+9. `undefined symbol: _Z11fullanalyseRSt6vectorIdSaIdEEiiiiii`
+
+	- https://stackoverflow.com/questions/12573816/what-is-an-undefined-reference-unresolved-external-symbol-error-and-how-do-i-fix
+	- https://stackoverflow.com/questions/28082675/undefined-reference-when-using-a-function-included-in-a-header-file
+
+10.
 
 
