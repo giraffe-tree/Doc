@@ -1573,7 +1573,20 @@ public ExecutorService getThreadPool() {
 	- https://stackoverflow.com/questions/12573816/what-is-an-undefined-reference-unresolved-external-symbol-error-and-how-do-i-fix
 	- https://stackoverflow.com/questions/28082675/undefined-reference-when-using-a-function-included-in-a-header-file
 
-10.
+## 2018.12.13
 
+1.  com.zaxxer.hikari.pool.PoolBase - Failed to validate connection com.mysql.jdbc.JDBC4Connection@5fde3a5e (No operations allowed after connection closed.
+	
+	- http://cmsblogs.com/?p=2522
+	- https://stackoverflow.com/questions/41008350/no-operations-allowed-after-connection-closed-errors-in-slick-hikaricp
+
+2. `cout’ is not a member of ‘std`
+
+	-  `#include <iostream>`
+
+3. `error: ‘>>’ should be ‘> >’ within a nested template argument list`
+	
+	- `vector<pair<string, int>> word;`  ->  `vector<pair<string, int> > word;`
+	- https://blog.csdn.net/u011630575/article/details/45557573
 
 
