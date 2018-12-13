@@ -1520,6 +1520,12 @@ public ExecutorService getThreadPool() {
 
 `git log --all --graph` 图像化的 git
 
+`gitk -all` 图形化界面 
+
+5. 享元模式
+
+	- 享元模式尝试重用现有的同类对象，如果未找到匹配的对象，则创建新对象。
+	- JAVA 字符串缓存池
 
 ## 2018.12.12
 
@@ -1561,9 +1567,13 @@ public ExecutorService getThreadPool() {
 
 9. `undefined symbol: _Z11fullanalyseRSt6vectorIdSaIdEEiiiiii`
 
+	- 乱码问题
+	- `git config --global gui.encoding utf-8`
+
 	- https://stackoverflow.com/questions/12573816/what-is-an-undefined-reference-unresolved-external-symbol-error-and-how-do-i-fix
 	- https://stackoverflow.com/questions/28082675/undefined-reference-when-using-a-function-included-in-a-header-file
 
 10.
+
 
 
