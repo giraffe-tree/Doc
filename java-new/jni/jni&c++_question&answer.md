@@ -61,4 +61,8 @@
 	- `vector<pair<string, int>> word;`  ->  `vector<pair<string, int> > word;`
 	- https://blog.csdn.net/u011630575/article/details/45557573
 
+4. `Sorry, unimplemented: 64 bit mode not compiled in`
+
+	https://stackoverflow.com/questions/38589886/sorry-unimplemented-64-bit-mode-not-compiled-in
+
 

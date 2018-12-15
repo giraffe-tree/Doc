@@ -1589,4 +1589,46 @@ public ExecutorService getThreadPool() {
 	- `vector<pair<string, int>> word;`  ->  `vector<pair<string, int> > word;`
 	- https://blog.csdn.net/u011630575/article/details/45557573
 
+## 2018.12.14
+
+1. 今天使用 idea 碰到了一个很诡异的现象, 有以下几点
+	
+	- 右击项目主目录没有 maven 选项
+	- 右击 pom 文件, 使用 maven reimport, 显示已经 import 成功
+	- 但是 External Libraries 中只有 jdk-8 , 没有其他导入的包
+	- 项目中的 spring 代码 都是没有 import 的状态 
+	- 重新打开项目, 重新 import 没有用
+	- 最诡异的是在 右边侧边栏有个 maven projects -> plugins -> spring-boot -> spring-boot:run 还能运行起来?? WTF ???
+
+	- 最后怎么解决的呢?
+	- 右边侧边栏有个 maven projects 的一个maven 的管理界面, 我点击了下载 source code
+	- 然后 主目录右击 有 maven 选项了,  External Libraries 也有其他的库了
+	- 估计是某个奇怪的原因引起了某个奇怪的bug? 内存占用太大?
+	- 然后点击 下载 source code 的时候, 发现 external library 还没导入, 就修复了这个问题.
+
+2. 洛伦兹变换是观测者在不同惯性参照系之间对物理量进行测量时所进行的转换关系，在数学上表现为一套方程组。洛伦兹变换因其创立者——荷兰物理学家亨德里克·洛伦兹而得名。洛伦兹变换最初用来调和19世纪建立起来的经典电动力学同牛顿力学之间的矛盾，后来成为狭义相对论中的基本方程组。
+
+	- https://zh.wikipedia.org/wiki/%E6%B4%9B%E4%BC%A6%E5%85%B9%E5%8F%98%E6%8D%A2
+	- 那么帅气的么?
+
+	- 迈克耳孙-莫雷实验 -> 洛伦兹变换
+
+3. 以 `0.1c` 运动, 增加 0.5% 的质量?
+
+4. `MQClientException: No route info of this topic, PushTopic`
+
+	- 原因: rocket 不会自动添加 topic
+	- 解决办法: autoCreateTopicEnable=true
+
+5. redis 
+	
+	- requirepass
+	- 路径: /usr/local/etc/redis/redis.conf
+
+## 2018.12.15
+
+1. redis streams 使用
+
+	- https://redis.io/topics/streams-intro
+
 

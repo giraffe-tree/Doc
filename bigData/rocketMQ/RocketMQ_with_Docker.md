@@ -33,7 +33,10 @@ d0f3f1e41cc1        apache/rocketmq-broker:4.3.0    "/bin/sh -c 'cd ${RO…"   5
 
 OK,结束了. 感叹一句, docker 真的强大, 啥都没干就搭好了.
 
-## 
+## 回头看看 play-docker 中写了什么
+
+
+
 
 
 
