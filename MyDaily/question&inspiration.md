@@ -1629,6 +1629,9 @@ public ExecutorService getThreadPool() {
 
 1. redis streams 使用
 
+	- 命令介绍
 	- https://redis.io/topics/streams-intro
+	- java 使用
+	- https://www.javacodegeeks.com/2018/05/a-first-look-at-redis-streams-and-how-to-use-them-with-java.html
 
 
