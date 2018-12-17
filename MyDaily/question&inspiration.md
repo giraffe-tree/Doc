@@ -1634,4 +1634,31 @@ public ExecutorService getThreadPool() {
 	- java 使用
 	- https://www.javacodegeeks.com/2018/05/a-first-look-at-redis-streams-and-how-to-use-them-with-java.html
 
+## 2018.12.17
+
+1. unchecked generics array creation for varargs parameter
+
+	- https://stackoverflow.com/questions/21132692/java-unchecked-unchecked-generic-array-creation-for-varargs-parameter
+	- java doesn't allow a generic array creation
+
+2. redis stream 数据结构
+
+	- http://xiaorui.cc/2018/06/07/%E6%B5%85%E5%85%A5%E6%B5%85%E5%87%BAredis5-0%E7%9A%84streams%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/
+
+3. `\xac\xed\x00\x05t\x00\x05`
+
+	- https://blog.csdn.net/yunhaibin/article/details/9001198
+	
+4. 星系都大致在一个平面上
+
+	- 有角动量的方向上旋转
+	- 没有角动量的方向 -> 因为引力聚集
+
+5. vs format code
+
+	- ctrl+k,ctrl+f
+
+
+
+
 
