@@ -46,5 +46,65 @@ public class HelloWorld {
 
 我们可以看到`HelloWorld()`的方法下面有个 `descriptor: ()V`, 这个描述符就是我们刚刚说的 `signature` 了.
 
-在 JVM 字节码规范中规定了
+在 java 中的方法定义如下
+
+```
+## ref -> https://docs.oracle.com/javase/tutorial/java/javaOO/methods.html
+Definition: Two of the components of a method declaration comprise the method signature—the method's name and the parameter types.
+```
+
+在 JAVA 中方法由两部分组成: 1. 方法名  2. 参数类型 , 这里我提一句, 参数类型是有顺序的, 也就是说在 JAVA 中, 相同方法名相同参数类型(顺序一致)的方法即为同一个方法.
+
+## 怎么使用 Signature
+
+| 标识字符 |       含义       |
+| :------: | :--------------: |
+|    B     |  基本类型 byte   |
+|    C     |  基本类型 char   |
+|    D     | 基本类型 double  |
+|    F     |  基本类型 float  |
+|    I     |   基本类型 int   |
+|    J     |  基本类型 long   |
+|    S     |  基本类型 short  |
+|    Z     | 基本类型 boolean |
+|    V     |       void       |
+|    L     |     对象类型     |
+
+### 示例
+
+1. 空返回
+
+```java
+public void say(Long a, String s) {
+}
+
+// -> (Ljava/lang/Long;Ljava/lang/String;)V
+```
+
+2. 原始类型返回
+
+```java
+public short say(long a) {
+        return 0;
+}
+// ->  (J)S
+```
+
+3. 数组参数, 及`List<String>`返回
+
+```java
+public List<String> say(Long a, int[] arr, String... strings) {
+        return null;
+}
+// (Ljava/lang/Long;[I[Ljava/lang/String;)Ljava/util/List;
+```
+
+
+## 参考
+
+下面这篇文章, 通过修改字节码, 在 jvm 上实现了 同方法名/同参数类型(顺序一致), 但方法的返回值不同.
+
+[Java语言层面和JVM层面方法特征签名的区别 及 实例分析](https://blog.csdn.net/tjiyu/article/details/53891813)
+
+
 
