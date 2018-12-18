@@ -11,6 +11,9 @@
 
 2. String 转换
 
+	- jstring to string
+	- string to jstring
+
 ## 版本
 
 1. java version
