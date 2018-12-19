@@ -102,9 +102,12 @@ public List<String> say(Long a, int[] arr, String... strings) {
 
 ## 参考
 
-下面这篇文章, 通过修改字节码, 在 jvm 上实现了 同方法名/同参数类型(顺序一致), 但方法的返回值不同.
+1. 下面这篇文章, 通过修改字节码, 在 jvm 上实现了 同方法名/同参数类型(顺序一致), 但方法的返回值不同.
 
-[Java语言层面和JVM层面方法特征签名的区别 及 实例分析](https://blog.csdn.net/tjiyu/article/details/53891813)
+	[Java语言层面和JVM层面方法特征签名的区别 及 实例分析](https://blog.csdn.net/tjiyu/article/details/53891813)
 
+2. scala 实现相同 方法名, 相同参数, 不同返回值
+
+	[Scala trait same method and argument with different return types](https://stackoverflow.com/questions/17888978/scala-trait-same-method-and-argument-with-different-return-types)
 
 

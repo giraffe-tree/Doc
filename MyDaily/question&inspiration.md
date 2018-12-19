@@ -1678,7 +1678,33 @@ limitations under the License.
 
 ## 2018.12.18
 
-1. 
+1. grep 输出到文件
+
+	- 有时输出不了...加上下面的参数
+	- `grep --line-buffered`
+
+
+2. https://www.wolframalpha.com/
+
+	- awesome compute !!!!
+
+3. redis commit 事务取消
+
+4. `concurrentLinkedList`
+
+	- 实现起来好像会很难..
+
+5. 链表
+	
+	- leetcode
+	- 单链表反转  206
+	- 链表中环的检测  141
+	- 两个有序链表 合并  21
+	- 删除链表倒数 第 n 个点  19
+	- 求链表的中间节点  876
+
+
+
 
 
 
