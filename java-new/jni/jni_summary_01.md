@@ -15,16 +15,10 @@
 ## JNI 
 
 1. HelloWorld
-2. Signiture JAVA 类型标识符
-3. Java 基本类型与 C++ 中的转换
-	
-	- jstring to string
-	- https://stackoverflow.com/questions/41820039/jstringjni-to-stdstringc-with-utf8-characters
-	- jstring, jbool
-	- https://blog.csdn.net/u014300915/article/details/52916086
-	- jint to int/uint16_t
-	- https://stackoverflow.com/questions/8012450/jni-converting-unsigned-int-to-jint
 
+2. Signiture JAVA 类型标识符
+
+3. Java 基本类型与 C++ 中的转换
 
 4. 返回 NULL
 
@@ -37,5 +31,9 @@
 	- 设置 index, 值
 	- https://stackoverflow.com/questions/11666821/array-of-object-array-2d-arrays-jni
 
-
+8. jclass / jobject 
+	
+	- static 方法 -> jclass
+	- 非静态方法 -> jobject
+	- https://blog.csdn.net/CV_Jason/article/details/80026265
 

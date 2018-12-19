@@ -1545,9 +1545,9 @@ public ExecutorService getThreadPool() {
 
 	- 编译版本问题, C++ 代码在不同 VS 下表现不一致
 	- Release/Debug 版本速度差异巨大, 30ms/5s
+	- Release x64 x86 别搞错  Can't load IA 32-bit .dll on a AMD 64-bit platform
 	- 文件编码问题 C/C++ -> 命令行 -> 其他选项 -> /utf-8 
 	- 预编译头问题  C/C++ -> 预编译头 -> 不使用预编译头
-
 
 4. winscp transfer file to local Windows
 
