@@ -1703,6 +1703,26 @@ limitations under the License.
 	- 删除链表倒数 第 n 个点  19
 	- 求链表的中间节点  876
 
+## 2018.12.20
+
+1. 想要获取更好的结果, 就要首先获取更多的信息
+
+2. jni 多线程调用 static 方法
+
+	- 看了下jdk , native 方法有些是 static 的, Object/ Thread 中
+	- 有些是 非static 的, Unsafe 包
+	- 通过 ++ 多线程测试 jni native 方法
+
+3. stack
+
+	- 20,155,232,844,224,682,496
+
+4. 为什么要用 stack
+	
+	- 函数调用要符合先进后出的顺序
+
+
+
 
 
 
