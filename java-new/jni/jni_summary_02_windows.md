@@ -1,5 +1,9 @@
 # JNI 总结 02 Windows 纯命令行调用 DLL
 
+
+
+[TOC]
+
 ## 目标
 
 我的学习原则是先学会怎么用, 再问为什么? 
@@ -244,4 +248,20 @@ Ok, 成功了!
 `-fPIC`：表示编译为位置独立的代码，用于编译共享库。目标文件需要创建成位置无关码，概念上就是在可执行程序装载它们的时候，它们可以放在可执行程序的内存里的任何地方。
 
 参考: [gcc用法以及静态/动态链接](https://www.jianshu.com/p/31b33e5c48d7)
+
+### 关于文件路径中 `\` 和 `/`
+
+我实际测试下来, 在 windows 上下面的文件路径格式是可以用的
+
+```shell
+## 第一种 使用 `/`
+java -Djava.library.path=C:/Users/Administrator/Desktop/learn_jni/win_without_h HelloWorld
+
+## 第二种 使用反斜杠 `\\`
+java -Djava.library.path=C:\\Users\\Administrator\\Desktop\\learn_jni\\win_without_h HelloWorld
+```
+
+但是如果你直接拷贝的win下的文件路径,例如`D:\2018\Dec\java\play-jni`可能会产生`java.lang.UnsatisfiedLinkError`, 找不到链接文件. 所以你需要把文件目录改成双反斜杠的形式.
+
+原因就在于: String 会对使用反斜杠的字符进行转义.
 
