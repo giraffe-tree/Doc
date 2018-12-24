@@ -1,5 +1,22 @@
 # JNI 总结 05 Java 基本类型及 String 在 C++ 中的转换
 
+<!-- MarkdownTOC autolink=true -->
+
+- [目标](#%E7%9B%AE%E6%A0%87)
+- [版本](#%E7%89%88%E6%9C%AC)
+- [基本数据类型](#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B)
+    - [jint](#jint)
+    - [jlong](#jlong)
+    - [jbyte](#jbyte)
+    - [jboolean 等其他](#jboolean-%E7%AD%89%E5%85%B6%E4%BB%96)
+- [jstring](#jstring)
+    - [jstring to string](#jstring-to-string)
+    - [string to jstring](#string-to-jstring)
+- [参考](#%E5%8F%82%E8%80%83)
+
+<!-- /MarkdownTOC -->
+
+
 ## 目标
 
 1. Java 基本类型在 C++ 中的转换

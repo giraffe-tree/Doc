@@ -1722,6 +1722,24 @@ limitations under the License.
 	- 函数调用要符合先进后出的顺序
 
 
+## 2018.12.24
+
+1. markdown toc
+
+```
+## toc 配置
+autolink="true"
+
+## 快捷键配置
+{ 
+	"keys": ["ctrl+shift+j"], 
+	"command": "markdowntoc_insert" 
+},
+{ 
+	"keys": ["ctrl+shift+k"], 
+	"command": "markdowntoc_update" 
+}
+```
 
 
 

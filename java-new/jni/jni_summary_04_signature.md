@@ -1,5 +1,17 @@
 # JNI 总结 04 Signature
 
+<!-- MarkdownTOC autolink=true -->
+
+- [目标](#%E7%9B%AE%E6%A0%87)
+- [什么是 Signature](#%E4%BB%80%E4%B9%88%E6%98%AF-signature)
+  - [字节码解析](#%E5%AD%97%E8%8A%82%E7%A0%81%E8%A7%A3%E6%9E%90)
+- [怎么使用 Signature](#%E6%80%8E%E4%B9%88%E4%BD%BF%E7%94%A8-signature)
+  - [示例](#%E7%A4%BA%E4%BE%8B)
+- [参考](#%E5%8F%82%E8%80%83)
+
+<!-- /MarkdownTOC -->
+
+
 ## 目标
 
 1. 什么是 Signature?
