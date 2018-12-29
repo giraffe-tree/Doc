@@ -1741,8 +1741,40 @@ autolink="true"
 }
 ```
 
+## 2018.12.26
 
+1. disruptor
 
+2. cas 无锁队列
 
+3. Talk is cheap. Show me the code.
 
+## 2018.12.27
+
+1. idea 条件断点 新技能!!
+
+2. lombok 
+
+	- JSR 269 Pluggable Annotation Processing API
+
+3. mysql 中如何修改一个字段的类型
+
+	This is how I would do it:
+	1) Create a new datetime column  新建新的一列
+	ALTER TABLE mytable ADD COLUMN mydatetime DATETIME;
+	2) Update this column using the timestamp values   
+	UPDATE mytable SET mydatetime=FROM_UNIXTIME(UNIX_TIMESTAMP(mytimestamp));
+	3) After a few integrity checks, delete the timestamp column
+	ALTER TABLE mytable DROP COLUMN mytimestamp;
+	This should be safe enough for you, as you can keep the original timestamp column as long as you want.
+
+4. 好像有些版本的mysql 中 timestamp 是可以为 负的..
+
+	- 不过涉及到生日/过去时间的还是用 datetime 比较好
+
+## 2018.12.29
+
+1. spring boot hikari connect 未关闭
+
+2. Bytecode provider name : javassist
 
