@@ -1778,3 +1778,12 @@ autolink="true"
 
 2. Bytecode provider name : javassist
 
+## 2019.1.1
+
+1. java `int a = 1+2;`
+
+	- 编译之后是怎么样的?
+
+
+
+
