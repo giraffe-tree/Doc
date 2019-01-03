@@ -1817,6 +1817,10 @@ public class Hello{
 
 	- 玩玩?
 
+5.  在 docker 中配置 rocketMQ brokerIp 的问题
+
+	- https://medium.com/@prinswu/rocketmq-with-docker-compose-%E7%9C%9F%E7%9A%84%E5%BE%88%E5%A4%9A%E5%9D%91-d1bd41e26090
+
 
 
 
