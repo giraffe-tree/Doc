@@ -1783,6 +1783,39 @@ autolink="true"
 1. java `int a = 1+2;`
 
 	- 编译之后是怎么样的?
+	- 字节码中仅有一个数字 3
+
+## 2019.1.2
+
+1. 运行时编译/编译时运行
+
+## 2019.1.3
+
+1. mysql 定时0点弹出 update catalog
+
+	- https://stackoverflow.com/questions/26638238/strange-mysql-popup-mysql-installer-is-running-community-mode
+
+2. 字节码优化
+
+```java
+public class Hello{
+	// 整个 a 被优化成 4
+    int a = (1+1)*2;
+    // 括号中的内容会被优化成 3 
+    int b = (2+1)*a+1;
+}
+```
+
+相当于在编译时做了一部分计算
+
+3. bitmap
+
+	- 用户标签应该如何设计, 有什么优劣
+	- https://www.zhihu.com/question/20245628?sort=created
+
+4. 用 clojure 自动生成 repository ?
+
+	- 玩玩?
 
 
 
