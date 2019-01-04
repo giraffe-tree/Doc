@@ -23,7 +23,7 @@ list 可以近似理解为 LinkedList
 {:a 1, :b 2} ; map
 ```
 
-## clojure 的常用库/函数介绍
+## clojure cheatsheet
 
 https://clojure.org/api/cheatsheet
 
