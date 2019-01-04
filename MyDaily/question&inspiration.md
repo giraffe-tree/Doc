@@ -1822,5 +1822,20 @@ public class Hello{
 	- https://medium.com/@prinswu/rocketmq-with-docker-compose-%E7%9C%9F%E7%9A%84%E5%BE%88%E5%A4%9A%E5%9D%91-d1bd41e26090
 
 
+## 2019.1.4
+
+1. 深入浅出 Java CMS
+
+	- https://mp.weixin.qq.com/s/eGwLVk474cJWyVoP97gWGg
+
+2. ZGC 
+
+	- https://www.zhihu.com/question/287945354/answer/458761494
+
+3. Copying 复制算法
+
+	- 是如何实现的
+
+4. 并发GC根本上要跟应用玩追赶游戏：应用一边在分配，GC一边在收集，如果GC收集的速度能跟得上应用分配的速度，那就一切都很完美；一旦GC开始跟不上了，垃圾就会渐渐堆积起来，最终到可用空间彻底耗尽的时候，应用的分配请求就只能暂时等一等了，等GC追赶上来.所以，对于一个并发GC来说，能够尽快回收出越多空间，就能够应付越高的应用内存分配速率，从而更好地保持GC以完美的并发模式工作。
 
 
