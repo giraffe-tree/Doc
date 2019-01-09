@@ -1839,3 +1839,18 @@ public class Hello{
 4. 并发GC根本上要跟应用玩追赶游戏：应用一边在分配，GC一边在收集，如果GC收集的速度能跟得上应用分配的速度，那就一切都很完美；一旦GC开始跟不上了，垃圾就会渐渐堆积起来，最终到可用空间彻底耗尽的时候，应用的分配请求就只能暂时等一等了，等GC追赶上来.所以，对于一个并发GC来说，能够尽快回收出越多空间，就能够应付越高的应用内存分配速率，从而更好地保持GC以完美的并发模式工作。
 
 
+## 2019.1.8
+
+1. 泛型 instanceof
+
+2. mysql varchar(50) -> 指限定最多50个字符(不是字节)
+
+
+## 2019.1.9
+
+1. hibernate 二级缓存
+
+2. deeplearning4j 了解一下?
+
+	https://deeplearning4j.org/docs/latest/deeplearning4j-quickstart
+
