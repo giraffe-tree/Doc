@@ -1986,4 +1986,12 @@ ZoneId zoneId = ZoneId.systemDefault();
 LocalDate localDate = instant.atZone(zoneId).toLocalDate();
 ```
 
+## 2019.1.18
+
+1. docker deploy in idea
+
+
+
+
+
 
