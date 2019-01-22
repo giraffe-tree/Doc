@@ -1877,6 +1877,7 @@ public class Hello{
 	1. `nativeQuery`
 	2. 自定义 `Repository` autowired `SessionFactory`
 	3. `extend JpaSpecificationExecutor<T>`
+	4. `queryDsl`
 
 ## 2019.1.14
 
@@ -1990,8 +1991,12 @@ LocalDate localDate = instant.atZone(zoneId).toLocalDate();
 
 1. docker deploy in idea
 
+## 2019.1.22
 
+1. jvm 调参 -> 神经网络调参
 
+2. OSS policy 生成器 
 
+	- http://gosspublic.alicdn.com/ram-policy-editor/index.html?
 
 
