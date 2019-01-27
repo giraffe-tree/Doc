@@ -1999,4 +1999,12 @@ LocalDate localDate = instant.atZone(zoneId).toLocalDate();
 
 	- http://gosspublic.alicdn.com/ram-policy-editor/index.html?
 
+## 2019.1.27
+
+1. showing-a-spring-transaction-in-log
+	
+	- https://stackoverflow.com/questions/1965454/showing-a-spring-transaction-in-log
+
+
+
 
