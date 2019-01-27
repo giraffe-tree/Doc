@@ -1864,3 +1864,139 @@ public class Hello{
 
 	https://deeplearning4j.org/docs/latest/deeplearning4j-quickstart
 
+## 2019.1.10
+
+1. 运行时修改日志等级
+
+2. 抽象问题的能力
+
+## 2019.1.11
+
+1. hibernate 复杂sql的几种写法
+
+	1. `nativeQuery`
+	2. 自定义 `Repository` autowired `SessionFactory`
+	3. `extend JpaSpecificationExecutor<T>`
+	4. `queryDsl`
+
+## 2019.1.14
+
+1. `spring boot messagesource` 国际化
+
+2. `Validated` + `ExceptionHandler`
+
+```java
+@RestControllerAdvice
+public class ProcessExceptionHandler {
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseTO missingServletRequestParameter(MissingServletRequestParameterException ex) {
+        return ResponseTO.error(ErrorEnum.BUSINESS_PARAM_INVALID, "参数 - " + ex.getParameterName() + " 未找到");
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseTO methodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex) {
+        return ResponseTO.error(ErrorEnum.BUSINESS_PARAM_INVALID, "参数 - " + ex.getName() + " 类型错误");
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ResponseTO httpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException ex) {
+        return ResponseTO.error(ErrorEnum.SERVER_METHOD_NOT_SUPPORT,"不支持 HTTP 方法: "+ex.getMethod());
+    }
+
+    @ExceptionHandler(BindException.class)
+    public ResponseTO bindExceptionHandler(BindException bindException) {
+        FieldError fieldError = bindException.getFieldError();
+        return ResponseTO.error(ErrorEnum.BUSINESS_PARAM_INVALID, Objects.requireNonNull(fieldError).getDefaultMessage());
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseTO exceptionHandler() {
+        return ResponseTO.error(ErrorEnum.SERVER_ERROR);
+    }
+}
+```
+
+https://stackoverflow.com/questions/14483223/custom-binding-error-message-with-collections-of-beans-in-spring-mvc
+
+```java
+@Autowired
+private MessageSource messageSource;
+DefaultMessageCodesResolver
+class DefaultBindingErrorProcessor implements BindingErrorProcessor
+```
+
+3. `ExceptionHandler 中抛出异常`
+
+## 2019.1.15
+
+1. `javax.validation.constraints` 自定义限定
+
+	- https://stackoverflow.com/questions/6294587/java-string-validation-using-enum-values-and-annotation
+
+2. `annotation`中的限制
+
+```
+// https://stackoverflow.com/questions/49609447/how-to-set-integer-array-in-java-annotation
+Invalid type Integer[] for the annotation attribute permissions;
+only primitive type, String, Class, annotation, enumeration are permitted or one-dimensional arrays thereof
+```
+
+3. `LongValidator`
+
+```java
+public class LongValidator implements ConstraintValidator<ValidateLong, Long> {
+
+    private List<Long> valueList;
+    @Override
+    public void initialize(ValidateLong constraintAnnotation) {
+        valueList = new ArrayList<>();
+        for (Long val : constraintAnnotation.acceptedValues()) {
+            valueList.add(val);
+        }
+    }
+    @Override
+    public boolean isValid(Long value, ConstraintValidatorContext context) {
+        return valueList.contains(value);
+    }
+}
+```
+
+4. 注解 与 泛型
+	
+    - 注解不能使用泛型
+	- https://stackoverflow.com/questions/7594582/annotation-attributes-with-type-parameters
+
+
+## 2019.1.16
+
+1. list to map
+
+	- `lsit.stream().collect(Collectors.toMap(User::getId, Function.identity()))`
+	- https://stackoverflow.com/questions/20363719/java-8-listv-into-mapk-v
+	- `Map<String, Choice> result = choices.stream().collect(Collectors.toMap(Choice::getName, c -> c));`
+
+
+2. `Date` to `LocalDate`
+
+```java
+Instant instant = from.toInstant();
+ZoneId zoneId = ZoneId.systemDefault();
+
+// atZone()方法返回在指定时区从此Instant生成的ZonedDateTime。
+LocalDate localDate = instant.atZone(zoneId).toLocalDate();
+```
+
+## 2019.1.18
+
+1. docker deploy in idea
+
+## 2019.1.22
+
+1. jvm 调参 -> 神经网络调参
+
+2. OSS policy 生成器 
+
+	- http://gosspublic.alicdn.com/ram-policy-editor/index.html?
+
+
