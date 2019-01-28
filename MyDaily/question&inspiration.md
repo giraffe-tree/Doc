@@ -1999,4 +1999,25 @@ LocalDate localDate = instant.atZone(zoneId).toLocalDate();
 
 	- http://gosspublic.alicdn.com/ram-policy-editor/index.html?
 
+## 2019.1.24
+
+1. java 语法检查, 不检查import, 在编译之前
+
+2. sql injection in jpa 
+
+	- https://stackoverflow.com/questions/3441193/are-sql-injection-attacks-possible-in-jpa
+
+## 2019.1.25
+
+1. 在 querydsl-jpa 中使用 mysql 内置函数/自定义函数
+
+	- 对 jpa 进行自定义
+	- https://stackoverflow.com/questions/7005354/jpa-criteria-api-group-concat-usage
+	- http://www.voidcn.com/article/p-nzsfettl-btk.html
+	- https://github.com/querydsl/querydsl/issues/2377#issuecomment-457435922
+
+2. query-jpa 中不允许join中使用子查询
+	
+	- join 中不允许使用子查询
+	- https://stackoverflow.com/questions/6942108/jpql-querydsl-join-subquery-and-get-aliased-column
 
