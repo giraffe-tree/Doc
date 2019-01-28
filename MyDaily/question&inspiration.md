@@ -2018,8 +2018,9 @@ LocalDate localDate = instant.atZone(zoneId).toLocalDate();
 
 2. query-jpa 中不允许join中使用子查询
 	
-	- join 中不允许使用子查询
+	- query-jpa 使用 JPQL 规范, 因此受到了 JPQL 的限制, 不能再 join 中使用 子查询
 	- https://stackoverflow.com/questions/6942108/jpql-querydsl-join-subquery-and-get-aliased-column
+	- 相应的解决方案时, 可以在 `on` 语句中加入限定条件, 但这可能表达能力有限
 
 ## 2019.1.27
 
@@ -2027,6 +2028,8 @@ LocalDate localDate = instant.atZone(zoneId).toLocalDate();
 	
 	- https://stackoverflow.com/questions/1965454/showing-a-spring-transaction-in-log
 
+2. jpa 中即使我先删除, 再插入, 最后sql执行也会变成, 先插入后删除, why?
 
+3. 在事务中, 异步处理
 
 
