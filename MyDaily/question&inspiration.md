@@ -2021,3 +2021,12 @@ LocalDate localDate = instant.atZone(zoneId).toLocalDate();
 	- join 中不允许使用子查询
 	- https://stackoverflow.com/questions/6942108/jpql-querydsl-join-subquery-and-get-aliased-column
 
+## 2019.1.27
+
+1. showing-a-spring-transaction-in-log
+	
+	- https://stackoverflow.com/questions/1965454/showing-a-spring-transaction-in-log
+
+
+
+
