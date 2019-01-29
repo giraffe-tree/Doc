@@ -1004,6 +1004,7 @@ read 深入理解java虚拟机
          python -m ensurepip
          python -m pip install --upgrade pip
          python -m pip install --upgrade pip==18.0```
+         ```
     - 最后吐槽一句, 作为一个第一天使用 pipenv 的新手来说, 真的算不上一次很好的体验.
 
 
@@ -1863,4 +1864,17 @@ public class Hello{
 2. deeplearning4j 了解一下?
 
 	https://deeplearning4j.org/docs/latest/deeplearning4j-quickstart
+
+## 2019.1.16
+
+1. MIT 课程 
+   - https://ocw.mit.edu/courses/most-visited-courses/
+   - youtube 量子力学
+   - https://www.youtube.com/watch?v=lZ3bPUKo5zc&list=PLUl4u3cNGP61-9PEhRognw5vryrSEVLPr
+
+
+
+
+
+
 
