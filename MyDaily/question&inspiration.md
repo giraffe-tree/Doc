@@ -2032,4 +2032,13 @@ LocalDate localDate = instant.atZone(zoneId).toLocalDate();
 
 3. 在事务中, 异步处理
 
+## 2019.1.28
+
+1. springboot jpa open-in-view 
+
+	- https://stackoverflow.com/questions/30549489/what-is-this-spring-jpa-open-in-view-true-property-in-spring-boot
+
+
+
+
 
