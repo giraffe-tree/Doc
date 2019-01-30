@@ -2039,12 +2039,21 @@ LocalDate localDate = instant.atZone(zoneId).toLocalDate();
 
 3. 在事务中, 异步处理
 
+4. mysql 事务中 read-view 中的数据在之前改变会不会导致事务失败回滚?
+
+	- https://www.cnblogs.com/Allen-win/p/8283102.html
+
 ## 2019.1.28
 
 1. springboot jpa open-in-view 
 
 	- https://stackoverflow.com/questions/30549489/what-is-this-spring-jpa-open-in-view-true-property-in-spring-boot
 
+## 2019.1.29
+
+1.  `proxy_connect_timeout 5;`
+
+	- 没有这句话就访问错误? 什么原因呢
 
 
 
