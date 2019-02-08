@@ -21,7 +21,7 @@ set autocommit=0;
 set global autocommit=0;
 ```
 
-###` autocommit` 是什么作用?
+### `autocommit` 是什么作用?
 
 #### 默认下 autocommit =1 
 

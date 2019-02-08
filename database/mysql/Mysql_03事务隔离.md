@@ -1,5 +1,13 @@
 # Mysql 事务隔离
 
+## 概述
+
+### 知识点
+
+1. 事务隔离级别有哪些?
+
+
+
 ## 事务隔离
 
 1. 读未提交：别人改数据的事务尚未提交，我在我的事务中也能读到。
@@ -21,7 +29,11 @@
 
 `set autocommit=0`，该命令会把这个线程的自动提交关掉。这样只要执行一个select语句，事务就启动，并不会自动提交，直到主动执行commit或rollback或断开连接。
 
-### 疑问
+## 
+
+
+
+## 疑问
 
 1. `information_schema.innodb_trx` 这张表是做什么的 ?
    - `select * from information_schema.innodb_trx ;`

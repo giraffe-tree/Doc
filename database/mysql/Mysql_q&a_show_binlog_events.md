@@ -40,22 +40,36 @@ SHOW BINLOG EVENTS
 
 #### 示例
 
-```sql
-mysql> show binlog events in 'mysql-bin.000027' limit 224980,10;
-+------------------+----------+----------------+-----------+-------------+----------------------------------------------------------------------------+
-| Log_name         | Pos      | Event_type     | Server_id | End_log_pos | Info                                                                       |
-+------------------+----------+----------------+-----------+-------------+----------------------------------------------------------------------------+
-| mysql-bin.000027 | 22832026 | Anonymous_Gtid |         1 |    22832091 | SET @@SESSION.GTID_NEXT= 'ANONYMOUS'                                       |
-| mysql-bin.000027 | 22832091 | Query          |         1 |    22832176 | BEGIN                                                                      |
-| mysql-bin.000027 | 22832176 | Query          |         1 |    22832315 | use `db_test`; update v_user set school_index = school_index+1 where id =1 |
-| mysql-bin.000027 | 22832315 | Xid            |         1 |    22832346 | COMMIT /* xid=149415 */                                                    |
-+------------------+----------+----------------+-----------+-------------+----------------------------------------------------------------------------+
-4 rows in set (0.11 sec)
-```
+1. 使用 `show binlog events`
+
+    ```sql
+    mysql> show binlog events in 'mysql-bin.000027' limit 224980,10;
+    +------------------+----------+----------------+-----------+-------------+----------------------------------------------------------------------------+
+    | Log_name         | Pos      | Event_type     | Server_id | End_log_pos | Info                                                                       |
+    +------------------+----------+----------------+-----------+-------------+----------------------------------------------------------------------------+
+    | mysql-bin.000027 | 22832026 | Anonymous_Gtid |         1 |    22832091 | SET @@SESSION.GTID_NEXT= 'ANONYMOUS'                                       |
+    | mysql-bin.000027 | 22832091 | Query          |         1 |    22832176 | BEGIN                                                                      |
+    | mysql-bin.000027 | 22832176 | Query          |         1 |    22832315 | use `db_test`; update v_user set school_index = school_index+1 where id =1 |
+    | mysql-bin.000027 | 22832315 | Xid            |         1 |    22832346 | COMMIT /* xid=149415 */                                                    |
+    +------------------+----------+----------------+-----------+-------------+----------------------------------------------------------------------------+
+    4 rows in set (0.11 sec)
+    ```
 
 上面这个 binlog 记录了更新一次事务的业务逻辑.
 
-###  `show binlog events` 有什么作用?
+2. 使用 `mysqlbinlog` 工具
+
+   ```sh
+   #  --no-defaults 为了避免 unknown variable 'default-character-set=utf8' 的错误
+   # -o 跳过
+   mysqlbinlog --no-defaults -o 225025 mysql-bin.000027
+   # --start-datetime 开始的时间
+   mysqlbinlog --no-defaults --start-datetime='2019-02-08 00:00:00' mysql-bin.000027
+   ```
+
+   详情请参考: https://dev.mysql.com/doc/refman/8.0/en/mysqlbinlog.html
+
+###  show binlog events` 有什么作用?
 
 查看 `binlog` , 验证执行的 sql 是否正确
 
@@ -66,6 +80,11 @@ mysql> show binlog events in 'mysql-bin.000027' limit 224980,10;
 - 增量备份
 
 #### binlog 三种模式的区别
+
+```sql
+SELECT @@binlog_format;
+SELECT @@global.binlog_format;
+```
 
 - Row level: 仅保存记录被修改细节，不记录sql语句上下文相关信息优点：能非常清晰的记录下每行数据的修改细节，不需要记录上下文相关信息，因此不会发生某些特定情况下的procedure、function、及trigger的调用触发无法被正确复制的问题，任何情况都可以被复制，且能加快从库重放日志的效率，保证从库数据的一致性
   缺点:由于所有的执行的语句在日志中都将以每行记录的修改细节来记录，因此，可能会产生大量的日志内容，干扰内容也较多；比如一条update语句，如修改多条记录，则binlog中每一条修改都会有记录，这样造成binlog日志量会很大，特别是当执行alter table之类的语句的时候，由于表结构修改，每条记录都发生改变，那么该表每一条记录都会记录到日志中，实际等于重建了表。
