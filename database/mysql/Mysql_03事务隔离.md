@@ -29,7 +29,30 @@
 
 `set autocommit=0`，该命令会把这个线程的自动提交关掉。这样只要执行一个select语句，事务就启动，并不会自动提交，直到主动执行commit或rollback或断开连接。
 
-## 
+## MVCC
+
+
+
+
+
+## 其他
+
+### undo log
+
+事务中, 语句更新会生成 undo log（回滚日志）
+
+### start transaction with consistent snapshot
+
+它的含义是： 执行 start transaction 同时建立本事务一致性读的 snapshot . 而不是等到执行第一条语句时，才开始事务，并且建立一致性读的 snapshot .
+
+https://www.cnblogs.com/digdeep/p/4947694.html
+
+
+
+有个问题, 一个事务提交了, 但是另一个事务回滚了, 那么修改的值会怎么样?
+
+
+
 
 
 
