@@ -2056,5 +2056,13 @@ LocalDate localDate = instant.atZone(zoneId).toLocalDate();
 	- 没有这句话就访问错误? 什么原因呢
 
 
+## 2019.2.10
+
+1. jpa how to rollback?
+
+2. itextpdf
+
+	- https://mp.weixin.qq.com/s?__biz=MzI2NDU3OTg5Nw==&mid=2247483859&idx=1&sn=f21c3238f9c3356271f2fb353881c402&chksm=eaab3f85dddcb693ac39255db31654d4ae545d235dc161aa0f3eb2834c97492b7af920b82e6c&scene=21#wechat_redirect
+	- 全:https://www.cnblogs.com/liaojie970/p/7132475.html
 
 
