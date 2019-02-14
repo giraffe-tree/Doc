@@ -2075,8 +2075,12 @@ LocalDate localDate = instant.atZone(zoneId).toLocalDate();
 ## 2019.2.13
 
 1. `win` 命令行分析 内存占用情况?
+2. `@RetryTransaction`
+   - https://stackoverflow.com/questions/2332768/how-to-avoid-mysql-deadlock-found-when-trying-to-get-lock-try-restarting-trans
 
-2. 
+
+
+
 
  
 
