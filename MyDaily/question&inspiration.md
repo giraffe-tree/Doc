@@ -2078,6 +2078,10 @@ LocalDate localDate = instant.atZone(zoneId).toLocalDate();
 2. `@RetryTransaction`
    - https://stackoverflow.com/questions/2332768/how-to-avoid-mysql-deadlock-found-when-trying-to-get-lock-try-restarting-trans
 
+## 2019.2.15
+
+1. 有向图判环
+
 
 
 
