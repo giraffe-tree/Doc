@@ -2082,9 +2082,23 @@ LocalDate localDate = instant.atZone(zoneId).toLocalDate();
 
 1. 有向图判环
 
+## 2019.2.17
 
+1. mysql ` Authentication plugin 'caching_sha2_password' cannot be loaded: dlopen(/usr/...`
 
+   - 在用 docker 启动 mysql 时遇到的, 远程连接不上
 
+   - 配置文件 `/etc/mysql/conf.d/mysql.cnf`
+
+   - > [mysqld]
+     >
+     > default_authentication_plugin=mysql_native_password
 
  
+
+
+
+
+
+
 
