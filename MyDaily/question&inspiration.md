@@ -2088,16 +2088,59 @@ LocalDate localDate = instant.atZone(zoneId).toLocalDate();
 
    - 在用 docker 启动 mysql 时遇到的, 远程连接不上
 
+2. `java -cp C:\Users\Administrator\.m2\repository\org\clojure\clojure\1.10.0\clojure-1.10.0.jar learnclojure.clj`
+
+3. https://api.aliyun.com/#/
+
    - 配置文件 `/etc/mysql/conf.d/mysql.cnf`
 
    - > [mysqld]
      >
      > default_authentication_plugin=mysql_native_password
 
+4. kafka 
+
+	- `Caused by: org.apache.kafka.streams.errors.StreamsException: task [0_3] Abort sending since an error caught with a previous record (xxx) to topic dockerUpCtrl due to org.apache.kafka.common.errors.TimeoutException: Expiring 223 record(s) for dockerUpCtrl-0: 30106 ms has passed since batch creation plus linger time.`
+	- https://stackoverflow.com/questions/46750420/kafka-producer-error-expiring-10-records-for-topicxxxxxx-6686-ms-has-passed
+	- https://blog.csdn.net/jiecxy/article/details/53369173#commentBox
+
+	1. 检查网络 ping, telnet
+	2. 吞吐量不够? 增大 `batch.size`, `request.timeout.ms`
+	3. 发现另外一个问题, 记录在重复消费?
+	4. 查看 offset, zoopkeeper 查看, 1.1 版本的
+	5. 使用 `kafka-consumer-groups.sh --bootstrap-server 10.xx.xx.xx:9092 --group groupName --describe`
+	6. 打算重置 offset, ` --reset-offsets --to-latest --all-topics --execute`
+	7. 重置完之后, 查看了 LAG=0
+	8. 当时没有数据进入, 但是消费者重启后, 仍然在消费, LAG变了 -> 重复消费了
+	9. 由于我用的1.1.0 版本 offset 过期的缘故, 并且由于我的消费者配置中 `auto.offset.reset = earliest`, ` enable.auto.commit=false` 导致了程序一启动就去重复消费数据, 且 offset 未提交, 而消费者如果未找到有效偏移量, 则根据auto.offset.reset参数重置偏移量.
+
+
+5. kafka producer oom
+
+	- https://blog.csdn.net/szwandcj/article/details/77460939
+	- 根据 `batch.size` 和 `linger.ms`, 满足 `batch.size` 和 `linger.ms` 之一，producer便开始发送消息。
+	- `batch.size` 单位:字节, 默认 16384Bytes
+
+6. kafka producer config
+
+	- http://atbug.com/kafka-producer-config/
+
+7. kafka 1.1.0 reset offset
+
+	- https://cwiki.apache.org/confluence/display/KAFKA/KIP-122%3A+Add+Reset+Consumer+Group+Offsets+tooling
+	- https://stackoverflow.com/questions/50741783/why-does-kafka-streams-reprocess-the-messages-produced-after-broker-restart/52571074#52571074
+	- https://stackoverflow.com/questions/39131465/how-does-an-offset-expire-for-an-apache-kafka-consumer-group
+	- https://issues.apache.org/jira/browse/KAFKA-4682
+	- 我自己测试了一下应该是由于我用的1.1.0 版本 offset 过期的缘故, 并且由于我的消费者配置中 `auto.offset.reset = earliest`, ` enable.auto.commit=false` 导致了程序一启动就去重复消费数据, 且 offset 未提交, 而消费者如果未找到有效偏移量, 则根据auto.offset.reset参数重置偏移量.
+	- 其中还碰到一个 `timeoutException`, 
+
+
+
+## 2019.2.19
+
+1. `1KiB = 1024B` ,`1KB=1000B/1024B`
  
-
-
-
+2. 
 
 
 
