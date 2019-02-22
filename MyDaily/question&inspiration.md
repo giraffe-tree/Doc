@@ -2140,8 +2140,52 @@ LocalDate localDate = instant.atZone(zoneId).toLocalDate();
 
 1. `1KiB = 1024B` ,`1KB=1000B/1024B`
  
-2. 
+2. ` df -hl `
+
+3. idea 运行时编译
 
 
+4. 
+
+```
+CREATE TABLE `t_desk` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `ddd` varchar(45) DEFAULT NULL,
+  `key` bigint(20) NOT NULL,
+  `value` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4
+```
+
+```
+insert into t_desc (key,value) values (1, "hello");
+```
+
+会产生语法错误, 原因在于 key 为关键字
+
+5. jpa 的问题
+
+	1. 支持的sql语法有限
+
+
+
+
+## 2019.2.22
+
+1. vim 缩进 tab, insert 界面中 `ctrl+d` , tab insert 界面 `ctrl+t`
+
+2. 事务传播特性 7 种
+
+	- 嵌套事务
+
+3. springboot 事务管理 默认事务隔离
+
+4. `@Transaction` 在方法内部调用无法开启事务
+
+	`AopContext.currentProxy()` 获取当前类的代理对象, 再调用增强后的方法
+
+5. `CompletableFuture` 中异常没有报出, 没有报错, 但实际已经 NPE 了
+
+6. `winscp` linux 传文件到 win
 
 
