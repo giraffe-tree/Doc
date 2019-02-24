@@ -87,6 +87,11 @@ mysql 的 server 层是不管理事务的, 事务都是由下层的存储引擎�
 
 因为表结构没有对应的行数据, 也没有 `trx_id`, 因此只能遵循当前读
 
+### Consistent read view 一致性读视图
+
+用于实现 `read commited` 和 `repeateable read` 隔离级别
+
+它没有物理结构, 作用是在事务执行期间用来定义 *我能看到什么数据*
 
 
 ## 其他

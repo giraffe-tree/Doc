@@ -50,7 +50,7 @@ commit;
 
 ## 疑问
 
-### 在`mysql` 命令行中更新了数据, 但在 workbench 中没有看到更新 ? 
+####  在`mysql` 命令行中更新了数据, 但在 workbench 中没有看到更新 ? 
 
 
 
