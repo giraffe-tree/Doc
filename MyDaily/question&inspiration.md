@@ -2141,7 +2141,7 @@ LocalDate localDate = instant.atZone(zoneId).toLocalDate();
 ## 2019.2.19
 
 1. `1KiB = 1024B` ,`1KB=1000B/1024B`
- 
+
 2. ` df -hl `
 
 3. idea 运行时编译
@@ -2170,6 +2170,10 @@ insert into t_desc (key,value) values (1, "hello");
 	1. 支持的sql语法有限
 
 
+## 2019.2.20 
+
+1. `http://mysql.taobao.org/monthly/`
+
 
 
 ## 2019.2.22
@@ -2185,6 +2189,7 @@ insert into t_desc (key,value) values (1, "hello");
 4. `@Transaction` 在方法内部调用无法开启事务
 
 	`AopContext.currentProxy()` 获取当前类的代理对象, 再调用增强后的方法
+
 
 5. `CompletableFuture` 中异常没有报出, 没有报错, 但实际已经 NPE 了
 
