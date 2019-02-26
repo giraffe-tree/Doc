@@ -2195,5 +2195,17 @@ insert into t_desc (key,value) values (1, "hello");
 
 6. `winscp` linux 传文件到 win
 
+## 2019.2.25
+
+1. `top` + `P` -> cpu 排序
+
+2. `B+ tree` 删除节点?
+
+3. `B+ tree` 叶子节点分裂
+	- 节点递增, 就不会引起叶子节点分裂
+
+
+
+
 
 
