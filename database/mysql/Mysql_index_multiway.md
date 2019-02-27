@@ -23,9 +23,11 @@
 
 这里我们只讨论非叶子节点的情况, 一个记录= 5(header) + 4(假定主键为4个字节)+4(子页的序号) = 13
 
-在innodb 中page 是由一个 4字节的 int 来编号的 (上面公式中的子叶序号就是一个 page_number), 所以想想看 mysql 最多能存多少?  大概是 `2^32 * 16*1024 B=  64 TB`
+在innodb 中page 是由一个 4字节的 int 来编号的 (上面公式中的子叶序号就是一个 page_number), 所以想想看 mysql 最多能存多少? 大概是 `2^32 *16*1024 B= 64TB`
 
-![Index Overview](https://open-chen.oss-cn-hangzhou.aliyuncs.com/open/img/2019/Feb/IMG_0009.PNG)
+索引结构: 
+
+![](https://open-chen.oss-cn-hangzhou.aliyuncs.com/open/img/2019/Feb/IMG_0009.png)
 
 ### 表结构
 
