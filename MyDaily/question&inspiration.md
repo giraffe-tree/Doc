@@ -2142,7 +2142,7 @@ LocalDate localDate = instant.atZone(zoneId).toLocalDate();
 
 1. `1KiB = 1024B` ,`1KB=1000B/1024B`
 
-2. ` df -hl `
+2. ` df -hl ` 磁盘占用
 
 3. idea 运行时编译
 
@@ -2213,9 +2213,11 @@ insert into t_desc (key,value) values (1, "hello");
 	1. `B+tree` 叶子节点是有序的
 	2. 比如我想查询一个排序好的结果, 要支持正序/倒序, 那应该用单链表还是双向链表呢? 那就只能是双向链表了
 
+## 2019.2.27
 
+1. `docker run -p 3306:3306 --name mymysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=xxx -d mysql:5.7`
 
-
+2. mysql 索引的 `B+ tree` 到底是 `几叉树` ?
 
 
 
