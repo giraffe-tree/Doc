@@ -12,7 +12,14 @@ Multiversion concurrency control
 
 ### MVCC 的优点
 
-
+```
+Trx id counter 2568
+Purge done for trx's n:o < 2566 undo n:o < 0 state: running but idle
+History list length 3
+LIST OF TRANSACTIONS FOR EACH SESSION:
+---TRANSACTION 421164805986144, not started
+0 lock struct(s), heap size 1136, 0 row lock(s)
+```
 
 ### MVCC 的缺点
 

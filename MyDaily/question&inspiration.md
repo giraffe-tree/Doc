@@ -2182,13 +2182,13 @@ insert into t_desc (key,value) values (1, "hello");
 
 2. 事务传播特性 7 种
 
-	- 嵌套事务
+  - 嵌套事务
 
 3. springboot 事务管理 默认事务隔离
 
 4. `@Transaction` 在方法内部调用无法开启事务
 
-	`AopContext.currentProxy()` 获取当前类的代理对象, 再调用增强后的方法
+  `AopContext.currentProxy()` 获取当前类的代理对象, 再调用增强后的方法
 
 
 5. `CompletableFuture` 中异常没有报出, 没有报错, 但实际已经 NPE 了
@@ -2216,8 +2216,10 @@ insert into t_desc (key,value) values (1, "hello");
 ## 2019.2.27
 
 1. `docker run -p 3306:3306 --name mymysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=xxx -d mysql:5.7`
-
 2. mysql 索引的 `B+ tree` 到底是 `几叉树` ?
+
+
+
 
 
 
