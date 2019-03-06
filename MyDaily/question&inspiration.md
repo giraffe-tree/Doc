@@ -2216,22 +2216,67 @@ insert into t_desc (key,value) values (1, "hello");
 ## 2019.2.27
 
 1. `docker run -p 3306:3306 --name mymysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=xxx -d mysql:5.7`
+
 2. mysql 索引的 `B+ tree` 到底是 `几叉树` ?
 
+	- 在默认`innodb_page_size` 16KB 下
+	- int 1203 
+	- bigint 928
 
+## 2019.3.1
+
+1. `DATE_SUB(t.time, INTERVAL 1 DAY) `
+	
+	- timstamp(3) 可以使用
+
+
+## 2019.3.4
+
+1. 缓存过期
+
+	- MVCC 实现
 
 ## 2019.3.5
 
-1.  mysql 5.6.4 以后, 增加了` fractional seconds precision ` (FSP)
+1. 画 jpg/png 时的中文字体显示问题
+
+	- docker 启动
+	- 将字体包挂载到 `/usr/share/fonts/` 目录下
+	- 如: `-v /project/test/font/apple_hei_simple.ttf:/usr/share/fonts/apple_hei_simple.ttf`
+	- 如何判断已经可以使用字体包
+	- ```java
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        String[] fontFamilies = ge.getAvailableFontFamilyNames();
+        for (String s : fontFamilies) {
+        	// 这里会将所有可用的字体包名称打印出来
+            System.out.println(s);
+        }
+        ```
+    - 
+
+2. 手动回滚
+
+	- `TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();`
+
+3. update `@Modifying`
+
+4.  mysql 5.6.4 以后, 增加了` fractional seconds precision ` (FSP)
    - `TIMESTAMP` 4个字节 + 小数秒
    - `DATETIME` 5个字节 + 小数秒
    -  1/2 位小数 -> 1字节  3/4位小数 -> 2字节 ...
    - https://dev.mysql.com/doc/internals/en/date-and-time-data-type-representation.html
 
-2. `internals`
+5. `internals` mysql 内部文档 (很多内容已经很老了)
    - https://dev.mysql.com/doc/internals/en/innodb-fil-header.html
 
-3. `fsync`
+
+6. `fsync`
    - https://www.cnblogs.com/bhlsheji/p/5222271.html
    - 数据库应用一般会在调用write()保存关键交易数据的同一时候也调用fsync().这样更能保证数据的安全可靠.
+
+
+## 2019.3.6
+
+
+
 
