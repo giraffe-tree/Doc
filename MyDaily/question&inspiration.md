@@ -2220,9 +2220,18 @@ insert into t_desc (key,value) values (1, "hello");
 
 
 
+## 2019.3.5
 
+1.  mysql 5.6.4 以后, 增加了` fractional seconds precision ` (FSP)
+   - `TIMESTAMP` 4个字节 + 小数秒
+   - `DATETIME` 5个字节 + 小数秒
+   -  1/2 位小数 -> 1字节  3/4位小数 -> 2字节 ...
+   - https://dev.mysql.com/doc/internals/en/date-and-time-data-type-representation.html
 
+2. `internals`
+   - https://dev.mysql.com/doc/internals/en/innodb-fil-header.html
 
-
-
+3. `fsync`
+   - https://www.cnblogs.com/bhlsheji/p/5222271.html
+   - 数据库应用一般会在调用write()保存关键交易数据的同一时候也调用fsync().这样更能保证数据的安全可靠.
 
