@@ -2277,6 +2277,12 @@ insert into t_desc (key,value) values (1, "hello");
 
 ## 2019.3.6
 
+## 2019.3.7
+
+1. java map to stream
+
+	- https://stackoverflow.com/questions/35486826/transform-and-filter-a-java-map-with-streams
+
 
 
 
