@@ -2283,6 +2283,11 @@ insert into t_desc (key,value) values (1, "hello");
 
 	- https://stackoverflow.com/questions/35486826/transform-and-filter-a-java-map-with-streams
 
+## 2019.3.8
 
+
+1. collectors to map
+
+	- https://colorpanda.iteye.com/blog/2319688
 
 
