@@ -2251,7 +2251,7 @@ insert into t_desc (key,value) values (1, "hello");
         	// 这里会将所有可用的字体包名称打印出来
             System.out.println(s);
         }
-        ```
+    ```
     - 
 
 2. 手动回滚
@@ -2267,6 +2267,7 @@ insert into t_desc (key,value) values (1, "hello");
    - https://dev.mysql.com/doc/internals/en/date-and-time-data-type-representation.html
 
 5. `internals` mysql 内部文档 (很多内容已经很老了)
+
    - https://dev.mysql.com/doc/internals/en/innodb-fil-header.html
 
 
@@ -2289,5 +2290,66 @@ insert into t_desc (key,value) values (1, "hello");
 1. collectors to map
 
 	- https://colorpanda.iteye.com/blog/2319688
+
+
+
+## 2019.3.10
+
+1. windows 进程间通讯
+   - 命名管道 named-pipe
+   - 共享内存  shared-memory
+2. Unix 进程间通讯
+   - 使用 unix 域套接字文件 `--protocal=socket`
+   - `mysql` 默认使用的域套接字文件时 `/tmp/mysql.sock`
+
+3. Mysql 查看表结构/建表语句
+
+```
+show create table t1\G
+```
+
+4. mysql 查看默认引擎
+
+   - ```mysqld --verbose --help | grep engine```
+
+5. 查看系统变量和状态变量
+
+   - `show variables like '%connection%';`
+   - `show status like "%thread%";`
+
+6. mysql 中的`utf8` 为 `utf8mb3` 是 经过阉割后的`utf8` , 正宗的是 `utf8mb4` 使用的是4个字节, 可以放入 emoji 表情这类的.
+
+   - `show charset;`
+
+7. mysql `show collation;` 表示的是字符集的比较规则
+
+   - `_ci` case insensitive 不区分大小写
+   - `_cs` case sensitive 区分大小写
+   - `show variables like '%collation%';` 
+   - 对于 mysql 中的**同一张表的不同列也可以有不同的字符集/比较规则**
+
+8. 客户端到服务器/服务器到客户端 实际上也伴随着多次字符集的转换
+
+   - 使用操作系统的字符集请求字符串.
+   - 从 `character_set_client` ->  `character_set_connection`
+   - `character_set_connection` 转为表交互的字符类型 `c`
+   - 操作表返回结果
+   - `c` ->  `character_set_connection` 
+   - `character_set_connection` -> `character_set_results`
+   - 使用操作系统的字符集
+
+9. 字符集/比较规则的选用会影响唯一键的判定
+  - ```
+    CREATE TABLE `t7_for_uni` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+      PRIMARY KEY (`id`),
+      UNIQUE KEY `name_UNIQUE` (`name`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    ```
+
+   - `alter table t7_for_uni modify name varchar(20) character set utf8mb4 COLLATE utf8mb4_bin ;`
+
+   - `alter table t7_for_uni modify name varchar(20) character set utf8mb4 COLLATE utf8mb4_general_ci ;`
 
 
