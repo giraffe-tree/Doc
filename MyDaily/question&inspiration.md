@@ -2352,4 +2352,10 @@ show create table t1\G
 
    - `alter table t7_for_uni modify name varchar(20) character set utf8mb4 COLLATE utf8mb4_general_ci ;`
 
+## 2019.3.12
+
+1. windows 10 + docker + git bash  -> run jupyter
+
+	- `winpty docker run -it -v /${PWD}:/tf/notebooks/ --name jupyter tensorflow/tensorflow:nightly-jupyter`
+	- https://stackoverflow.com/questions/50608301/docker-mounted-volume-adds-c-to-end-of-windows-path-when-translating-from-linux
 
