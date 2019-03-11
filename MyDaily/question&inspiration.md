@@ -2356,6 +2356,6 @@ show create table t1\G
 
 1. windows 10 + docker + git bash  -> run jupyter
 
-	- `winpty docker run -it -v /${PWD}:/tf/notebooks/ --name jupyter tensorflow/tensorflow:nightly-jupyter`
+	- `winpty docker run -it -v /${PWD}:/tf/notebooks/ --name jupyter -p 8888:8888  tensorflow/tensorflow:nightly-jupyter`
 	- https://stackoverflow.com/questions/50608301/docker-mounted-volume-adds-c-to-end-of-windows-path-when-translating-from-linux
 
