@@ -2352,10 +2352,25 @@ show create table t1\G
 
    - `alter table t7_for_uni modify name varchar(20) character set utf8mb4 COLLATE utf8mb4_general_ci ;`
 
+## 2019.3.11
+
+1. `git checkout -b dev`
+
+	- 新建分支, 切换分支
+
 ## 2019.3.12
 
 1. windows 10 + docker + git bash  -> run jupyter
 
 	- `winpty docker run -it -v /${PWD}:/tf/notebooks/ --name jupyter -p 8888:8888  tensorflow/tensorflow:nightly-jupyter`
 	- https://stackoverflow.com/questions/50608301/docker-mounted-volume-adds-c-to-end-of-windows-path-when-translating-from-linux
+
+
+## 2019.3.13
+
+1. cmd 修改编码 `CHCP 65001`
+
+	- cmd 修改环境变量  `set LESSCHARSET=utf-8`
+
+
 
