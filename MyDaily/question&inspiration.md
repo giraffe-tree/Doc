@@ -2372,5 +2372,11 @@ show create table t1\G
 
 	- cmd 修改环境变量  `set LESSCHARSET=utf-8`
 
+## 2019.3.14
+
+1. tensorflow session graph operation tensor 概念/原理内核
+   - https://blog.csdn.net/u013510838/article/details/84111031
+   - 
+
 
 
