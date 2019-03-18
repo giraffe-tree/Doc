@@ -2379,4 +2379,12 @@ show create table t1\G
    - 
 
 
+## 2019.3.18
+
+1. 列出目录下所有文件
+
+	- `ls -lR| grep "^-" | wc -l`
+
+
+
 
