@@ -3,30 +3,10 @@
 
 ## TODO
 
-### 函数间调用问题
+### 底层数据库模块如何架构
 
-需要 sdk 提供支持
 
-### idea 调试
 
-https://blog.csdn.net/xstardust/article/details/84989300
-
-### 函数冷启动问题
-
-https://yq.aliyun.com/articles/672416
-
-### python tensorflow
-
-1. nas 上传tensorflow 依赖
-2. 使用 fun 工具 https://yq.aliyun.com/articles/688062
-
-### 权限
-
-NoPermissionError: You are not authorized to do this action. Resource: acsram:xxxxxxxxxx:role/ Action: ram:GetRole
-
-授权 AliyunRAMFullAccess 已解决, 但为什么要那么高的权限呢?
-
-https://github.com/aliyun/fun/blob/84b0a928a4579cc8bccc948d24f526f35500b189/docs/usage/faq-zh.md
 
 ## 其他
 
@@ -62,8 +42,50 @@ backend as a service
 
 宕机事件触发 -> 快照 -> 迁移
 
+### 函数间调用问题
 
+通过api接口解决
 
+### idea 调试
+
+https://blog.csdn.net/xstardust/article/details/84989300
+
+### 函数冷启动问题
+
+https://yq.aliyun.com/articles/672416
+
+### python tensorflow
+
+1. nas 上传tensorflow 依赖
+2. 使用 fun 工具 https://yq.aliyun.com/articles/688062
+
+### 权限
+
+NoPermissionError: You are not authorized to do this action. Resource: acsram:xxxxxxxxxx:role/ Action: ram:GetRole
+
+授权 AliyunRAMFullAccess 已解决, 但为什么要那么高的权限呢?
+
+https://github.com/aliyun/fun/blob/84b0a928a4579cc8bccc948d24f526f35500b189/docs/usage/faq-zh.md
+
+### 日志如何记录
+
+test log-server 中
+
+### 调用其他服务的函数
+
+使用api接口
+
+1. config
+2. InvokeFunctionRequest, 如果使用http trigger 则使用 httpInvokeFunctionRequest
+3. FunctionComputeClient
+
+### 异步请求过多问题
+
+如果是异步请求, 函数计算会按照最大并发度, 通过队列来做削峰填谷
+
+### 上传代码包不一致/不完整 -- 如何保证上传的文件是完整的
+
+在代码上传前/代码上传后/创建容器前做checksum 校验
 
 
 
