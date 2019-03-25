@@ -2386,5 +2386,53 @@ show create table t1\G
 	- `ls -lR| grep "^-" | wc -l`
 
 
+## 2019.3.19
+
+1. 使用 `go` 调用 `c++`
+
+
+## 2019.3.20
+
+1. 获取jar/class运行路径
+
+	- https://stackoverflow.com/questions/320542/how-to-get-the-path-of-a-running-jar-file
+
+2. idea 生成 jni header 的工具
+	
+	 - ![](https://open-chen.oss-cn-hangzhou.aliyuncs.com/open/img/2019/Mar/generate_jni_header_file.jpg)
+
+3. 函数计算的实现方式
+
+	```
+		"java.net.URLClassLoader.findClass(URLClassLoader.java:381)",
+		"java.lang.ClassLoader.loadClass(ClassLoader.java:424)",
+		"java.lang.ClassLoader.loadClass(ClassLoader.java:357)",
+		"java.lang.Class.forName0(Native Method)",
+		"java.lang.Class.forName(Class.java:348)"
+	```
+
+4. maven 打包包含 `.so` 库文件
+
+	- 使用 maven-resources-plugin
+	- https://my.oschina.net/u/2377110/blog/1584204
+
+5. 在 jar 包中使用 so 库文件
+
+	- 只能通过解压缩 jar 中的 so 文件 到本地目录, 然后再去加载
+	- https://blog.csdn.net/Revivedsun/article/details/86562934
+	- https://stackoverflow.com/questions/4113317/load-library-from-jar  
+
+## 2019.3.22
+
+1. java debug 原理
+
+	- 暴露端口
+	- todo
+
+## 2019.3.25
+
+
+
+
 
 
