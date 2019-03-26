@@ -2435,8 +2435,12 @@ show create table t1\G
 
 	- 在线学习
 
+2. mysql docker
 
+	- `docker run -p 3306:3306 --name mymysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7`
 
+## 2019.3.26
 
+1. 
 
 
