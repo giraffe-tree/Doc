@@ -2376,7 +2376,16 @@ show create table t1\G
 
 1. tensorflow session graph operation tensor 概念/原理内核
    - https://blog.csdn.net/u013510838/article/details/84111031
-   - 
+
+## 2019.3.17
+
+1. python import absolute path
+   - https://stackoverflow.com/questions/67631/how-to-import-a-module-given-the-full-path
+2. 函数计算中导入 tensorflow
+   - `import sys`
+   - `sys.path.insert(0,'/home/dev/code/other/')`
+   - `import tensorflow as tf`
+
 
 
 ## 2019.3.18
@@ -2442,5 +2451,4 @@ show create table t1\G
 ## 2019.3.26
 
 1. 
-
 
