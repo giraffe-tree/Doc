@@ -2448,7 +2448,13 @@ show create table t1\G
 
 	- `docker run -p 3306:3306 --name mymysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7`
 
-## 2019.3.26
+## 2019.3.27
 
-1. 
+1. commit 标准化 提交
+
+	- https://segmentfault.com/a/1190000009048911
+
+
+
+
 
