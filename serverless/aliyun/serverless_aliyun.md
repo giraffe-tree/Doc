@@ -1,11 +1,15 @@
 # 阿里云上的 serverless 实践
 
-
 ## TODO
 
-### 底层数据库模块如何架构
+### 异步如何保证事务 在同一个 数据库连接 session 中
 
-很难去抽象一些数据库操作  -> 使用 graphQL
+
+### dynamoDB 和 tablestore
+
+都是基于 google 的 bigtable 论文做的
+
+
 
 ## 其他
 
@@ -86,6 +90,11 @@ test log-server 中
 
 在代码上传前/代码上传后/创建容器前做checksum 校验
 
+### 底层数据库模块如何架构
 
+很难去抽象一些数据库操作  -> 使用 graphQL
 
+### 定制镜像
+
+阿里云函数计算目前 不能定制镜像
 
