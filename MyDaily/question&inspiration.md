@@ -2442,11 +2442,13 @@ show create table t1\G
 
 1. coursera
 
-	- 在线学习
+  - 在线学习
+  - fast.ai
+  - deeplearning.ai
 
 2. mysql docker
 
-	- `docker run -p 3306:3306 --name mymysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7`
+  - `docker run -p 3306:3306 --name mymysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7`
 
 ## 2019.3.27
 
@@ -2455,6 +2457,6 @@ show create table t1\G
 	- https://segmentfault.com/a/1190000009048911
 
 
-
-
+1. keras 中文文档
+   - https://keras-zh.readthedocs.io/
 
