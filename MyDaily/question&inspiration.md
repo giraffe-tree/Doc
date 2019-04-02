@@ -2456,7 +2456,69 @@ show create table t1\G
 
 	- https://segmentfault.com/a/1190000009048911
 
+## 2019.3.29
+
+1. https://stackoverflow.com/questions/8696653/dynamically-load-a-function-from-a-dll
+
+2. https://stackoverflow.com/questions/36873742/calling-a-shared-library-from-c
 
 1. keras 中文文档
    - https://keras-zh.readthedocs.io/
+
+## 2019.4.1
+
+1. vim 去掉自动注释
+
+	```
+	关闭自动注释
+	:set fo-=r 
+	关闭自动缩进（这个对C/C++代码好像无效）
+	:set noautoindent
+	关闭C语言缩进 
+	:set nocindent
+	```
+
+2. vim 取消搜索字体高亮
+
+	- `:noh`
+
+3. rename 用法
+	
+	- `rename [options] expression replacement file...`
+	- `-v -> explain what is being done`
+	- 比如，有一批文件，都是以log开头的，log001.txt,  log002.txt ..
+	- 一直到log100.txt 现在想要把这批文件的log全部替换为history
+	- `rename  log history log*`
+
+4. `c++`怎么那么多后缀??
+
+	- https://stackoverflow.com/questions/5171502/c-vs-cc-vs-cpp-vs-hpp-vs-h-vs-cxx
+	- https://stackoverflow.com/questions/1545080/c-code-file-extension-cc-vs-cpp
+
+5. 升级 gcc 版本至 8.3.0
+
+	- https://blog.csdn.net/liwenkai2002/article/details/88064940
+	- `yum -y install bzip2`
+
+6. 用日志组件打印 gc log
+
+	- 输出 gc 到file
+	- https://stackoverflow.com/questions/1161647/how-to-redirect-verbose-garbage-collection-output-to-a-file
+	- 
+
+7. 多个 `.so` 组合成一个 `.so`
+
+	- 确实是不能实现的, 只有 source/object file 可以直接编译生成 .so
+	- https://stackoverflow.com/questions/915128/merge-multiple-so-shared-libraries
+
+8. kotlin coroutine 
+
+	- kotlin 协程如何实现的?
+
+## 2019.4.2
+
+
+
+
+
 
