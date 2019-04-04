@@ -2517,6 +2517,26 @@ show create table t1\G
 
 ## 2019.4.2
 
+1. mysql 索引及数据, 数据及索引
+
+## 2019.4.3
+
+1. 修改表的数据结构时
+
+	- 表锁
+	- 底层数据结构变化
+	- 如何减少对用户的影响呢?
+
+2. aliyun 北京峰会
+	- https://yunqi.youku.com/2019/beijing/review
+
+## 2019.4.4
+
+1. 新增索引
+
+	- `ALTER TABLE user ADD UNIQUE KEY `uniq_email`(`email`(200)) USING BTREE;`
+
+
 
 
 
