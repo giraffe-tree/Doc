@@ -2464,6 +2464,9 @@ show create table t1\G
 
 1. keras 中文文档
    - https://keras-zh.readthedocs.io/
+2. fashion mnist
+   - 数据集
+3. <https://stackoverflow.com/questions/42153747/why-does-0-1-0-2-get-0-3-in-google-go>
 
 ## 2019.4.1
 
@@ -2529,14 +2532,15 @@ show create table t1\G
 
 2. aliyun 北京峰会
 	- https://yunqi.youku.com/2019/beijing/review
+	
+3. LeNet、AlexNet、GoogLeNet、*VGG*、ResNet 
+   - deeplearning 发展史
 
 ## 2019.4.4
 
 1. 新增索引
 
 	- `ALTER TABLE user ADD UNIQUE KEY `uniq_email`(`email`(200)) USING BTREE;`
-
-
 
 
 
