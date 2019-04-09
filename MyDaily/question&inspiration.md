@@ -2542,6 +2542,52 @@ show create table t1\G
 
 	- `ALTER TABLE user ADD UNIQUE KEY `uniq_email`(`email`(200)) USING BTREE;`
 
+## 2018.4.8
+
+1. golang 中的 slice 和 java 的 arraylist 之间的差别
+
+2. `time.Now()` 和 `time.Now().Local()` 之间的差别
+
+3. 这是什么 feature 来着??
+
+```golang
+type NullTime struct {
+	time.Time
+	Valid bool
+}
+```
+
+4. docker 已知问题 
+	
+	- `kernel:unregister_netdevice: waiting for lo to become free. Usage count = 1`
+	- https://github.com/moby/moby/issues/5618
+
+5. `docker run -p 3306:3306 --name mymysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=xxxxx -d mysql:5.7`
+
+
+6. hikariPool 问题
+
+	- `HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=49s880ms724µs141ns)`
+
+
+## 2019.4.9
+
+1. linux 创建link
+
+	- `ln -s 源文件 目标文件`  soft link 相当于快捷方式, 会创建快捷方式
+	- `ln 源文件 目标文件` hard link , 在内部实现中, 源文件和目标文件实际指向同一个文件, 最终生成的目标文件的 inode 和源文件一致, 所以hard link 所用到的数据很少
+
+2. `#/bin/bash`
+
+	- https://stackoverflow.com/questions/8967902/why-do-you-need-to-put-bin-bash-at-the-beginning-of-a-script-file
+
+3. linux 中的文件`metadata`和`data`是分开存储的么?
+
+	- 是的
+	- `mv` 为什么比 `cp` 快? 
+	- https://unix.stackexchange.com/questions/454318/why-is-mv-so-much-faster-than-cp-how-do-i-recover-from-an-incorrect-mv-command
+
+
 
 
 
