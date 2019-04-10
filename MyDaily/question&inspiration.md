@@ -2587,8 +2587,27 @@ type NullTime struct {
 	- `mv` 为什么比 `cp` 快? 
 	- https://unix.stackexchange.com/questions/454318/why-is-mv-so-much-faster-than-cp-how-do-i-recover-from-an-incorrect-mv-command
 
+## 2019.4.10
 
+1. 安装nginx后, 无法访问外网 80 端口
 
+	- ```
+	firewall-cmd --zone=public --add-port=80/tcp --permanent
+	firewall-cmd --reload
+	```
 
+2. 在使用npm安装模块时-g --save --save-dev有什么区别
 
+	- https://blog.csdn.net/jigetage/article/details/80993563
+
+4. graphql-java 文档
+
+	- https://www.graphql-java.com/documentation/v11/schema/
+
+5. serverless 中 lambda/函数计算 所使用的 cpu 核数
+
+	- 内存与cpu的关系
+	- https://stackoverflow.com/questions/34135359/whats-the-maximum-number-of-virtual-processor-cores-available-in-aws-lambda
+	- https://www.jeremydaly.com/15-key-takeaways-from-the-serverless-talk-at-aws-startup-day/
+	- https://engineering.opsgenie.com/how-does-proportional-cpu-allocation-work-with-aws-lambda-41cd44da3cac
 
