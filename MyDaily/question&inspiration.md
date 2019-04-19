@@ -2611,3 +2611,151 @@ type NullTime struct {
 	- https://www.jeremydaly.com/15-key-takeaways-from-the-serverless-talk-at-aws-startup-day/
 	- https://engineering.opsgenie.com/how-does-proportional-cpu-allocation-work-with-aws-lambda-41cd44da3cac
 
+
+## 2019.4.11
+
+1. 数据库连接中
+	
+	- session 和 connection 的关系
+	- hibernate
+		- 在 hibernate 中, 每次http请求都会建立一个 db session
+	- 参考 session和transaction的关系: https://developer.jboss.org/wiki/SessionsAndTransactions
+
+2. mybatis
+
+	- annotation with dynamic sql 
+	- https://www.jianshu.com/p/03642b807688
+
+	```
+	@Update("<script>
+	update user
+	<set>
+	  <if test="name != null">userName=#{name},</if>
+	  <if test="address != null">userAddress=#{address},</if>
+	  <if test="age != null">userAge=#{age},</if>
+	</set>
+	where id=#{id}
+	</script>")
+	```
+
+
+3. mybatis 乱码
+
+	- `jdbc:mysql://localhost:3306/blog?useSSL=false&useUnicode=true&amp&characterEncoding=utf-8`
+	- 这里的 `useUnicode`, `characterEncoding` 指的是哪里的编码
+
+4. 在 notebooks中安装 dlib
+
+	- https://github.com/ageitgey/face_recognition/issues/703
+
+## 2019.4.16
+
+1. add volume to an existing docker container
+	- https://stackoverflow.com/questions/28302178/how-can-i-add-a-volume-to-an-existing-docker-container
+
+2. sql ` where name in ("xx")` 和 `where name ="xx"` 有什么区别 
+	
+	- 在mysql,oracle 中, 优化器会将其优化为 `where name ="xx"`, 所以没有差别
+	- https://stackoverflow.com/questions/37828398/performance-differences-between-equal-and-in-with-one-value
+
+## 2019.4.17
+
+1. dns 查询与刷新
+
+	- mac
+		- `nslookup xxx`
+		- `dscacheutil -flushcache`
+	- win
+		- `ipconfig /flushdns`
+
+2. 查看进程的pid及详细信息
+
+	- `pgrep java| xargs ps -u --pid`
+
+3. 如何用阿里云的dns, 不经过备案直接解析到你的网站
+
+	- 使用 `.me` 等域名
+		- 在阿里云上, `.com/.net/.cn/.xin/.top/.xyz/.vip/.club/.shop/.wang/.ren` 等域名注册成功后必须进行域名实名认证，否则域名无法进行DNS解析
+		- 可以使用 `godaddy` 注册
+	- 使用港澳台或者国外的服务器
+		- 使用 `A` 记录指向你的 港澳台或者国外的服务器 `ip`, 否则即使第一步 `dns` 解析成功, 通过外部访问你的**国内阿里云服务器**时, 阿里云会检测你的网站地址是否备案, 如果未备案, 在一定访问次数之后会直接屏蔽掉, 让你备案之后再访问. 
+
+4. 使用 `http://netlify.com` 托管
+
+	- `netlify` 绑定你的域名, 然后通过阿里云的 `dns` 解析, 速度贼快
+	- 结合 3 中, 可以使用未备案的域名访问, netlify 中托管的网站, 并且通过国内的dns解析(阿里云dns)
+
+5. nginx https
+
+	- 阿里云上申请证书
+	- `https://common-buy.aliyun.com/?spm=5176.2020520163.cas.1.1ba9Yij4Yij4E0&commodityCode=cas#/buy`
+	- 开始Nginx的SSL模块
+		- `https://www.cnblogs.com/ghjbk/p/6744131.html`
+	- 跳转
+		- `https://www.cnblogs.com/yun007/p/3739182.html`
+
+6. nginx http -> https
+
+```
+server {
+listen       80;
+server_name  giraffetree.me;
+
+rewrite ^(.*)$  https://$host$1 permanent;  
+return 301 https://www.$server_name$request_uri;
+
+location / {
+        root   /root/web/http/;
+        index  index.html;
+    }
+}
+```
+
+
+7. http code 301 307 区别??
+	
+	- 待研究
+	- https://stackoverflow.com/questions/14484473/301-redirect-vs-307-redirect
+
+8. nginx 使用 http2
+
+	- `the "http2" parameter requires ngx_http_v2_module`
+		- https://www.daozhao.com/8285.html
+	- 什么是 HTTP/2
+		- https://www.cnblogs.com/Jacck/p/7806922.html
+	- 安装 HTTP/2
+		- `./configure --prefix=/usr/local/nginx --with-http_ssl_module --with-http_v2_module`
+	- 配置完
+		- chrome 访问 http2 不开启?
+			- 检查 是否支持 http2
+				- `echo | openssl s_client -alpn h2 -connect giraffetree.me:443 | grep ALPN`
+				- `echo | openssl s_client -nextprotoneg h2 -connect giraffetree.me:443`
+			- openssl 版本低么?
+				- `openssl version` -> `OpenSSL 1.0.2k-fips  26 Jan 2017`
+				- https://www.openssl.org/source/openssl-1.0.2r.tar.gz
+				- 更换 yum 源
+					- https://www.cnblogs.com/xjh713/p/7458437.html
+					 - 还是这个版本
+					- `./configure --prefix=/usr/local/nginx --with-http_v2_module --with-http_ssl_module --with-openssl=/root/env/openssl/openssl-1.0.2r`
+					- `make`
+					- `cp /usr/local/nginx/sbin/nginx /usr/local/nginx/sbin/nginx.bak`
+					- `cp ./objs/nginx /usr/local/nginx/sbin/`
+					- `/usr/local/nginx/sbin/nginx -V`
+					- `rm /usr/bin/nginx`
+					- `ln /usr/local/nginx/sbin/nginx /usr/bin/nginx`
+					- 该方法无效
+				- https://serverfault.com/questions/820471/why-chrome-browser-doesnt-recognize-my-nginx-http2-server
+					- 就是这里的原因 `You are using older TLS ciphers`, 我使用的 `ssl_ciphers` 已经不被 chrome 允许
+					- 更换一个 ssl_ciphers 就可以了 比如: `ssl_ciphers AESGCM:HIGH:!aNULL:!MD5;`
+
+
+## 2019.4.18
+
+1. 检查服务器
+
+	- cat /proc/cpuinfo
+	- df -h
+
+## 2019.4.19
+
+1. 
