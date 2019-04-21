@@ -2611,3 +2611,15 @@ type NullTime struct {
 	- https://www.jeremydaly.com/15-key-takeaways-from-the-serverless-talk-at-aws-startup-day/
 	- https://engineering.opsgenie.com/how-does-proportional-cpu-allocation-work-with-aws-lambda-41cd44da3cac
 
+## 2019.4.14
+
+
+1. Redis缓存和MySQL数据一致性 怎么解决
+
+	- https://zhuanlan.zhihu.com/p/58536781
+
+2. tolearn 数学公式作图
+
+3. 人工智能解数学题
+
+
