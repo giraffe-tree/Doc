@@ -8,6 +8,8 @@
 
 ## 路线图
 
+[点击查看原图](https://open-chen.oss-cn-hangzhou.aliyuncs.com/open/img/2019/April/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99.png)
+
 ![如何搭建一个博客网站](https://open-chen.oss-cn-hangzhou.aliyuncs.com/open/img/2019/April/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99.png)
 
 1. **静态页面**
