@@ -15,7 +15,9 @@ wget http://nginx.org/download/nginx-1.14.0.tar.gz
 yum install -y gcc
 yum install -y pcre
 yum install -y zlib
-yum install -y openssl
+yum -y install pcre-devel
+yum -y install openssl openssl-devel
+
 ```
 
 
