@@ -2648,6 +2648,17 @@ type NullTime struct {
 
 	- https://github.com/ageitgey/face_recognition/issues/703
 
+## 2019.4.14
+
+
+1. Redis缓存和MySQL数据一致性 怎么解决
+
+	- https://zhuanlan.zhihu.com/p/58536781
+
+2. tolearn 数学公式作图
+
+3. 人工智能解数学题
+
 ## 2019.4.16
 
 1. add volume to an existing docker container
@@ -2790,6 +2801,7 @@ location / {
 		- https://liudanking.com/beautiful-life/%E6%9C%AC%E7%AB%99%E5%BC%80%E5%90%AF%E6%94%AF%E6%8C%81-quic-%E7%9A%84%E6%96%B9%E6%B3%95%E4%B8%8E%E9%85%8D%E7%BD%AE/
 
 3. spring boot http/2
+
 
 
 
