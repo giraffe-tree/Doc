@@ -2,16 +2,27 @@
 
 ## TODO
 
+### serverless 的配套设施
+
+1. 定时触发器 ok
+2. 日志系统
+3. API网关服务
+4. 访问数据库 ok
+5. 
+
+### 如何使用 graphql 的方式访问数据库
+
 ### 异步如何保证事务 在同一个 数据库连接 session 中
 
+使用同一个 db session
+
+
+## 其他
 
 ### dynamoDB 和 tablestore
 
 都是基于 google 的 bigtable 论文做的
 
-
-
-## 其他
 
 ### faas vs baas
 
