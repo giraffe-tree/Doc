@@ -2758,4 +2758,39 @@ location / {
 
 ## 2019.4.19
 
-1. 
+1. 查看指定内容行数
+
+	- `grep -c search_content  filename`
+
+2. cdn
+
+	- cdn 原理
+		- https://linux.cn/thread-17631-1-1.html
+	- 查询 dns / 服务器ip
+		- `dig giraffetree.me`
+	- google cloud cdn 为什么不生效
+		- 响应缺少必要的 Cache-Control 标头。
+			- https://cloud.google.com/cdn/docs/troubleshooting-steps
+		- nginx 配置 CACHE-CONTROL
+
+## 2019.04.22
+
+1. 检查文件夹大小
+
+	- `du -sh *`
+
+2. quic 协议
+	
+	- 什么是 quic
+		- https://drive.google.com/file/d/1EuQtUan7MdSCVrdO3MjZA9HxmZNhh98P/view
+		- 什么是 RTT round-trip time
+			- https://www.zhihu.com/question/39244840
+
+	- 如何开启 quic
+		- https://liudanking.com/beautiful-life/%E6%9C%AC%E7%AB%99%E5%BC%80%E5%90%AF%E6%94%AF%E6%8C%81-quic-%E7%9A%84%E6%96%B9%E6%B3%95%E4%B8%8E%E9%85%8D%E7%BD%AE/
+
+3. spring boot http/2
+
+
+
+
