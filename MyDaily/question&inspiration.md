@@ -2802,6 +2802,23 @@ location / {
 
 3. spring boot http/2
 
+	- todo
+
+## 2019.04.23
+
+1. 信息论
+
+2. 查看nginx 进程
+
+	- `ps -ef | grep nginx`
+
+## 2019.4.24
+
+
+1. 压缩文件夹
+
+	- `zip -r test.zip ./tmp/*`
+
 
 
 
