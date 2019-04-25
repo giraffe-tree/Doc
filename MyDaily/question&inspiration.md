@@ -2812,6 +2812,9 @@ location / {
 
 	- `ps -ef | grep nginx`
 
+3. 检查txt `nslookup --type=txt giraffetree.me`
+
+
 ## 2019.4.24
 
 
@@ -2819,7 +2822,18 @@ location / {
 
 	- `zip -r test.zip ./tmp/*`
 
+2. 跳过 10 行
+	- `tail -n +10  xxx.log`
+	- 组合使用 跳过 n 行, 搜索内容
+	- `tail -n +10 xxx.log | grep "abc" | head -n 1`
 
+3. 查找搜索内容行号
+	
+	- `grep -c "abc" xxx.log | head -n 1`
+
+4. 查找某一字符串在文件中的第一行, 所在的行号
+
+	- `grep -n "2570" 0419_night.log | cut -f1 -d: | head -n 1`
 
 
 

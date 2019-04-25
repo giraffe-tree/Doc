@@ -2,9 +2,9 @@
 
 # http2
 
+## why http2
 
-
-
+想要了解一门技术, 首先要知道这门技术是为了解决什么问题而出现的.
 
 
 
@@ -26,15 +26,52 @@ SPDY并不用于取代HTTP，它只是修改了HTTP的请求与应答在网络�
 
 http://dev.chromium.org/spdy/spdy-whitepaper
 
+### SPDY 的功能
+
+#### 基本功能
+
+1. 多路复用
+   - 多个并发的http请求在单个tcp会话中运行
+2. 实现了请求的优先级
+   - 防止网络信道被非关键资源堵塞
+3. http 标头压缩
+   - ??
+
+#### 高级功能
+
+1. 服务器推送
+2. 服务器提示
+
+## HTTP/2
+
+###   HTTP/2 规范
+
+HTTP/2 主要由两个规范组成
+
+1. Hypertext Transfer Protocol Version 2 https://httpwg.org/specs/rfc7540.html
+2. HPACK - HTTP / 2的头压缩 https://httpwg.org/specs/rfc7541.html
+
+上面的两个文档, 可能是我能找到的最权威的规范文档了, 你可以通过这两个规范了解 `http/2` 的一切.
 
 
 
+### 如何减少网络延时
+
+1. 对 `http` 头部字段进行压缩 HPACK 算法
+   - 基于霍夫曼编码 Huffman Coding
+2. HTTP/2 服务端推送
+   - 为什么要用服务端推送呢?
+   - 服务器直接提供浏览器渲染页面所需资源，而无须浏览器在收到、解析页面后再提起一轮请求，节约了加载时间
+3. HTTP pipelining 
+   - 将多个[HTTP](https://zh.wikipedia.org/wiki/HTTP)请求（request）整批提交的技术，而在发送过程中不需先等待服务器的回应。
+4. 修复HTTP/1.0版本以来未修复的 [队头阻塞](https://zh.wikipedia.org/wiki/%E9%98%9F%E5%A4%B4%E9%98%BB%E5%A1%9E) 问题
+5. 对数据传输采用[多路复用](https://zh.wikipedia.org/wiki/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8)，让多个请求合并在同一 [TCP](https://zh.wikipedia.org/wiki/TCP) 连接内。
 
 
 
+https://zh.wikipedia.org/wiki/HTTP/2
 
-
-
+https://github.com/http2/http2-spec
 
 
 
