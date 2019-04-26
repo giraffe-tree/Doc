@@ -2835,5 +2835,13 @@ location / {
 
 	- `grep -n "2570" 0419_night.log | cut -f1 -d: | head -n 1`
 
+## 2019.04.26
+
+1.  a goal is a dream with a deadline
+
+2. SqL中使用   ESCAPE   关键字定义转义符
+	
+	- hibernate 使用 "!"
+
 
 
