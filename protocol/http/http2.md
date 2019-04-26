@@ -6,7 +6,7 @@
 
 想要了解一门技术, 首先要知道这门技术是为了解决什么问题而出现的.
 
-
+![http_pipelining](https://open-chen.oss-cn-hangzhou.aliyuncs.com/open/img/2019/April/http_pipelining.jpg)
 
 ## 前身 -- SPDY
 
@@ -53,6 +53,66 @@ HTTP/2 主要由两个规范组成
 
 上面的两个文档, 可能是我能找到的最权威的规范文档了, 你可以通过这两个规范了解 `http/2` 的一切.
 
+### HTTP/2 改变
+
+1. HTTP / 2脱离了严格的请求 - 响应语义，并启用了一对多和服务器启动的推送工作流
+2. 拆分了原有的 http 消息, 将 http 抽象成了 frame 
+
+### 基本概念  Connection, Stream, Message, Frame
+
+#### Connnection
+
+指 `tcp 连接` , 一个 tcp 连接可以携带任意数量的 双向流 `bidirectional streams`
+
+#### **Stream** 
+
+` Stream` 指在一个已经建立的tcp连接上的双向字节流 `A bidirectional flow of bytes` , 它可以携带 1 个或者多个 `Message` 信息
+
+#### Message
+
+对应 `Http/1.x` 中的 `request / response` , 一个 `Message` 对应 一个完整的 `frame` 序列
+
+#### Frame
+
+`Frame` 是 `HTTP/2` 中的最小通讯单元, 可以携带一种指定类型的数据 , 如 `HTTP HEADER` , `message  Payload` 等
+
+来自不同 `Stream` 的 `Frame` 可以任意编排, 最后通过 `Frame` 中的流标识 `Stream identifier` 来进行重新组装
+
+### HTTP/2 做了哪些事情
+
+1. 流控制 stream 
+2. 二进制帧层 binary framing layer
+3. 头压缩  header compression
+
+
+
+#### 流控制
+
+1.  每个 stream 都有一个权重 [1 -255]
+2. 每个 stream 都可以有一个依赖
+
+流控制中允许一下操作
+
+1.  客户端可以暂停 stream 传送, 并可以在之后恢复
+2. 流控制在建立信任的基础之上实现
+
+关于权重
+
+流依赖性和权重表示*传输偏好*，而不是要求，因此不保证特定的处理或传输顺序。也就是说，客户端不能强制服务器使用流优先级按特定顺序处理流。虽然这看似违反直觉，但事实上它是理想的行为：如果阻止了更高优先级的资源，我们不希望阻止服务器在较低优先级资源上取得进展。
+
+
+
+#### 二进制帧
+
+1. headers -> metadata
+2. data ->  payload
+
+每个帧都有一个通用 header (9 字节) , 可以高效地进行编码/解码
+
+#### HPACK 头压缩 HPACK header compression
+
+
+
 
 
 ### 如何减少网络延时
@@ -74,11 +134,11 @@ https://zh.wikipedia.org/wiki/HTTP/2
 https://github.com/http2/http2-spec
 
 
+https://www.cnblogs.com/confach/p/10141273.html
 
+https://www.nginx.com/blog/7-tips-for-faster-http2-performance/
 
-
-
-
+high performance browser network     https://hpbn.co/http2/
 
 
 
