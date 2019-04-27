@@ -24,13 +24,13 @@
 
 ## 问题
 
-### 队头堵塞问题 head of line blocking
+### 队头堵塞问题
 
-`HTTP/1.1`通过`pipelining` 管道技术实现一次性发送多个请求，以期提高吞吐和性能。然而，这种技术在接收响应时，要求必须按照发送请求的顺序返回。如果，第一个请求被堵塞了，则后面的请求即使处理完毕了，也需要等待. [4]
+`HTTP/1.1`通过`pipelining` 管道技术实现一次性发送多个请求，以期提高吞吐和性能. 然而，这种技术在接收响应时，要求必须按照发送请求的顺序返回如果，第一个请求被堵塞了，则后面的请求即使处理完毕了，也需要等待. [4]
 
 ## 参考
 
-[1]: https://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1.2.2	"w3c  rfc2616"
-[2]: https://stackoverflow.com/questions/19619124/http-pipelining-request-text-example	"http pipelining test"
+[1]: https://www.w3.org/Protocols/rfc2616/rfc2616-sec8.html#sec8.1.2.2
+[2]: https://stackoverflow.com/questions/19619124/http-pipelining-request-text-example
 [3]: https://blog.csdn.net/dongzhiquan/article/details/6114040
 [4]: https://liudanking.com/arch/what-is-head-of-line-blocking-http2-quic/

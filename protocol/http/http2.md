@@ -1,16 +1,40 @@
 
 
-# http2
+# 一文了解 HTTP/2 前世今生
+
+## 阅读本文你会了解
+
+1. 为什么要使用 HTTP/2
+   - HTTP/1.x 有哪些缺点
+2. HTTP/2 的前身是什么 ? 它做了什么改进
+3. HTTP/2 是怎么工作的 ?
 
 ## why http2
 
 想要了解一门技术, 首先要知道这门技术是为了解决什么问题而出现的.
 
-![http_pipelining](https://open-chen.oss-cn-hangzhou.aliyuncs.com/open/img/2019/April/http_pipelining.jpg)
+#### `http/1.x` 的缺点
 
-## 前身 -- SPDY
+1. 队头阻塞 head-of-line blocking
 
-`SPDY` 即 `speedy` 
+   - 在使用 pipelining 时, 如果第一个请求阻塞后, 客户端要等待前一个请求接受完毕, 才能接着完成下一个请求的接受( 保证客户端有序收到 ); 其实也就是说, 在一个 tcp 连接上, 只允许有一个未完成的请求. 
+   - 由于队头阻塞, 因此客户端需要使用多个 tcp 连接到服务器来实现并发, 减少延迟
+   - https://liudanking.com/arch/what-is-head-of-line-blocking-http2-quic/
+   - https://en.wikipedia.org/wiki/Head-of-line_blocking
+
+2. 低效的 tcp
+
+   - 浏览器会与一个服务器建立多个tcp连接
+
+   - 由于tcp 的慢启动/拥塞窗口调节, 以及 http/1.x 中浏览器会对单个域名开启 多个并发连接, 而慢启动也会并发的发生多次,  从而导致网络传输并不是最高效的
+
+3. 臃肿的消息首部 header
+
+https://segmentfault.com/a/1190000013519925
+
+## HTTP/2 的前身 -- SPDY
+
+`SPDY` 即 `speedy` , 是 google 用于改进 http 开发的一款协议
 
 SPDY并不用于取代HTTP，它只是修改了HTTP的请求与应答在网络上传输的方式；这意味着只需增加一个SPDY传输层，现有的所有服务端应用均不用做任何修改。 
 
@@ -35,7 +59,6 @@ http://dev.chromium.org/spdy/spdy-whitepaper
 2. 实现了请求的优先级
    - 防止网络信道被非关键资源堵塞
 3. http 标头压缩
-   - ??
 
 #### 高级功能
 
@@ -53,6 +76,8 @@ HTTP/2 主要由两个规范组成
 
 上面的两个文档, 可能是我能找到的最权威的规范文档了, 你可以通过这两个规范了解 `http/2` 的一切.
 
+另外还有一些 `HTTP/2`的常见问题权威解答  https://http2.github.io/faq/
+
 ### HTTP/2 改变
 
 1. HTTP / 2脱离了严格的请求 - 响应语义，并启用了一对多和服务器启动的推送工作流
@@ -60,7 +85,7 @@ HTTP/2 主要由两个规范组成
 
 ### 基本概念  Connection, Stream, Message, Frame
 
-#### Connnection
+#### Connection
 
 指 `tcp 连接` , 一个 tcp 连接可以携带任意数量的 双向流 `bidirectional streams`
 
@@ -83,8 +108,6 @@ HTTP/2 主要由两个规范组成
 1. 流控制 stream 
 2. 二进制帧层 binary framing layer
 3. 头压缩  header compression
-
-
 
 #### 流控制
 
@@ -147,6 +170,7 @@ high performance browser network     https://hpbn.co/http2/
 
 
 
+![http_pipelining](https://open-chen.oss-cn-hangzhou.aliyuncs.com/open/img/2019/April/http_pipelining.jpg)
 
 
 
