@@ -2843,5 +2843,47 @@ location / {
 	
 	- hibernate 使用 "!"
 
+## 2019.04.29
+
+1. 国际化
+
+```java
+// accept-language resolver
+public class SmartLocaleResolver extends AcceptHeaderLocaleResolver {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(SmartLocaleResolver.class);
+
+    private final static List<Locale> LOCALES = Arrays.asList(new Locale("en"),
+            new Locale("zh"));
+
+    @Override
+    public Locale resolveLocale(HttpServletRequest request) {
+        if (StringUtils.isBlank(request.getHeader("Accept-Language"))) {
+            return Locale.getDefault();
+        }
+        List<Locale.LanguageRange> list;
+        try {
+            list = Locale.LanguageRange.parse(request.getHeader("Accept-Language"));
+        } catch (IllegalArgumentException e) {
+            LOGGER.warn("locale transfer error - {}", e.getMessage());
+            return Locale.getDefault();
+        }
+        return Locale.lookup(list, LOCALES);
+    }
+}
+
+// spring boot config
+@Configuration
+public class I18nConfig {
+    @Bean
+    public LocaleResolver localeResolver() {
+        return new SmartLocaleResolver();
+    }
+}
+
+// in a http request
+Locale locale = LocaleContextHolder.getLocale();
+String language = locale.getLanguage();
+```
 
 
