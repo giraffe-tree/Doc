@@ -5,3 +5,6 @@
 
 ## 数据结构
 
+![](https://open-chen.oss-cn-hangzhou.aliyuncs.com/open/img/2019/April/http2_frame_structure.jpg)
+
+
