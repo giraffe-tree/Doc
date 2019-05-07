@@ -2886,4 +2886,47 @@ Locale locale = LocaleContextHolder.getLocale();
 String language = locale.getLanguage();
 ```
 
+## 2019.4.30
+
+1. spring boot messageSource with yml
+
+	- https://qiita.com/felis/items/431f40c8a7f515f04d38#fnref5
+
+## 2019.5.5
+
+1. 高并发下的幂等性
+
+	- https://cloud.tencent.com/developer/article/1162207
+
+2. golang string to time.time
+
+## 2019.5.6
+
+1. ABNF 扩充巴科斯范式(BNF: Backus-Naur Form )
+
+	- ` ` 空格  分隔元素
+	- `/` 选择 
+	-  值范围 `%x30-37`  即16进制 0-7
+	- 序列组合 `()` 将规则组合, 视为单个元素
+	- 不定量重复 `m*n`
+		- `*` 元素标识 0个或更多元素 如: `*(header-field CRLF)`
+		- `1*` 表示一个或更多元素 `2*4` 表示 2-4个元素
+	- 可选序列 `[]`
+
+2. 使用 ABNF 表示的 http 协议
+
+	```
+	HTTP-message =
+	start‑line 
+	*( header‑field  CRLF ) 
+	CRLF 
+	[ message‑body ]
+	```
+	- ABNF for HTTP/1.1
+	- https://www.tech-invite.com/fo-abnf/tinv-fo-abnf-http.html#message-body
+
+## 2019.05.07
+
+1. http keepalive 和 tcp 的 keepalive 有什么关联?
+
 
