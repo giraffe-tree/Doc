@@ -2929,4 +2929,11 @@ String language = locale.getLanguage();
 
 1. http keepalive 和 tcp 的 keepalive 有什么关联?
 
+2. 什么是 tcp 连接?
+
+## 2019.05.07
+
+1. java `import static` 意义
+
+
 
