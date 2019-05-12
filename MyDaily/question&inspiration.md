@@ -2935,5 +2935,73 @@ String language = locale.getLanguage();
 
 1. java `import static` 意义
 
+## 2019.05.11
 
+1. java10 -> reified generics
+
+	- https://www.zhihu.com/question/20928981
+	- 玩玩看?
+
+2. go http2  serverPush
+
+	- https://blog.golang.org/h2push
+
+3. SSA static single assignment
+
+	- https://zh.wikipedia.org/wiki/%E9%9D%99%E6%80%81%E5%8D%95%E8%B5%8B%E5%80%BC%E5%BD%A2%E5%BC%8F
+
+## 2019.05.12
+
+1. linux 内核版本
+
+	- `cat /proc/version`
+	- `uname -r`
+
+2. tcp 拥塞控制算法 BBR
+
+	- https://www.cnblogs.com/x_wukong/p/7752558.html
+
+3. socket 上使用 tcp , 如何让在有限的资源内处理更多的请求
+
+	1. 使用多进程的方式,  使用 fork 创建子进程
+	2. 使用多线程的方式,  使用 pthread_create 创建一个线程 - C10K
+	3. IO 多路复用,单线程维护多个socket, 轮询调用 select 函数来监听文件描述符集合是否有变化
+	4. IO 多路复用, 使用 epoll 通过注册callback 函数, 当某个文件描述符发送变化时, 主动通知
+	5. 在第4步的基础上, 提高进程所能打开的最大文件描述符的个数, 增大 socket 上限
+
+4. linux 上使用 epoll, 那 windows 上对应的机制是什么? 
+
+	- iocp, 但原理还是有点不一致的地方
+
+5. https
+	
+	- server -> client (之后缩写为 s -> c)
+	1. c -> s 这是我的 随机数
+	2. s -> c 这是我的 随机数 + ca证书
+	3. client 证书校验 
+	4. client 产生 pre-master 随机数
+	5. c -> s 随机数通过 ca证书(public key)加密
+	6. s server 的随机数+ client 随机数+ pre-master -> 算出 对称秘钥
+	7. c server 的随机数+ client 随机数+ pre-master -> 算出 对称秘钥
+	8. c -> s 以后我们就用对称加密了 change cipher spec
+	9. c -> s  encrypted handshake message
+	10. s -> c 好的以后就用对称加密了
+	11. s -> c encrypted handshake message
+	12. 使用对称加密进行通讯
+
+6. 为什么 https 以这种方式工作
+
+	- 对称加密效率高, 但解决不了密钥传输的问题
+	- 非对称加密效率低, 但可以解决密钥传输问题
+
+7. python ctypes.py_object
+
+	- `self._elements = (ctypes.py_object() * size)()`
+	- https://stackoverflow.com/questions/50889988/the-attribute-of-ctypes-py-object
+
+8. python int cache
+
+	- `[-5,256]`
+	- https://stackoverflow.com/questions/15171695/whats-with-the-integer-cache-inside-python
+	- 虽然顺序一致, 但根据语句的位置不同, 执行出来的结果可能也不同
 
