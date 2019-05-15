@@ -12,7 +12,7 @@ cdn 即 Content delivery networks.
 
 ## 流程
 
-原始域名 A1  
+原始域名 A1 
 cdn 权威dns服务器 B1 
 cdn 全局负载均衡器 B2
 

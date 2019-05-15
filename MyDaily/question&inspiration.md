@@ -3070,6 +3070,11 @@ String language = locale.getLanguage();
 
 	- `LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss.SSS"))`
 
+
+4. win10 idea 更换 openJdk11, switch boot jdk -> 解决输入法光标不匹配问题
+
+	- 升级到最新版本的idea也解决了这个问题
+
 ## 2019.05.15
 
 1. go 创建文件夹
@@ -3094,6 +3099,11 @@ err := os.Mkdir(_dir, os.ModePerm)
 3. go to js
 
 	- https://github.com/gopherjs/gopherjs
+
+4. 反转链表启发
+
+	- 最重要的是链表中不能丢失指针, 一旦指针, 链表后面的数据就都没有了, 感觉这是重要的原则
+
 
 
 
