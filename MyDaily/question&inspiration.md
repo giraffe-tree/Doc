@@ -2935,6 +2935,20 @@ String language = locale.getLanguage();
 
 1. java `import static` 意义
 
+2. `JPA` 规范要看下
+
+## 2019.05.09
+
+1. `Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 1080));`
+
+	- http proxy
+
+2. `GOARCH=amd64 GOOS=linux go build xxx.go`
+
+3. `IDEA Error:java: Compilation failed: internal java compiler error`
+
+	- File-->Setting...-->Build,Execution,Deployment-->Compiler-->Java Compiler target bytecode version
+
 ## 2019.05.11
 
 1. java10 -> reified generics
@@ -3004,4 +3018,82 @@ String language = locale.getLanguage();
 	- `[-5,256]`
 	- https://stackoverflow.com/questions/15171695/whats-with-the-integer-cache-inside-python
 	- 虽然顺序一致, 但根据语句的位置不同, 执行出来的结果可能也不同
+
+## 2019.05.13
+
+1. nginx proxy_pass 的作用
+
+2. 做个视频记录 - 动漫女主
+
+	- 哈哈, 要不要来个挑战
+	- 没错, 用 thr Loneliest Girl 做 bgm
+	- 
+
+3. 网站访问速度优化三部曲
+
+	1. 提升带宽
+	2. 减少传输内容 - 对内容进行压缩
+	3. 使用 cdn 减少源服务器压力
+
+4. 自动生成 robots.txt 文件
+
+	- http://tool.chinaz.com/robots/
+
+5. 阿里云服务器安装 logtail
+
+	- wget http://logtail-release-cn-hangzhou.oss-cn-hangzhou.aliyuncs.com/linux64/logtail.sh -O logtail.sh;chmod 755 logtail.sh
+	- wget http://logtail-release-ap-southeast-1.oss-ap-southeast-1-internal.aliyuncs.com/linux64/logtail.sh -O logtail.sh; chmod 755 logtail.sh; ./logtail.sh install ap-southeast-1
+
+## 2019.5.14
+
+1. java jdk 11
+
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>3.8.0</version>
+    <configuration>
+        <release>11</release>
+    </configuration>
+</plugin>
+```
+
+2. wireshark
+
+	- 过滤 ip
+	- `ip.dst == x.x.x.x`, `ip.src == x.x.x.x`, `ip.addr == x.x.x.x`
+	- `(ip.src==192.168.2.25)||(ip.dst==192.168.2.25)`
+	- https://stackoverflow.com/questions/4043406/how-to-filter-by-ip-address-in-wireshark
+
+3. localdatetime 毫秒显示 
+
+	- `LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss.SSS"))`
+
+## 2019.05.15
+
+1. go 创建文件夹
+
+```golang
+// 判断文件夹是否存在
+func PathExists(path string) (bool, error) {
+    _, err := os.Stat(path)
+    if err == nil {
+        return true, nil
+    }
+    if os.IsNotExist(err) {
+        return false, nil
+    }
+    return false, err
+}
+err := os.Mkdir(_dir, os.ModePerm)
+```
+
+2. executorService 优雅关闭
+
+3. go to js
+
+	- https://github.com/gopherjs/gopherjs
+
+
 
