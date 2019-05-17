@@ -3104,6 +3104,97 @@ err := os.Mkdir(_dir, os.ModePerm)
 
 	- 最重要的是链表中不能丢失指针, 一旦指针, 链表后面的数据就都没有了, 感觉这是重要的原则
 
+## 2019.5.16
+
+1. maven pacakge main class  -> 不包含依赖
+
+	- 下面的配置文件主要解决 
+	1. maven 打包 main class 的问题
+	2. maven 编译时, java 字节码版本不对的问题(在用idea时, 自动会将 java compile bytecode 版本置为 1.5) 
+
+```xml
+<properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+</properties>
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <addClasspath>true</addClasspath>
+                        <mainClass>me.giraffetree.java.logstoredemo.mqtt.SubMsg</mainClass>
+                        <classpathPrefix>libs/</classpathPrefix>
+                    </manifest>
+                </archive>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.1.1</version>
+            <executions>
+                <execution>
+                    <id>copy-dependencies</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>copy-dependencies</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>
+                            ${project.build.directory}/libs
+                        </outputDirectory>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+
+    </plugins>
+</build>
+```
+
+2. package main class -> 包含依赖
+
+	- https://stackoverflow.com/questions/574594/how-can-i-create-an-executable-jar-with-dependencies-using-maven
+	- `mvn clean compile assembly:single`
+
+```xml
+<plugin>
+  <artifactId>maven-assembly-plugin</artifactId>
+  <configuration>
+    <archive>
+      <manifest>
+        <mainClass>fully.qualified.MainClass</mainClass>
+      </manifest>
+    </archive>
+    <descriptorRefs>
+      <descriptorRef>jar-with-dependencies</descriptorRef>
+    </descriptorRefs>
+  </configuration>
+  <executions>
+    <execution>
+      <id>make-assembly</id> <!-- this is used for inheritance merges -->
+      <phase>package</phase> <!-- bind to the packaging phase -->
+      <goals>
+        <goal>single</goal>
+      </goals>
+    </execution>
+  </executions>
+</plugin>
+```
+
+
+3. jvm 关闭/hook
+
+	- https://blog.csdn.net/dd864140130/article/details/49155179
+
+
+## 2019.05.17
+
+1. 使用 cnpm 代替 npm
 
 
 
