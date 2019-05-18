@@ -20,10 +20,16 @@ https://gerardnico.com/dit/kafka/connect/connector
 
 [Kafka connect MQTT sink to write data from Kafka to MQTT.](https://lenses.stream/connectors/sink/mqtt.html)
 
+### 主要步骤
+
+1. 我使用的是 wurstmeister/kafka 的docker 镜像
+2. 将实现好的 jar(我使用的是 kafka-connect-mqtt) 放入指定位置,例如 docker容器中的地址 - ```/opt/kafka_2.12-1.0.1/libs```
+3. 在 kafka bin目录下, 有 `connect-distributed.sh`, config 目录下有 `connect-distributed.properties`, 执行 `connect-distributed.sh -daemon connect-distributed.properties`, 具体查看 shell 脚本里面的内容 =.=
 
 ### Mqtt to Apache Kafka Connect
 
 **We use ->**  [github.com/evokly/kafka-connect-mqtt](https://github.com/evokly/kafka-connect-mqtt)
+
 
 #### 编译
 
