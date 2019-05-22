@@ -3196,5 +3196,37 @@ err := os.Mkdir(_dir, os.ModePerm)
 
 1. 使用 cnpm 代替 npm
 
+## 2019.05.21
+
+1. mqtt distributed 如何处理?
+
+2. 逃逸分析?
+
+	- `System.currentTimeMillis()` vs `new Date().getTime()`
+	- https://stackoverflow.com/questions/36196460/what-is-faster-system-currenttimemillis-or-date-gettime
+
+3. `System.nanoTime()` 和 `System.currentTimeMillis()`
+
+	- https://stackoverflow.com/questions/19052316/why-is-system-nanotime-way-slower-in-performance-than-system-currenttimemill
+
+4. why string class is final ?
+
+	- 为什么将类声明为 final => 不允许继承, 不能扩展
+	- https://stackoverflow.com/questions/5181578/what-is-the-point-of-final-class-in-java
+	- https://stackoverflow.com/questions/218744/good-reasons-to-prohibit-inheritance-in-java
+
+## 2019.5.22
+
+1. grep 过滤注释和空白行
+
+	- `grep "^\s*[^# \t].*$"`
+
+2. 查看端口占用
+
+	- `lsof -i:1883`
+
+3. protobuf 原理
+
+4. openResty
 
 
