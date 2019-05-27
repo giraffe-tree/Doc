@@ -3229,4 +3229,71 @@ err := os.Mkdir(_dir, os.ModePerm)
 
 4. openResty
 
+## 2019.5.23
+
+1. kafka streams enable.auto.commit can't config
+	
+	- https://stackoverflow.com/questions/47710291/enable-auto-commit-value-is-not-configuring-to-true
+
+
+## 2019.5.24
+
+1. pwa
+
+2. flutter desktop
+
+```
+flutter channel master
+flutter upgrade
+```
+
+## 2019.5.27
+
+1. win7 安装 docker
+
+	- https://docs.docker.com/toolbox/toolbox_install_windows/
+	- https://www.jianshu.com/p/48e546fd3c8f
+	- https://github.com/boot2docker/boot2docker
+
+2. cpuz 检查cpu/内存参数
+	
+	- https://zh.wikipedia.org/wiki/DDR4_SDRAM
+	- cpu: 指令集,电压,速度,缓存等
+	- 主板
+	- 内存条: 内存频率,DDR4(Double-Data-Rate Fourth Generation Synchronous Dynamic Random Access Memory，简称为DDR4 SDRAM)第四代双倍数据率同步动态随机存取存储器
+	- 显卡
+
+
+3. win7 docker 的一些问题
+
+	- docker toolbox mount file on windows
+		-  bad mount mode specified 
+			- https://stackoverflow.com/questions/33312662/docker-toolbox-mount-file-on-windows
+		- https://stackoverflow.com/questions/50540721/docker-toolbox-error-response-from-daemon-invalid-mode-root-docker
+	 	- `docker run -v /d/2019/May/docker/ecghospital/ecg-hospital-1.0.0.jar://data/ecg-hospital.jar ecghospital:1.2`
+	 		- Error: Unable to access jarfile /data/ecg-hospital.jar
+	 		- 挂载问题, 虽然没有解决问题
+	 		- http://support.divio.com/local-development/docker/how-to-use-a-directory-outside-cusers-with-docker-toolboxdocker-for-windows
+	 		- https://www.cnblogs.com/hangj/p/6502608.html
+	 - 尝试远程连接 docker daemon
+	 	- 远程服务器修改
+	 		- 生成证书
+	 		- https://www.jianshu.com/p/7ba1a93e6de4
+		 	- `vim /usr/lib/systemd/system/docker.service` 修改文件中的 ExecStart
+		 		- `ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock \
+				--tlsverify \
+				--tlscacert=/etc/docker/ca.pem \
+				--tlscert=/etc/docker/server-cert.pem \
+				--tlskey=/etc/docker/server-key.pem \
+				-H tcp://0.0.0.0:2376`
+		 	- `systemctl daemon-reload`
+		 	- `systemctl restart docker`
+		 	- 修改`~/.bashrc`
+		 		- `alias docker='docker --tlsverify --tlscacert=/root/2019/May/cert/client/ca.pem --tlscert=/root/2019/May/cert/client/cert.pem --tlskey=/root/2019/May/cert/client/key.pem -H tcp://127.0.0.1:2375'`
+		 	- 尝试 `docker version` 
+		- 客户端修改
+			- `docker --tlsverify --tlscacert=client/ca.pem --tlscert=client/cert.pem --tlskey=client/key.pem -H tcp://127.0.0.1:2375 version`
+			- 为了简化, 这里设定 `DOCKER_CERT_PATH` 为 `D:\environment\docker.cert\client`
+
+
 
