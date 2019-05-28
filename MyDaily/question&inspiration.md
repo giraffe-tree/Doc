@@ -3296,4 +3296,17 @@ flutter upgrade
 			- 为了简化, 这里设定 `DOCKER_CERT_PATH` 为 `D:\environment\docker.cert\client`
 
 
+## 2919.5.28
+
+1. TOTP标准算法
+	
+	- 两步验证
+	- https://www.jianshu.com/p/a7b900e8e50a
+
+2.  brotli 压缩算法
+
+	- 比 gzip 好一点
+
+
+
 
