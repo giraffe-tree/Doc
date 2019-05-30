@@ -45,6 +45,12 @@ https://en.wikipedia.org/wiki/Treap
 
 作者 Seidel 和 Aragon 出自论文 [randomized search trees](https://open-chen.oss-cn-hangzhou.aliyuncs.com/open/pdf/datastructure/randomized%20search%20trees.pdf)
 
+### 2008 LLRB
+
+在 algorithms 第四版中, 红黑树的实现来自于 Robert Sedgewick 在 2008 年的论文 [Left-leaning Red-Black Trees](https://open-chen.oss-cn-hangzhou.aliyuncs.com/open/pdf/datastructure/LLRB.pdf)
+
+看到 Robert Sedgewick 的名字有没有感觉很熟悉呢 =.= 没错, 他就是 Algorithms 的作者, 也是红黑树的命名者 =.=
+
 ## 其他变种
 
 ### 加权平衡树 weight-balanced tree

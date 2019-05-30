@@ -6,6 +6,8 @@
 
 	- 参考解答: https://algs4.cs.princeton.edu/33balanced/
 
+2. 2008年 Sedgewick 的论文 [Left-leaning Red-Black Trees](https://open-chen.oss-cn-hangzhou.aliyuncs.com/open/pdf/datastructure/LLRB.pdf)
+
 ## 导读
 
 曾经, 我看到的红黑树, 上来就是

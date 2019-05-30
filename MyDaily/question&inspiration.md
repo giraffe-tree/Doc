@@ -3296,7 +3296,7 @@ flutter upgrade
 			- 为了简化, 这里设定 `DOCKER_CERT_PATH` 为 `D:\environment\docker.cert\client`
 
 
-## 2919.5.28
+## 2019.5.28
 
 1. TOTP标准算法
 	
@@ -3306,6 +3306,65 @@ flutter upgrade
 2.  brotli 压缩算法
 
 	- 比 gzip 好一点
+
+3. apache flink 无敌教程
+
+	- zh.ververica.com
+
+
+## 2019.5.29
+
+1. this cannot be referenced from a static context
+
+	- https://stackoverflow.com/questions/13373779/non-static-class-cannot-be-referenced-from-a-static-context/13373837
+	- 在一个类 A 内部建立一个 class B, 由于没有 B 不是静态类, 所以需要实例化一个 A , 才能实例化 B , 但静态内部类就没有这个限制 
+
+2. redis 序列化问题
+
+3. sublime package install 被墙
+
+	- https://packagecontrol.io/ 添加这个网址到 pac.txt 中
+
+4. sublime 文本对比
+	
+	- 这里我用来对比导出 sql
+	- 下载插件 sublimerge
+
+5. `pthread_create failed: Resource temporarily unavailable`
+	
+	- 执行任何命令均有类似如下报错
+		- `man: fork failed: Cannot allocate memory`
+
+	- 可能的解决方案
+		- https://github.com/moby/moby/issues/9868
+		- 已解决 https://blog.csdn.net/onlyellow/article/details/51917757
+		- docker ce 中类似的问题
+			- https://success.docker.com/article/how-to-reserve-resource-temporarily-unavailable-errors-due-to-tasksmax-setting
+
+	- 一些用到的命令
+		- `ps -elfT | wc -l`
+		- `cat /proc/{pid}/limits`
+		- `echo "kernel.pid_max=65530" >> /etc/sysctl.conf`
+		- `cat /etc/security/limits.conf`
+		- `systemctl status docker`
+		- `cat /proc/version`
+	- pid_max thread_max 的区别
+		- https://unix.stackexchange.com/questions/136854/understanding-the-difference-between-pid-max-ulimit-u-and-thread-max
+
+	- 总结
+		- 表面上看起来的原因是 pthread_create 失败, 并且我提高了系统的 pid_max 后恢复了正常
+		- 但我没搞懂, 我提高进程上限, 和 线程创建失败有什么关系?
+
+6. jwt
+	
+	- 基本使用
+		- https://www.cnblogs.com/cjsblog/p/9277677.html
+		- http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html
+	- online debug
+		- https://jwt.io/
+	- 总结
+		- 感觉 jwt 和函数计算不能再般配了 =.=
+
 
 
 
