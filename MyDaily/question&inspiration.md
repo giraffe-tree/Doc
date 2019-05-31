@@ -3365,7 +3365,17 @@ flutter upgrade
 	- 总结
 		- 感觉 jwt 和函数计算不能再般配了 =.=
 
+## 2019.5.31
 
+1. 何谓以直报怨?
 
+	- 
+
+2. java cannot referenced from a static context
+	
+	- You need to declare the generic type in the method signature:
+	- `public static <E> BTNode<E> treeCopy(BTNode<E> source)`
+	- https://stackoverflow.com/questions/4209080/using-generic-types-in-a-static-context
+	- 这个方法独立于类的, 参数 E 独立于类中的标识
 
 
