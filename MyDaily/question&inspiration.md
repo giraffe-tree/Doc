@@ -3196,5 +3196,186 @@ err := os.Mkdir(_dir, os.ModePerm)
 
 1. 使用 cnpm 代替 npm
 
+## 2019.05.21
+
+1. mqtt distributed 如何处理?
+
+2. 逃逸分析?
+
+	- `System.currentTimeMillis()` vs `new Date().getTime()`
+	- https://stackoverflow.com/questions/36196460/what-is-faster-system-currenttimemillis-or-date-gettime
+
+3. `System.nanoTime()` 和 `System.currentTimeMillis()`
+
+	- https://stackoverflow.com/questions/19052316/why-is-system-nanotime-way-slower-in-performance-than-system-currenttimemill
+
+4. why string class is final ?
+
+	- 为什么将类声明为 final => 不允许继承, 不能扩展
+	- https://stackoverflow.com/questions/5181578/what-is-the-point-of-final-class-in-java
+	- https://stackoverflow.com/questions/218744/good-reasons-to-prohibit-inheritance-in-java
+
+## 2019.5.22
+
+1. grep 过滤注释和空白行
+
+	- `grep "^\s*[^# \t].*$"`
+
+2. 查看端口占用
+
+	- `lsof -i:1883`
+
+3. protobuf 原理
+
+4. openResty
+
+## 2019.5.23
+
+1. kafka streams enable.auto.commit can't config
+	
+	- https://stackoverflow.com/questions/47710291/enable-auto-commit-value-is-not-configuring-to-true
+
+
+## 2019.5.24
+
+1. pwa
+
+2. flutter desktop
+
+```
+flutter channel master
+flutter upgrade
+```
+
+## 2019.5.27
+
+1. win7 安装 docker
+
+	- https://docs.docker.com/toolbox/toolbox_install_windows/
+	- https://www.jianshu.com/p/48e546fd3c8f
+	- https://github.com/boot2docker/boot2docker
+
+2. cpuz 检查cpu/内存参数
+	
+	- https://zh.wikipedia.org/wiki/DDR4_SDRAM
+	- cpu: 指令集,电压,速度,缓存等
+	- 主板
+	- 内存条: 内存频率,DDR4(Double-Data-Rate Fourth Generation Synchronous Dynamic Random Access Memory，简称为DDR4 SDRAM)第四代双倍数据率同步动态随机存取存储器
+	- 显卡
+
+
+3. win7 docker 的一些问题
+
+	- docker toolbox mount file on windows
+		-  bad mount mode specified 
+			- https://stackoverflow.com/questions/33312662/docker-toolbox-mount-file-on-windows
+		- https://stackoverflow.com/questions/50540721/docker-toolbox-error-response-from-daemon-invalid-mode-root-docker
+	 	- `docker run -v /d/2019/May/docker/ecghospital/ecg-hospital-1.0.0.jar://data/ecg-hospital.jar ecghospital:1.2`
+	 		- Error: Unable to access jarfile /data/ecg-hospital.jar
+	 		- 挂载问题, 虽然没有解决问题
+	 		- http://support.divio.com/local-development/docker/how-to-use-a-directory-outside-cusers-with-docker-toolboxdocker-for-windows
+	 		- https://www.cnblogs.com/hangj/p/6502608.html
+	 - 尝试远程连接 docker daemon
+	 	- 远程服务器修改
+	 		- 生成证书
+	 		- https://www.jianshu.com/p/7ba1a93e6de4
+		 	- `vim /usr/lib/systemd/system/docker.service` 修改文件中的 ExecStart
+		 		- `ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix://var/run/docker.sock \
+				--tlsverify \
+				--tlscacert=/etc/docker/ca.pem \
+				--tlscert=/etc/docker/server-cert.pem \
+				--tlskey=/etc/docker/server-key.pem \
+				-H tcp://0.0.0.0:2376`
+		 	- `systemctl daemon-reload`
+		 	- `systemctl restart docker`
+		 	- 修改`~/.bashrc`
+		 		- `alias docker='docker --tlsverify --tlscacert=/root/2019/May/cert/client/ca.pem --tlscert=/root/2019/May/cert/client/cert.pem --tlskey=/root/2019/May/cert/client/key.pem -H tcp://127.0.0.1:2375'`
+		 	- 尝试 `docker version` 
+		- 客户端修改
+			- `docker --tlsverify --tlscacert=client/ca.pem --tlscert=client/cert.pem --tlskey=client/key.pem -H tcp://127.0.0.1:2375 version`
+			- 为了简化, 这里设定 `DOCKER_CERT_PATH` 为 `D:\environment\docker.cert\client`
+
+
+## 2019.5.28
+
+1. TOTP标准算法
+	
+	- 两步验证
+	- https://www.jianshu.com/p/a7b900e8e50a
+
+2.  brotli 压缩算法
+
+	- 比 gzip 好一点
+
+3. apache flink 无敌教程
+
+	- zh.ververica.com
+
+
+## 2019.5.29
+
+1. this cannot be referenced from a static context
+
+	- https://stackoverflow.com/questions/13373779/non-static-class-cannot-be-referenced-from-a-static-context/13373837
+	- 在一个类 A 内部建立一个 class B, 由于没有 B 不是静态类, 所以需要实例化一个 A , 才能实例化 B , 但静态内部类就没有这个限制 
+
+2. redis 序列化问题
+
+3. sublime package install 被墙
+
+	- https://packagecontrol.io/ 添加这个网址到 pac.txt 中
+
+4. sublime 文本对比
+	
+	- 这里我用来对比导出 sql
+	- 下载插件 sublimerge
+
+5. `pthread_create failed: Resource temporarily unavailable`
+	
+	- 执行任何命令均有类似如下报错
+		- `man: fork failed: Cannot allocate memory`
+
+	- 可能的解决方案
+		- https://github.com/moby/moby/issues/9868
+		- 已解决 https://blog.csdn.net/onlyellow/article/details/51917757
+		- docker ce 中类似的问题
+			- https://success.docker.com/article/how-to-reserve-resource-temporarily-unavailable-errors-due-to-tasksmax-setting
+
+	- 一些用到的命令
+		- `ps -elfT | wc -l`
+		- `cat /proc/{pid}/limits`
+		- `echo "kernel.pid_max=65530" >> /etc/sysctl.conf`
+		- `cat /etc/security/limits.conf`
+		- `systemctl status docker`
+		- `cat /proc/version`
+	- pid_max thread_max 的区别
+		- https://unix.stackexchange.com/questions/136854/understanding-the-difference-between-pid-max-ulimit-u-and-thread-max
+
+	- 总结
+		- 表面上看起来的原因是 pthread_create 失败, 并且我提高了系统的 pid_max 后恢复了正常
+		- 但我没搞懂, 我提高进程上限, 和 线程创建失败有什么关系?
+
+6. jwt
+	
+	- 基本使用
+		- https://www.cnblogs.com/cjsblog/p/9277677.html
+		- http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html
+	- online debug
+		- https://jwt.io/
+	- 总结
+		- 感觉 jwt 和函数计算不能再般配了 =.=
+
+## 2019.5.31
+
+1. 何谓以直报怨?
+
+	- 
+
+2. java cannot referenced from a static context
+	
+	- You need to declare the generic type in the method signature:
+	- `public static <E> BTNode<E> treeCopy(BTNode<E> source)`
+	- https://stackoverflow.com/questions/4209080/using-generic-types-in-a-static-context
+	- 这个方法独立于类的, 参数 E 独立于类中的标识
 
 
