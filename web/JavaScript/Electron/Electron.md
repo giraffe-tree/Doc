@@ -45,8 +45,62 @@ package.json 配置
 npm run-script package-win
 ```
 
-### 
+### 如何使用 vscode 调试
 
+https://github.com/Microsoft/vscode-recipes/tree/master/Electron
 
+1. 下载 vscode 插件 Node Debugger 和  the [Debugger for Chrome](https://github.com/Microsoft/vscode-chrome-debug) extension 
 
+2. 在 `.vscode/launch.json` 中添加配置即可
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+      {
+          "type": "node",
+          "request": "launch",
+          "name": "Electron: Main",
+          "protocol": "inspector",
+          "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+          "runtimeArgs": [
+              "--remote-debugging-port=9223",
+              "."
+          ],
+          "windows": {
+              "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
+          }
+      },
+      {
+          "name": "Electron: Renderer",
+          "type": "chrome",
+          "request": "attach",
+          "port": 9223,
+          "webRoot": "${workspaceFolder}",
+          "timeout": 30000
+      }
+  ],
+  "compounds": [
+      {
+          "name": "Electron: All",
+          "configurations": [
+              "Electron: Main",
+              "Electron: Renderer"
+          ]
+      }
+  ]
+}
+```
+
+### 证书问题
+
+https://www.electron.build/code-signing
+
+###Requiring electron dialog from render process is undefined
+
+<https://stackoverflow.com/questions/36637201/requiring-electron-dialog-from-render-process-is-undefined>
+
+```javascript
+const { app,clipboard,dialog} = require('electron').remote
+```
 
