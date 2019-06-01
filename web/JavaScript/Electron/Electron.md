@@ -45,14 +45,11 @@ package.json 配置
 npm run-script package-win
 ```
 
-<<<<<<< HEAD
 ### 如何使用 vscode 调试
 
 https://github.com/Microsoft/vscode-recipes/tree/master/Electron
-=======
->>>>>>> c6c1544c9b8ac69bf07cb9c1c0d9590b78f00b65
 
-1. 下载 vscode 插件 Node Debugger 和  the [Debugger for Chrome](https://github.com/Microsoft/vscode-chrome-debug) extension 
+下载 vscode 插件 Node Debugger 和  the [Debugger for Chrome](https://github.com/Microsoft/vscode-chrome-debug) extension 
 
 2. 在 `.vscode/launch.json` 中添加配置即可
 
