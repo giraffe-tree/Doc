@@ -2591,10 +2591,13 @@ type NullTime struct {
 
 1. 安装nginx后, 无法访问外网 80 端口
 
-	- ```
-	firewall-cmd --zone=public --add-port=80/tcp --permanent
-	firewall-cmd --reload
-	```
+  - ```
+    firewall-cmd --zone=public --add-port=80/tcp --permanent
+    firewall-cmd --reload
+    ```
+  ```
+  
+  ```
 
 2. 在使用npm安装模块时-g --save --save-dev有什么区别
 
@@ -2915,13 +2918,14 @@ String language = locale.getLanguage();
 
 2. 使用 ABNF 表示的 http 协议
 
-	```
-	HTTP-message =
-	start‑line 
-	*( header‑field  CRLF ) 
-	CRLF 
-	[ message‑body ]
-	```
+```
+HTTP-message =
+start‑line 
+*( header‑field  CRLF ) 
+CRLF 
+[ message‑body ]
+```
+
 	- ABNF for HTTP/1.1
 	- https://www.tech-invite.com/fo-abnf/tinv-fo-abnf-http.html#message-body
 
@@ -3195,6 +3199,14 @@ err := os.Mkdir(_dir, os.ModePerm)
 ## 2019.05.17
 
 1. 使用 cnpm 代替 npm
+
+## 2019.05.19
+
+1. 进程间通讯 IPC 
+
+   - Linux 管道
+
+   - https://blog.csdn.net/LEON1741/article/details/77934508
 
 ## 2019.05.21
 

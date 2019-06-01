@@ -89,11 +89,13 @@ server {
         listen  443 ssl http2;
         server_name giraffetree.me;
         
-    	# ssl 证书
+    	## ssl 证书
+  
         ssl_certificate      /usr/local/nginx/conf/conf.d/cert/giraffetree.me.pem;
         ssl_certificate_key  /usr/local/nginx/conf/conf.d/cert/giraffetree.me.key;
     ssl_session_timeout  5m;
-    # 下面这行不写会导致浏览器报出 ERR_SSL_PROTOCOL_ERROR 错误
+    ## 下面这行不写会导致浏览器报出 ERR_SSL_PROTOCOL_ERROR 错误
+  
 	ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 	ssl_ciphers 'ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!CAMELLIA:!DES:!MD5:!PSK:!RC4';
 	ssl_prefer_server_ciphers  on;	
@@ -107,6 +109,7 @@ server {
 
 ```nginx
 # xxx.80.conf 的内容如下, 域名设定成自己的哦
+
 server {
 	listen 80;
 	server_name giraffetree.me;
