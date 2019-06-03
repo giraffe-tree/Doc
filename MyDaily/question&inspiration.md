@@ -3390,4 +3390,23 @@ flutter upgrade
 	- https://stackoverflow.com/questions/4209080/using-generic-types-in-a-static-context
 	- 这个方法独立于类的, 参数 E 独立于类中的标识
 
+## 2019.6.1
+
+1. rsync 同步文件 =.=
+
+	- `rsync -run ./_site/* root@xxxxxx:/xx/xx/xx`
+
+## 2019.6.2
+
+1. 动态追踪
+
+	- https://openresty.org/posts/dynamic-tracing/
+	- SystemTap
+	- flame graph 
+	- 要不要去玩玩 =.=
+
+2. SystemTap
+
+	- SystemTap使用技巧
+		- https://segmentfault.com/a/1190000010774974
 

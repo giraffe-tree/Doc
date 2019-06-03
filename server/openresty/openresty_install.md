@@ -54,6 +54,19 @@ resty -e "ngx.say('hello world')"
 
 openresty 本质上是启动了一个 nginx 服务
 
+查看目录, 你会发现所谓的 openresty 就是 nginx
+
+```
+[root@centos7 bin]# pwd
+/usr/local/openresty/bin
+[root@centos7 bin]# ll
+total 36
+lrwxrwxrwx 1 root root    37 Jun  1 21:40 openresty -> /usr/local/openresty/nginx/sbin/nginx
+-rwxr-xr-x 1 root root 34219 May 17 07:47 resty
+```
+
+启动
+
 ```
 # 启动 openresty
 openresty
@@ -73,7 +86,6 @@ ps -ef | grep nginx
 openstry -s quit
 ```
 
-可以看到 openresty 的命令和 nginx 的关闭的命令有点相似.
 
 ### 配置
 
@@ -115,5 +127,18 @@ Connection: keep-alive
 hello, world
 ```
 
+### 其他模块
 
+#### restydoc
+
+```
+yum install restydoc
+```
+
+使用方法
+
+```
+restydoc -s ngx.say
+restydoc -s proxy_pass
+```
 
