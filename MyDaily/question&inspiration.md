@@ -3410,3 +3410,39 @@ flutter upgrade
 	- SystemTap使用技巧
 		- https://segmentfault.com/a/1190000010774974
 
+
+## 2019.6.3
+
+1. IM 消息如何存储
+
+	- 阿里云 tablestore
+		- im架构
+			- https://yq.aliyun.com/articles/66461
+		- tablestore 进阶之旅
+			- https://yq.aliyun.com/topic/121?spm=a2c4g.11186623.2.7.249863eeaLmqbH
+
+## 2019.6.4
+
+1. v2ray NB!!!
+
+	- v2ray 原理
+		- 伪装成 https 流量 =.=
+		- https://fbol.org/?p=440
+
+2. http 协议 header 大小写问题
+	
+	- http 协议本身不区分大小写, 但是标准规定的请求和响应的 Header 字段名是首字母大写这种格式
+	- 因为有些实现对于标准的 Header 字段并没有兼容大小写，所以流行的实现都会把你设置的 Header 转成首字母大写的格式来保证兼容性。
+	- 比如 `Content-Type` 和 `Content-type`, 尽量写成第一种的格式, 避免出现不兼容现象(暗示 IE) hah
+		- https://stackoverflow.com/questions/5258977/are-http-headers-case-sensitive
+		- https://www.v2ex.com/t/385522
+
+3. electron 练手项目 - oss browser
+
+	- https://github.com/aliyun/oss-browser
+
+
+
+
+
+
