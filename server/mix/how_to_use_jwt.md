@@ -22,7 +22,7 @@ JSON WEB TOKEN
 官方定义
 
 - iss (issuer)：签发人
-- exp (expiration time)：过期时间
+- exp (expiration time)：过期时	间
 - sub (subject)：主题
 - aud (audience)：受众
 - nbf (Not Before)：生效时间  实施者可以提供一些小的余地，通常不超过几分钟，以解决时钟偏差。

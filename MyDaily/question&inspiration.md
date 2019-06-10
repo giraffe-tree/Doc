@@ -3450,6 +3450,11 @@ flutter upgrade
 	- https://www.cnblogs.com/bonelee/p/6244810.html
 
 
+2. resize png example
+
+	- https://open-chen.oss-cn-hangzhou.aliyuncs.com/open/img/2019/june/d.png?x-oss-process=image/resize,w_28
+
+
 
 
 
