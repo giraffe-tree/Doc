@@ -3449,6 +3449,15 @@ flutter upgrade
 	- Log-Structured Merge Tree
 	- https://www.cnblogs.com/bonelee/p/6244810.html
 
+## 2019.6.9
+
+1. 什么是我想要的?
+
+
+2. 自然对数 e 是什么?
+
+	- e的x方是怎么画出来的?
+
 
 
 
