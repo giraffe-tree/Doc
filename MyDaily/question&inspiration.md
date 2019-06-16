@@ -3459,6 +3459,39 @@ flutter upgrade
 	- e的x方是怎么画出来的?
 
 
+2. resize png example
+
+	- https://open-chen.oss-cn-hangzhou.aliyuncs.com/open/img/2019/june/d.png?x-oss-process=image/resize,w_28
+
+## 2019.6.12 
+
+1. jar 包版本冲突
+
+```xml
+<dependency>
+    <groupId>com.aliyun.openservices</groupId>
+    <artifactId>tablestore</artifactId>
+    <version>5.0.0</version>
+    <classifier>jar-with-dependencies</classifier>
+    <exclusions>
+        <exclusion>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+```
+
+
+## 2019.6.14
+
+1. java static 静态块加载顺序
+
+	- 静态块初始化
+
+2. 机器人推理小说
+	
+	- 场景 => 推理嫌疑人
 
 
 
