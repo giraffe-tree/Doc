@@ -1688,6 +1688,7 @@ limitations under the License.
 2. https://www.wolframalpha.com/
 
 	- awesome compute !!!!
+	- 计算搜索
 
 3. redis commit 事务取消
 
@@ -3526,10 +3527,36 @@ flutter upgrade
 
 ## 2019.6.18
 
-1. 真实?
+1. mysql `The server time zone value...` 错误
+
+	- 更改时区
+		- `show variables like '%time_zone%';`
+		- `set global time_zone='+08:00';`
+
+2. nginx 
+
+	- 把 http 协议转为 HTTP2
+		- why?how?what?
+
+3. 真实?
 
 	- 真实的好么?
 
+## 2019.6.19
+
+1. git tag 使用
+
+	- 为当前commit添加标签
+		- `git tag <tag-name>`
+	- 获取 tag 的 commit-id
+		- `git show <tag名>`
+	- 回滚到该 commit
+		- `git reset --hard <commit-id>`
+
+
+2. `@JsonProperty` 修改 requestBody 中的传参名
+
+	- https://stackoverflow.com/questions/38635472/how-to-rename-json-objectsvariables-name-in-spring-boot
 
 
 
