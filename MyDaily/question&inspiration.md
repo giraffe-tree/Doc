@@ -3559,4 +3559,34 @@ flutter upgrade
 	- https://stackoverflow.com/questions/38635472/how-to-rename-json-objectsvariables-name-in-spring-boot
 
 
+## 2019.6.20
+
+1. Instantiating a generic class in Java
+
+	- https://stackoverflow.com/questions/1090458/instantiating-a-generic-class-in-java
+	- https://stackoverflow.com/questions/1090458/instantiating-a-generic-class-in-java
+
+2. go 写文件
+
+	- https://juejin.im/entry/5ba3759cf265da0af93afb8a
+	- 追加写
+
+```golang
+func tracefile(str_content string)  {
+    fd,_:=os.OpenFile("a.txt",os.O_RDWR|os.O_CREATE|os.O_APPEND,0644)
+    fd_time:=time.Now().Format("2006-01-02 15:04:05");
+    fd_content:=strings.Join([]string{"======",fd_time,"=====",str_content,"\n"},"")
+    buf:=[]byte(fd_content)
+    fd.Write(buf)
+    fd.Close()
+}
+```
+
+## 2019.6.21
+
+
+1. `@Version`
+
+	- `import javax.persistence.*;` 可以
+	- `@org.springframework.data.annotation.Version` 不行? why?
 
