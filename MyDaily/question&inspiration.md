@@ -3619,7 +3619,59 @@ func tracefile(str_content string)  {
 }
 ```
 
+## 2019.6.24
 
+1. nginx 热部署
+
+	- http://www.zsythink.net/archives/3260
+		- `kill -USR2 8874`
+		- `kill -WINCH 8874` 
+			- 这步不会关闭旧的nginx master 主进程
+			- 原因是为了之后的新进程出错, 可以及时回滚
+
+2. nginx 日志分隔
+
+	1. 将日志 `mv` 走
+	2. `nginx -s reopen`
+
+3. `execve() failed while executing new binary process "nginx"` 
+	
+	- `kill -USR2 nginx主进程pid` 时发生错误
+	- 遇到这个问题的原因是由于没有通过绝对路径启动 nginx, 导致向 nginx 进程发送更新的信号时, nginx 进程无法找到新的二进制程序
+
+4. 查看 docker 容器进程id
+
+	- `docker top container-id`
+	- `docker inspect container-id | grep Pid` // 注意 `Pid` 首字母大写
+
+5. java try finally 
+	
+```java
+    public static int test() {
+        int a = 3;
+        int b = 1;
+        try {
+            a = a + 1;
+            return a / b;
+        } catch (Exception e) {
+            return 0;
+        } finally {
+            b = b - 1;
+            a += 10;
+        }
+    }
+    // out: 4
+ ```
+
+6. JS 中 `12.toString()` 为什么不能用
+
+	- 12.toString() 会被解析成 12.（数字字面量） 和 toString()。所以正常的写法是12..toString()才是正常的
+
+7. IIFE
+
+	- Immediately Invoked Function Expression
+	- 立即调用函数表达式
+		- https://developer.mozilla.org/zh-CN/docs/Glossary/%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F
 
 
 
