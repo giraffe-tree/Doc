@@ -3590,3 +3590,37 @@ func tracefile(str_content string)  {
 	- `import javax.persistence.*;` 可以
 	- `@org.springframework.data.annotation.Version` 不行? why?
 
+## 2019.6.23
+
+1. eslint
+
+	- ECMAScript/JavaScript 语法规则和代码风格的检查工具
+
+2. vscode js 插件
+
+	- eslint 语法检查
+	- beautify 按F1 beautify file 格式化代码
+	- es6 code snippets 代码提示
+	- live server 静态网页preview
+
+3. vscode 调试当前文件
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "启动程序",
+            "program": "${workspaceFolder}/${relativeFile}"//${relativeFile} 从当前打开的文件夹到当前打开的文件的路径
+        }
+    ]
+}
+```
+
+
+
+
+
+
