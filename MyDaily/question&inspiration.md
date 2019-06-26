@@ -3724,4 +3724,5 @@ func tracefile(str_content string)  {
 			- 检查发现 `.git/refs/remotes/origin/master` 文件内容全是 `0000000000...` (16进制)
 				- 将 `.git/logs/refs/remotes/origin/master` 中最新的一次commit对应的 hashcode 拷过去(一般是最后一行)
 				- 终于正常了...
-
+		- 注意点: 
+			1. 修改 `.git/logs/refs/remotes/origin/master` 时要注意编码问题, 我用记事本打开存就可以, 但是用sublime存就不行, 猜测是编码问题
