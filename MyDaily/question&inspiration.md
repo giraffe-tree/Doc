@@ -3710,5 +3710,18 @@ func tracefile(str_content string)  {
 		1. 删除或重命名 `.git/index` 文件 
 		2. 重建 `.git/index` : `git read-tree` 或者直接 `git reset`
 		- https://www.clarencep.com/2017/10/23/a-note-to-git-error-bad-signature-index-file-corrupt/
-
+		- 本地看起来正常了, `git commit/log/status` 都是对的
+		- git push 错误
+			- `cannot lock ref 'refs/remotes/origin/master': unable to resolve reference 'refs/remotes/origin/master': reference broken` 改了之后, 本地正常, 但是 `git push` 时错误了
+				- https://stackoverflow.com/questions/2998832/git-pull-fails-unable-to-resolve-reference-unable-to-update-local-ref
+				- 尝试`git gc --prune=now`
+					- `error: bad ref for .git/logs/refs/remotes/origin/master`
+					- `fatal: bad object refs/remotes/origin/master`
+					- `error: failed to run repack`
+					- 结论: 无效
+			- `git status` => ` but the upstream is gone.`
+			- `git branch -a` => `warning: ignoring broken ref refs/remotes/origin/master * master`
+			- 检查发现 `.git/refs/remotes/origin/master` 文件内容全是 `0000000000...` (16进制)
+				- 将 `.git/logs/refs/remotes/origin/master` 中最新的一次commit对应的 hashcode 拷过去(一般是最后一行)
+				- 终于正常了...
 
