@@ -3674,7 +3674,41 @@ func tracefile(str_content string)  {
 		- https://developer.mozilla.org/zh-CN/docs/Glossary/%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F
 
 
-## 2019.6.25
+## 2019.6.26
 
-1. 
+1. js puzzlers
+
+	- http://javascript-puzzlers.herokuapp.com/
+
+2. js gc
+	
+	- js 内存泄漏问题
+		- http://www.ruanyifeng.com/blog/2017/04/memory-leak.html
+
+3. 任何足够先进的技术都和魔法无异
+
+	- 你不知道的JS 上卷 P74
+	- 致命魔术
+
+4. 创作共享协议
+
+	- CC BY 4.0
+		- https://creativecommons.org/licenses/by/4.0/deed.zh
+
+5. 本地文件存储/读取
+
+	- 批量存储
+	- 倒序读取
+
+6. 昨天我踢了下我的电脑, 然后死机了, 估计内存条没插稳...然后重启之后发现 git 命令执行时出现了一系列的错误
+
+	
+	- 文件夹A: `git log` => `fatal: your current branch appears to be broken`, `git status` 正常
+		- https://www.jianshu.com/p/3f528a36bfad
+		- https://stackoverflow.com/questions/33012869/broken-branch-in-git-fatal-your-current-branch-appears-to-be-broken
+	- 文件夹B: `git status` => `error: bad signature fatal: index file corrupt`, `git log` 正常
+		1. 删除或重命名 `.git/index` 文件 
+		2. 重建 `.git/index` : `git read-tree` 或者直接 `git reset`
+		- https://www.clarencep.com/2017/10/23/a-note-to-git-error-bad-signature-index-file-corrupt/
+
 
