@@ -3701,7 +3701,6 @@ func tracefile(str_content string)  {
 	- 倒序读取
 
 6. 昨天我踢了下我的电脑, 然后死机了, 估计内存条没插稳...然后重启之后发现 git 命令执行时出现了一系列的错误
-
 	
 	- 文件夹A: `git log` => `fatal: your current branch appears to be broken`, `git status` 正常
 		- https://www.jianshu.com/p/3f528a36bfad
@@ -3726,3 +3725,13 @@ func tracefile(str_content string)  {
 				- 终于正常了...
 		- 注意点: 
 			1. 修改 `.git/logs/refs/remotes/origin/master` 时要注意编码问题, 我用记事本打开存就可以, 但是用sublime存就不行, 猜测是编码问题
+
+## 2019.6.28
+
+1. vim 粘贴时缩进错误问题
+
+	- `:set paste` 在命令模式, 进入粘贴模式
+	- `:set nopaste` 退出粘贴模式
+
+2. 
+
