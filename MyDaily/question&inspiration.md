@@ -3733,5 +3733,17 @@ func tracefile(str_content string)  {
 	- `:set paste` 在命令模式, 进入粘贴模式
 	- `:set nopaste` 退出粘贴模式
 
-2. 
+
+## 2019.6.29
+
+1. class object 谁先出来的?
+
+	 - 什么是 class
+	 	- 构造对象的模板
+	 - 为什么要有 class
+	 	- 抽象
+	 - class 对象和一般的对象有什么区别?
+
+
+
 
