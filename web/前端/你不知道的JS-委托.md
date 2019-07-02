@@ -4,7 +4,7 @@
 
 JS 原型链的本质就是对象之间的关联关系
 
-## 委托
+## 行为委托
 
 ### 例
 
@@ -50,9 +50,49 @@ x.outputTaskDetails();
 
 按照我的理解, 使用**类构造函数**比较**倾向于创建和初始化放在一起**, 当然我这不是绝对的, 很多时候创建和初始化是分开的, 也就是类似于**懒汉模式**, **延迟初始化**. 但是在**对象关联中, 作者更加倾向于分离创建和初始化**. 在一般情况下, 延迟初始化可能会提高一些启动速度, 特别是 java 这类需要虚拟机的语言. 但不可避免的是, 你总归要初始化, 初始化的时间消耗不可能被避免.
 
+### 简洁方法
+
+```js
+var LoginController = {
+    errors: [],
+    getUser() {
+        // 妈妈再也不用担心代码里有 function 了！
+        console.log("get user...");
+    },
+    getPassword() {
+        console.log("get password...");
+    }
+    // ...
+};
+
+LoginController.getUser()
+
+var AuthController = {
+    errors: [],
+    checkAuth() {
+        // ...
+    },
+    server(url, data) {
+        console.log(url + data);
+    }
+    // ...
+};
+Object.setPrototypeOf(AuthController, LoginController);
+
+AuthController.getUser()
+```
+
+简洁方法实际上是一个语法糖, 它把一个匿名函数赋值给变量, 
+
+简洁方法很好用, 但也有缺点, 因为是匿名函数, 所有它不能自我引用=.=(当做递归函数), 如果需要递归, 请为他命名
 
 
 
+## 总结
+
+行为委托认为对象之间是兄弟关系，互相委托，而不是父类和子类的关系。JavaScript 的[[Prototype]] 机制本质上就是行为委托机制。也就是说，我们可以选择在 JavaScript 中努力实现类机制（参见第 4 和第 5 章），也可以拥抱更自然的 [[Prototype]] 委托机制
+
+对象关联（对象之前互相关联）是一种编码风格，它倡导的是直接创建和关联对象，不把它们抽象成类。对象关联可以用基于 [[Prototype]] 的行为委托非常自然地实现。
 
 
 
