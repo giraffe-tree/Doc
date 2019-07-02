@@ -3744,7 +3744,18 @@ func tracefile(str_content string)  {
 	 	- 抽象
 	 - class 对象和一般的对象有什么区别?
 
-## 2019.7.1
+## 2019.7.2
 
-1. 
+1. 滑动窗口问题
+
+	- https://juejin.im/post/5bd921b6e51d45681675134e
+
+2. 内容发布
+	- 尝试下?
+	- https://ghost.org/
+
+3. 大量删除导致慢查询
+
+	- https://tech.youzan.com/-ci-da-liang-shan-chu-dao-zhi-mysqlman-cha-de-fen-xi/
+
 
