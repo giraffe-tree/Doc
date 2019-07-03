@@ -3758,4 +3758,8 @@ func tracefile(str_content string)  {
 
 	- https://tech.youzan.com/-ci-da-liang-shan-chu-dao-zhi-mysqlman-cha-de-fen-xi/
 
+## 2019.7.3
 
+1. java 8 spliterator
+
+	- https://www.cnblogs.com/nevermorewang/p/9368431.html
