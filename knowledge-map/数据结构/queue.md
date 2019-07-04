@@ -8,7 +8,7 @@
 	- PriorityQueue
 	  - 大致原理: 内部数据结构, 如何实现最小堆
 	  - 画出 add 元素的示意图, 从 6 添加到 1
-	  - 画出 poll 元素的示意图
+	  - 画出 poll 元素的示意图, 从 1 到 6
 	  - modcount 的作用
 	- ArrayDeque
 	    - 大致原理: 内部数据结构
@@ -146,7 +146,8 @@ public interface Deque<E> extends Queue<E>
     - 始终扩容到原先的 2倍
     - 数据迁移使用 `System.arraycopy` 实现, 扩容后, head会指向数组的第一个元素
 
-5. 其他思考
+5. 不允许添加 null 元素
+6. 其他思考
 
     - 为什么容量要为 2的指数次方
         - 我想的是: 在计算实际 size 时, 能够更快 `size=(tail - head) & (elements.length - 1);`
