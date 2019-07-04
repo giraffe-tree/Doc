@@ -69,8 +69,8 @@ public interface Queue<E> extends Collection<E>
 
 6. 添加元素使用到了 2分法, 从而保证了该树的每一颗子树的根节点都是该子树中最小的点
 
-   - 简单的来说, 添加元素是从下往上交换元素, **时间复杂度为 `logn`**
-   - 与之对应的, 删除队首元素, 是从上往下交换元素, 时间复杂度也是 `logn `
+   - 简单的来说, 添加元素是从下往上交换元素, **时间复杂度为 `log n`**
+   - 与之对应的, 删除队首元素, 是从上往下交换元素, 时间复杂度也是 `log n `
 
 7. 在 `add/offer/remove/poll` 时会修改 `modcount` 
 
@@ -173,8 +173,6 @@ LinkedList 比较简单 =.=
 参考:
 
 - https://stackoverflow.com/questions/18638743/is-it-better-to-use-system-arraycopy-than-a-for-loop-for-copying-arrays
-
-
 
 
 
