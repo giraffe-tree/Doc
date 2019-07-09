@@ -3763,3 +3763,26 @@ func tracefile(str_content string)  {
 1. java 8 spliterator
 
 	- https://www.cnblogs.com/nevermorewang/p/9368431.html
+
+## 2019.7.8
+
+1. settings.xml
+
+	- 阿里云镜像
+
+```xml
+     <mirror>
+      <id>nexus-aliyun</id>
+      <mirrorOf>central</mirrorOf>
+      <name>Nexus aliyun</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+     </mirror>
+```
+
+2. 统计单个字符出现的次数
+	
+	- 比如这里我统计 `test.log` 中出现 `,` 的个数
+	- `cat test.log | tr -cd ',' | wc -c`
+
+
+
