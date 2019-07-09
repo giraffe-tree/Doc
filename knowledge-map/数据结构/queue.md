@@ -111,7 +111,7 @@ public interface Deque<E> extends Queue<E>
 |removeLast|E|删除队尾元素|队列空时, 抛出 NoSuchElementException|
 |pollFirst|E|删除队首元素|队列空时, 返回null|
 |pollLast|E|删除队尾元素|队列空时, 返回null|
-|push|void|添加元素||
+|push|void|添加元素|可以作为 stack 使用|
 |pop|E|删除元素||
 |descendingIterator|Iterator<E>|反向迭代|这个比较好玩 =.=|
 

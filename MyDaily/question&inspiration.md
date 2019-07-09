@@ -3785,4 +3785,23 @@ func tracefile(str_content string)  {
 	- `cat test.log | tr -cd ',' | wc -c`
 
 
+## 2019.7.9
+
+1. Apache/tomcat
+
+	- Apache是一个HTTP服务器，而Tomcat或者Jetty是一个HTTP服务器+Servlet容器。HTTP服务器与Servlet容器的功能界限是：你可以把HTTP服务器想象成前台的接待，负责网络通信和解析请求，而Servlet容器是业务部门，负责处理业务请求。
+
+2. 看源码时需要注意的
+
+	- 看源码很容易迷失在细节里无法自拔：），所以要抓住主线，分析源码之前看看它的主要功能有哪些，比如对于Tomcat、Jetty来说，主线就是启停、请求处理过程和类加载。 另外还是需要把源码跑起来，打断点调试。
+
+3. Java 的基础知识包括 Java 基本语法、面向对象设计的概念（封装、继承、多态、接口、抽象类等）、Java 集合的使用、Java I/O 体系、异常处理、基本的多线程并发编程（包括线程同步、原子类、线程池、并发容器的使用和原理）、Java 网络编程（I/O 模型 BIO、NIO、AIO 的原理和相应的 Java API）、Java 注解以及 Java 反射的原理等。
+
+	- 此外你还需要了解一些 JVM 的基本知识，比如 JVM 的类加载机制、JVM 内存模型、JVM 内存空间分布、JVM 内存和本地内存的区别以及 JVM GC 的原理等。
+
+4. 阿里云容器镜像服务
+	
+	- https://cr.console.aliyun.com
+
+
 
