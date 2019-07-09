@@ -67,7 +67,7 @@ public interface Map<K,V>
        - 快速确定哈希码进入的存储区 `int bucket = hashcode & (size-1);`
        - 更加容易理解的确定性
          - 参考 https://stackoverflow.com/questions/5040753/why-arraylist-grows-at-a-rate-of-1-5-but-for-hashmap-its-2?noredirect=1&lq=1
-   - resize 的过程中, 即使一个 bin 中的元素, 被分为 2 个bin, 每个 bin 中的顺序还是不变的
+   - resize 的过程中, 即使一个 bin 中的元素, 被分为 2 个bin, 在每个 bin 中的顺序还是不变的
    - resize 只会使 capacity 增加
 
    
