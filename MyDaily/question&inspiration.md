@@ -3803,5 +3803,31 @@ func tracefile(str_content string)  {
 	
 	- https://cr.console.aliyun.com
 
+## 7.10
+
+1. http://google.github.io/styleguide/javaguide.html
+
+2. vscode go
+	
+	- 下载依赖
+		- 使用 mod
+		- goproxy
+	- 调试 
+		- https://segmentfault.com/a/1190000018671207
+
+3. golang module
+	
+	- 搞了一个上午, 然后下午莫名其妙就可以了... 什么鬼
+		- 上午的时候爆出一堆乱七八糟的错误, 快疯了....
+	- 总结一下
+		1. 环境变量两个环境变量 GOPROXY="https://goproxy.io", GO111MODULE="on"
+		2. 并检查下 环境变量 %GOPATH%/bin 是否已经加进 PATH
+		3. tools 要 clone 过去
+		4. 
+ 	- http://ddrv.cn/a/292541
+		- 好像不能用 vscode 内部自动的 go get
+		- 安装了之后还是报错
+	- 光标在保存之后跳到行首, 解决不了 88了
+
 
 
