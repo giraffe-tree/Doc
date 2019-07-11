@@ -2790,7 +2790,7 @@ location / {
 
 ## 2019.04.22
 
-1. 检查文件夹大小
+1. 检查文件夹大小, 磁盘占用
 
 	- `du -sh *`
 
@@ -3829,5 +3829,14 @@ func tracefile(str_content string)  {
 		- 安装了之后还是报错
 	- 光标在保存之后跳到行首, 解决不了 88了
 
+## 07.11
 
+1. docker log 日志过大问题
+	
+	- Docker容器日志管理最佳实践
+		- https://www.cnblogs.com/operationhome/p/10907591.html
+
+2. cookie 在 springboot 中的使用
+
+	- https://attacomsian.com/blog/cookies-spring-boot
 
