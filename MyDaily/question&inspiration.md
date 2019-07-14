@@ -3840,3 +3840,23 @@ func tracefile(str_content string)  {
 
 	- https://attacomsian.com/blog/cookies-spring-boot
 
+
+## 07.14
+
+1. FunctionalInterface 做了什么
+
+2. jvm 不能识别 docker 内存限制
+
+	- http://developer.51cto.com/art/201808/581473.htm
+
+3. 查看 jvm 状态
+
+	- jvisualvm
+
+4. 常用配置
+
+	- `-Xmx50m -XX:+PrintGCDateStamps`
+	- `-XX:+HeapDumpOnOutOfMemoryError`
+
+
+
