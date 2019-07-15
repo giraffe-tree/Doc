@@ -3841,6 +3841,46 @@ func tracefile(str_content string)  {
 	- https://attacomsian.com/blog/cookies-spring-boot
 
 
+## 07.12
+
+1. 待了解数据库分库
+
+	- 读写分离
+
+2. 全部已读
+
+	- tablestore
+		- 列数据库
+	- https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651961184&idx=1&sn=d0add7f47d928febbd1ebd32239f05ce&chksm=bd2d02bc8a5a8baa704268891880e2560969fc1c3ed8cc45325db4313d8b43eb6db641cb469b&scene=21#wechat_redirect
+	- last_ack_id
+
+3. 读扩散/写扩散
+	
+	- 架构师之路公众号
+		- https://mp.weixin.qq.com/s/V1hGa6D9aGrP6PiCWEmc0w
+		- 《系统通知，究竟是推送还是拉取？》
+		- 《状态同步，究竟是推送还是拉取？》
+		- 《网页消息，究竟是推送还是拉取？》
+		- 《群已读回执，究竟是推送还是拉取？》
+		- 《群消息，究竟存一份还是多份？》
+		- 《feed流，究竟什么是读扩散？》
+		- 《feed流，究竟什么是写扩散？》
+	- 架构不(只)是设计出来的，更是演进出来的.
+	- 钉钉IM服务
+		- https://yq.aliyun.com/articles/66461
+		- 写扩散
+		- 为了支持多终端，在应用服务器中会为每个终端持有一个session，每个session持有一个当前最新消息的ID，当被通知有新消息时，会去存储系统读取当前消息之后的所有消息，
+	- 千万级feed流
+		- https://yq.aliyun.com/articles/224132
+		- 推模式,写扩散
+		- 推模式之后可以使用算法, 加入.....
+	- Feed流系统设计总纲
+		- https://yq.aliyun.com/articles/706808
+
+4. lisp, c,c++,java,js,golang,erlang,python,clojure,
+
+
+
 ## 07.14
 
 1. FunctionalInterface 做了什么
@@ -3857,6 +3897,13 @@ func tracefile(str_content string)  {
 
 	- `-Xmx50m -XX:+PrintGCDateStamps`
 	- `-XX:+HeapDumpOnOutOfMemoryError`
+
+
+## 07.15
+
+1. 阿里云ACP认证 
+
+	- https://edu.aliyun.com/certification/acp01
 
 
 
