@@ -3905,5 +3905,19 @@ func tracefile(str_content string)  {
 
 	- https://edu.aliyun.com/certification/acp01
 
+## 07.16
 
+1. win+R  =>  Regedit
+
+	- HKCU/Software/Microsoft/Windows/CurrentVersion/Policies/Explorer/
+	- 把DisableThumbnails的值从1改为0
+	- 文件夹选项 始终显示图标从不显示缩略图
+
+2. 查看字节码
+	- 包含私有方法
+	- `javap -c -p AliyunSTSUtils.class`
+
+3. springboot @value 静态变量赋值
+	- 使用 setter 方法
+		- https://blog.csdn.net/mononoke111/article/details/81088472
 
