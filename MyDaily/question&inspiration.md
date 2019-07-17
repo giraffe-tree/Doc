@@ -3921,3 +3921,22 @@ func tracefile(str_content string)  {
 	- 使用 setter 方法
 		- https://blog.csdn.net/mononoke111/article/details/81088472
 
+4. 为什么要使用接口
+
+	- 这是面向对象设计的精髓，将系统中经常变化的部分和稳定的部分隔离，有助于增加复用性，并降低系统耦合度。
+	- 高内聚/低耦合
+
+5. 适配器模式
+	
+	- 参考:
+		- https://blog.csdn.net/qq_36582604/article/details/82261858
+	- 优点
+		- 适配器模式可以让两个没有任何关系得类在一起运行，只要适配器这个角色能够搞定他就成。
+	 	- 增加了类的透明性。我们访问的Target目标角色，但是具体的实现都委托给了源角色，而这些对高层次模块时透明的，也是它不需要关心的。
+	- tomcat 中 CoyoteAdapter 使用了适配器模式
+		- CoyoteAdapter 负责将 Tomcat Request 转成 ServletRequest，再调用容器的 Service 方法。
+
+6. Servlet规范规定了对HTTP Body的读写是阻塞的 why?
+
+	- 
+

@@ -15,38 +15,63 @@
 
 ### 编写一个继承 HttpServlet 的 Java 类
 
-```
+```java
 import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-public class MyServlet extends HttpServlet {
+@WebServlet("/myAnnotationServlet")
+public class AnnotationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        System.out.println("MyServlet 在处理 get（）请求...");
+        System.out.println("AnnotationServlet process get...");
         PrintWriter out = response.getWriter();
-        response.setContentType("text/html;charset=utf-8");
-        out.println("<strong>My Servlet!</strong><br>");
+        response.setContentType("text/html; charset=utf-8");
+        out.println("<strong>Annotation Servlet!</strong><br>");
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        System.out.println("MyServlet 在处理 post（）请求...");
+        System.out.println("AnnotationServlet process post...");
         PrintWriter out = response.getWriter();
-        response.setContentType("text/html;charset=utf-8");
-        out.println("<strong>My Servlet!</strong><br>");
-    }
+        response.setContentType("text/html; charset=utf-8");
+        out.println("<strong>Annotation Servlet!</strong><br>");
 
-}
+    }
+}  
 ```
+
+编译, `servlet-api.jar` 来自tomcat的lib目录下
+
+```sh
+# 指定 utf-8 编码, 防止乱码
+javac -encoding UTF-8 -cp ./servlet-api.jar AnnotationServlet.java
+```
+
+将编译好的 `AnnotationServlet.class` 放入下面的路径, 其中 webapps 是 tomcat 主路径下的一个子文件夹.
+
+```
+webapps/MyWebApp/WEB-INF/classes/AnnotationServlet.class
+```
+
+启动
+
+```
+startup.bat
+```
+
+打开链接: http://localhost:8080/MyWebApp/myAnnotationServlet
+
+完成!
 
