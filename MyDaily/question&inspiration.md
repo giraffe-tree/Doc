@@ -3869,6 +3869,7 @@ func tracefile(str_content string)  {
 	- 钉钉IM服务
 		- https://yq.aliyun.com/articles/66461
 		- 写扩散
+			- 微信朋友圈
 		- 为了支持多终端，在应用服务器中会为每个终端持有一个session，每个session持有一个当前最新消息的ID，当被通知有新消息时，会去存储系统读取当前消息之后的所有消息，
 	- 千万级feed流
 		- https://yq.aliyun.com/articles/224132
@@ -3938,5 +3939,15 @@ func tracefile(str_content string)  {
 
 6. Servlet规范规定了对HTTP Body的读写是阻塞的 why?
 
-	- 
+## 07.18
+
+1. why full gc
+
+	- 测试下 https://www.jianshu.com/p/945881f5d439
+
+2. 微信的写扩散
+
+	- Quorum 机制
+	- https://blog.csdn.net/tb3039450/article/details/80249664
+
 
