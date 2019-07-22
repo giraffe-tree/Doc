@@ -3950,5 +3950,24 @@ func tracefile(str_content string)  {
 	- Quorum 机制
 	- https://blog.csdn.net/tb3039450/article/details/80249664
 
+## 07.22
+
+1. tomcat 
+	
+	- 通用的/统一的接口
+		- 组合模式
+	- 监听器
+		- 观察者模式
+	- 基类实现
+		- 模板设计模式
+	- 其他
+		- 开闭原则
+		- 接口分离原则
+	- 问题
+		- 组合模式和模板设计模式的区别?
+
+2. jmx
+
+	- tomcat 将组件注册到mbean server，用JMX管起来
 
 
