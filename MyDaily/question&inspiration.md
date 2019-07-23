@@ -3971,3 +3971,14 @@ func tracefile(str_content string)  {
 	- tomcat 将组件注册到mbean server，用JMX管起来
 
 
+## 07.23 晚
+
+1. jetty
+
+	1. Acceptor就是不停的调accept函数，接收新的连接
+	2. Selector不停的调select函数，查询某个Channel上是否有数据可读
+	3. 同一个浏览器发过来的请求会重用TCP连接，也就是用同一个Channel
+		- Channel是非阻塞的，连接器里维护了这些Channel实例，过了一段时间超时到了channel还没数据到来，表面用户长时间没有操作浏览器，这时Tomcat才关闭这个channel。
+
+
+
