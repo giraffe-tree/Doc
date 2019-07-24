@@ -3827,7 +3827,7 @@ func tracefile(str_content string)  {
  	- http://ddrv.cn/a/292541
 		- 好像不能用 vscode 内部自动的 go get
 		- 安装了之后还是报错
-	- 光标在保存之后跳到行首, 解决不了 88了
+	- 光标在保存之后跳到行首, 解决不了 88了 -> 用 goland
 
 ## 07.11
 
@@ -3950,9 +3950,55 @@ func tracefile(str_content string)  {
 	- Quorum 机制
 	- https://blog.csdn.net/tb3039450/article/details/80249664
 
+## 07.19
+
+1. 图数据库的原理
+
+2. union all 使用
+
+3. executor service 中加入 shutdownHook ?
+
 ## 07.22
 
-1. tomcat 
+1. GCLocker Initiated GC 是什么
+
+	- https://www.jianshu.com/p/ecc57a81f73c
+	- https://bugs.openjdk.java.net/browse/JDK-8048556
+
+```
+23264.262: [GC (Allocation Failure) [PSYoungGen: 271547K->1874K(291840K)] 486793K->254558K(601600K), 0.0133121 secs] [Times: user=0.02 sys=0.01, real=0.01 secs] 
+23264.275: [Full GC (Ergonomics) [PSYoungGen: 1874K->0K(291840K)] [ParOldGen: 252683K->47508K(308224K)] 254558K->47508K(600064K), [Metaspace: 74380K->74380K(1118208K)], 0.0837050 secs] [Times: user=0.12 sys=0.00, real=0.09 secs] 
+```
+
+```
+35147.160: [GC (GCLocker Initiated GC) [PSYoungGen: 83426K->2615K(86528K)] 274007K->227491K(345088K), 0.0065559 secs] [Times: user=0.01 sys=0.00, real=0.00 secs] 
+35147.167: [Full GC (Ergonomics) [PSYoungGen: 2615K->0K(86528K)] [ParOldGen: 224875K->47873K(262656K)] 227491K->47873K(349184K), [Metaspace: 76851K->76851K(1120256K)], 0.0874253 secs] [Times: user=0.13 sys=0.00, real=0.08 secs] 
+```
+
+2. 什么是 cuda
+
+3. 计算能力
+
+	- MFLOPS（megaFLOPS）等於每秒一佰万（=10^6）次的浮点运算，
+	- GFLOPS（gigaFLOPS）等於每秒拾亿（=10^9）次的浮点运算，
+	- TFLOPS（teraFLOPS）等於每秒万亿（=10^12）次的浮点运算，
+	- PFLOPS（petaFLOPS）等於每秒千万亿（=10^15）次的浮点运算，
+	- EFLOPS（exaFLOPS）等於每秒百亿亿（=10^18）次的浮点运算。
+
+	- gpu 性能对比
+		- https://zhuanlan.zhihu.com/p/51380356
+		- https://pic4.zhimg.com/v2-83ee652c2cecd7b05154bb7b174defcf_r.jpg
+
+4. CUDA
+	
+	- cuda 介绍
+		- https://zhuanlan.zhihu.com/p/34587739
+	- nvprof 优化 cuda 性能
+
+5. 语音识别
+	- http://kaldi-asr.org/doc/
+
+6. tomcat 
 	
 	- 通用的/统一的接口
 		- 组合模式
@@ -3966,8 +4012,35 @@ func tracefile(str_content string)  {
 	- 问题
 		- 组合模式和模板设计模式的区别?
 
-2. jmx
+7. jmx
 
 	- tomcat 将组件注册到mbean server，用JMX管起来
+
+
+## 7.23
+
+1. 好友表为什么使用 union all
+
+	- 小数据量的话无所谓。如果数据量大，union all 效率更高。union all 可以充分利用索引。
+	- union
+		- 去重且排序
+	- union all
+		- 不去重不排序
+	- 故从效率上说，UNION ALL 要比UNION快很多，所以，如果可以确认合并的两个结果集中不包含重复数据且不需要排序时的话，那么就使用UNION ALL。
+		- https://juejin.im/post/5c131ee4e51d45404123d572
+
+2. sql explain
+	- 怎么使用
+
+3. docker-proxy
+
+	- 这个进程是做什么的?
+
+4. Dockerfile 最佳实践
+
+	- https://blog.docker.com/2019/07/intro-guide-to-dockerfile-best-practices/
+
+
+
 
 
