@@ -4062,3 +4062,11 @@ func tracefile(str_content string)  {
 2. `redis-cli -a 'xx' KEYS "Device_1000*" | xargs redis-cli DEL`
 
 
+## 07.30
+
+1. jvm 锁消除
+
+	- `StringBuilder` 第400页
+
+
+
