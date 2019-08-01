@@ -66,3 +66,12 @@
 	https://stackoverflow.com/questions/38589886/sorry-unimplemented-64-bit-mode-not-compiled-in
 
 
+## 2019.7.31
+
+
+1. `Can't find dependent libraries`
+
+	- dependency walker
+		
+
+

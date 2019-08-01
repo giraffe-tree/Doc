@@ -2508,7 +2508,7 @@ show create table t1\G
 
 	- 输出 gc 到file
 	- https://stackoverflow.com/questions/1161647/how-to-redirect-verbose-garbage-collection-output-to-a-file
-	- 
+	-   `-Xloggc:garbage-collection.log`
 
 7. 多个 `.so` 组合成一个 `.so`
 
@@ -4067,6 +4067,69 @@ func tracefile(str_content string)  {
 1. jvm 锁消除
 
 	- `StringBuilder` 第400页
+## 07.31
 
+1. gc 日志
+
+	- `-XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+HeapDumpOnOutOfMemoryError`
+	- `-Xmx1536m -Xms1536m -XX:+PrintGCDetails -XX:+PrintGCDateStamps   -Xloggc:garbage-collection.log -XX:+HeapDumpOnOutOfMemoryError`
+	- `-Xmx1536m -Xms1536m -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+HeapDumpOnOutOfMemoryError`
+
+2. shell
+
+```sh
+#!/bin/sh
+
+while [[ true ]]; do
+	jstat -gc 20284
+	sleep 2
+done
+```
+
+
+## 08.01
+
+1. 在吞吐量方面：LZ4 > Snappy > zstd 和 GZIP；而在压缩比方面，zstd > LZ4 > GZIP > Snappy。
+
+2. spel # vs $
+	
+	- `${...}` 是属性占位符语法。它只能用于取消引用属性。
+	- `#{...}` 是SpEL语法，它更强大，更复杂。它还可以处理属性占位符，还有更多
+		- `"#{'${property}'}"`
+	- https://stackoverflow.com/questions/5322632/spring-expression-language-spel-with-value-dollar-vs-hash-vs
+
+3. kafka
+
+	- 新加入的 group 从加入开始的时间点(offset)开始消费
+
+4. kafka 可视化
+
+	- https://hub.docker.com/r/hlebalbau/kafka-manager
+
+5. 
+
+```Dockerfile
+version: '2'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka:2.12-2.2.1
+    container_name: kafka
+    # build: .
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.2.153
+      # KAFKA_CREATE_TOPICS: "test:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_MESSAGE_MAX_BYTES: 4000
+    # volumes:
+    #   - /var/run/docker.sock:/var/run/docker.sock
+```
 
 
