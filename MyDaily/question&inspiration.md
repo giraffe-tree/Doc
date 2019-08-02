@@ -4132,4 +4132,23 @@ services:
     #   - /var/run/docker.sock:/var/run/docker.sock
 ```
 
+```
+# 这里注意 ZH_HOSTS 由于docker 容器之间网络隔离的原因, 不能使用 localhost
+docker run -d  -p 9001:9000 --name manager \
+-e ZK_HOSTS="192.168.2.153:2181" \
+hlebalbau/kafka-manager:stable \
+-Dpidfile.path=/dev/null
+```
+
+## 08.02
+
+1. windows 上的 docker 是怎么运行起来的?
+
+	- 
+
+
+
+
+
+
 
