@@ -4062,6 +4062,26 @@ func tracefile(str_content string)  {
 2. `redis-cli -a 'xx' KEYS "Device_1000*" | xargs redis-cli DEL`
 
 
+## 7.29
+
+1. 剪视频 =.=
+	
+	- 初学者选择免费剪辑软件（无成本，操作简单）
+		- windows系统：Movie Maker、达芬奇15免费版
+		- mac系统：iMovie、达芬奇15免费版
+	-进阶用户（达芬奇15免费版：调色功能强大）
+		- windows系统：Premiere & Aft（更加高级的视频效果）
+		- mac系统：Final Cut Pro & Motion
+	- 无版权音乐
+		- bensound.com 
+		- freemusicarchive.org 
+		- jamendo.com
+
+2. 绿里奇迹
+
+
+
+
 ## 07.30
 
 1. jvm 锁消除
@@ -4145,6 +4165,8 @@ hlebalbau/kafka-manager:stable \
 1. windows 上的 docker 是怎么运行起来的?
 
 	- 
+
+
 
 
 
