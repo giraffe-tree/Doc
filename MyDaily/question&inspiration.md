@@ -4086,7 +4086,8 @@ func tracefile(str_content string)  {
 
 1. jvm 锁消除
 
-	- `StringBuilder` 第400页
+	- 深入理解java虚拟机 `StringBuilder` 第400页
+
 ## 07.31
 
 1. gc 日志
@@ -4187,9 +4188,17 @@ hlebalbau/kafka-manager:stable \
 	- 并发量大的
 	- 自身服务, 数据库性能有限, 并且没有做限流控制的
 
+## 08.06
 
+1. kafka rebalance 问题
 
+	- 通过流处理框架可以解决么?
 
+2. 积分系统设计
+
+	- 看起来像是 京东阅读的 积分解决方案
+		- https://my.oschina.net/funcy/blog/1975523
+		- 缺点是: 比较难回滚 
 
 
 
