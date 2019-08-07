@@ -4201,5 +4201,20 @@ hlebalbau/kafka-manager:stable \
 		- 缺点是: 比较难回滚 
 
 
+## 08.07
+
+1. 事务自增锁
+
+	- 自增锁会因为事务而降低 tps 么
+
+2. `UnexpectedRollbackException: Transaction silently rolled back because it has been marked as rollback-only`
+
+	- spring 事务传播方式
+
+3. mysql 5.6 版本
+
+	- 不稳定排序的问题
+		- 优化器在遇到order by xxx limit x,x 时，会做一个优化，使用优先队列(堆排序)，来进行排序，这样的好处在于在排序过程中，仅保留需要的n条数据即可。
+		- https://www.jianshu.com/p/1e8a19738ae4
 
 
