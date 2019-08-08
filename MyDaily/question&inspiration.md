@@ -4217,4 +4217,37 @@ hlebalbau/kafka-manager:stable \
 		- 优化器在遇到order by xxx limit x,x 时，会做一个优化，使用优先队列(堆排序)，来进行排序，这样的好处在于在排序过程中，仅保留需要的n条数据即可。
 		- https://www.jianshu.com/p/1e8a19738ae4
 
+## 08.08
+
+1. 寻找为什么依靠荷尔蒙的证据, 心理学依据
+
+2. 好想法接连不断, 得以实现的却寥寥无几
+	
+	- 加油实现呀
+
+3. kotlin blade
+
+	- 用 kotlin 实现一个 blade
+
+4. redis docker 启动
+
+	- `docker run -d -p 6379:6379 --name redis redis:5 redis-server --appendonly yes --requirepass "123456"`
+
+5. redis 文档
+
+	- http://redisdoc.com/
+
+6. 回家搭一个 redis 集群
+
+7. spring data redis 
+
+	- srandmember 会返回重复的元素
+		- https://blog.csdn.net/MitKey/article/details/56278310
+
+8. redis 一次添加多个元素的事务性如何保证
+
+	- 多线程使用 redis 时的事务问题
+
+
+
 
