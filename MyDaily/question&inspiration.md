@@ -4144,7 +4144,7 @@ services:
     ports:
       - "9092:9092"
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: 192.168.2.153
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.2.112
       # KAFKA_CREATE_TOPICS: "test:1:1"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
@@ -4156,7 +4156,7 @@ services:
 ```
 # 这里注意 ZH_HOSTS 由于docker 容器之间网络隔离的原因, 不能使用 localhost
 docker run -d  -p 9001:9000 --name manager \
--e ZK_HOSTS="192.168.2.153:2181" \
+-e ZK_HOSTS="192.168.2.112:2181" \
 hlebalbau/kafka-manager:stable \
 -Dpidfile.path=/dev/null
 ```
@@ -4248,6 +4248,31 @@ hlebalbau/kafka-manager:stable \
 
 	- 多线程使用 redis 时的事务问题
 
+## 08.09
 
+1. xss 设置线程堆栈大小
+
+
+## 08.11
+
+1. 一下两种方式的区别
+
+	- 反向代理 https + web 服务器 http
+	- 反向代理 https + web 服务器 https
+
+2. 在 docker 中使用 apr
+
+3. `DirectByteBuffer` 用于实现堆外内存分配, 我们可以通过该类实现堆外内存的创建、使用和销毁。
+	
+	- DirectByteBuffer是通过虚引用(Phantom Reference)来实现堆外内存的释放的。
+		- 其实虚引用主要被用来 跟踪对象被垃圾回收的状态，通过查看引用队列中是否包含对象所对应的虚引用来判断它是否 即将被垃圾回收，从而采取行动。
+	- Cleaner是PhantomReference的子类, cleaner 是如何实现回收 堆外资源的呢? todo
+		- 
+	- `-XX:MaxDirectMemorySize` 指定最大的堆外内存大小，当使用达到了阈值的时候将调用System.gc()来做一次full gc，以此来回收掉没有被使用的堆外内存。
+	- 使用堆外内存的原因
+		- 在某些场景下可以提升程序I/O操纵的性能。少去了将数据从堆内内存拷贝到堆外内存的步骤。
+		- 对垃圾回收停顿的改善, 减少堆内存, 减少gc时间, 对这点不是特别明白? todo
+	- 考虑 虚拟内存 对 堆外内存的影响
+	- https://www.jianshu.com/p/007052ee3773
 
 
