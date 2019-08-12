@@ -4250,7 +4250,9 @@ hlebalbau/kafka-manager:stable \
 
 ## 08.09
 
-1. xss 设置线程堆栈大小
+1. 感觉百度翻译的没有google翻译地道 =.=
+
+2.  xss 设置线程堆栈大小
 
 
 ## 08.11
@@ -4274,5 +4276,42 @@ hlebalbau/kafka-manager:stable \
 		- 对垃圾回收停顿的改善, 减少堆内存, 减少gc时间, 对这点不是特别明白? todo
 	- 考虑 虚拟内存 对 堆外内存的影响
 	- https://www.jianshu.com/p/007052ee3773
+
+## 08.12
+
+1. 消息队列如何实现解耦
+
+	- 在软件的正常功能开发中，并不需要去刻意的寻找消息队列的使用场景，而是当出现性能瓶颈时，去查看业务逻辑是否存在可以异步处理的耗时操作，如果存在的话便可以引入消息队列来解决。否则盲目的使用消息队列可能会增加维护和开发的成本却无法得到可观的性能提升，那就得不偿失了
+	- 使用消息队列, 在不降低可维护性的基础上, 对业务进行解耦
+
+2. kafka 空消费者组延时rebalance
+
+	- 0.11 版本,为了缩短多consumer首次rebalance的时间，增加了“group.initial.rebalance.delay.ms”用于设置group开启rebalance的延时时间
+
+3. kafka 消息格式演变 todo:read
+
+	- https://blog.csdn.net/u013256816/article/details/80300225
+
+4. kafka record header
+
+	- kafka improvement proposals
+		- https://cwiki.apache.org/confluence/display/KAFKA/KIP-82+-+Add+Record+Headers
+	- kafka headers 的实际应用
+		- 例子中, 都是使用 拦截器 对 header 进行 身份验证/签名/跟踪/自定义压缩
+		- https://cwiki.apache.org/confluence/display/KAFKA/A+Case+for+Kafka+Headers
+
+5. kafka consumer 错误 - FetchSessionHandler
+
+	- 使用 拉取会话（Fetch Session） 的意义
+		- http://zqhxuyuan.github.io/2019/03/07/2019-03-07-KafkaConsumer-IncrementalFetch/
+
+	- `Node 1001 was unable to process the fetch request with (sessionId=2088729181, epoch=1094): INVALID_FETCH_SESSION_EPOCH.`
+	- 可能有帮助的
+		- https://stackoverflow.com/questions/54823733/kafka-invalid-fetch-session-epoch
+		- https://cwiki.apache.org/confluence/display/KAFKA/KIP-227%3A+Introduce+Incremental+FetchRequests+to+Increase+Partition+Scalability
+		- https://issues.apache.org/jira/browse/KAFKA-8052
+
+
+
 
 
