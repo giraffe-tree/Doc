@@ -4323,6 +4323,11 @@ hlebalbau/kafka-manager:stable \
 
 4. 这话题的压抑感让人觉得在审判
 
+5. tomcat heapByteBuffer 来接受网络数据
+
+	- HeapByteBuffer来接收网络数据，需要把数据从内核先拷贝到一个临时的本地内存，再从临时本地内存拷贝到 JVM 堆，而不是直接从内核拷贝到 JVM 堆上。这是为什么呢？这是因为数据从内核拷贝到 JVM 堆的过程中，JVM 可能会发生 GC，GC 过程中对象可能会被移动，也就是说 JVM 堆上的字节数组可能会被移动，这样的话 Buffer 地址就失效了。如果这中间经过本地内存中转，从本地内存到 JVM 堆的拷贝过程中 JVM 可以保证不做 GC。
+	- 为什么不 GC 原因在于 jvm 要处于 safepoint 才能 gc
+
 
 
 
