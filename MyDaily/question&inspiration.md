@@ -4311,6 +4311,18 @@ hlebalbau/kafka-manager:stable \
 		- https://cwiki.apache.org/confluence/display/KAFKA/KIP-227%3A+Introduce+Incremental+FetchRequests+to+Increase+Partition+Scalability
 		- https://issues.apache.org/jira/browse/KAFKA-8052
 
+## 08.13
+
+1. nio, nio.2
+
+	- 异步最大的特点是，应用程序不需要自己去触发数据从内核空间到用户空间的拷贝。
+
+2. 一切都是政治敏感的世界真是恐怖, 想起了文革啊
+
+3. 绝对公平的世界, 会损害人
+
+4. 这话题的压抑感让人觉得在审判
+
 
 
 
