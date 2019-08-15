@@ -4354,8 +4354,12 @@ hlebalbau/kafka-manager:stable \
 		- CopyOnWriteArrayList
 			- 在 add 时会复制整个 array , 所以很耗费性能
 
+2. MappedByteBuffer
 
-
+	- 缺页中断：当程序试图访问已映射在虚拟地址空间中但未被加载至物理内存的一个分页时，由MMC发出的中断。如果操作系统判断此次访问是有效的，则尝试将相关的页从虚拟内存文件中载入物理内存
+	- MMU：CPU的内存管理单元。
+	- https://www.jianshu.com/p/f90866dcbffc
+	- 用户空间上还有一个共享库和 mmap 映射区，Linux 提供了内存映射函数 mmap， 它可将文件内容映射到这个内存区域，用户通过读写这段内存，从而实现对文件的读取和修改，无需通过 read/write 系统调用来读写文件，省去了**用户空间和内核空间之间的数据拷贝**，Java 的 MappedByteBuffer 就是通过它来实现的
 
 
 
