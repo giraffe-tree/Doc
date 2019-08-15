@@ -4328,6 +4328,33 @@ hlebalbau/kafka-manager:stable \
 	- HeapByteBuffer来接收网络数据，需要把数据从内核先拷贝到一个临时的本地内存，再从临时本地内存拷贝到 JVM 堆，而不是直接从内核拷贝到 JVM 堆上。这是为什么呢？这是因为数据从内核拷贝到 JVM 堆的过程中，JVM 可能会发生 GC，GC 过程中对象可能会被移动，也就是说 JVM 堆上的字节数组可能会被移动，这样的话 Buffer 地址就失效了。如果这中间经过本地内存中转，从本地内存到 JVM 堆的拷贝过程中 JVM 可以保证不做 GC。
 	- 为什么不 GC 原因在于 jvm 要处于 safepoint 才能 gc
 
+## 08.16
+
+1. copy-on-write
+
+	- https://juejin.im/post/5bd96bcaf265da396b72f855
+	- fork 做了什么?
+		- 子进程的是父进程的副本。
+	- exec
+		- 将子进程从父进程复制过来的数据替换掉
+	- COW copy-on-write
+		- fork创建出的子进程，与父进程共享内存空间(直接引用父进程的物理空间)。
+		- 当父子进程中有更改相应段的行为发生时，再为子进程相应的段分配物理空间。
+		- 而如果是因为exec，由于两者执行的代码不同，子进程的代码段也会分配单独的物理空间。
+	- COW 的好处
+		- COW技术可减少分配和复制大量资源时带来的瞬间延时。
+		- COW技术可减少不必要的资源分配。比如fork进程时，并不是所有的页面都需要复制，父进程的代码段和只读数据段都不被允许修改，所以无需复制。
+	- Copy On Write技术缺点是什么？
+		- 如果在fork()之后，父子进程都还需要继续进行写操作，那么会产生大量的分页错误(页异常中断page-fault)，这样就得不偿失。
+
+	- 其他应用
+		- 文件系统, 用于保证文件的完整性
+			- btrfs b-tree-file-system
+			- https://www.ibm.com/developerworks/cn/linux/l-cn-btrfs/
+		- CopyOnWriteArrayList
+			- 在 add 时会复制整个 array , 所以很耗费性能
+
+
 
 
 
