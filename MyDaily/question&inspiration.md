@@ -4328,6 +4328,26 @@ hlebalbau/kafka-manager:stable \
 	- HeapByteBuffer来接收网络数据，需要把数据从内核先拷贝到一个临时的本地内存，再从临时本地内存拷贝到 JVM 堆，而不是直接从内核拷贝到 JVM 堆上。这是为什么呢？这是因为数据从内核拷贝到 JVM 堆的过程中，JVM 可能会发生 GC，GC 过程中对象可能会被移动，也就是说 JVM 堆上的字节数组可能会被移动，这样的话 Buffer 地址就失效了。如果这中间经过本地内存中转，从本地内存到 JVM 堆的拷贝过程中 JVM 可以保证不做 GC。
 	- 为什么不 GC 原因在于 jvm 要处于 safepoint 才能 gc
 
+## 08.15
+
+1. docker 容器中 fontconfig 缺失问题
+
+	- https://blog.zjyl1994.com/post/alpine-fontconfig/
+
+2. 公司环境
+
+	- 技术氛围
+		- 技术输出
+		- 分享
+
+3. Set 'exposeProxy' property on Advised to 'true' to make it available.
+	
+	 - `((XXXService) AopContext.currentProxy()).callXXXMethod()`
+	 - `@EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)` 放在 SpringApplication 上
+	 - `proxyTargetClass` 是否要创建cglib代理
+	 	- todo: why use cglib ?
+	 - `exposeProxy` 打开开关, 以便 AopContext 可以获取到代理
+
 ## 08.16
 
 1. copy-on-write
@@ -4360,6 +4380,38 @@ hlebalbau/kafka-manager:stable \
 	- MMU：CPU的内存管理单元。
 	- https://www.jianshu.com/p/f90866dcbffc
 	- 用户空间上还有一个共享库和 mmap 映射区，Linux 提供了内存映射函数 mmap， 它可将文件内容映射到这个内存区域，用户通过读写这段内存，从而实现对文件的读取和修改，无需通过 read/write 系统调用来读写文件，省去了**用户空间和内核空间之间的数据拷贝**，Java 的 MappedByteBuffer 就是通过它来实现的
+
+
+3. 微博点赞功能实现
+
+	- https://www.zhihu.com/question/63947513
+		- redis 计数器
+		- 对一致性的要求不是那么高
+		- http://blog.cydu.net/weidesign/2012/08/30/weibo-counter-service-design-1/
+		- http://blog.cydu.net/weidesign/2012/09/09/weibo-counter-service-design-2/
+			- redis 计数器相关的优化
+	- 微博缓存架构
+		- https://juejin.im/entry/5b166320f265da6e61788a25
+
+4. redis rdb 和 aof
+
+	- https://redis.io/topics/persistence
+	- redis 设计与实现 
+		- http://redisbook.com/
+
+5. 工程师文化
+	
+	- 在公司内, 如何建立沟通
+	- https://mp.weixin.qq.com/s?__biz=MzAwMDU1MTE1OQ==&mid=401460975&idx=1&sn=8e39520929d2b06c20739d54baf7c2f3&3rd=MzA3MDU4NTYzMw==&scene=6#rd
+
+6. chubby 分布式锁
+	
+	 - https://catkang.github.io/2017/09/29/chubby.html
+
+
+
+
+
 
 
 
