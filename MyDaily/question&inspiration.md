@@ -4379,7 +4379,7 @@ hlebalbau/kafka-manager:stable \
 	- 缺页中断：当程序试图访问已映射在虚拟地址空间中但未被加载至物理内存的一个分页时，由MMC发出的中断。如果操作系统判断此次访问是有效的，则尝试将相关的页从虚拟内存文件中载入物理内存
 	- MMU：CPU的内存管理单元。
 	- https://www.jianshu.com/p/f90866dcbffc
-	- 用户空间上还有一个共享库和 mmap 映射区，Linux 提供了内存映射函数 mmap， 它可将文件内容映射到这个内存区域，用户通过读写这段内存，从而实现对文件的读取和修改，无需通过 read/write 系统调用来读写文件，省去了**用户空间和内核空间之间的数据拷贝**，Java 的 MappedByteBuffer 就是通过它来实现的
+	- 用户空间上还有一个共享库和 mmap 映射区，Linux 提供了内存映射函数 mmap， 它可将文件内容映射到这个内存区域，用户通过读写这段内存，从而实现对文件的读取和修改，无需通过 read/write 系统调用来读写文件，**省去了用户空间和内核空间之间的数据拷贝**，Java 的 MappedByteBuffer 就是通过它来实现的
 
 
 3. 微博点赞功能实现
@@ -4409,9 +4409,42 @@ hlebalbau/kafka-manager:stable \
 	 - https://catkang.github.io/2017/09/29/chubby.html
 
 
+## 2019.8.28
 
+1. windows - tomcat apr
 
+	- Apache Portable Runtime (APR)
+		- https://tomcat.apache.org/native-doc/
+	- 
 
+2. gc 日志
 
+	- `java -jar -Xmn640m -Xms2048m -Xmx2048m -XX:SurvivorRatio=8 -XX:PermSize=128m -XX:MaxPermSize=128m -XX:+UseParallelOldGC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/var/www/logs -Xnoclassgc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/var/www/logs/gc.log -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5 -XX:GCLogFileSize=2m Xxx.jar`
+
+3. jni cookbook
+	
+	- jni 教程 服气, 强无敌
+	- http://jnicookbook.owsiak.org/contents/
+
+4. TCP_DEFER_ACCEPT
+
+	- tcp 的一个server端参数
+	- 当收到 3 次握手的最后一个 ack 时, 不立刻进行 accept, 而是进入一个定时器, 如果在一段时间内没有收到数据则自动关闭, 等到数据来时才接受这个链接端口
+	- 需要注意的是, 有些操作系统不支持这个参数
+	- tomcat apr 设置这个参数后，当 TCP 客户端有新的连接请求到达时，TCP 服务端先不建立连接，而是再等等，直到客户端有请求数据发过来时再建立连接。
+
+5. epoll 有什么用? 它的原理是什么?
+
+	- todo
+
+6. Java NIO中，关于DirectBuffer，HeapBuffer
+
+	- https://www.zhihu.com/question/57374068
+
+7. NIO本质还是同步，数据从用户空间和内核空间之间的拷贝还是阻塞的。
+
+8. tls 通讯建议使用 apr
+
+9. mmap是将文件映射到用户进程的虚拟地址空间
 
 
