@@ -4447,4 +4447,23 @@ hlebalbau/kafka-manager:stable \
 
 9. mmap是将文件映射到用户进程的虚拟地址空间
 
+## 2019.8.19
+
+1. redis 
+
+	- 如何保证持久化
+		- https://blog.csdn.net/shangyuanlang/article/details/81297970
+			- rdb 定义快照周期, rdb 可以更快的重启
+			- 如何开启 aof , aof 日志自动压缩, aof 完全持久化
+			- master-slave 灾难模拟
+	- 如何迁移数据
+		- 需要有 master-slave 集群
+	- 实战
+		- todo
+
+2. 
+
+
+
+
 
