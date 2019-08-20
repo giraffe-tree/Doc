@@ -4375,6 +4375,8 @@ hlebalbau/kafka-manager:stable \
 			- https://www.ibm.com/developerworks/cn/linux/l-cn-btrfs/
 		- CopyOnWriteArrayList
 			- 在 add 时会复制整个 array , 所以很耗费性能
+			- tomcat 的事件监听器
+				- `private final List<LifecycleListener> lifecycleListeners = new CopyOnWriteArrayList<>();`
 
 2. MappedByteBuffer
 
@@ -4463,6 +4465,22 @@ hlebalbau/kafka-manager:stable \
 	- 实战
 		- todo
 
+2. jetty 中的 eat what you kill
+	
+	- 充分利用cpu缓存, 生产者消费者
+	- 将 I/O 事件检测和业务处理这两种工作分开的思路也有缺点。当 Selector 检测读就绪事件时，数据已经被拷贝到内核中的缓存了，同时 CPU 的缓存中也有这些数据了，我们知道 CPU 本身的缓存比内存快多了，这时当应用程序去读取这些数据时，如果用另一个线程去读，很有可能这个读线程使用另一个 CPU 核，而不是之前那个检测数据就绪的 CPU 核，这样 CPU 缓存中的数据就用不上了，并且线程切换也需要开销。
+	- 因此 Jetty 的 Connector 做了一个大胆尝试，那就是用把 I/O 事件的生产和消费放到同一个线程来处理
+	- ManagedSelector 
+	- todo: 还不是很了解 
+	- https://webtide.com/eat-what-you-kill/
+
+3. 池化的本质就是用内存换 CPU；而零拷贝就是不做无用功，减少资源浪费
+
+4. 拿锁的过程本身就是个系统调用，如果锁没拿到线程会阻塞，又会发生线程上下文切换，尤其是大量线程同时竞争一把锁时，会浪费大量的系统资源
+
+5. 什么是状态机?
+
+
 ## 2019.8.20
 
 1. zookeeper 有 standalone, quorum 两种模式
@@ -4474,8 +4492,31 @@ hlebalbau/kafka-manager:stable \
 		- follower 读 leader 读写
 		- follower 会转发 写请求
 
-2. 
+2. 类加载
 
+	- Java 的类加载，就是把字节码格式“.class”文件加载到 JVM 的方法区，并在 JVM 的堆区建立一个java.lang.Class对象的实例，用来封装 Java 类相关的数据和方法。
+	- JVM 并不是在启动时就把所有的“.class”文件都加载一遍，而是程序在运行过程中用到了这个类才去加载。
+	- loadclass方法负责把字节码格式.class 文件加载到JVM的方法区
+	- defineclass负责在JVM的堆区建立一个java.lang.Class 对象实例
+	- tomcat 与 双亲委托
+		- tomcat 的类加载器先用 extclassloader 加载类
+			- ext让父加载器bootstrap去加载，防止优先加载应用中同名的类
+		- 那我用appclassloader，最终也能达到bootstrap加载器去加载类的效果，那为什么不直接调用appclassloader加载？		
+			- appclassloader会加载PATH目录下的类，这样就达不到优先加载web应用目录下类的目的了
+			- https://stackoverflow.com/questions/37202725/why-cant-i-load-my-class-by-extclassloader
+
+		- tomcat 使用的是 `WebappClassLoader` 继承了 `WebappClassLoaderBase`
+		- Tomcat类加载器加载顺序是：ExtClassLoader - 本地目录下加载 - 父加载器加载（sharedclassloader）
+
+3. 分析内存泄漏
+
+	-  `jmap -dump:live,format=b,file=heap-dump.bin <pid>`生成heapdump，然后用mat分析
+
+
+4. HotSpot VM默认不会JIT编译字节码大小超过8000字节的方法
+
+    - `-XX:+DontCompileHugeMethods`
+	- `-XX:HugeMethodLimit=8000`
 
 
 
