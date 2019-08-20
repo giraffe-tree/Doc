@@ -4155,6 +4155,8 @@ services:
 
 ```
 # 这里注意 ZH_HOSTS 由于docker 容器之间网络隔离的原因, 不能使用 localhost
+# 更换 ip 及端口
+
 docker run -d  -p 9001:9000 --name manager \
 -e ZK_HOSTS="192.168.2.112:2181" \
 hlebalbau/kafka-manager:stable \
@@ -4461,8 +4463,18 @@ hlebalbau/kafka-manager:stable \
 	- 实战
 		- todo
 
-2. 
+## 2019.8.20
 
+1. zookeeper 有 standalone, quorum 两种模式
+
+	- 可以端会和其中一个 zookeeper 节点建立session
+		- 节点与客户端 timeout , 节点会关闭这个session
+		- 客户端与连接的 zookeeper 节点出错, 会尝试与其他节点连接
+	- quorum 模式中
+		- follower 读 leader 读写
+		- follower 会转发 写请求
+
+2. 
 
 
 
