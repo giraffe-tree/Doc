@@ -3877,6 +3877,8 @@ func tracefile(str_content string)  {
 		- 推模式之后可以使用算法, 加入.....
 	- Feed流系统设计总纲
 		- https://yq.aliyun.com/articles/706808
+	- 头条/微博热门类
+		- https://www.itcodemonkey.com/article/6731.html
 
 4. lisp, c,c++,java,js,golang,erlang,python,clojure,
 
@@ -4517,6 +4519,51 @@ hlebalbau/kafka-manager:stable \
 
     - `-XX:+DontCompileHugeMethods`
 	- `-XX:HugeMethodLimit=8000`
+
+## 2019.8.22
+
+1. 在缓存生成前, 可能会有很多请求直接去访问数据库, 导致数据库压力过大
+	- 解决方法是: 在应用提供服务前, 先对这些接口进行缓存预热
+
+2. rocketMQ 如何做到低延迟高稳定
+
+	- http://jm.taobao.org/2017/01/26/20170126/
+	- 包含 GC,锁, 内存
+
+3. jni `vector<int>` 转 `int[] `
+
+	- result 为 `vector<int>`
+	- `		jintArray intJavaArray = env->NewIntArray(result.Rpeaks.size());
+		env->SetIntArrayRegion(intJavaArray, 0, result.Rpeaks.size(), (jint *)&result[0]);`
+
+4. jni 内存泄漏
+
+	- https://www.ibm.com/developerworks/cn/java/j-lo-jnileak/index.html
+	- Local Reference 和局部变量有着本质的区别。
+		- todo: 验证下 local reference 是否会回收
+	- 理解 Local Reference 表的存在是理解 JNI Local Reference 的关键。
+		- 在 native method 执行完毕切换回 Java 程序时，所有 JNI Local Reference 被删除，生命期结束（调用 JNI function 可以提前结束其生命期）。
+
+## 2019.8.23
+
+1. 原码 -> 补码
+
+	- 原码 -> 补码
+		- 0/正数: 原码 = 补码
+		- 负数:  除第一位外取反+1 
+	- 补码 -> 原码
+		- 0/正数: 原码 = 补码
+		- 负数: 补码-1, 然后除第一位外取反
+
+2. java 基本数据类型数组的 length 是函数还是属性
+
+	- 属性
+	- array 数组都是对象, 继承了 Object
+
+3. hibernate 清除缓存
+	- `entityManager.clear()`
+	- https://blog.csdn.net/u012643122/article/details/47433559
+
 
 
 
