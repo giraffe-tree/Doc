@@ -3878,7 +3878,9 @@ func tracefile(str_content string)  {
 	- Feed流系统设计总纲
 		- https://yq.aliyun.com/articles/706808
 	- 头条/微博热门类
-		- https://www.itcodemonkey.com/article/6731.html
+		- 非Timeline的feeds流的架构设计
+			- https://www.itcodemonkey.com/article/6731.html
+			- 
 
 4. lisp, c,c++,java,js,golang,erlang,python,clojure,
 
@@ -4563,6 +4565,14 @@ hlebalbau/kafka-manager:stable \
 3. hibernate 清除缓存
 	- `entityManager.clear()`
 	- https://blog.csdn.net/u012643122/article/details/47433559
+
+## 2019.8.26
+
+1. docker 日志过多
+
+	- 分割日志的方法
+
+## 2019.8.27
 
 
 
