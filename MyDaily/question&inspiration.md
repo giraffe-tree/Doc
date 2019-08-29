@@ -4588,5 +4588,7 @@ hlebalbau/kafka-manager:stable \
 	- 使用 `zrevrange key start end withscores` O(log(N)+M) 可以解决排序问题
 	- 都是原子操作
 
+3. kafka 为什么要使用 key value 发送消息
 
+	- https://stackoverflow.com/questions/29511521/is-key-required-as-part-of-sending-messages-to-kafka
 
