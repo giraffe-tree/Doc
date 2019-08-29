@@ -4574,6 +4574,19 @@ hlebalbau/kafka-manager:stable \
 
 ## 2019.8.27
 
+1. CMS, G1 https://yq.aliyun.com/articles/444436
+
+## 2019.8/29
+
+1. 使用 redis  incr 和 expire 进行一定时间内计数
+	- 可以使用这个方案解决流量控制的问题
+
+2. redis zset 内部实现
+
+	- 使用 `zincrby key incrment member ` O(log(N)) 可以实现一定数据量内的计数问题
+		- 当然使用 `incr/decr` 效率更高 O(1), 但你可能需要自己实现排序
+	- 使用 `zrevrange key start end withscores` O(log(N)+M) 可以解决排序问题
+	- 都是原子操作
 
 
 
