@@ -4576,7 +4576,7 @@ hlebalbau/kafka-manager:stable \
 
 1. CMS, G1 https://yq.aliyun.com/articles/444436
 
-## 2019.8/29
+## 2019.8.29
 
 1. 使用 redis  incr 和 expire 进行一定时间内计数
 	- 可以使用这个方案解决流量控制的问题
@@ -4584,11 +4584,25 @@ hlebalbau/kafka-manager:stable \
 2. redis zset 内部实现
 
 	- 使用 `zincrby key incrment member ` O(log(N)) 可以实现一定数据量内的计数问题
-		- 当然使用 `incr/decr` 效率更高 O(1), 但你可能需要自己实现排序
+		- 当然使用 `incr/decr/HINCRBY` 效率更高 O(1), 但你可能需要自己实现排序
 	- 使用 `zrevrange key start end withscores` O(log(N)+M) 可以解决排序问题
 	- 都是原子操作
 
-3. kafka 为什么要使用 key value 发送消息
+## 2019.8.30
 
-	- https://stackoverflow.com/questions/29511521/is-key-required-as-part-of-sending-messages-to-kafka
+1. `/etc/init.d/rc.local` 中为什么有一句 `touch /var/lock/subsys/local`
+	
+	- 防止脚本重复执行
+	- https://blog.csdn.net/sinat_16791487/article/details/76696753
+
+2. 做一档程序员的节目??
+	
+	- 来点好玩的?
+	- 程序员 vedio?
+
+3. `不兼容的类型: java.util.List<java.lang.String>无法转换为java.util.Collection<java.io.Serializable>`
+
+	- why?
+
+
 
