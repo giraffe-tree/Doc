@@ -4604,5 +4604,12 @@ hlebalbau/kafka-manager:stable \
 
 	- why?
 
+## 2019.9.2
+
+1. java 能力测试
+
+	- https://developer.aliyun.com/article/714279
+
+
 
 
