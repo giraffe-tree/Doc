@@ -4636,6 +4636,33 @@ hlebalbau/kafka-manager:stable \
 
 	- https://stackoverflow.com/questions/42510002/how-to-clear-the-logs-properly-for-a-docker-container
 
-5. 
+5. Garbage-First (G1) 垃圾优先回收器
 
-	- https://unix.stackexchange.com/questions/34140/tell-fs-to-free-space-from-deleted-files-now
+	- G1 将堆拆成一系列的分区 heap region
+	- 新生代 
+		- 复制算法 
+		- 预测时间动态地改变新生代大小? how? why? 
+	- 老生代
+		- 混合回收
+	- 问题
+		- 老生代中, 什么是 mixed GC
+		- 列车算法?
+	- heap region 参数
+		- `G1HeapRegionSize` 1M 到 32M, 2次幂对齐
+
+6. java 8 默认gc
+
+	- https://stackoverflow.com/questions/33206313/default-garbage-collector-for-java-8
+	- Java 7 - Parallel GC  
+	- Java 8 - Parallel GC `-XX:+UseParallelGC`
+	- Java 9 - G1 GC  `-XX:+UseG1GC`
+	- Java 10 - G1 GC
+	- Java 11 - may be ZGC?
+
+7. 指定 `Metaspace` `-XX:MetaspaceSize=96M`
+
+	- https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html#BABFAFAE
+	- 设置分配的类元数据空间的大小，该空间将在第一次超出时触发垃圾回收。根据使用的元数据量，增加或减少垃圾收集的阈值。默认大小取决于平台。
+	
+
+
