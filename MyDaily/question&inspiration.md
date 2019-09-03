@@ -4610,6 +4610,32 @@ hlebalbau/kafka-manager:stable \
 
 	- https://developer.aliyun.com/article/714279
 
+## 2019.9.3
 
+1. 关于 docker 日志迁移
+	
+	- 由于之前的 docker 日志并没有做日志分割, 导致日志文件越来越大
+	- 方法: 
+		- `cd /var/lib/docker/containers/{container_id}/`
+		- `mv {container_id}-json.log old.log` 之前的`old.log`在容器重启前还会继续存入日志, 不会影响现在的服务
+		- `docker restart xxx` 重启之后, 日志会重定向到新的 `{container_id}-json.log` 
 
+2. mysql 5.6/5.7 的 `count(*)` 差异
 
+	- https://yq.aliyun.com/articles/177835
+
+3. 查看系统应该 deleted 但是没有删除的文件
+
+	- 如何清理 docker containers 目录下的文件
+		- 已经被删除, 但没有释放磁盘
+	- `lsof -w |grep deleted` 其中 `-w` 为忽略错误
+	- `cat /dev/null > /proc/{pid}/fd/{xx}`
+	- https://unix.stackexchange.com/questions/34140/tell-fs-to-free-space-from-deleted-files-now
+
+4. 优雅地清理 docker 日志
+
+	- https://stackoverflow.com/questions/42510002/how-to-clear-the-logs-properly-for-a-docker-container
+
+5. 
+
+	- https://unix.stackexchange.com/questions/34140/tell-fs-to-free-space-from-deleted-files-now
