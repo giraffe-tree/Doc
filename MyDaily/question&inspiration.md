@@ -4100,6 +4100,7 @@ func tracefile(str_content string)  {
 	- `-Xmx1536m -Xms1536m -XX:+PrintGCDetails -XX:+PrintGCDateStamps   -Xloggc:garbage-collection.log -XX:+HeapDumpOnOutOfMemoryError`
 	- `-Xmx1536m -Xms1536m -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+HeapDumpOnOutOfMemoryError`
 
+
 2. shell
 
 ```sh
@@ -4722,6 +4723,11 @@ hlebalbau/kafka-manager:stable \
 
 	- https://stackoverflow.com/questions/26357186/what-is-in-java-object-header
 
+9. `-XX:+PrintCommandLineFlags`
 
+	- `-XX:-BytecodeVerificationLocal -XX:-BytecodeVerificationRemote -XX:+HeapDumpOnOutOfMemoryError -XX:InitialHeapSize=1073741824 -XX:+ManagementServer -XX:MaxHeapSize=1073741824 -XX:MetaspaceSize=100663296 -XX:+PrintCommandLineFlags -XX:+PrintGCDateStamps -XX:+PrintGCDetails -XX:TieredStopAtLevel=1 -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:+UseG1GC -XX:-UseLargePagesIndividualAllocation `
+	- todo: 查查这些参数什么意思...
 
+10. `-XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:G1LogLevel=finest `
 
+11. `GCTimeRatio` 设置为 19 ,则gc时长占比 5%
