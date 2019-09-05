@@ -4663,6 +4663,65 @@ hlebalbau/kafka-manager:stable \
 
 	- https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html#BABFAFAE
 	- 设置分配的类元数据空间的大小，该空间将在第一次超出时触发垃圾回收。根据使用的元数据量，增加或减少垃圾收集的阈值。默认大小取决于平台。
-	
+
+
+
+## 2019.9.5 night
+
+1. kafka 生产参数配置示例
+
+	- `-Xmx6g -Xms6g -XX:MetaspaceSize=96M -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX：InitiatingHeapOccupancyPercent=50`
+
+2. How to know region size used of G1 garbage collector?
+
+	- https://stackoverflow.com/questions/46786601/how-to-know-region-size-used-of-g1-garbage-collector
+
+```
+<4GB -  1MB
+ <8GB -  2MB
+<16GB -  4MB
+<32GB -  8MB
+<64GB - 16MB
+64GB+ - 32MB
+```
+
+3. KB / KiB，MB / MiB，GB / GiB，… 的区别是什么？
+
+	- KiB是kilo binary byte的缩写，指的是千位二进制字节
+
+```
+1KB = 1,000 Byte
+1MB = 1,000 KB
+1GB = 1,000,000 KB
+
+1KiB = 1,024Byte
+1MiB = 1,024KiB
+1GiB = 1,024MiB = 1,048,576 KiB
+```
+
+4. JDK7 中的 `LinkedTransferQueue` 通过追加字节的方式, 来优化出队入队性能, 还是第一次听过
+
+5. synchronized 实现同步的基础, 每一个对象都可以作为锁
+
+	- 普通同步方法, 当前实例对象
+	- 静态同步方法, 当前 class
+	- 同步方法块, 括号中的对象
+
+6. 偏向锁 -> 轻量级锁 -> 重量级锁
+
+	- 偏向锁和轻量级锁的区别
+	- 什么是自旋? 
+		- 感觉像是一直循环, 不会阻塞
+
+7. 同步模型
+
+	- 共享内存 java
+	- 消息传递 golang
+
+8. java object header
+
+	- https://stackoverflow.com/questions/26357186/what-is-in-java-object-header
+
+
 
 
