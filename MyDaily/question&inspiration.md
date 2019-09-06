@@ -4620,6 +4620,8 @@ hlebalbau/kafka-manager:stable \
 		- `cd /var/lib/docker/containers/{container_id}/`
 		- `mv {container_id}-json.log old.log` 之前的`old.log`在容器重启前还会继续存入日志, 不会影响现在的服务
 		- `docker restart xxx` 重启之后, 日志会重定向到新的 `{container_id}-json.log` 
+		- 这个故事的后续是, dockerd 进程仍然引用了这个文件, 当我rm后, 它实际并未删除
+		- 接下来就是 接下来就是如何删除 已经deleted文件的故事了....
 
 2. mysql 5.6/5.7 的 `count(*)` 差异
 
@@ -4632,6 +4634,7 @@ hlebalbau/kafka-manager:stable \
 	- `lsof -w |grep deleted` 其中 `-w` 为忽略错误
 	- `cat /dev/null > /proc/{pid}/fd/{xx}`
 	- https://unix.stackexchange.com/questions/34140/tell-fs-to-free-space-from-deleted-files-now
+	- https://mp.weixin.qq.com/s/oCK0chpOmJcCnPdMhcketw
 
 4. 优雅地清理 docker 日志
 
@@ -4664,7 +4667,54 @@ hlebalbau/kafka-manager:stable \
 
 	- https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html#BABFAFAE
 	- 设置分配的类元数据空间的大小，该空间将在第一次超出时触发垃圾回收。根据使用的元数据量，增加或减少垃圾收集的阈值。默认大小取决于平台。
+	
+## 2019.9.5
 
+1. spring `BeanUtils.copyProperties()`
+
+	- `xxxMethod.setAccessible(true)` why
+	- 实际上setAccessible是启用和禁用访问安全检查的开关,并不是为true就能访问为false就不能访问
+		- todo: test
+	- 关于反射中能用到的工具
+		- http://gityuan.com/2015/07/18/java-reflection/
+
+2. oracle java
+
+	- 故障排除指南
+		- https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/ 
+
+3. 发现 kafka, zookeeper 默认都是用G1GC 启动的 =.= 
+
+	- `-XX:+UseG1GC -XX:MaxGCPauseMillis=20  -XX:InitiatingHeapOccupancyPercent=35 -XX:+ExplicitGCInvokesConcurren`
+
+4. final 字段编译出来的字节码, 和普通变量编译出来的字节码有什么不同么?
+
+5. 查看 linux 内核版本
+
+	- `cat /proc/version`
+
+6. 解压
+
+```
+unzip filename. zip.
+tar -zxvf filename. tar.gz.
+tar -Jxvf filename. tar.xz.
+tar -Zxvf filename. tar.Z.
+tar --help.
+tar -xvf filename. tar.gz tar -xvf filename.
+```
+
+7.  后台启动 frp `nohup ./frps -c ./frps.ini &`
+
+8. 服务器上的 nginx 有点问题, 用域名映射不行 =.= 
+
+	- todo: why
+
+9. hibernate 与 mybatis
+
+	- hibernate 不方便的地方
+		- 在写一些sql不被jpa支持, 只能用 nativeQuery
+		- 在写 join 的时候, 很难进行 orm , 导致后面花费很多时间在对象映射上
 
 
 ## 2019.9.5 night
@@ -4731,3 +4781,49 @@ hlebalbau/kafka-manager:stable \
 10. `-XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:G1LogLevel=finest `
 
 11. `GCTimeRatio` 设置为 19 ,则gc时长占比 5%
+
+## 2019.9.6
+
+
+1. `Could not commit JPA transaction; nested exception is javax.persistence.RollbackException: Transaction marked as rollbackOnly`
+
+	- 看起来像是, 一个事务已经被标记为回滚, 但是又被提交了
+
+2. `bigdecimal` 字段范围 2位小数
+
+	- 参考: https://stackoverflow.com/questions/11319445/java-to-jackson-json-serialization-money-fields
+
+```java
+    @Bean
+    @Primary
+    @ConditionalOnMissingBean(ObjectMapper.class)
+    public ObjectMapper jacksonObjectMapper(Jackson2ObjectMapperBuilder builder) {
+        ObjectMapper objectMapper = builder.createXmlMapper(false).build();
+        // 转为下划线的样式  objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE)
+        // 默认将所有date类型转换成 timestamp
+        objectMapper.enable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+        SimpleModule module = new SimpleModule();
+        module.addSerializer(BigDecimal.class, new MoneySerializer());
+        objectMapper.registerModule(module);
+
+        return objectMapper;
+    }
+
+    public class MoneySerializer extends JsonSerializer<BigDecimal> {
+        @Override
+        public void serialize(BigDecimal value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+            jgen.writeString(value.setScale(2, BigDecimal.ROUND_HALF_DOWN).toString());
+        }
+    }
+```
+
+3. kafka client 收到 `INVALID_FETCH_SESSION_EPOCH`
+
+	- 好吧, 之前遇到过这个问题=.=
+
+4. hibernate 操作数据库时的异常
+
+	- https://blog.csdn.net/wj123446/article/details/77873661
+
+
