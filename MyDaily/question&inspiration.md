@@ -4183,6 +4183,8 @@ hlebalbau/kafka-manager:stable \
 	- 目前绝大部分的消息队列提供的服务质量都是 at least once
 	- 消息队列本身很难保证消息不重复
 	- At least once + 幂等消费 = Exactly once。
+	- 为什么大部分消息队列都选择只提供 At least once 的服务质量
+	- 最重要的原因是消息队列即使做到了Exactly once级别，consumer也还是要做幂等。因为在consumer从消息队列取消息这里，如果consumer消费成功，但是ack失败，consumer还是会取到重复的消息，所以消息队列花大力气做成Exactly once并不能解决业务侧消息重复的问题。
 
 3. mq topic
 
@@ -4834,6 +4836,10 @@ tar -xvf filename. tar.gz tar -xvf filename.
 	- https://stackoverflow.com/questions/499591/are-https-urls-encrypted
 	- 是的, SSL连接位于TCP层和HTTP层之间。客户端和服务器首先建立安全的加密TCP连接（通过SSL / TLS协议），然后客户端将通过该加密的TCP连接发送HTTP请求（GET，POST，DELETE ...）。
 
+
+## 2019.9.9
+
+1. `lscpu` 查看 cpu 核心数
 
 
 
