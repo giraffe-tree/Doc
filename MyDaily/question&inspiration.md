@@ -4827,3 +4827,13 @@ tar -xvf filename. tar.gz tar -xvf filename.
 	- https://blog.csdn.net/wj123446/article/details/77873661
 
 
+## 2019.9.7
+
+1. https 中 url 会被加密么
+
+	- https://stackoverflow.com/questions/499591/are-https-urls-encrypted
+	- 是的, SSL连接位于TCP层和HTTP层之间。客户端和服务器首先建立安全的加密TCP连接（通过SSL / TLS协议），然后客户端将通过该加密的TCP连接发送HTTP请求（GET，POST，DELETE ...）。
+
+
+
+
