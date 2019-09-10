@@ -4841,5 +4841,39 @@ tar -xvf filename. tar.gz tar -xvf filename.
 
 1. `lscpu` 查看 cpu 核心数
 
+## 2019.9.10
+
+1. springboot 查看所有 param
+
+	- https://stackoverflow.com/questions/42823730/spring-boot-how-to-get-all-request-params-in-a-map-in-spring-restcontroller
+
+
+2. `BigDecimal`
+
+	- `toString`
+		- 有必要时使用科学计数法
+	- `toEngineeringString`
+		- 有必要时使用工程计数法。工程记数法是一种工程计算中经常使用的记录数字的方法，与科学技术法类似，但要求10的幂必须是3的倍数
+	- `toPlainString`
+		- 不使用任何指数
+	- https://www.cnblogs.com/happy520/p/7090199.html
+
+3. G1 对象分配
+
+	- 普通的分配对象要加全局锁, 但是这样会导致分配效率低下
+	- 所以为了满足
+		- 避免使用全局锁
+		- 满足不同用户线程(mutator)之间能并行分配
+	- 于是就有了 TLAB thread local allocation buffer 线程本地分配缓冲区
+	- 首先 TLAB 空间分配时, 还是需要锁的, G1 中使用的是 CAS 分配
+	- 在 TLAB 内部分配对象空间是无锁的
+
+4. 搭建一个图片分享服务器
+
+5. 家用 nas 内网穿透, 不经过服务器
+
+	- https://github.com/fatedier/frp/blob/master/README_zh.md#%E7%82%B9%E5%AF%B9%E7%82%B9%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F
+	- xtcp
+
 
 
