@@ -4905,7 +4905,8 @@ tar -xvf filename. tar.gz tar -xvf filename.
 
 5. jdk1.8中，string是标准的不可变类，但其hash值没有用final修饰，其hash值计算是在第一次调用hashcode方法时计算，但方法没有加锁，变量也没用volatile关键字修饰就无法保证其可见性。当有多个线程调用的时候，hash值可能会被计算多次，虽然结果是一样的，但jdk的作者为什么不将其优化一下呢？
 
-	- 作者回复: 这些“优化”在通用场景可能变成持续的成本，volatile read是有明显开销的；
+	- 作者回复: 这些“优化”在通用场景可能变成持续的成本，volatile read是有明显开销的；
+
 如果冲突并不多见，read才是更普遍的，简单的cache是更高效的
 	- 我比较同意作者的观点, 脱离实际的优化都是瞎扯淡=.=
 	- 来源: https://time.geekbang.org/column/article/7349
@@ -4918,5 +4919,20 @@ tar -xvf filename. tar.gz tar -xvf filename.
 	- https://time.geekbang.org/column/article/10651
 
 7. card table是remembered set的一种实现
+
+## 2019.9.12
+
+1. 数据库事务乐观锁
+
+	- hibernate + springboot 如何实现 `@Version`
+
+2. swagger + nginx 无法正常使用
+
+	- https://blog.csdn.net/zixiangli/article/details/90030185
+	- `proxy_set_header Host $host; # 指定host`
+
+3. kafka 广播导致不能用?
+
+
 
 
