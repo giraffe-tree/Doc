@@ -4875,5 +4875,48 @@ tar -xvf filename. tar.gz tar -xvf filename.
 	- https://github.com/fatedier/frp/blob/master/README_zh.md#%E7%82%B9%E5%AF%B9%E7%82%B9%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F
 	- xtcp
 
+## 2019.9.11
+
+1. G1
+
+	- java 逃逸分析是什么?
+		- https://www.cayun.me/java/Java%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/
+	- G1 GC 下的字符串排重
+		- `-XX:+UseStringDeduplication`
+        - `-XX:StringDeduplicationAgeThreshold=6`
+        - `-XX:+PrintStringDeduplicationStatistics`
+        - https://blog.gceasy.io/2018/07/17/disappointing-story-on-memory-optimization/
+    - `-XX:+PrintAdaptiveSizePolicy` // 打印 G1 Ergonomics 相关信息
+    - G1 调优指南
+    	- https://docs.oracle.com/javase/9/gctuning/garbage-first-garbage-collector-tuning.htm#JSGCT-GUID-0BB3B742-A985-4D5E-A9C5-433A127FE0F6
+
+2. 为什么String类要缓存 hash?
+
+	- 性能
+
+3. 为什么要用 31 来计算散列码 hashCode
+	- `31 * i == (i<<5)-i`
+	- 现代VM 可以自动完成这类优化
+
+4. 使用 hashCode 来攻击应用程序
+
+	- 有一些应用的 http 请求中 header/param 是通过 `Map<String,Object>` 来存的, 其实很容易通过构造相同的 hashCode String 来进行 ddos 攻击
+	- https://dzone.com/articles/what-is-wrong-with-hashcode-in-javalangstring
+
+5. jdk1.8中，string是标准的不可变类，但其hash值没有用final修饰，其hash值计算是在第一次调用hashcode方法时计算，但方法没有加锁，变量也没用volatile关键字修饰就无法保证其可见性。当有多个线程调用的时候，hash值可能会被计算多次，虽然结果是一样的，但jdk的作者为什么不将其优化一下呢？
+
+	- 作者回复: 这些“优化”在通用场景可能变成持续的成本，volatile read是有明显开销的；
+如果冲突并不多见，read才是更普遍的，简单的cache是更高效的
+	- 我比较同意作者的观点, 脱离实际的优化都是瞎扯淡=.=
+	- 来源: https://time.geekbang.org/column/article/7349
+
+6. java 类型卸载
+
+	- G1 中的类型卸载
+		- `-XX:+ClassUnloadingWithConcurrentMark`
+		- 在并发标记阶段结束后，JVM 即进行类型卸载。
+	- https://time.geekbang.org/column/article/10651
+
+7. card table是remembered set的一种实现
 
 
