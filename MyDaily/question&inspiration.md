@@ -4933,6 +4933,62 @@ tar -xvf filename. tar.gz tar -xvf filename.
 
 3. kafka 广播导致不能用?
 
+## 2019.9.16
+
+1. redis 单线程
+
+	- jetty eat what you kill
+
+2. 再谈 copy on write (COW, 写时复制) 的思想
+
+	- COW 不仅仅是一种技术, 也是一种思想, 读多写少, 保证并发安全
+	- 不可变对象的写操作往往都是使用 Copy-on-Write 方法解决的
+		- 王宝令 https://time.geekbang.org/column/article/93154
+		- Java 里 String 这个类在实现 replace() 方法的时候，并没有更改原字符串里面 value[] 数组的内容，而是创建了一个新字符串，这种方法在解决不可变对象的修改问题时经常用到
+	- docker images
+	- git 文件储存
+		- git 增量存储
+		- https://stackoverflow.com/questions/8198105/how-does-git-store-files
+	- 使用 Copy-on-Write 更多地体现的是一种延时策略，只有在真正需要复制的时候才复制，而不是提前复制好
+		- 王宝令 https://time.geekbang.org/column/article/93154
+
+	- redis 使用 cow 实现快照持久化
+		- 钱文品 <<redis 深度历险>>
+	- java CopyOnWriteArrayList 
+	- 实际项目中:
+		- 维护很少修改的 路由表
+	- 以至于 Java 中的基本数据类型 String、Integer、Long 等都是基于 Copy-on-Write 方案实现的。	
+
+3. 通过避免共享解决并发问题
+
+	- Immutability 模式、Copy-on-Write 模式和线程本地存储模式本质上都是为了避免共享
+		- 王宝令 https://time.geekbang.org/column/article/96736
+
+4. 活锁
+
+	- 例子
+		- 所谓的“活锁”，可以类比现实世界里的例子。路人甲从左手边出门，路人乙从右手边进门，两人为了不相撞，互相谦让，路人甲让路走右手边，路人乙也让路走左手边，结果是两人又相撞了。
+		- 这种情况，基本上谦让几次就解决了，因为人会交流啊。可是如果这种情况发生在编程世界了，就有可能会一直没完没了地“谦让”下去，成为没有发生阻塞但依然执行不下去的“活锁”。
+	- 解决: 随机等待
+
+
+5. 栈帧 与 栈 , stackOverFlow, 栈溢出
+
+	- 每个线程都有自己独立的调用栈 (里面与很多栈帧)
+	- 因为每调用一个方法就会在栈上创建一个栈帧，方法调用结束后就会弹出该栈帧，而栈的大小不是无限的，所以递归调用次数过多的话就会导致栈溢出。
+
+6. docker cp
+
+	- `docker cp <containerId>:/file/path/within/container /host/path/target`
+		- 例如: 
+			- `docker cp eddb38febacc:/data .`
+			- `docker cp eddb38febacc:/data C:\Users\pc\Desktop\data\`
+	- https://stackoverflow.com/questions/22049212/copying-files-from-docker-container-to-host
+
+7. docker 启动带有 bloom filter 的 redis
+
+	- `docker run -p 6379:6379 -v E:\local\path\data:/data --name redisbloom redislabs/rebloom:2.0.3 redis-server /data/redis.conf --loadmodule /usr/lib/redis/modules/redisbloom.so`
+
 
 
 
