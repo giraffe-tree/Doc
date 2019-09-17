@@ -4989,6 +4989,42 @@ tar -xvf filename. tar.gz tar -xvf filename.
 
 	- `docker run -p 6379:6379 -v E:\local\path\data:/data --name redisbloom redislabs/rebloom:2.0.3 redis-server /data/redis.conf --loadmodule /usr/lib/redis/modules/redisbloom.so`
 
+## 2019.9.17
+
+1. lettuce 集成进 spring boot
+
+	- 如果用原生的 spring data redis 会导致有很多 redis 命令无法使用
+		- https://docs.spring.io/spring-data/data-redis/docs/current/reference/html/#_supported_commands
+	- lua 实现 cas
+		- eval https://redis.io/commands/eval
+			- 例如 `eval "return redis.call('set','foo','bar')" 0`
+		- lua dubuger https://redis.io/topics/ldb
+	- lua + redis 使用指南
+		- https://www.redisgreen.net/blog/intro-to-lua-for-redis-programmers/
+	- 使用 lua 脚本
 
 
+2. 中间件性能挑战赛
+	
+	- 初赛要求实现一个简化、高效的本地 kv 存储引擎，复赛在初赛的基础上增加了计算存储分离的架构，计算节点需要通过网络传输将数据递交给存储节点存储。
+	- https://www.cnkirito.moe/taurusdb-race/#more
+
+3. 容器如何限定内存, cpu, 磁盘
+
+4. srping data redis 如何扩展命令
+
+	- 比如: 使用redis插件中的命令:布隆过滤器, 一些额外的监控命令, spring data redis 中无法支持的命令 
+	- 最简单通用的方法 lua
+
+5. 记录日志请求参数
+
+	- 使用 aop 拦截器
+		- 在请求来的时候, 进行日志记录
+
+6. 安装windows 包管理器 
+
+	- 在 PowerShell 中输入下面内容，保证允许本地脚本的执行：
+		- `set-executionpolicy remotesigned -scope currentuser`
+	- 然后执行下面语句进行安装：
+		- `iex (new-object net.webclient).downloadstring('https://get.scoop.sh')`
 
