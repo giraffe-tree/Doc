@@ -4184,7 +4184,9 @@ hlebalbau/kafka-manager:stable \
 	- 消息队列本身很难保证消息不重复
 	- At least once + 幂等消费 = Exactly once。
 	- 为什么大部分消息队列都选择只提供 At least once 的服务质量
-	- 最重要的原因是消息队列即使做到了Exactly once级别，consumer也还是要做幂等。因为在consumer从消息队列取消息这里，如果consumer消费成功，但是ack失败，consumer还是会取到重复的消息，所以消息队列花大力气做成Exactly once并不能解决业务侧消息重复的问题。
+	- 最重要的原因是消息队列即使做到了Exactly once级别，consumer也还是要做幂等。
+		- 因为在consumer从消息队列取消息这里，如果consumer消费成功，但是ack失败，consumer还是会取到重复的消息，所以消息队列花大力气做成Exactly once并不能解决业务侧消息重复的问题。
+		- 也有可能, 实际发送到消息队列, 但是由于网络超时原因 producer 端没有收到回调,直接回滚, 导致实际消息发出, 但业务操作失败, 如果不是幂等消费可能会产生错误 
 
 3. mq topic
 
@@ -5027,4 +5029,40 @@ tar -xvf filename. tar.gz tar -xvf filename.
 		- `set-executionpolicy remotesigned -scope currentuser`
 	- 然后执行下面语句进行安装：
 		- `iex (new-object net.webclient).downloadstring('https://get.scoop.sh')`
+
+## 2019.9.18
+
+1. 今天一篇文章
+
+2. 为什么要重写 hashCode 和 equals 方法
+
+	- 在使用 hashMap 时, hashMap 使用 equals 来判断两个 key 是否相等, 使用 hashCode 来分区
+	- 现在有个两个对象(不同的内存位置) A,B, 我们将这两个元素作为 hashMap 的 key
+		- 如果只重写 equals 可能会导致两个元素分别放置在两个不同的 bucket 中, 放置了两次
+		- 如果只重写 hashCode 可能会导致两个元素在同一个bucket中, 且仍然被放置了两次
+			- hashCode 决定了一个元素该被放入哪个 bucket
+		- https://stackoverflow.com/questions/2265503/why-do-i-need-to-override-the-equals-and-hashcode-methods-in-java
+
+3. stream split partition stream
+
+	-  `Map<Boolean, List<Object>> collect = mget.stream().collect(Collectors.partitioningBy(Objects::nonNull));`
+
+4. how java stream works
+
+
+5. stream duplicate key 怎么处理
+
+	- collectors.toMap
+
+## 2019.09.19
+
+1. js 跨域问题
+
+	- https://juejin.im/post/5ab218b1518825555c1d8a11
+	- Access-Control-Allow-Origin 跨域设置多域名
+		- 不能设置, 只能通过判断 origin 来进行操作
+		- https://www.jianshu.com/p/b587dd1b7086
+
+
+
 
