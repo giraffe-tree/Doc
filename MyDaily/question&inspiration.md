@@ -4869,6 +4869,9 @@ tar -xvf filename. tar.gz tar -xvf filename.
 	- 于是就有了 TLAB thread local allocation buffer 线程本地分配缓冲区
 	- 首先 TLAB 空间分配时, 还是需要锁的, G1 中使用的是 CAS 分配
 	- 在 TLAB 内部分配对象空间是无锁的
+		- bump (up) the pointer 指针加法 
+		- 如果加法后空余内存指针的值仍小于或等于指向末尾的指针，则代表分配成功。否则，TLAB 已经没有足够的空间来满足本次新建操作。这个时候，便需要当前线程重新申请新的 TLAB。
+
 
 4. 搭建一个图片分享服务器
 
@@ -5064,5 +5067,126 @@ tar -xvf filename. tar.gz tar -xvf filename.
 		- https://www.jianshu.com/p/b587dd1b7086
 
 
+## 2019.09.22
 
+1. 费曼学习法
+
+	- 通过向别人清楚地解说一件事，来确认自己真的弄懂了这件事。
+	- 第一步 - 选择一个你想要理解的概念
+		- 选择一个你想要理解的概念, 然后拿出一张白纸, 把这个概念写在白纸的最上边.
+
+	- 第二步 - 设想一种场景，你正要向别人传授这个概念
+		- 在白纸上写下你对这个概念的解释, 就好像你正在教导一位新接触这个概念的学生一样. 当你这样做的时候, 你会更清楚地意识到关于这个概念你理解了多少, 以及是否还存在理解不清的地方.
+
+	- 第三步 - 如果你感觉卡壳了, 就回顾一下学习资料
+		- 无论何时你感觉卡壳了, 都要回到原始的学习资料并重新学习让你感到卡壳的那部分, 直到你领会得足够顺畅, 顺畅到可以在纸上解释这个部分为止.
+
+	- 第四步 - 为了让你的讲解通俗易懂，简化语言表达
+		- 最终的目的, 是用你自己的语言, 而不是学习资料中的语言来解释概念. 如果你的解释很冗长或者令人迷惑, 那就说明你对概念的理解可能并没有你自己想象得那么顺畅 -- 你要努力简化语言表达, 或者与已有的知识建立一种类比关系, 以便更好地理解它。
+	- https://www.zhihu.com/question/20576786
+
+2. gc 可视化工具
+
+	- gcviewer
+		- https://github.com/chewiebug/GCViewer
+		- `java -jar gcviewer.jar`
+	- gceasy.io
+		- 统计gc时长, 百分比
+		- https://www.gceasy.io/
+
+3. 获取 jvm pid
+
+	- https://stackoverflow.com/questions/35842/how-can-a-java-program-get-its-own-process-id
+	- `ManagementFactory.getRuntimeMXBean().getName()`
+
+4. jvm eden 与 survivor 的比例
+
+	-  默认情况下，Java 虚拟机采取的是一种动态分配的策略（对应 Java 虚拟机参数 -XX:+UsePSAdaptiveSurvivorSizePolicy），根据生成对象的速率，以及 Survivor 区的使用情况动态调整 Eden 区和 Survivor 区的比例。
+
+5. hotspot card table 的实现
+
+	- 如果想要保证每个可能有指向新生代对象引用的卡都被标记为脏卡，那么 Java 虚拟机需要截获每个引用型实例变量的写操作，并作出对应的写标识位操作。
+	- 这个操作在解释执行器中比较容易实现。但是在即时编译器生成的机器码中，则需要插入额外的逻辑。这也就是所谓的写屏障（write barrier)
+	- 虚共享 false sharing 问题 两个线程同时更新卡表的问题
+	- `-XX:+UseCondCardMark`，来尽量减少写卡表的操作
+
+6. why ?
+
+```
+class ObjectOf64Bytes {
+    long placeholder0;
+    long placeholder1;
+    long placeholder2;
+    long placeholder3;
+    long placeholder4;
+    long placeholder5;
+}
+```
+
+7. `-Xmn` : the size of the heap for the young generation
+
+8. switch 语法糖
+	
+	- `javac Test.java`
+	- `javap -v Test`
+	- 所以 switch 底层是怎么实现的?
+
+```java
+// Test.java
+public class Test{
+  public static void main(String[] args){
+    String s = "alpha";
+    switch (s) {
+	case "alpha": // fall through
+	case "beta":  System.out.println("ab"); break;
+	case "Ea":    System.out.println("e"); break;
+	case "FB":    System.out.println("f"); break;
+    }
+  }
+}
+
+```
+
+```java
+// 反编译之后的
+public class Test {
+    public Test() {
+    }
+
+    public static void main(String[] var0) {
+        String var1 = "alpha";
+        byte var3 = -1;
+        switch(var1.hashCode()) {
+        case 2236:
+            if (var1.equals("FB")) {
+                var3 = 3;
+            } else if (var1.equals("Ea")) {
+                var3 = 2;
+            }
+            break;
+        case 3020272:
+            if (var1.equals("beta")) {
+                var3 = 1;
+            }
+            break;
+        case 92909918:
+            if (var1.equals("alpha")) {
+                var3 = 0;
+            }
+        }
+
+        switch(var3) {
+        case 0:
+        case 1:
+            System.out.println("ab");
+            break;
+        case 2:
+            System.out.println("e");
+            break;
+        case 3:
+            System.out.println("f");
+        }
+    }
+}
+```
 
