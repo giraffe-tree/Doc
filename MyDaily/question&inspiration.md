@@ -4568,7 +4568,7 @@ hlebalbau/kafka-manager:stable \
 	- array 数组都是对象, 继承了 Object
 
 3. hibernate 清除缓存
-	- `entityManager.clear()`
+	- `private EntityManager entityManager; entityManager.clear();` 
 	- https://blog.csdn.net/u012643122/article/details/47433559
 
 ## 2019.8.26
@@ -5065,6 +5065,33 @@ tar -xvf filename. tar.gz tar -xvf filename.
 	- Access-Control-Allow-Origin 跨域设置多域名
 		- 不能设置, 只能通过判断 origin 来进行操作
 		- https://www.jianshu.com/p/b587dd1b7086
+
+## 2019.09.20
+
+1. springboot 如何判断当前事务是否已经回滚
+
+	- 不同事务等级会产生什么样的影响 ?
+		- https://juejin.im/post/5b00c52ef265da0b95276091
+	- How do I get transaction info in Spring whether transaction is committed or rollback in a declarative transaction management?
+		- https://stackoverflow.com/questions/13395794/how-do-i-get-transaction-info-in-spring-whether-transaction-is-committed-or-roll
+
+
+2. java 后端开发中可能遇到的 幻/Phantom 
+
+	- 幻读
+		- 使用 sql 说明幻读
+
+3. http
+	-`HttpClient httpClient = HttpClientBuilder.create().build();`
+
+4. mysql 行格式
+
+	- compact 
+	- compressed
+	- default
+	- dynamic
+	- fixed
+	- redundant
 
 
 ## 2019.09.22
