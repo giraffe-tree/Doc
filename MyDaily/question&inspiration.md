@@ -5190,3 +5190,15 @@ public class Test {
 }
 ```
 
+## 2019.9.23 晚
+
+1. GPGC Generational Pauseless GC  -> C4GC 
+	- Continuous concurrent compaction collector
+	- marking, relocation, remapping
+	- https://blog.csdn.net/uftjtt/article/details/80269936
+	- 消除了重标记可能引起的重标记无限循环，也就消除了在标记阶段出现OOM错误的风险。
+
+2. 无安全点检测的计数循环带来的长暂停
+
+	- 多线程等待另一个线程进入安全点
+
