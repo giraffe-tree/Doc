@@ -35,8 +35,10 @@
 	- jit 机器码
 		- 在可接受的性能开销以及内存开销之内，避免机器码长时间不进入安全点的情况，间接地减少垃圾回收的暂停时间。
 	- 阻塞线程
+7. 现代JVM中的Safe Region和Safe Point到底是如何定义和划分的?
+	- R大回答: https://www.zhihu.com/question/29268019
 
-7. GC 的分类, full gc 和 minor gc 分别会回收哪些jvm中的哪些区域
+8. GC 的分类, full gc 和 minor gc 分别会回收哪些jvm中的哪些区域
 	- https://juejin.im/post/5b8d2a5551882542ba1ddcf8
 	- Partial GC(局部 GC): 并不收集整个 GC 堆的模式
 		- Young GC: 只收集young gen的GC，Young GC还有种说法就叫做 "Minor GC"

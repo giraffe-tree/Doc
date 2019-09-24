@@ -5262,3 +5262,15 @@ public class Test {
 	- Safepoints: Meaning, Side Effects and Overheads
 		- http://psy-lob-saw.blogspot.com/2016/02/wait-for-it-counteduncounted-loops.html
 
+## 2019.9.24
+
+1. mq 消息发送过快, 导致事务未提交? 有可能么?
+	- mq 的消息是否应该放在事务中
+
+2. 想了老半天多个第三方支付系统, 重复支付的问题, 感觉好麻烦, 没有好的解决方案
+	- 最后直接放弃解决, 只记录日志, 方便追溯 =.= 豁然开朗, MD想太多了
+	- 简单的才是好的 =.= yeah
+
+
+
+
