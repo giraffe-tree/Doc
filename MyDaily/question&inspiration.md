@@ -5202,3 +5202,36 @@ public class Test {
 
 	- 多线程等待另一个线程进入安全点
 
+3. jvm 参数配置
+
+	- `-XX:+PrintGCDateStamps -XX:+PrintGCDetails -XX:+PrintHeapAtGC`
+	- `-XX:+PrintGCDateStamps -XX:+PrintGC -XX:+PrintGCApplicationStoppedTime -XX:+PrintSafepointStatistics -XX:+PrintGCApplicationStoppedTime -XX:+UseCountedLoopSafepoints`
+	- `-XX:+PrintGC -Xmn100M -XX:PretenureSizeThreshold=10000 -XX:+PrintHeapAtGC，-XX:-UsePSAdaptiveSurvivorSizePolicy or -XX:SurvivorRatio=N`
+
+
+4. 常用jvm工具
+
+	- 查看运行时 jvm 参数
+		- `jinfo -flags {pid}`
+		- `Non-default VM flags: -XX:+UseParallelGC ...
+		Command line: -XX:+PrintHeapAtGC -Dspring.output.ansi.enabled=always ...`
+	- 查看运行时java堆状态
+		- `jstat -gc {pid} {毫秒数} {执行几次}`
+		- ` S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT     GCT
+		10752.0 10752.0 10590.2  0.0   91648.0  11082.3   114176.0   10595.5   30848.0 29365.7 4224.0 3940.3      4    0.043   1      0.033    0.076`
+
+5. 长时间循环导致的安全点延迟
+
+	- https://stackoverflow.com/questions/48627532/jvm-safepoint-pauses-but-only-when-code-is-in-method-and-its-not-the-gc-engag
+	- `-XX:+UseCountedLoopSafepoints`
+	- 参数含义
+		- https://juejin.im/post/5d1b1fc46fb9a07ef7108d82
+	- JVM认为比较短的循环，所以不会放置Safepoint，比如用int作为index的循环。与其对应的是Uncounted loop。
+
+6. todo read
+
+	- 现代JVM中的Safe Region和Safe Point到底是如何定义和划分的?
+		- https://www.zhihu.com/question/29268019
+	- Safepoints: Meaning, Side Effects and Overheads
+		- http://psy-lob-saw.blogspot.com/2016/02/wait-for-it-counteduncounted-loops.html
+
