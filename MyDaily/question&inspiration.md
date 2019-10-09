@@ -5326,6 +5326,38 @@ public class Test {
 2. unsafe 与 类加载器
 
 
+## 2019.9.29
+
+1. Starting without optional epoll library
+
+	- 如何处理
+
+2. 
+
+## 2019.10.09
+
+1. Concurrent and Parallel difference
+	- https://joearms.github.io/published/2013-04-05-concurrent-and-parallel-programming.html?spm=a2c4e.10696291.0.0.a1a819a4lQXE3E
+
+2. 监测工具 jmeter/gcviewer
+
+3. 设置大堆
+
+	- 主要是会引起gc停顿时间过长
+	- 吞吐量会上去
+
+4. 逃逸分析
+
+	- 逃逸分析的基本行为就是分析对象动态作用域：当一个对象在方法中被定义后，它可能被外部方法所引用，例如作为调用参数传递到其他地方中，称为方法逃逸。
+	- https://www.hollischuang.com/archives/2583
+	- 例子: 演示逃逸分析的作用
+		- http://www.hollischuang.com/archives/2398
+
+5. 在Java虚拟机中，对象是在Java堆中分配内存的，这是一个普遍的常识。但是，有一种特殊情况，那就是如果经过逃逸分析后发现，一个对象并没有逃逸出方法的话，那么就可能被优化成栈上分配。这样就无需在堆上分配内存，也无须进行垃圾回收了。
+
+	- 标量替换
+
+6. 通过 jps 查看 java pid
 
 
 
