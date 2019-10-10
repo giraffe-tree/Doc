@@ -5428,14 +5428,13 @@ public class Test {
 		- 引入 yield
 	- Text Blocks (Preview)
 		- 可以使用 `""" text content """`, `"""` 包裹文本
-
+	- https://docs.oracle.com/en/java/javase/13/migrate/index.html#JSMIG-GUID-4B3D2D73-359C-4ADA-937E-BAEA79CFDF0F
 
 2. 人们常常认为他们站在了潮头, 就掌控了整个潮流, 但他们也只不过是被潮流推着前进罢了
 
 3. java 中的局部变量在哪里分配的?
 
 	- 基本数据类型/局部对象的引用 -> stack frame 栈帧上
-	- 
 
 4. 对象一般会分配在堆上
 	
@@ -5507,6 +5506,35 @@ public class Test {
 	- 错误 `Bad token [Invalid65533@1,1]:"TOK65533"`
 
 15. jna 大法好 =.=
+
+16. Compressed Ordinary Object Pointers (oops)
+
+	- Java SE 6u23和更高版本默认情况下支持并启用压缩的oops。在Java SE 7中，-Xmx未指定时，对于64位JVM进程以及-Xmx小于32 GB的值， 默认使用压缩的oop 
+
+17. invokedynamic 
+	
+	- 反射和 methodHandle 有什么区别?
+		- reflection 和 methodHandle 都是在模拟方法的调用
+		- 反射模拟的是 java 代码层面的方法调用
+		- methodHandle 模拟的是 字节码层面的方法调用 -> 为 jvm 上的所有语言服务
+		- 深入理解 jvm P263
+	- 问题: 如何访问 grandFather 的方法
+		- 深入理解 jvm P268
+
+
+18. MethodHandles.lookup().findSpecial 
+
+	- 在 jdk 1.7 和 1.8 的表现实现不一致
+		- https://blog.csdn.net/weixin_34252686/article/details/91657059
+	- findSpecial()得到的MethodHandle的具体语义在JSR 292的设计过程中有被调整过。
+		- 只能找到父类
+		- https://www.zhihu.com/question/40427344
+
+19. Why is super.super.method(); not allowed in Java?
+	
+	- 它违反了封装。您不应该能够绕过父类的行为。
+	- https://stackoverflow.com/questions/586363/why-is-super-super-method-not-allowed-in-java
+
 
 
 
