@@ -4795,6 +4795,7 @@ tar -xvf filename. tar.gz tar -xvf filename.
 
 2. `bigdecimal` 字段范围 2位小数
 
+	- `new BigDecimal("100"), 2, BigDecimal.ROUND_HALF_UP)`
 	- 参考: https://stackoverflow.com/questions/11319445/java-to-jackson-json-serialization-money-fields
 
 ```java
@@ -5334,12 +5335,40 @@ public class Test {
 
 2. 
 
+## 2019.10.8
+
+1. log4j2 配置
+
+	- https://howtodoinjava.com/log4j2/log4j-2-xml-configuration-example/
+
+2. 门面模式
+
+	- 自测: 举个例子
+	- https://www.cnblogs.com/java-my-life/archive/2012/05/02/2478101.html
+	- 优点举例:
+		- 选择性地暴露方法, 层次感
+			- 使用门面模式来隐藏内部实现，对外提供服务。
+		- 松耦合
+
+3. 状态模式
+
+	- 状态模式允许一个对象在其内部状态改变时改变它的行为，对象看起来就像是改变了它的类。
+	- 通过状态子类或者 switch 语句实现
+
+4. 单例模式
+
+	- 使用 ConcurrentHashMap putIfAbsent 完成单例模式
+	- 单例模式涉及一个单一的类，该类负责创建自己的对象，同时确保只有单个对象被创建。这个类提供了一种访问其唯一的对象的方式，可以直接访问，不需要实例化该类的对象。
+
+5. 如何进行消息队列中的消息链路追踪?
+
+
 ## 2019.10.09
 
 1. Concurrent and Parallel difference
 	- https://joearms.github.io/published/2013-04-05-concurrent-and-parallel-programming.html?spm=a2c4e.10696291.0.0.a1a819a4lQXE3E
 
-2. 监测工具 jmeter/gcviewer
+2. 压测/监测工具 jmeter/gcviewer
 
 3. 设置大堆
 
@@ -5347,17 +5376,115 @@ public class Test {
 	- 吞吐量会上去
 
 4. 逃逸分析
-
+	- 逃逸分析是 一种确定指针动态范围的静态分析，它可以分析在程序的哪些地方可以访问到指针
+		- 进行逃逸分析
+			- 在 Java 虚拟机的即时编译语境下，逃逸分析将判断新建的对象是否逃逸。即时编译器判断对象是否逃逸的依据，一是对象是否被存入堆中（静态字段或者堆中对象的实例字段），二是对象是否被传入未知代码中。由于 Java 虚拟机的即时编译器是以方法为单位的, 对于方法中未被内联的方法调用，即时编译器会将其当成未知代码，
+		- 逃逸分析之后可以进行的优化
+			- 锁消除
+				- `synchronized (new Object()) {}`
+				- `synchronized (escapedObject) {}` 则不然。由于其他线程可能会对逃逸了的对象escapedObject进行加锁操作，从而构造了两个线程之间的 happens-before 关系。因此即时编译器至少需要为这段代码生成一条刷新缓存的内存屏障指令。
+			- 栈上分配
+				- 如果逃逸分析能够证明某些新建的对象不逃逸，那么 Java 虚拟机完全可以将其分配至栈上，并且在 new 语句所在的方法退出时，通过弹出当前方法的栈桢来自动回收所分配的内存空间。这样一来，我们便无须借助垃圾回收器来处理不再被引用的对象。
+				- 由于实现起来需要更改大量假设了“对象只能堆分配”的代码，因此 HotSpot 虚拟机并没有采用栈上分配，而是使用了标量替换这么一项技术。
+			- 标量替换
+				- 标量替换这项优化技术，可以看成将原本对对象的字段的访问，替换为一个个局部变量的访问
+		- https://time.geekbang.org/column/article/18048
+		- https://zh.wikipedia.org/wiki/逃逸分析
 	- 逃逸分析的基本行为就是分析对象动态作用域：当一个对象在方法中被定义后，它可能被外部方法所引用，例如作为调用参数传递到其他地方中，称为方法逃逸。
-	- https://www.hollischuang.com/archives/2583
+		- https://www.hollischuang.com/archives/2583
 	- 例子: 演示逃逸分析的作用
 		- http://www.hollischuang.com/archives/2398
+		- https://stackoverflow.com/questions/771430/escape-analysis-in-java
+
 
 5. 在Java虚拟机中，对象是在Java堆中分配内存的，这是一个普遍的常识。但是，有一种特殊情况，那就是如果经过逃逸分析后发现，一个对象并没有逃逸出方法的话，那么就可能被优化成栈上分配。这样就无需在堆上分配内存，也无须进行垃圾回收了。
 
 	- 标量替换
 
 6. 通过 jps 查看 java pid
+
+
+7. spring boot 2 `logging.register-shutdown-hook`
+	
+	- sl4j2 logback
+	- 为了避免在这种情况下中断工作线程，可以将关闭钩子插入JVM运行时，以在启动JVM关闭后正确停止LoggerContext。
+	- https://stackoverflow.com/questions/45693107/define-logback-shutdown-hook-in-spring-boot/45693867
+
+8. `logging.file.max-history` not work
+
+	- https://github.com/spring-projects/spring-boot/issues/12596
+
+## 2019.10.10
+
+1. jdk 13 新特性
+
+	- Dynamic CDS Archives
+		- 核心类在 jvm 间共享
+	- ZGC: Uncommit Unused Memory
+		- 向 os 返还 未使用内存
+	- Reimplement the Legacy Socket API
+	- Switch Expressions (Preview)
+		- 引入 yield
+	- Text Blocks (Preview)
+		- 可以使用 `""" text content """`, `"""` 包裹文本
+
+
+2. 人们常常认为他们站在了潮头, 就掌控了整个潮流, 但他们也只不过是被潮流推着前进罢了
+
+3. java 中的局部变量在哪里分配的?
+
+	- 基本数据类型/局部对象的引用 -> stack frame 栈帧上
+	- 
+
+4. 对象一般会分配在堆上
+	
+	- 对象和对象引用是一个东西么?
+		- no no no
+	1. 首先需要注意的是对象和对象引用是不同的东西
+		- Note: Object and Object references are different things.
+	2. 使用 new 关键字产生的对象, 都是放在 heap 中的
+	3. 所有
+		- All the class variable primitive or object references (which is just a pointer to location where object is stored i.e. heap) are also stored in heap. (todo: 存疑)
+	4. 类, 静态变量, 静态对象引用都会存在 matespace (java8之后)
+		- Classes loaded by classloader and static variables and static object references are stored in a special location in heap which permanent generation.
+		- 这句话有点问题, 实际上永生代属于非堆区域
+		- todo: 存疑
+		- https://stackoverflow.com/questions/41358895/permgen-is-part-of-heap-or-not
+	5. 局部基本数据类型, 局部对象引用, 方法参数 存在栈(栈帧)中
+	6. 局部函数(方法)存在栈中, 静态函数(方法)存在 metaspace 中
+		- todo: 存疑
+		- Local Functions (methods) are stored in stack but Static functions(methods) goes in permanent storage.
+	7. 类信息 -> metaspace
+		- All the information related to a class like name of the class, Object arrays asscociated with the class, internal objects used by JVM (like java/lang/Object) and optimization information goes into the Permanent Generation area.
+		- todo: 存疑
+	- https://stackoverflow.com/questions/13624462/where-does-class-object-reference-variable-get-stored-in-java-in-heap-or-stac/44153495#44153495
+
+
+5. java 新建对象有哪几种方式
+
+6. java 值传递和引用传递
+
+7. permGen 和 metaspace 的区别
+
+	1. metaspace 的大小的自动增长, 而 permGen 不会
+		- Metaspace by default auto increases its size while PermGen always has a fixed maximum size
+	2. metaspace 能够 load/unload类(gc), 而 permGen 不能 unload
+	3. 他们都会造成 Classloader leaks
+		- MetaSpace is based on native memory, so you know...
+	- https://stackoverflow.com/questions/27131165/what-is-the-difference-between-permgen-and-metaspace
+	- metaspace gc
+		- https://stackoverflow.com/questions/24074164/what-is-the-use-of-metaspace-in-java-8
+
+
+8. 方法内联
+
+	- 在 JIT 编译过程中遇到方法调用时，将目标方法的方法体纳入编译范围之中，并取代原方法调用的优化手段。
+
+9. Classloader leaks 类加载器泄漏 举例
+
+10. python/golang 的 gc 是如何完成的?
+
+	- todo
 
 
 
