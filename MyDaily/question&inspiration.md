@@ -5536,5 +5536,41 @@ public class Test {
 	- https://stackoverflow.com/questions/586363/why-is-super-super-method-not-allowed-in-java
 
 
+## 2019.10.11
+
+
+1. vs studio 生成 dll 和 lib
+
+	- 属性->链接器->输入->模块定义文件
+	- source.def 
+
+```def
+LIBRARY JNA
+EXPORTS 
+	max @1
+```
+
+2. vs studio format 格式化代码
+
+	- `ctrl+K`  -> `ctrl+F`
+
+3. 如何处理过期订单
+
+	- todo
+
+4. jna invalid memory access
+
+	1. 传参为 null 导致的?
+	2. 检查 type mapping
+		- https://stackoverflow.com/questions/38057959/jna-exception-in-thread-main-java-lang-error-invalid-memory-accessunknown-so
+
+5. jna 中 `int arr[10];` 与 `int* arr` 所映射的java对象不同
+
+	- https://stackoverflow.com/questions/7598685/jna-arrays-and-pointer
+	- 使用 pointer 来表示 float array
+		- https://stackoverflow.com/questions/24092495/passing-array-from-java-to-dll-function-with-jna
+
+6. java 数组可能不连续?
+
 
 
