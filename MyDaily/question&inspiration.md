@@ -5584,7 +5584,7 @@ EXPORTS
 
 2. InputStream -> byteArray 字节数组
 
-```
+```java
 InputStream is;
 // apache commons io
 byte[] bytes = IOUtils.toByteArray(is);
