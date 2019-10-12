@@ -5573,4 +5573,20 @@ EXPORTS
 6. java 数组可能不连续?
 
 
+## 2019.10.12
+
+1. 我竟然在java中遇到了值传递和引用传递的问题?
+
+	- https://java-native-access.github.io/jna/5.3.0/javadoc/overview-summary.html
+	- https://www.zhihu.com/question/31203609/answer/576030121
+	- 值传递（pass by value）是指在调用函数时将实际参数复制一份传递到函数中，这样在函数中如果对参数进行修改，将不会影响到实际参数。
+	- 引用传递（pass by reference）是指在调用函数时将实际参数的地址直接传递到函数中，那么在函数中对参数所进行的修改，将影响到实际参数。
+
+2. InputStream -> byteArray 字节数组
+
+```
+InputStream is;
+// apache commons io
+byte[] bytes = IOUtils.toByteArray(is);
+```
 
