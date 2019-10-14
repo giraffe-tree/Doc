@@ -4184,7 +4184,9 @@ hlebalbau/kafka-manager:stable \
 	- 消息队列本身很难保证消息不重复
 	- At least once + 幂等消费 = Exactly once。
 	- 为什么大部分消息队列都选择只提供 At least once 的服务质量
-	- 最重要的原因是消息队列即使做到了Exactly once级别，consumer也还是要做幂等。因为在consumer从消息队列取消息这里，如果consumer消费成功，但是ack失败，consumer还是会取到重复的消息，所以消息队列花大力气做成Exactly once并不能解决业务侧消息重复的问题。
+	- 最重要的原因是消息队列即使做到了Exactly once级别，consumer也还是要做幂等。
+		- 因为在consumer从消息队列取消息这里，如果consumer消费成功，但是ack失败，consumer还是会取到重复的消息，所以消息队列花大力气做成Exactly once并不能解决业务侧消息重复的问题。
+		- 也有可能, 实际发送到消息队列, 但是由于网络超时原因 producer 端没有收到回调,直接回滚, 导致实际消息发出, 但业务操作失败, 如果不是幂等消费可能会产生错误 
 
 3. mq topic
 
@@ -4566,7 +4568,7 @@ hlebalbau/kafka-manager:stable \
 	- array 数组都是对象, 继承了 Object
 
 3. hibernate 清除缓存
-	- `entityManager.clear()`
+	- `private EntityManager entityManager; entityManager.clear();` 
 	- https://blog.csdn.net/u012643122/article/details/47433559
 
 ## 2019.8.26
@@ -4793,6 +4795,7 @@ tar -xvf filename. tar.gz tar -xvf filename.
 
 2. `bigdecimal` 字段范围 2位小数
 
+	- `new BigDecimal("100"), 2, BigDecimal.ROUND_HALF_UP)`
 	- 参考: https://stackoverflow.com/questions/11319445/java-to-jackson-json-serialization-money-fields
 
 ```java
@@ -4867,6 +4870,9 @@ tar -xvf filename. tar.gz tar -xvf filename.
 	- 于是就有了 TLAB thread local allocation buffer 线程本地分配缓冲区
 	- 首先 TLAB 空间分配时, 还是需要锁的, G1 中使用的是 CAS 分配
 	- 在 TLAB 内部分配对象空间是无锁的
+		- bump (up) the pointer 指针加法 
+		- 如果加法后空余内存指针的值仍小于或等于指向末尾的指针，则代表分配成功。否则，TLAB 已经没有足够的空间来满足本次新建操作。这个时候，便需要当前线程重新申请新的 TLAB。
+
 
 4. 搭建一个图片分享服务器
 
@@ -4932,6 +4938,678 @@ tar -xvf filename. tar.gz tar -xvf filename.
 	- `proxy_set_header Host $host; # 指定host`
 
 3. kafka 广播导致不能用?
+
+## 2019.9.16
+
+1. redis 单线程
+
+	- jetty eat what you kill
+
+2. 再谈 copy on write (COW, 写时复制) 的思想
+
+	- COW 不仅仅是一种技术, 也是一种思想, 读多写少, 保证并发安全
+	- 不可变对象的写操作往往都是使用 Copy-on-Write 方法解决的
+		- 王宝令 https://time.geekbang.org/column/article/93154
+		- Java 里 String 这个类在实现 replace() 方法的时候，并没有更改原字符串里面 value[] 数组的内容，而是创建了一个新字符串，这种方法在解决不可变对象的修改问题时经常用到
+	- docker images
+	- git 文件储存
+		- git 增量存储
+		- https://stackoverflow.com/questions/8198105/how-does-git-store-files
+	- 使用 Copy-on-Write 更多地体现的是一种延时策略，只有在真正需要复制的时候才复制，而不是提前复制好
+		- 王宝令 https://time.geekbang.org/column/article/93154
+
+	- redis 使用 cow 实现快照持久化
+		- 钱文品 <<redis 深度历险>>
+	- java CopyOnWriteArrayList 
+	- 实际项目中:
+		- 维护很少修改的 路由表
+	- 以至于 Java 中的基本数据类型 String、Integer、Long 等都是基于 Copy-on-Write 方案实现的。	
+
+3. 通过避免共享解决并发问题
+
+	- Immutability 模式、Copy-on-Write 模式和线程本地存储模式本质上都是为了避免共享
+		- 王宝令 https://time.geekbang.org/column/article/96736
+
+4. 活锁
+
+	- 例子
+		- 所谓的“活锁”，可以类比现实世界里的例子。路人甲从左手边出门，路人乙从右手边进门，两人为了不相撞，互相谦让，路人甲让路走右手边，路人乙也让路走左手边，结果是两人又相撞了。
+		- 这种情况，基本上谦让几次就解决了，因为人会交流啊。可是如果这种情况发生在编程世界了，就有可能会一直没完没了地“谦让”下去，成为没有发生阻塞但依然执行不下去的“活锁”。
+	- 解决: 随机等待
+
+
+5. 栈帧 与 栈 , stackOverFlow, 栈溢出
+
+	- 每个线程都有自己独立的调用栈 (里面与很多栈帧)
+	- 因为每调用一个方法就会在栈上创建一个栈帧，方法调用结束后就会弹出该栈帧，而栈的大小不是无限的，所以递归调用次数过多的话就会导致栈溢出。
+
+6. docker cp
+
+	- `docker cp <containerId>:/file/path/within/container /host/path/target`
+		- 例如: 
+			- `docker cp eddb38febacc:/data .`
+			- `docker cp eddb38febacc:/data C:\Users\pc\Desktop\data\`
+	- https://stackoverflow.com/questions/22049212/copying-files-from-docker-container-to-host
+
+7. docker 启动带有 bloom filter 的 redis
+
+	- `docker run -p 6379:6379 -v E:\local\path\data:/data --name redisbloom redislabs/rebloom:2.0.3 redis-server /data/redis.conf --loadmodule /usr/lib/redis/modules/redisbloom.so`
+
+## 2019.9.17
+
+1. lettuce 集成进 spring boot
+
+	- 如果用原生的 spring data redis 会导致有很多 redis 命令无法使用
+		- https://docs.spring.io/spring-data/data-redis/docs/current/reference/html/#_supported_commands
+	- lua 实现 cas
+		- eval https://redis.io/commands/eval
+			- 例如 `eval "return redis.call('set','foo','bar')" 0`
+		- lua dubuger https://redis.io/topics/ldb
+	- lua + redis 使用指南
+		- https://www.redisgreen.net/blog/intro-to-lua-for-redis-programmers/
+	- 使用 lua 脚本
+
+
+2. 中间件性能挑战赛
+	
+	- 初赛要求实现一个简化、高效的本地 kv 存储引擎，复赛在初赛的基础上增加了计算存储分离的架构，计算节点需要通过网络传输将数据递交给存储节点存储。
+	- https://www.cnkirito.moe/taurusdb-race/#more
+
+3. 容器如何限定内存, cpu, 磁盘
+
+4. srping data redis 如何扩展命令
+
+	- 比如: 使用redis插件中的命令:布隆过滤器, 一些额外的监控命令, spring data redis 中无法支持的命令 
+	- 最简单通用的方法 lua
+
+5. 记录日志请求参数
+
+	- 使用 aop 拦截器
+		- 在请求来的时候, 进行日志记录
+
+6. 安装windows 包管理器 
+
+	- 在 PowerShell 中输入下面内容，保证允许本地脚本的执行：
+		- `set-executionpolicy remotesigned -scope currentuser`
+	- 然后执行下面语句进行安装：
+		- `iex (new-object net.webclient).downloadstring('https://get.scoop.sh')`
+
+## 2019.9.18
+
+1. 今天一篇文章
+
+2. 为什么要重写 hashCode 和 equals 方法
+
+	- 在使用 hashMap 时, hashMap 使用 equals 来判断两个 key 是否相等, 使用 hashCode 来分区
+	- 现在有个两个对象(不同的内存位置) A,B, 我们将这两个元素作为 hashMap 的 key
+		- 如果只重写 equals 可能会导致两个元素分别放置在两个不同的 bucket 中, 放置了两次
+		- 如果只重写 hashCode 可能会导致两个元素在同一个bucket中, 且仍然被放置了两次
+			- hashCode 决定了一个元素该被放入哪个 bucket
+		- https://stackoverflow.com/questions/2265503/why-do-i-need-to-override-the-equals-and-hashcode-methods-in-java
+
+3. stream split partition stream
+
+	-  `Map<Boolean, List<Object>> collect = mget.stream().collect(Collectors.partitioningBy(Objects::nonNull));`
+
+4. how java stream works
+
+
+5. stream duplicate key 怎么处理
+
+	- collectors.toMap
+
+## 2019.09.19
+
+1. js 跨域问题
+
+	- https://juejin.im/post/5ab218b1518825555c1d8a11
+	- Access-Control-Allow-Origin 跨域设置多域名
+		- 不能设置, 只能通过判断 origin 来进行操作
+		- https://www.jianshu.com/p/b587dd1b7086
+
+## 2019.09.20
+
+1. springboot 如何判断当前事务是否已经回滚
+
+	- 不同事务等级会产生什么样的影响 ?
+		- https://juejin.im/post/5b00c52ef265da0b95276091
+	- How do I get transaction info in Spring whether transaction is committed or rollback in a declarative transaction management?
+		- https://stackoverflow.com/questions/13395794/how-do-i-get-transaction-info-in-spring-whether-transaction-is-committed-or-roll
+
+
+2. java 后端开发中可能遇到的 幻/Phantom 
+
+	- 幻读
+		- 使用 sql 说明幻读
+
+3. http
+	-`HttpClient httpClient = HttpClientBuilder.create().build();`
+
+4. mysql 行格式
+
+	- compact 
+	- compressed
+	- default
+	- dynamic
+	- fixed
+	- redundant
+
+
+## 2019.09.22
+
+1. 费曼学习法
+
+	- 通过向别人清楚地解说一件事，来确认自己真的弄懂了这件事。
+	- 第一步 - 选择一个你想要理解的概念
+		- 选择一个你想要理解的概念, 然后拿出一张白纸, 把这个概念写在白纸的最上边.
+
+	- 第二步 - 设想一种场景，你正要向别人传授这个概念
+		- 在白纸上写下你对这个概念的解释, 就好像你正在教导一位新接触这个概念的学生一样. 当你这样做的时候, 你会更清楚地意识到关于这个概念你理解了多少, 以及是否还存在理解不清的地方.
+
+	- 第三步 - 如果你感觉卡壳了, 就回顾一下学习资料
+		- 无论何时你感觉卡壳了, 都要回到原始的学习资料并重新学习让你感到卡壳的那部分, 直到你领会得足够顺畅, 顺畅到可以在纸上解释这个部分为止.
+
+	- 第四步 - 为了让你的讲解通俗易懂，简化语言表达
+		- 最终的目的, 是用你自己的语言, 而不是学习资料中的语言来解释概念. 如果你的解释很冗长或者令人迷惑, 那就说明你对概念的理解可能并没有你自己想象得那么顺畅 -- 你要努力简化语言表达, 或者与已有的知识建立一种类比关系, 以便更好地理解它。
+	- https://www.zhihu.com/question/20576786
+
+2. gc 可视化工具
+
+	- gcviewer
+		- https://github.com/chewiebug/GCViewer
+		- `java -jar gcviewer.jar`
+	- gceasy.io
+		- 统计gc时长, 百分比
+		- https://www.gceasy.io/
+
+3. 获取 jvm pid
+
+	- https://stackoverflow.com/questions/35842/how-can-a-java-program-get-its-own-process-id
+	- `ManagementFactory.getRuntimeMXBean().getName()`
+
+4. jvm eden 与 survivor 的比例
+
+	-  默认情况下，Java 虚拟机采取的是一种动态分配的策略（对应 Java 虚拟机参数 -XX:+UsePSAdaptiveSurvivorSizePolicy），根据生成对象的速率，以及 Survivor 区的使用情况动态调整 Eden 区和 Survivor 区的比例。
+
+5. hotspot card table 的实现
+
+	- 如果想要保证每个可能有指向新生代对象引用的卡都被标记为脏卡，那么 Java 虚拟机需要截获每个引用型实例变量的写操作，并作出对应的写标识位操作。
+	- 这个操作在解释执行器中比较容易实现。但是在即时编译器生成的机器码中，则需要插入额外的逻辑。这也就是所谓的写屏障（write barrier)
+	- 虚共享 false sharing 问题 两个线程同时更新卡表的问题
+	- `-XX:+UseCondCardMark`，来尽量减少写卡表的操作
+
+6. why ?
+
+```
+class ObjectOf64Bytes {
+    long placeholder0;
+    long placeholder1;
+    long placeholder2;
+    long placeholder3;
+    long placeholder4;
+    long placeholder5;
+}
+```
+
+7. `-Xmn` : the size of the heap for the young generation
+
+8. switch 语法糖
+	
+	- `javac Test.java`
+	- `javap -v Test`
+	- 所以 switch 底层是怎么实现的?
+
+```java
+// Test.java
+public class Test{
+  public static void main(String[] args){
+    String s = "alpha";
+    switch (s) {
+	case "alpha": // fall through
+	case "beta":  System.out.println("ab"); break;
+	case "Ea":    System.out.println("e"); break;
+	case "FB":    System.out.println("f"); break;
+    }
+  }
+}
+
+```
+
+```java
+// 反编译之后的
+public class Test {
+    public Test() {
+    }
+
+    public static void main(String[] var0) {
+        String var1 = "alpha";
+        byte var3 = -1;
+        switch(var1.hashCode()) {
+        case 2236:
+            if (var1.equals("FB")) {
+                var3 = 3;
+            } else if (var1.equals("Ea")) {
+                var3 = 2;
+            }
+            break;
+        case 3020272:
+            if (var1.equals("beta")) {
+                var3 = 1;
+            }
+            break;
+        case 92909918:
+            if (var1.equals("alpha")) {
+                var3 = 0;
+            }
+        }
+
+        switch(var3) {
+        case 0:
+        case 1:
+            System.out.println("ab");
+            break;
+        case 2:
+            System.out.println("e");
+            break;
+        case 3:
+            System.out.println("f");
+        }
+    }
+}
+```
+
+## 2019.9.23 晚
+
+1. GPGC Generational Pauseless GC  -> C4GC 
+	- Continuous concurrent compaction collector
+	- marking, relocation, remapping
+	- https://blog.csdn.net/uftjtt/article/details/80269936
+	- 消除了重标记可能引起的重标记无限循环，也就消除了在标记阶段出现OOM错误的风险。
+
+2. 无安全点检测的计数循环带来的长暂停
+
+	- 多线程等待另一个线程进入安全点
+
+3. jvm 参数配置
+
+	- `-XX:+PrintGCDateStamps -XX:+PrintGCDetails -XX:+PrintHeapAtGC`
+	- `-XX:+PrintGCDateStamps -XX:+PrintGC -XX:+PrintGCApplicationStoppedTime -XX:+PrintSafepointStatistics -XX:+PrintGCApplicationStoppedTime -XX:+UseCountedLoopSafepoints`
+	- `-XX:+PrintGC -Xmn100M -XX:PretenureSizeThreshold=10000 -XX:+PrintHeapAtGC，-XX:-UsePSAdaptiveSurvivorSizePolicy or -XX:SurvivorRatio=N`
+
+
+4. 常用jvm工具
+
+	- 查看运行时 jvm 参数
+		- `jinfo -flags {pid}`
+		- `Non-default VM flags: -XX:+UseParallelGC ...
+		Command line: -XX:+PrintHeapAtGC -Dspring.output.ansi.enabled=always ...`
+	- 查看运行时java堆状态
+		- `jstat -gc {pid} {毫秒数} {执行几次}`
+		- ` S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT     GCT
+		10752.0 10752.0 10590.2  0.0   91648.0  11082.3   114176.0   10595.5   30848.0 29365.7 4224.0 3940.3      4    0.043   1      0.033    0.076`
+
+5. 长时间循环导致的安全点延迟
+
+	- https://stackoverflow.com/questions/48627532/jvm-safepoint-pauses-but-only-when-code-is-in-method-and-its-not-the-gc-engag
+	- `-XX:+UseCountedLoopSafepoints`
+	- 参数含义
+		- https://juejin.im/post/5d1b1fc46fb9a07ef7108d82
+	- JVM认为比较短的循环，所以不会放置Safepoint，比如用int作为index的循环。与其对应的是Uncounted loop。
+
+6. todo read
+
+	- 现代JVM中的Safe Region和Safe Point到底是如何定义和划分的?
+		- https://www.zhihu.com/question/29268019
+	- Safepoints: Meaning, Side Effects and Overheads
+		- http://psy-lob-saw.blogspot.com/2016/02/wait-for-it-counteduncounted-loops.html
+
+## 2019.9.24
+
+1. mq 消息发送过快, 导致事务未提交? 有可能么?
+	- mq 的消息是否应该放在事务中
+
+2. 想了老半天多个第三方支付系统, 重复支付的问题, 感觉好麻烦, 没有好的解决方案
+	- 最后直接放弃解决, 只记录日志, 方便追溯 =.= 豁然开朗, MD想太多了
+	- 简单的才是好的 =.= yeah
+
+## 2019.9.25
+
+1. 超越经典概念 - 量子
+
+	- 观察的结果, 在观察之前不一定存在
+	- 观察的过程改变了现实存在
+
+2. 自由意志 free will =我的意识能够产生相对于外界的随机
+
+	- 人的智慧是经典的
+		- 大脑=神经元, 电压控制
+
+3. 量子计算比经典计算更加快
+	- 规模 N -> 2^N 的经典系统
+
+4. 猜想: 物理里面有一些定理/断言, 无法被实验证明 
+	- 哥德尔不完全
+
+5. 万物万事量子生 it from qubit
+	- 不同物质对应不同的量子态
+	- 引力也可从量子信息中涌现出来 emerge
+	- 通过量子态模拟万物: 光, 电, 引力
+
+6. ocean base 使用 paxos 
+
+	- 兼容 mysql
+	- 分布式数据库
+
+7. 一个bug倒下去, 还有千万个bug站起来
+
+8. 李氏代换
+
+	- 任何基类可以出现的地方, 子类一定可以出现
+
+9. 迪米特法则
+
+	- 一个对象应当对其他对象有尽可能少的了解
+
+10. 分布式事务
+
+	- 坑TT
+	- 就下个单而已, 事情怎么那么多
+		- https://juejin.im/post/5cdfe4a16fb9a07ef63facc3
+11. 库存
+	
+	- 好像不太适合用 乐观锁做, 只要不小于0就可以
+
+## 2019.9.27
+
+1. docker  Error starting userland proxy: /forwards/expose/port returned unexpected status: 500
+	- 重启 docker service 后正常
+
+2. unsafe 与 类加载器
+
+
+## 2019.9.29
+
+1. Starting without optional epoll library
+
+	- 如何处理
+
+2. 
+
+## 2019.10.8
+
+1. log4j2 配置
+
+	- https://howtodoinjava.com/log4j2/log4j-2-xml-configuration-example/
+
+2. 门面模式
+
+	- 自测: 举个例子
+	- https://www.cnblogs.com/java-my-life/archive/2012/05/02/2478101.html
+	- 优点举例:
+		- 选择性地暴露方法, 层次感
+			- 使用门面模式来隐藏内部实现，对外提供服务。
+		- 松耦合
+
+3. 状态模式
+
+	- 状态模式允许一个对象在其内部状态改变时改变它的行为，对象看起来就像是改变了它的类。
+	- 通过状态子类或者 switch 语句实现
+
+4. 单例模式
+
+	- 使用 ConcurrentHashMap putIfAbsent 完成单例模式
+	- 单例模式涉及一个单一的类，该类负责创建自己的对象，同时确保只有单个对象被创建。这个类提供了一种访问其唯一的对象的方式，可以直接访问，不需要实例化该类的对象。
+
+5. 如何进行消息队列中的消息链路追踪?
+
+
+## 2019.10.09
+
+1. Concurrent and Parallel difference
+	- https://joearms.github.io/published/2013-04-05-concurrent-and-parallel-programming.html?spm=a2c4e.10696291.0.0.a1a819a4lQXE3E
+
+2. 压测/监测工具 jmeter/gcviewer
+
+3. 设置大堆
+
+	- 主要是会引起gc停顿时间过长
+	- 吞吐量会上去
+
+4. 逃逸分析
+	- 逃逸分析是 一种确定指针动态范围的静态分析，它可以分析在程序的哪些地方可以访问到指针
+		- 进行逃逸分析
+			- Java 虚拟机中的逃逸分析针对的是新建对象
+			- 在 Java 虚拟机的即时编译语境下，逃逸分析将判断新建的对象是否逃逸。即时编译器判断对象是否逃逸的依据，一是对象是否被存入堆中（静态字段或者堆中对象的实例字段），二是对象是否被传入未知代码中。由于 Java 虚拟机的即时编译器是以方法为单位的, 对于方法中未被内联的方法调用，即时编译器会将其当成未知代码，
+		- 逃逸分析之后可以进行的优化
+			- 锁消除
+				- `synchronized (new Object()) {}`
+				- `synchronized (escapedObject) {}` 则不然。由于其他线程可能会对逃逸了的对象escapedObject进行加锁操作，从而构造了两个线程之间的 happens-before 关系。因此即时编译器至少需要为这段代码生成一条刷新缓存的内存屏障指令。
+			- 栈上分配
+				- 如果逃逸分析能够证明某些新建的对象不逃逸，那么 Java 虚拟机完全可以将其分配至栈上，并且在 new 语句所在的方法退出时，通过弹出当前方法的栈桢来自动回收所分配的内存空间。这样一来，我们便无须借助垃圾回收器来处理不再被引用的对象。
+				- 由于实现起来需要更改大量假设了“对象只能堆分配”的代码，因此 HotSpot 虚拟机并没有采用栈上分配，而是使用了标量替换这么一项技术。
+			- 标量替换
+				- 标量替换这项优化技术，可以看成将原本对对象的字段的访问，替换为一个个局部变量的访问
+		- https://time.geekbang.org/column/article/18048
+		- https://zh.wikipedia.org/wiki/逃逸分析
+	- 逃逸分析的基本行为就是分析对象动态作用域：当一个对象在方法中被定义后，它可能被外部方法所引用，例如作为调用参数传递到其他地方中，称为方法逃逸。
+		- https://www.hollischuang.com/archives/2583
+	- 例子: 演示逃逸分析的作用
+		- http://www.hollischuang.com/archives/2398
+		- https://stackoverflow.com/questions/771430/escape-analysis-in-java
+
+
+5. 在Java虚拟机中，对象是在Java堆中分配内存的，这是一个普遍的常识。但是，有一种特殊情况，那就是如果经过逃逸分析后发现，一个对象并没有逃逸出方法的话，那么就可能被优化成栈上分配。这样就无需在堆上分配内存，也无须进行垃圾回收了。
+
+	- 标量替换
+
+6. 通过 jps 查看 java pid
+
+
+7. spring boot 2 `logging.register-shutdown-hook`
+	
+	- sl4j2 logback
+	- 为了避免在这种情况下中断工作线程，可以将关闭钩子插入JVM运行时，以在启动JVM关闭后正确停止LoggerContext。
+	- https://stackoverflow.com/questions/45693107/define-logback-shutdown-hook-in-spring-boot/45693867
+
+8. `logging.file.max-history` not work
+
+	- https://github.com/spring-projects/spring-boot/issues/12596
+
+## 2019.10.10
+
+1. jdk 13 新特性
+
+	- Dynamic CDS Archives
+		- 核心类在 jvm 间共享
+	- ZGC: Uncommit Unused Memory
+		- 向 os 返还 未使用内存
+	- Reimplement the Legacy Socket API
+	- Switch Expressions (Preview)
+		- 引入 yield
+	- Text Blocks (Preview)
+		- 可以使用 `""" text content """`, `"""` 包裹文本
+	- https://docs.oracle.com/en/java/javase/13/migrate/index.html#JSMIG-GUID-4B3D2D73-359C-4ADA-937E-BAEA79CFDF0F
+
+2. 人们常常认为他们站在了潮头, 就掌控了整个潮流, 但他们也只不过是被潮流推着前进罢了
+
+3. java 中的局部变量在哪里分配的?
+
+	- 基本数据类型/局部对象的引用 -> stack frame 栈帧上
+
+4. 对象一般会分配在堆上
+	
+	- 对象和对象引用是一个东西么?
+		- no no no
+	1. 首先需要注意的是对象和对象引用是不同的东西
+		- Note: Object and Object references are different things.
+	2. 使用 new 关键字产生的对象, 都是放在 heap 中的
+	3. 所有
+		- All the class variable primitive or object references (which is just a pointer to location where object is stored i.e. heap) are also stored in heap. (todo: 存疑)
+	4. 类, 静态变量, 静态对象引用都会存在 matespace (java8之后)
+		- Classes loaded by classloader and static variables and static object references are stored in a special location in heap which permanent generation.
+		- 这句话有点问题, 实际上永生代属于非堆区域
+		- todo: 存疑
+		- https://stackoverflow.com/questions/41358895/permgen-is-part-of-heap-or-not
+	5. 局部基本数据类型, 局部对象引用, 方法参数 存在栈(栈帧)中
+	6. 局部函数(方法)存在栈中, 静态函数(方法)存在 metaspace 中
+		- todo: 存疑
+		- Local Functions (methods) are stored in stack but Static functions(methods) goes in permanent storage.
+	7. 类信息 -> metaspace
+		- All the information related to a class like name of the class, Object arrays asscociated with the class, internal objects used by JVM (like java/lang/Object) and optimization information goes into the Permanent Generation area.
+		- todo: 存疑
+	- https://stackoverflow.com/questions/13624462/where-does-class-object-reference-variable-get-stored-in-java-in-heap-or-stac/44153495#44153495
+
+
+5. java 新建对象有哪几种方式
+
+6. java 值传递和引用传递
+
+7. permGen 和 metaspace 的区别
+
+	1. metaspace 的大小的自动增长, 而 permGen 不会
+		- Metaspace by default auto increases its size while PermGen always has a fixed maximum size
+	2. metaspace 能够 load/unload类(gc), 而 permGen 不能 unload
+	3. 他们都会造成 Classloader leaks
+		- MetaSpace is based on native memory, so you know...
+	- https://stackoverflow.com/questions/27131165/what-is-the-difference-between-permgen-and-metaspace
+	- metaspace gc
+		- https://stackoverflow.com/questions/24074164/what-is-the-use-of-metaspace-in-java-8
+
+
+8. 方法内联
+
+	- 在 JIT 编译过程中遇到方法调用时，将目标方法的方法体纳入编译范围之中，并取代原方法调用的优化手段。
+
+9. Classloader leaks 类加载器泄漏 举例
+
+10. python/golang 的 gc 是如何完成的?
+
+	- todo
+
+11. java @HotSpotIntrinsicCandidate
+
+	- 通过本地 cpu 指令优化执行速度
+
+12. JIT 编译器  字段访问相关优化
+
+	- 字段缓存
+	- 存储优化, 去冗余
+	- 死代码消除
+
+13. java 多级包名编译运行
+
+	- `javac -d . xxxx.java`
+	- https://blog.csdn.net/u011035397/article/details/101941977
+
+14. jnaerator  
+
+	- 错误 `Bad token [Invalid65533@1,1]:"TOK65533"`
+
+15. jna 大法好 =.=
+
+16. Compressed Ordinary Object Pointers (oops)
+
+	- Java SE 6u23和更高版本默认情况下支持并启用压缩的oops。在Java SE 7中，-Xmx未指定时，对于64位JVM进程以及-Xmx小于32 GB的值， 默认使用压缩的oop 
+
+17. invokedynamic 
+	
+	- 反射和 methodHandle 有什么区别?
+		- reflection 和 methodHandle 都是在模拟方法的调用
+		- 反射模拟的是 java 代码层面的方法调用
+		- methodHandle 模拟的是 字节码层面的方法调用 -> 为 jvm 上的所有语言服务
+		- 深入理解 jvm P263
+	- 问题: 如何访问 grandFather 的方法
+		- 深入理解 jvm P268
+
+
+18. MethodHandles.lookup().findSpecial 
+
+	- 在 jdk 1.7 和 1.8 的表现实现不一致
+		- https://blog.csdn.net/weixin_34252686/article/details/91657059
+	- findSpecial()得到的MethodHandle的具体语义在JSR 292的设计过程中有被调整过。
+		- 只能找到父类
+		- https://www.zhihu.com/question/40427344
+
+19. Why is super.super.method(); not allowed in Java?
+	
+	- 它违反了封装。您不应该能够绕过父类的行为。
+	- https://stackoverflow.com/questions/586363/why-is-super-super-method-not-allowed-in-java
+
+
+## 2019.10.11
+
+
+1. vs studio 生成 dll 和 lib
+
+	- 属性->链接器->输入->模块定义文件
+	- source.def 
+
+```def
+LIBRARY JNA
+EXPORTS 
+	max @1
+```
+
+2. vs studio format 格式化代码
+
+	- `ctrl+K`  -> `ctrl+F`
+
+3. 如何处理过期订单
+
+	- todo
+
+4. jna invalid memory access
+
+	1. 传参为 null 导致的?
+	2. 检查 type mapping
+		- https://stackoverflow.com/questions/38057959/jna-exception-in-thread-main-java-lang-error-invalid-memory-accessunknown-so
+
+5. jna 中 `int arr[10];` 与 `int* arr` 所映射的java对象不同
+
+	- https://stackoverflow.com/questions/7598685/jna-arrays-and-pointer
+	- 使用 pointer 来表示 float array
+		- https://stackoverflow.com/questions/24092495/passing-array-from-java-to-dll-function-with-jna
+
+6. java 数组可能不连续?
+
+
+## 2019.10.12
+
+1. 我竟然在java中遇到了值传递和引用传递的问题?
+
+	- https://java-native-access.github.io/jna/5.3.0/javadoc/overview-summary.html
+	- https://www.zhihu.com/question/31203609/answer/576030121
+	- 值传递（pass by value）是指在调用函数时将实际参数复制一份传递到函数中，这样在函数中如果对参数进行修改，将不会影响到实际参数。
+	- 引用传递（pass by reference）是指在调用函数时将实际参数的地址直接传递到函数中，那么在函数中对参数所进行的修改，将影响到实际参数。
+
+2. InputStream -> byteArray 字节数组
+
+```java
+InputStream is;
+// apache commons io
+byte[] bytes = IOUtils.toByteArray(is);
+```
+
+3. HotSpot不支持在栈上新建对象。 C2里的逃逸分析是静态分析，和TLAB没什么关系。它和标量替换一起使用，能够完全不分配对象，仅在寄存器中维护这个对象的字段。
+
+	- https://time.geekbang.org/column/article/13137 评论
+
+## 2019.10.14
+
+1. CMS GC 的7个阶段
+	- https://www.iteye.com/blog/zhanjia-2435266
+
+2. jvm 基础面试
+
+	- https://www.zhihu.com/question/35164211
+
+3. linux java 进程被 killed
+	
+	- 建立swap区
+	- https://stackoverflow.com/questions/37071106/spring-boot-application-quits-unexpectedly-with-killed
+
+
+
 
 
 
