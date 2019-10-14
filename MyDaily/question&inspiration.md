@@ -3661,7 +3661,7 @@ func tracefile(str_content string)  {
         }
     }
     // out: 4
- ```
+```
 
 6. JS 中 `12.toString()` 为什么不能用
 
