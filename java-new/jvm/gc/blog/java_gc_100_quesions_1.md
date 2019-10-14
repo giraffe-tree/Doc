@@ -20,6 +20,9 @@ java 是一门可以自动管理内存的语言, 它运行在 jvm 之上, 所以
 
 不再使用的对象②. 一般一个对象不再被引用(可能有循环引用问题->1.3)，就代表该对象可以被回收
 
+1. [语法垃圾](https://en.wikipedia.org/wiki/Syntactic_garbage)(程序可能无法到达的那些对象)
+2. [语义垃圾](https://en.wikipedia.org/wiki/Semantic_garbage)(程序实际上将不再使用的那些对象)
+
 ### 3. 如何判断对象是否可被回收?
 
 一般判断一个对象是否可以被回收有两种方法 
@@ -33,7 +36,7 @@ java 是一门可以自动管理内存的语言, 它运行在 jvm 之上, 所以
 
 #### 3.2 简述可达性分析算法
 
-可达性分析算法通过一组 GC ROOTS (一组活跃的引用①) 作为起点 , 从这些节点向下搜索,  **标记**所有与之关联的对象 . 标记完成之后, 没有被标记的对象就称之为 **不可用对象**(垃圾回收的目标) 
+可达性分析算法通过一组 **GC ROOTS** (**一组活跃的引用**①) 作为起点 , 从这些节点向下搜索,  **标记**所有与之关联的对象 . 标记完成之后, 没有被标记的对象就称之为 **不可用对象**(垃圾回收的目标) 
 
 可达性分析算法可以解决 循环引用的问题
 
@@ -91,8 +94,8 @@ hotspot 目前提供的所有垃圾回收器都会 stw, 不管是Part GC 还是 
 ```
 
 - Spin阶段。因为jvm在决定进入全局safepoint的时候，有的线程在安全点上，而有的线程不在安全点上，这个阶段是等待未在安全点上的用户线程进入安全点。
-- Block阶段。即使进入safepoint，用户线程这时候仍然是running状态，保证用户不在继续执行，需要将用户线程阻塞。[http://blog.csdn.net/iter_zc/article/details/41892567](https://link.zhihu.com/?target=http%3A//blog.csdn.net/iter_zc/article/details/41892567) 这篇bog详细说明了如何将用户线程阻塞。
-- sync 等于 spin+block，这是从开始到进入安全点所耗的时间，可用于判断进入安全点耗时 
+- Block阶段。即使进入safepoint，用户线程这时候仍然是running状态，保证用户不在继续执行，需要将用户线程阻塞。⑦这篇bog详细说明了如何将用户线程阻塞。
+  - sync 等于 spin+block，这是从开始到进入安全点所耗的时间，可用于判断进入安全点耗时 
 - Cleanup。这个阶段是JVM做的一些内部的清理工作。
 - VM Operation. JVM执行的一些全局性工作，例如GC,代码反优化。
 
@@ -125,6 +128,8 @@ hotspot 目前提供的所有垃圾回收器都会 stw, 不管是Part GC 还是 
 
 `2019-10-12T23:32:23.767+0800: Total time for which application threads were stopped: 1.0933449 seconds, Stopping threads took: 1.0931842 seconds`
 
+原因是有线程迟迟进入不到safepoint来阻塞，导致其他已经停止的线程也一直等待，VM Thread也在等待所有的Java线程都进入到safepoint阻塞才能开始GC。
+
 
 
 
@@ -135,7 +140,7 @@ hotspot 目前提供的所有垃圾回收器都会 stw, 不管是Part GC 还是 
   - https://www.zhihu.com/question/53613423/answer/135743258
   
 - ② 语法垃圾与语义垃圾
-  - 有时在[语法垃圾](https://en.wikipedia.org/wiki/Syntactic_garbage)（程序可能无法到达的那些对象）和[语义垃圾](https://en.wikipedia.org/wiki/Semantic_garbage)（程序实际上将不再使用的那些对象）之间进行区分 garbage_collection
+  - 在[语法垃圾](https://en.wikipedia.org/wiki/Syntactic_garbage)（程序可能无法到达的那些对象）和[语义垃圾](https://en.wikipedia.org/wiki/Semantic_garbage)（程序实际上将不再使用的那些对象）之间进行区分
   -  https://en.wikipedia.org/wiki/Tracing_garbage_collection
   
 - ③ 深入理解 JVM 3.2.2 可达性分析算法 P64
@@ -152,6 +157,8 @@ hotspot 目前提供的所有垃圾回收器都会 stw, 不管是Part GC 还是 
 
   - https://www.zhihu.com/question/57722838/answer/156390795
   - https://blog.csdn.net/u011918260/article/details/70047159
+
+- ⑦ [http://blog.csdn.net/iter_zc/article/details/41892567](https://link.zhihu.com/?target=http%3A//blog.csdn.net/iter_zc/article/details/41892567) 
 
   
 
