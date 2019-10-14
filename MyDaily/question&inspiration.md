@@ -4484,6 +4484,7 @@ hlebalbau/kafka-manager:stable \
 	- https://webtide.com/eat-what-you-kill/
 
 3. 池化的本质就是用内存换 CPU；而零拷贝就是不做无用功，减少资源浪费
+<<<<<<< Updated upstream
 
 4. 拿锁的过程本身就是个系统调用，如果锁没拿到线程会阻塞，又会发生线程上下文切换，尤其是大量线程同时竞争一把锁时，会浪费大量的系统资源
 
@@ -5474,6 +5475,12 @@ public class Test {
 	- https://stackoverflow.com/questions/27131165/what-is-the-difference-between-permgen-and-metaspace
 	- metaspace gc
 		- https://stackoverflow.com/questions/24074164/what-is-the-use-of-metaspace-in-java-8
+=======
+
+4. 拿锁的过程本身就是个系统调用，如果锁没拿到线程会阻塞，又会发生线程上下文切换，尤其是大量线程同时竞争一把锁时，会浪费大量的系统资源
+
+5. 什么是状态机?
+>>>>>>> Stashed changes
 
 
 8. 方法内联
@@ -5589,4 +5596,9 @@ InputStream is;
 // apache commons io
 byte[] bytes = IOUtils.toByteArray(is);
 ```
+
+3. HotSpot不支持在栈上新建对象。 C2里的逃逸分析是静态分析，和TLAB没什么关系。它和标量替换一起使用，能够完全不分配对象，仅在寄存器中维护这个对象的字段。
+
+	- https://time.geekbang.org/column/article/13137 评论
+
 
