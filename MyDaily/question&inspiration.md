@@ -5608,9 +5608,83 @@ byte[] bytes = IOUtils.toByteArray(is);
 	- 建立swap区
 	- https://stackoverflow.com/questions/37071106/spring-boot-application-quits-unexpectedly-with-killed
 
+## 2019.10.15
+
+1. 手动System.gc()与JVM自动gc有什么根本上的区别么？
+
+	- https://www.iteye.com/blog/rednaxelafx-1042471
+
+2. java 8 default method 与 强制转换
+
+	- https://www.iteye.com/blog/rednaxelafx-2033089
+
+```java
+interface IFoo {  
+  default void bar(int i) {  
+    System.out.println("IFoo.bar(int)");  
+  }  
+}  
+  
+public class Foo implements IFoo {  
+  public static void main(String[] args) {  
+    Foo foo = new Foo();  
+    foo.bar(42);  // (1) invokevirtual Foo.bar(int)void  
+  
+    IFoo ifoo = foo;  
+    ifoo.bar(42); // (2) invokeinterface IFoo.bar(int)void  
+  }  
+  
+  public void bar(long l) {  
+    System.out.println("Foo.bar(long)");  
+  }  
+}  
+```
+
+3. java 8 使用接口来做静态工具类
+
+	- https://www.iteye.com/blog/rednaxelafx-2033104
+
+4. JVM 异常退出日志
+
+	- 深入分析 java web 技术内幕 P230
+	- EXCEPTION_ACCESS_VIOLATION
+	- SIGSEGV 
+		- JNI 
+	- EXCEPTION_STACK_OVERFLOW
 
 
+5. 热点分析工具分析当前系统执行的热点代码
 
+	- Oprofiler
 
+6. 请教下，识jvm堆栈中一个数据类型是否为为引用类型，目前虚拟机实现中是如何做的？
+
+	- https://www.iteye.com/blog/rednaxelafx-1044951
+
+7. hotspot
+
+	- 在特定位置记录下 OopMap
+		- OopMap 与 gc 的关系? 
+	- https://www.iteye.com/blog/rednaxelafx-1044951
+	- JNI 使用句柄表
+		- 但这也就意味着调用JNI方法会有句柄的包装/拆包装的开销，是导致JNI方法的调用比较慢的原因之一。
+
+8. 高级语言虚拟机 
+
+	- https://hllvm-group.iteye.com/
+
+9. 为啥别读 hotspot vm 源码
+	
+	- https://www.slideshare.net/RednaxelaFX/hotspot-vm20120303
+
+10. 新建对象
+
+	- 在 Java 程序中，我们拥有多种新建对象的方式。除了最为常见的 new 语句之外，我们还可以通过反射机制、Object.clone 方法、反序列化以及 Unsafe.allocateInstance 方法来新建对象。
+
+11. 反射性能优化
+	
+	- https://www.iteye.com/blog/rednaxelafx-548536
+	- java6, native版的反射调用则无法被有效内联，因而调用开销无法随程序的运行而降低。 
+	- 相比之下JDK 7里新的MethodHandle则更有潜力，在其功能完全实现后能达到比普通反射调用方法更高的性能。
 
 
