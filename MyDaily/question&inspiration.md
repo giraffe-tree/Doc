@@ -5688,3 +5688,95 @@ public class Foo implements IFoo {
 	- 相比之下JDK 7里新的MethodHandle则更有潜力，在其功能完全实现后能达到比普通反射调用方法更高的性能。
 
 
+## 2019.10.16
+
+1. Java8的DateTimeFormatter是线程安全的，而SimpleDateFormat并不是线程安全。
+
+	- https://blog.csdn.net/fragrant_no1/article/details/83991685
+	- 使用 threadLocal 解决 simpleDateFormat 的线程安全问题
+
+2. ConcurrentSkipListMap ConcurrentHashMap
+
+3. `void getBool(boolean x);`
+
+	- `x` 为 true 时, 输出 255
+	- https://stackoverflow.com/questions/55225896/jna-maps-java-boolean-to-1-integer
+
+4. debug jni with visual stduio
+
+	- 
+
+## 2019.10.17
+
+1. visual studio 2019 + idea jni debug
+
+	- idea
+		- 启动 java 程序
+		- 执行到断点
+	- cmd
+		- jps 找到 java 进程 pid
+	- visual studio
+		- `ctrl + alt + P` 调出 `附加到进程` 窗口  
+		- 指定 java 进程 pid
+2. 工作须知
+
+	- 社会保险缴纳基数 
+		- 最低缴纳基数 杭州 3321
+	- 社保缴费比例 18.5%
+	- 公积金基数 
+	- 公积金缴存比例 5% -12%
+
+3. todo:
+	- 查询社保缴纳基数
+	- 查询公积金缴纳基数
+	- 住房公积金管理条例
+		- https://duxiaofa.baidu.com/detail?searchType=statute&from=aladdin_28231&originquery=%E4%BD%8F%E6%88%BF%E5%85%AC%E7%A7%AF%E9%87%91%E7%AE%A1%E7%90%86%E6%9D%A1%E4%BE%8B2019&count=47&cid=acca82ae0f06858211e5d6505941bdec_law
+
+4. java
+
+	- 1. java 代码是怎么样运行的
+	- 为什么java要在虚拟机里运行
+		- java 作为一门高级程序语言, 它的语法比较复杂, 抽象程度高, 在硬件上直接运行并不现实
+		- write once , run everywhere
+			- 可移植性
+		- 提供托管环境, 帮我们处理复杂的内存逻辑
+			- 垃圾回收, 内存管理; 数组越界/动态类型/安全权限的检查 
+	- jvm 怎么样运行 字节码的
+		- java 代码 -> class 字节码
+		- 加载, 链接, 初始化 -> 方法区
+		- 实际运行时，虚拟机会执行方法区内的代码。
+			1. 解释执行, 逐条解释翻译成机器码
+			2. jit 即时编译, 编译成机器码后执行 
+	- java 的运行效率
+		- 理论上讲，即时编译后的 Java 程序的执行效率，是可能超过 C++ 程序的。这是因为与静态编译相比，即时编译拥有程序的运行时信息，并且能够根据这个信息做出相应的优化。
+		- 为了提高运行效率，标准 JDK 中的 HotSpot 虚拟机采用的是一种混合执行的策略。它会解释执行 Java 字节码，然后会将其中反复执行的热点代码，以方法为单位进行即时编译，翻译成机器码后直接运行在底层硬件之上。
+	- 2. 基本数据类型
+	- 在 Java 虚拟机规范中，boolean 类型则被映射成 int 类型
+
+
+5. 虚方法是用来实现面向对象语言多态性的。对于一个虚方法调用，尽管它有很多个目标方法，但在实际运行过程中它可能只调用其中的一个。
+
+	- 这个信息便可以被即时编译器所利用，来规避虚方法调用的开销，从而达到比静态编译的 C++ 程序更高的性能。
+
+6. hotspot vm 内置的 jit compiler
+
+	- C1,C2,Graal(java 10引入)
+
+7. 栈计算
+
+	- Java 虚拟机的算数运算几乎全部依赖于操作数栈。也就是说，我们需要将堆中的 boolean、byte、char 以及 short 加载到操作数栈上，而后将栈上的值当成 int 类型来运算。
+	- 主要是变长数组不好控制，所以就选择浪费一些空间，以便访问时直接通过下标来计算地址。
+	- 比如 一个 boolean 放在 栈上用于计算时会被映射成 int(4个字节), 但是放到 堆中只有 1 个字节 
+
+8. unsafe 
+
+	- https://stackoverflow.com/questions/13003871/how-do-i-get-the-instance-of-sun-misc-unsafe
+
+```java
+Field f =Unsafe.class.getDeclaredField("theUnsafe");
+f.setAccessible(true);
+unsafe = (Unsafe) f.get(null);
+```
+
+
+
