@@ -5778,5 +5778,45 @@ f.setAccessible(true);
 unsafe = (Unsafe) f.get(null);
 ```
 
+9. jvm 中 对象 会按照字(32位/64位)对齐
+	
+	- 所以在 64 位的系统上, 对象都是 8字节的倍数
+	- 对齐后最小的 java 对象是 16字节,因为该对象具有12个字节的标头，并填充为8个字节的倍数。
+	- 当我们将int原始类型（仅消耗4个字节）与 需要16个字节的Integer对象
+	- `ObjectSizeCalculator.getObjectSize`
+	- https://www.baeldung.com/java-size-of-object
+	- https://stackoverflow.com/questions/52353/in-java-what-is-the-best-way-to-determine-the-size-of-an-object
+	- 源代码
+		- http://hg.openjdk.java.net/jdk8/jdk8/hotspot/file/87ee5ee27509/src/share/vm/oops/markOop.hpp
+
+```
+32 bits:
+--------
+hash:25 ------------>| age:4    biased_lock:1 lock:2 (normal object)
+JavaThread*:23 epoch:2 age:4    biased_lock:1 lock:2 (biased object)
+size:32 ------------------------------------------>| (CMS free block)
+PromotedObject*:29 ---------->| promo_bits:3 ----->| (CMS promoted object)
+
+64 bits:
+--------
+unused:25 hash:31 -->| unused:1   age:4    biased_lock:1 lock:2 (normal object)
+JavaThread*:54 epoch:2 unused:1   age:4    biased_lock:1 lock:2 (biased object)
+PromotedObject*:61 --------------------->| promo_bits:3 ----->| (CMS promoted object)
+size:64 ----------------------------------------------------->| (CMS free block)
+
+unused:25 hash:31 -->| cms_free:1 age:4    biased_lock:1 lock:2 (COOPs && normal object)
+JavaThread*:54 epoch:2 cms_free:1 age:4    biased_lock:1 lock:2 (COOPs && biased object)
+narrowOop:32 unused:24 cms_free:1 unused:4 promo_bits:3 ----->| (COOPs && CMS promoted object)
+unused:21 size:35 -->| cms_free:1 unused:7 ------------------>| (COOPs && CMS free block)
+```
+
+10. java 对象头
+	- 在 64位 vm上 (hotspot)
+	- 对象头 = 标记信息(mark word 64位) + class 指针信息(一般来讲是一个字长也就是 64位)
+	- `-XX:+UseCompressedOops`
+	- https://stackoverflow.com/questions/26357186/what-is-in-java-object-header
+
+11. "oop" stands for ordinary object pointer
+
 
 
