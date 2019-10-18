@@ -1447,10 +1447,13 @@ int result = value & 0xff;
 
 2. MetaSpaceSize 
 
-	- Full GC (Metadata GC Threshold)
-	- `-XX:MetaspaceSize=256m`
-	- `-XX:MaxMetaspaceSize=256m`
-	- [JVM参数MetaspaceSize的误解](https://blog.csdn.net/u011381576/article/details/79635867)
+	- `GC (Metadata GC Threshold)` 后紧接着一次 `Full GC (Metadata GC Threshold)`
+	- 默认 `-XX:MetaspaceSize 为21810376B` 大约20.8M, 其实是根据不同平台而异的, 大约`10~20M`不等
+	- [JVM参数 MetaspaceSize 的误解](https://mp.weixin.qq.com/s/jqfppqqd98DfAJHZhFbmxA)
+		- 设置分配的类元数据空间的大小，该类元数据空间将在首次超过垃圾收集时触发垃圾收集。垃圾收集的阈值取决于使用的元数据量而增加或减少。
+		- https://stackoverflow.com/questions/47426407/java8-metaspacesize-flag-not-working
+	- 无论-XX:MetaspaceSize和-XX:MaxMetaspaceSize两个参数如何设置，都会从20.8M开始，随着类加载越来越多不断扩容调整，上限是-XX:MaxMetaspaceSize，默认是几乎无穷大(硬件内存上限)。
+
 
 3. jstat
 
@@ -5817,6 +5820,39 @@ unused:21 size:35 -->| cms_free:1 unused:7 ------------------>| (COOPs && CMS fr
 	- https://stackoverflow.com/questions/26357186/what-is-in-java-object-header
 
 11. "oop" stands for ordinary object pointer
+
+## 2019.10.18
+
+1. 将其他变量重新赋值到本地变量
+
+	- ```.copying to locals produces the smallest bytecode, and for low-level code it's nice to write code that's a little closer to the machine```
+	- https://stackoverflow.com/questions/2785964/in-arrayblockingqueue-why-copy-final-member-field-into-local-final-variable
+
+2. springboot nio 的线程数为 10 
+
+	- 似乎是循环调用每个线程
+
+3. xmx, xss, xmn
+
+	- xmx 最大堆
+	- xss 设置线程堆栈大小
+	- xmn young generation size
+
+4. `-XX:+NewRatio`
+
+	- NewRatio是老一代与年轻一代的比率（例如，值2表示老一代的最大大小将是年轻一代的最大大小的两倍，即，年轻一代最多可以得到堆的1/3）。
+
+
+5. `UseAdaptiveSizePolicy` 导致 S0C,S1C, EC 变化
+
+	- `-Xmx1024m -Xms1024m -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:NewRatio=1 -XX:+HeapDumpOnOutOfMemoryError -XX:MetaspaceSize=96M`
+
+6. java 虚拟机规范
+
+	- https://docs.oracle.com/javase/specs/index.html
+
+
+
 
 
 
