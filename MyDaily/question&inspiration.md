@@ -5900,5 +5900,65 @@ unused:21 size:35 -->| cms_free:1 unused:7 ------------------>| (COOPs && CMS fr
 	- http://hoelzle.org/publications/write-barrier.pdf
 	- https://hllvm-group.iteye.com/group/topic/41086?page=4
 
+## 2019.10.21
+
+1. jps 命令
+
+	- jps [-q] [-mlvV] [<hostid>]
+	- `-q`：只输出进程 ID
+	- `-m`：输出传入 main 方法的参数
+	- `-l`：输出完全的包名，应用主类名，jar的完全路径名
+	- `-v`：输出jvm参数
+	- `-V`：输出通过flag文件传递到JVM中的参数
+	- 获取远程服务器 jps 信息
+		- 需要启动 启动 jstatd 服务器
+		- https://www.jianshu.com/p/d39b2e208e72
+
+2. vs2019 当前不会命中断点还未为文档加载任何符号
+
+3. RSet记录了其他Region中的对象引用本Region中对象的关系，属于points-into结构（谁引用了我的对象）。而Card Table则是一种points-out（我引用了谁的对象）的结构，每个Card 覆盖一定范围的Heap（一般为512Bytes）。
+
+	- G1的RSet是在Card Table的基础上实现的：每个Region会记录下别的Region有指向自己的指针，并标记这些指针分别在哪些Card的范围内。 这个RSet其实是一个Hash Table，Key是别的Region的起始地址，Value是一个集合，里面的元素是Card Table的Index。每个Region都有一个对应的Rset。
+	- https://zhuanlan.zhihu.com/p/52841787
+
+4. method signature 是什么
+
+5. jconsole - VM 概要 可以做什么
+
+	- 查看 垃圾收集器 种类 
+		- 例如:
+			- 垃圾收集器: 名称 = 'PS MarkSweep', 收集 = 2, 总花费时间 = 0.073 秒
+			- 垃圾收集器: 名称 = 'PS Scavenge', 收集 = 6, 总花费时间 = 0.085 秒
+	- 查看 metaspace 卸载类的数量
+	- JIT 编译器的名称, 编译时间
+
+6. java native memory track
+
+	1. add `-XX:NativeMemoryTracking=summary` to VM options
+	2. `jcmd <PID> VM.native_memory`
+	- https://stackoverflow.com/questions/2756798/java-native-memory-usage
+
+7. navtive memory track 
+	
+	- 启用NMT将导致JVM性能下降5-10％，并且NMT的内存使用量将2个机器字作为malloc标头添加到所有malloc内存中。NMT还会跟踪NMT内存使用情况。
+
+	- https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/tooldescr007.html
+
+8. Are native Java methods equivalent to static Java methods?
+
+	- java 本地方法是否等同于 静态方法
+	- https://stackoverflow.com/questions/15253914/are-native-java-methods-equivalent-to-static-java-methods
+	- 是否需要在 静态本地方法中传入 class 类型
+		- 如果您的静态java方法引用任何其他静态成员，则您的JVM将需要有效的类指针。 
+		- https://stackoverflow.com/questions/29831703/jni-invoking-static-methods-is-the-class-object-necessary
+
+9. Initializing Servlet 'dispatcherServlet'
+
+	- 延迟加载
+
+
+
+
+
 
 
