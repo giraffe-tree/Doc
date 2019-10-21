@@ -5853,6 +5853,52 @@ unused:21 size:35 -->| cms_free:1 unused:7 ------------------>| (COOPs && CMS fr
 
 
 
+## 2019.10.20
+
+1. 为什么minor gc比full gc/major gc快？
+
+	- 如果把mark、sweep、compact、copying这几种动作的耗时放在一起看，大致有这样的关系：
+	- compaction >= copying > marking > sweeping
+	- 还有 marking + sweeping > copying
+	- 在分代式假设中，年轻代中的对象在minor GC时的存活率应该很低，这样用copying算法就是最合算的，因为其时间开销与活对象的大小成正比，如果没多少活对象，它就非常快
+	- https://www.zhihu.com/question/35172533
+	- https://hllvm-group.iteye.com/group/topic/38223#post-248757
+		- 把GC之外的代码（主要是应用程序的逻辑）叫做mutator，把GC的代码叫做collector。
+		- 如果有一个分代式的，或者增量式的collector，那它在工作的时候就只会观察到整个对象图的一部分；它观察不到的部分就有可能与mutator产生不一致，于是需要mutator配合：它与mutator之间需要额外的同步。Mutator在改变对象图中的引用关系时必须执行一些额外代码，让collector记录下这些变化。有两种做法，一种是 write barrier，一种是 read barrier。
+		- mark-sweep：mark阶段与活对象的数量成正比，sweep阶段与整堆大小成正比
+		- mark-compact：mark阶段与活对象的数量成正比，compact阶段与活对象的大小成正比
+		- copying：与活对象大小成正比
+
+2. young gc 的过程
+
+	- 什么时候进行 copying 的?
+
+3. java 8 hotspot metaspace 达到什么条件会触发 full gc 
+
+4. google V8 引擎用的也是 mark-compact
+
+5. 并发垃圾收集器（CMS）为什么没有采用标记整理-算法来实现，而是采用的标记-清除算法？
+
+	- CMS没有使用read barrier，只用了write barrier。这样，如果它要选用mark-compact为基本算法的话，就只有mark阶段可以并发执行（其中root scanning阶段仍然需要暂停mutator，这是initial marking；后面的concurrent marking才可以跟mutator并发执行），然后整个compact阶段都要暂停mutator。回想最初提到的：compact阶段的时间开销与活对象的大小成正比，这对年老代来说就不划算了。
+	- R大完美解答 
+		- https://hllvm-group.iteye.com/group/topic/38223#post-248757
+		- 现实中我们仍然可以看到以mark-compact为基础算法的增量式/并发式年老代GC。例如Google V8里的年老代GC就可以把marking阶段拆分为非并发的initial marking和增量式的incremental marking；但真正比较耗时的compact阶段仍然需要完全暂停mutator。它要降低暂停时间就只能想办法在年老代内进一步选择其中一部分来做compaction，而不是整个年老代一口气做compaction。这在V8里也已经有实现，叫做incremental compaction。再继续朝这方向发展的话最终会变成region-based collector，那就跟G1类似了。
+
+6. cms 论文
+
+	- `A Generational Mostly-concurrent Garbage Collector` By `Tony Printezis and David Detlefs`
+	- http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.22.8915
+	- pdf下载
+		- https://sites.cs.ucsb.edu/~ckrintz/racelab/gc/papers/detlefs-generational.pdf
+
+7. 高级语言虚拟机 论坛
+
+	- https://hllvm-group.iteye.com/
+
+8. HotSpot除了CMS和G1之外的GC所用的write barrier的思路源自Urs Hölzle的论文： A Fast Write Barrier for Generational Garbage Collectors。除了card size不同之外，实现细节跟当时在Self VM上用的一模一样。
+
+	- http://hoelzle.org/publications/write-barrier.pdf
+	- https://hllvm-group.iteye.com/group/topic/41086?page=4
 
 
 
