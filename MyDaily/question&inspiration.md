@@ -1287,9 +1287,9 @@ return (Comparator<Map.Entry<K, V>>) (Serializable)
 2. golang 在 windows 上编译 linux 的程序
 
 	```
-	set GOARCH=amd64
-	set GOOS=linux
-	go build
+set GOARCH=amd64
+set GOOS=linux
+go build
 	```
 
 3. `jni.h` 竟然和 netscape 公司有关...惊了. 
@@ -5956,7 +5956,73 @@ unused:21 size:35 -->| cms_free:1 unused:7 ------------------>| (COOPs && CMS fr
 
 	- 延迟加载
 
+## 2019.10.22
 
+1. 使用 服务器打游戏
+
+	- 好像没啥用, 要用显卡的
+
+2. 在 win10 上用 vs 2013 编译的 dll 在 windows server 2012 上无法运行
+
+	- 在 windows server 2012 上使用 vs 2019 编译成功, 然后运行 ok
+	- 具体原因不了解, 查看了 dll 依赖表, 检查了 windows server 2012 目录, 发现 dll 均存在, 但无法运行
+	- 但是反过来, 2012 上编译的, 可以再 win10上使用
+
+
+3. java classpath的作用
+
+	- `.;%JAVA_HOME%\lib;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar`
+
+
+4. 使用JNI技术，不仅可以实现Java访问C函数，也可以实现C语言调用Java代码。 而JNA只能实现Java访问C函数，作为一个Java框架，自然不能实现C语言调用Java代码。此时，你还是需要使用JNI技术。
+
+5. 如何 ignore 已经 push 的文件
+
+	- https://stackoverflow.com/questions/1139762/ignore-files-that-have-already-been-committed-to-a-git-repository
+
+## 2019.10.24
+
+
+1. file batch write 文件批量写
+
+	- 内存映射文件?
+
+2. 如何提升大量小文件的写效率
+
+	- 将多文件转为单个大文件
+	- 大文件使用批量顺序写,提升效率
+
+3. 文件写性能测试
+
+	- https://blog.csdn.net/yiifaa/article/details/78128363
+
+4. golang 常用 
+
+	- int to string `strconv.Itoa`
+	- byte[] to string/json 
+		- `err = json.Unmarshal(body, &httpRes)`
+	- `date :=time.Now().Format("20060102150405")`
+
+
+5. golang 包管理工具 glide https://glide.sh/
+
+	- 使用 12.3 版本
+		- 在 win10 上 13.3 版本会出错
+
+6. 阿里云 api 调试
+
+	- https://api.aliyun.com
+
+7. go 应用程序部署
+
+```Dockerfile
+FROM alpine:latest 
+#元镜像，使用了镜像大小体积只有5MB的alpine镜像
+WORKDIR / 
+#设置程序在容器内的工作路径
+ADD  app /
+ENTRYPOINT ["./app"]
+```
 
 
 
