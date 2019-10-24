@@ -9,26 +9,26 @@
 ## 本节自测问题
 
 1. **GC 回收算法有哪些 ?  有什么优点/缺点**
-- 提示: 一共 3个算法 + 一个思想
-   
+	- 提示: 一共 3个算法 + 一个思想
+  
 2. **这些算法对应的回收器实现有哪些 ?**
-- 新生代 / 老年代 / all
-   
+	- 新生代 / 老年代 / all
+  
 3.  **Parallel Scavenge 与 Parallel New 的区别**
-- 至少 3点  (参见: 其他问题)
-   
+	- 至少 3点  (参见: 其他问题)
+  
 4. **CMS 的4个阶段**
 
 5. **CMS 的缺点**
-- 至少 3 点
-   
+	- 至少 3 点
+  
 6. **G1GC 的特点**
-- 至少 3 点
+	- 至少 3 点
 7. **吞吐量优先/延迟优先下, 分别选用哪个(些) 垃圾回收器?**
 8. **其他问题**
-   - 为什么 Parallel Scanvenge 不能和 CMS 一起用 ?
-   - Parallel Scanvenge 和 ParNew(Parallel New) 的区别
-   - Parallel 和 Concurrent 用在垃圾回收器中分别是什么含义:
+   	- 为什么 Parallel Scanvenge 不能和 CMS 一起用 ?
+  	- Parallel Scanvenge 和 ParNew(Parallel New) 的区别
+  	- Parallel 和 Concurrent 用在垃圾回收器中分别是什么含义:
 
 
 
@@ -47,7 +47,7 @@
 
 | 回收器名          | 回收算法 | 特点                                                         |
 | ----------------- | -------- | ------------------------------------------------------------ |
-| Serial            | Copying  | 单线程回收器                                                 |
+| Serial young      | Copying  | 单线程回收器                                                 |
 | Parallel New      | Copying  | Parallel New 可以看成 Serial 的多线程版本, 可以和 CMS 一起使用 |
 | Parallel Scavenge | Copying  | 1. Parallel Scavenge 和 Parallel New 类似，但更加注重吞吐率。2. Parallel Scavenge 不能与 CMS 一起使用。3.Parallel Scavenge 有自适应调节策略`+XX:UseAdaptiveSizePolicy`, 调节新生代大小, eden/survivor 比例, 晋升老年代年龄等 |
 
@@ -78,14 +78,14 @@ Parallel Scavenge收集器提供了两个参数用于精确控制吞吐量，分
 #### CMS 的 4个阶段
 
 - 初始标记 STW
-  - 标记gc roots直接关联到的对象
+ 	 - 标记gc roots直接关联到的对象
 - 并发标记
-  - gc tracing
+  	- gc tracing
 - 重新标记 STW
-  - 修正并发标记阶段因为用户程序继续运行而导致的标记变动
-  - 时长远远比并发标记的时间短
+  	- 修正并发标记阶段因为用户程序继续运行而导致的标记变动
+  	- 时长远远比并发标记的时间短
 - 并发清除
-  - 与用户线程一起运行
+  	- 与用户线程一起运行
 
 #### CMS 的缺点
 
@@ -156,3 +156,10 @@ Concurrent 指用户线程与垃圾回收线程同时执行
   - > 与标记对象的传统算法相比，ZGC在指针上做标记，在访问指针时加入Load Barrier（读屏障），比如当对象正被GC移动，指针上的颜色就会不对，这个屏障就会先把指针更新为有效地址再返回，也就是，永远只有单个对象读取时有概率被减速，而不存在为了保持应用与GC一致而粗暴整体的Stop The World。
 
   - https://www.jianshu.com/p/60d9e125dcf3
+
+
+
+转载请注明出处
+
+>  作者: GiraffeTree -  https://giraffetree.me/2019/10/13/java_gc_100_quesions_2/
+

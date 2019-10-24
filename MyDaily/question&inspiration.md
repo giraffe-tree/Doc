@@ -1447,10 +1447,13 @@ int result = value & 0xff;
 
 2. MetaSpaceSize 
 
-	- Full GC (Metadata GC Threshold)
-	- `-XX:MetaspaceSize=256m`
-	- `-XX:MaxMetaspaceSize=256m`
-	- [JVM参数MetaspaceSize的误解](https://blog.csdn.net/u011381576/article/details/79635867)
+	- `GC (Metadata GC Threshold)` 后紧接着一次 `Full GC (Metadata GC Threshold)`
+	- 默认 `-XX:MetaspaceSize 为21810376B` 大约20.8M, 其实是根据不同平台而异的, 大约`10~20M`不等
+	- [JVM参数 MetaspaceSize 的误解](https://mp.weixin.qq.com/s/jqfppqqd98DfAJHZhFbmxA)
+		- 设置分配的类元数据空间的大小，该类元数据空间将在首次超过垃圾收集时触发垃圾收集。垃圾收集的阈值取决于使用的元数据量而增加或减少。
+		- https://stackoverflow.com/questions/47426407/java8-metaspacesize-flag-not-working
+	- 无论-XX:MetaspaceSize和-XX:MaxMetaspaceSize两个参数如何设置，都会从20.8M开始，随着类加载越来越多不断扩容调整，上限是-XX:MaxMetaspaceSize，默认是几乎无穷大(硬件内存上限)。
+
 
 3. jstat
 
@@ -5607,6 +5610,351 @@ byte[] bytes = IOUtils.toByteArray(is);
 	
 	- 建立swap区
 	- https://stackoverflow.com/questions/37071106/spring-boot-application-quits-unexpectedly-with-killed
+
+## 2019.10.15
+
+1. 手动System.gc()与JVM自动gc有什么根本上的区别么？
+
+	- https://www.iteye.com/blog/rednaxelafx-1042471
+
+2. java 8 default method 与 强制转换
+
+	- https://www.iteye.com/blog/rednaxelafx-2033089
+
+```java
+interface IFoo {  
+  default void bar(int i) {  
+    System.out.println("IFoo.bar(int)");  
+  }  
+}  
+  
+public class Foo implements IFoo {  
+  public static void main(String[] args) {  
+    Foo foo = new Foo();  
+    foo.bar(42);  // (1) invokevirtual Foo.bar(int)void  
+  
+    IFoo ifoo = foo;  
+    ifoo.bar(42); // (2) invokeinterface IFoo.bar(int)void  
+  }  
+  
+  public void bar(long l) {  
+    System.out.println("Foo.bar(long)");  
+  }  
+}  
+```
+
+3. java 8 使用接口来做静态工具类
+
+	- https://www.iteye.com/blog/rednaxelafx-2033104
+
+4. JVM 异常退出日志
+
+	- 深入分析 java web 技术内幕 P230
+	- EXCEPTION_ACCESS_VIOLATION
+	- SIGSEGV 
+		- JNI 
+	- EXCEPTION_STACK_OVERFLOW
+
+
+5. 热点分析工具分析当前系统执行的热点代码
+
+	- Oprofiler
+
+6. 请教下，识jvm堆栈中一个数据类型是否为为引用类型，目前虚拟机实现中是如何做的？
+
+	- https://www.iteye.com/blog/rednaxelafx-1044951
+
+7. hotspot
+
+	- 在特定位置记录下 OopMap
+		- OopMap 与 gc 的关系? 
+	- https://www.iteye.com/blog/rednaxelafx-1044951
+	- JNI 使用句柄表
+		- 但这也就意味着调用JNI方法会有句柄的包装/拆包装的开销，是导致JNI方法的调用比较慢的原因之一。
+
+8. 高级语言虚拟机 
+
+	- https://hllvm-group.iteye.com/
+
+9. 为啥别读 hotspot vm 源码
+	
+	- https://www.slideshare.net/RednaxelaFX/hotspot-vm20120303
+
+10. 新建对象
+
+	- 在 Java 程序中，我们拥有多种新建对象的方式。除了最为常见的 new 语句之外，我们还可以通过反射机制、Object.clone 方法、反序列化以及 Unsafe.allocateInstance 方法来新建对象。
+
+11. 反射性能优化
+	
+	- https://www.iteye.com/blog/rednaxelafx-548536
+	- java6, native版的反射调用则无法被有效内联，因而调用开销无法随程序的运行而降低。 
+	- 相比之下JDK 7里新的MethodHandle则更有潜力，在其功能完全实现后能达到比普通反射调用方法更高的性能。
+
+
+## 2019.10.16
+
+1. Java8的DateTimeFormatter是线程安全的，而SimpleDateFormat并不是线程安全。
+
+	- https://blog.csdn.net/fragrant_no1/article/details/83991685
+	- 使用 threadLocal 解决 simpleDateFormat 的线程安全问题
+
+2. ConcurrentSkipListMap ConcurrentHashMap
+
+3. `void getBool(boolean x);`
+
+	- `x` 为 true 时, 输出 255
+	- https://stackoverflow.com/questions/55225896/jna-maps-java-boolean-to-1-integer
+
+4. debug jni with visual stduio
+
+	- 
+
+## 2019.10.17
+
+1. visual studio 2019 + idea jni debug
+
+	- idea
+		- 启动 java 程序
+		- 执行到断点
+	- cmd
+		- jps 找到 java 进程 pid
+	- visual studio
+		- `ctrl + alt + P` 调出 `附加到进程` 窗口  
+		- 指定 java 进程 pid
+2. 工作须知
+
+	- 社会保险缴纳基数 
+		- 最低缴纳基数 杭州 3321
+	- 社保缴费比例 18.5%
+	- 公积金基数 
+	- 公积金缴存比例 5% -12%
+
+3. todo:
+	- 查询社保缴纳基数
+	- 查询公积金缴纳基数
+	- 住房公积金管理条例
+		- https://duxiaofa.baidu.com/detail?searchType=statute&from=aladdin_28231&originquery=%E4%BD%8F%E6%88%BF%E5%85%AC%E7%A7%AF%E9%87%91%E7%AE%A1%E7%90%86%E6%9D%A1%E4%BE%8B2019&count=47&cid=acca82ae0f06858211e5d6505941bdec_law
+
+4. java
+
+	- 1. java 代码是怎么样运行的
+	- 为什么java要在虚拟机里运行
+		- java 作为一门高级程序语言, 它的语法比较复杂, 抽象程度高, 在硬件上直接运行并不现实
+		- write once , run everywhere
+			- 可移植性
+		- 提供托管环境, 帮我们处理复杂的内存逻辑
+			- 垃圾回收, 内存管理; 数组越界/动态类型/安全权限的检查 
+	- jvm 怎么样运行 字节码的
+		- java 代码 -> class 字节码
+		- 加载, 链接, 初始化 -> 方法区
+		- 实际运行时，虚拟机会执行方法区内的代码。
+			1. 解释执行, 逐条解释翻译成机器码
+			2. jit 即时编译, 编译成机器码后执行 
+	- java 的运行效率
+		- 理论上讲，即时编译后的 Java 程序的执行效率，是可能超过 C++ 程序的。这是因为与静态编译相比，即时编译拥有程序的运行时信息，并且能够根据这个信息做出相应的优化。
+		- 为了提高运行效率，标准 JDK 中的 HotSpot 虚拟机采用的是一种混合执行的策略。它会解释执行 Java 字节码，然后会将其中反复执行的热点代码，以方法为单位进行即时编译，翻译成机器码后直接运行在底层硬件之上。
+	- 2. 基本数据类型
+	- 在 Java 虚拟机规范中，boolean 类型则被映射成 int 类型
+
+
+5. 虚方法是用来实现面向对象语言多态性的。对于一个虚方法调用，尽管它有很多个目标方法，但在实际运行过程中它可能只调用其中的一个。
+
+	- 这个信息便可以被即时编译器所利用，来规避虚方法调用的开销，从而达到比静态编译的 C++ 程序更高的性能。
+
+6. hotspot vm 内置的 jit compiler
+
+	- C1,C2,Graal(java 10引入)
+
+7. 栈计算
+
+	- Java 虚拟机的算数运算几乎全部依赖于操作数栈。也就是说，我们需要将堆中的 boolean、byte、char 以及 short 加载到操作数栈上，而后将栈上的值当成 int 类型来运算。
+	- 主要是变长数组不好控制，所以就选择浪费一些空间，以便访问时直接通过下标来计算地址。
+	- 比如 一个 boolean 放在 栈上用于计算时会被映射成 int(4个字节), 但是放到 堆中只有 1 个字节 
+
+8. unsafe 
+
+	- https://stackoverflow.com/questions/13003871/how-do-i-get-the-instance-of-sun-misc-unsafe
+
+```java
+Field f =Unsafe.class.getDeclaredField("theUnsafe");
+f.setAccessible(true);
+unsafe = (Unsafe) f.get(null);
+```
+
+9. jvm 中 对象 会按照字(32位/64位)对齐
+	
+	- 所以在 64 位的系统上, 对象都是 8字节的倍数
+	- 对齐后最小的 java 对象是 16字节,因为该对象具有12个字节的标头，并填充为8个字节的倍数。
+	- 当我们将int原始类型（仅消耗4个字节）与 需要16个字节的Integer对象
+	- `ObjectSizeCalculator.getObjectSize`
+	- https://www.baeldung.com/java-size-of-object
+	- https://stackoverflow.com/questions/52353/in-java-what-is-the-best-way-to-determine-the-size-of-an-object
+	- 源代码
+		- http://hg.openjdk.java.net/jdk8/jdk8/hotspot/file/87ee5ee27509/src/share/vm/oops/markOop.hpp
+
+```
+32 bits:
+--------
+hash:25 ------------>| age:4    biased_lock:1 lock:2 (normal object)
+JavaThread*:23 epoch:2 age:4    biased_lock:1 lock:2 (biased object)
+size:32 ------------------------------------------>| (CMS free block)
+PromotedObject*:29 ---------->| promo_bits:3 ----->| (CMS promoted object)
+
+64 bits:
+--------
+unused:25 hash:31 -->| unused:1   age:4    biased_lock:1 lock:2 (normal object)
+JavaThread*:54 epoch:2 unused:1   age:4    biased_lock:1 lock:2 (biased object)
+PromotedObject*:61 --------------------->| promo_bits:3 ----->| (CMS promoted object)
+size:64 ----------------------------------------------------->| (CMS free block)
+
+unused:25 hash:31 -->| cms_free:1 age:4    biased_lock:1 lock:2 (COOPs && normal object)
+JavaThread*:54 epoch:2 cms_free:1 age:4    biased_lock:1 lock:2 (COOPs && biased object)
+narrowOop:32 unused:24 cms_free:1 unused:4 promo_bits:3 ----->| (COOPs && CMS promoted object)
+unused:21 size:35 -->| cms_free:1 unused:7 ------------------>| (COOPs && CMS free block)
+```
+
+10. java 对象头
+	- 在 64位 vm上 (hotspot)
+	- 对象头 = 标记信息(mark word 64位) + class 指针信息(一般来讲是一个字长也就是 64位)
+	- `-XX:+UseCompressedOops`
+	- https://stackoverflow.com/questions/26357186/what-is-in-java-object-header
+
+11. "oop" stands for ordinary object pointer
+
+## 2019.10.18
+
+1. 将其他变量重新赋值到本地变量
+
+	- ```.copying to locals produces the smallest bytecode, and for low-level code it's nice to write code that's a little closer to the machine```
+	- https://stackoverflow.com/questions/2785964/in-arrayblockingqueue-why-copy-final-member-field-into-local-final-variable
+
+2. springboot nio 的线程数为 10 
+
+	- 似乎是循环调用每个线程
+
+3. xmx, xss, xmn
+
+	- xmx 最大堆
+	- xss 设置线程堆栈大小
+	- xmn young generation size
+
+4. `-XX:+NewRatio`
+
+	- NewRatio是老一代与年轻一代的比率（例如，值2表示老一代的最大大小将是年轻一代的最大大小的两倍，即，年轻一代最多可以得到堆的1/3）。
+
+
+5. `UseAdaptiveSizePolicy` 导致 S0C,S1C, EC 变化
+
+	- `-Xmx1024m -Xms1024m -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:NewRatio=1 -XX:+HeapDumpOnOutOfMemoryError -XX:MetaspaceSize=96M`
+
+6. java 虚拟机规范
+
+	- https://docs.oracle.com/javase/specs/index.html
+
+
+
+## 2019.10.20
+
+1. 为什么minor gc比full gc/major gc快？
+
+	- 如果把mark、sweep、compact、copying这几种动作的耗时放在一起看，大致有这样的关系：
+	- compaction >= copying > marking > sweeping
+	- 还有 marking + sweeping > copying
+	- 在分代式假设中，年轻代中的对象在minor GC时的存活率应该很低，这样用copying算法就是最合算的，因为其时间开销与活对象的大小成正比，如果没多少活对象，它就非常快
+	- https://www.zhihu.com/question/35172533
+	- https://hllvm-group.iteye.com/group/topic/38223#post-248757
+		- 把GC之外的代码（主要是应用程序的逻辑）叫做mutator，把GC的代码叫做collector。
+		- 如果有一个分代式的，或者增量式的collector，那它在工作的时候就只会观察到整个对象图的一部分；它观察不到的部分就有可能与mutator产生不一致，于是需要mutator配合：它与mutator之间需要额外的同步。Mutator在改变对象图中的引用关系时必须执行一些额外代码，让collector记录下这些变化。有两种做法，一种是 write barrier，一种是 read barrier。
+		- mark-sweep：mark阶段与活对象的数量成正比，sweep阶段与整堆大小成正比
+		- mark-compact：mark阶段与活对象的数量成正比，compact阶段与活对象的大小成正比
+		- copying：与活对象大小成正比
+
+2. young gc 的过程
+
+	- 什么时候进行 copying 的?
+
+3. java 8 hotspot metaspace 达到什么条件会触发 full gc 
+
+4. google V8 引擎用的也是 mark-compact
+
+5. 并发垃圾收集器（CMS）为什么没有采用标记整理-算法来实现，而是采用的标记-清除算法？
+
+	- CMS没有使用read barrier，只用了write barrier。这样，如果它要选用mark-compact为基本算法的话，就只有mark阶段可以并发执行（其中root scanning阶段仍然需要暂停mutator，这是initial marking；后面的concurrent marking才可以跟mutator并发执行），然后整个compact阶段都要暂停mutator。回想最初提到的：compact阶段的时间开销与活对象的大小成正比，这对年老代来说就不划算了。
+	- R大完美解答 
+		- https://hllvm-group.iteye.com/group/topic/38223#post-248757
+		- 现实中我们仍然可以看到以mark-compact为基础算法的增量式/并发式年老代GC。例如Google V8里的年老代GC就可以把marking阶段拆分为非并发的initial marking和增量式的incremental marking；但真正比较耗时的compact阶段仍然需要完全暂停mutator。它要降低暂停时间就只能想办法在年老代内进一步选择其中一部分来做compaction，而不是整个年老代一口气做compaction。这在V8里也已经有实现，叫做incremental compaction。再继续朝这方向发展的话最终会变成region-based collector，那就跟G1类似了。
+
+6. cms 论文
+
+	- `A Generational Mostly-concurrent Garbage Collector` By `Tony Printezis and David Detlefs`
+	- http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.22.8915
+	- pdf下载
+		- https://sites.cs.ucsb.edu/~ckrintz/racelab/gc/papers/detlefs-generational.pdf
+
+7. 高级语言虚拟机 论坛
+
+	- https://hllvm-group.iteye.com/
+
+8. HotSpot除了CMS和G1之外的GC所用的write barrier的思路源自Urs Hölzle的论文： A Fast Write Barrier for Generational Garbage Collectors。除了card size不同之外，实现细节跟当时在Self VM上用的一模一样。
+
+	- http://hoelzle.org/publications/write-barrier.pdf
+	- https://hllvm-group.iteye.com/group/topic/41086?page=4
+
+## 2019.10.21
+
+1. jps 命令
+
+	- jps [-q] [-mlvV] [<hostid>]
+	- `-q`：只输出进程 ID
+	- `-m`：输出传入 main 方法的参数
+	- `-l`：输出完全的包名，应用主类名，jar的完全路径名
+	- `-v`：输出jvm参数
+	- `-V`：输出通过flag文件传递到JVM中的参数
+	- 获取远程服务器 jps 信息
+		- 需要启动 启动 jstatd 服务器
+		- https://www.jianshu.com/p/d39b2e208e72
+
+2. vs2019 当前不会命中断点还未为文档加载任何符号
+
+3. RSet记录了其他Region中的对象引用本Region中对象的关系，属于points-into结构（谁引用了我的对象）。而Card Table则是一种points-out（我引用了谁的对象）的结构，每个Card 覆盖一定范围的Heap（一般为512Bytes）。
+
+	- G1的RSet是在Card Table的基础上实现的：每个Region会记录下别的Region有指向自己的指针，并标记这些指针分别在哪些Card的范围内。 这个RSet其实是一个Hash Table，Key是别的Region的起始地址，Value是一个集合，里面的元素是Card Table的Index。每个Region都有一个对应的Rset。
+	- https://zhuanlan.zhihu.com/p/52841787
+
+4. method signature 是什么
+
+5. jconsole - VM 概要 可以做什么
+
+	- 查看 垃圾收集器 种类 
+		- 例如:
+			- 垃圾收集器: 名称 = 'PS MarkSweep', 收集 = 2, 总花费时间 = 0.073 秒
+			- 垃圾收集器: 名称 = 'PS Scavenge', 收集 = 6, 总花费时间 = 0.085 秒
+	- 查看 metaspace 卸载类的数量
+	- JIT 编译器的名称, 编译时间
+
+6. java native memory track
+
+	1. add `-XX:NativeMemoryTracking=summary` to VM options
+	2. `jcmd <PID> VM.native_memory`
+	- https://stackoverflow.com/questions/2756798/java-native-memory-usage
+
+7. navtive memory track 
+	
+	- 启用NMT将导致JVM性能下降5-10％，并且NMT的内存使用量将2个机器字作为malloc标头添加到所有malloc内存中。NMT还会跟踪NMT内存使用情况。
+
+	- https://docs.oracle.com/javase/8/docs/technotes/guides/troubleshoot/tooldescr007.html
+
+8. Are native Java methods equivalent to static Java methods?
+
+	- java 本地方法是否等同于 静态方法
+	- https://stackoverflow.com/questions/15253914/are-native-java-methods-equivalent-to-static-java-methods
+	- 是否需要在 静态本地方法中传入 class 类型
+		- 如果您的静态java方法引用任何其他静态成员，则您的JVM将需要有效的类指针。 
+		- https://stackoverflow.com/questions/29831703/jni-invoking-static-methods-is-the-class-object-necessary
+
+9. Initializing Servlet 'dispatcherServlet'
+
+	- 延迟加载
 
 
 

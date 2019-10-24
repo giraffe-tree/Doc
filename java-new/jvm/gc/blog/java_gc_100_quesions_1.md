@@ -1,4 +1,4 @@
-# java GC 循序渐进100 问 - 1. 基础与概念
+# java GC 循序渐进100 问 - 1 基础与概念
 
 ## 前言
 
@@ -162,3 +162,6 @@ hotspot 目前提供的所有垃圾回收器都会 stw, 不管是Part GC 还是 
 
   
 
+转载请注明出处
+
+>  作者: GiraffeTree -  https://giraffetree.me/2019/10/13/java_gc_100_quesions_1/
