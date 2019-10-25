@@ -6025,6 +6025,31 @@ ENTRYPOINT ["./app"]
 ```
 
 
+## 2019.10.25
+
+1. 在一个 springboot jar 中, 启动非默认 main 方法
+
+	- `java -cp aolang-1.0.0.jar -Dloader.main=me.giraffetree.xxx.xxx org.springframework.boot.loader.PropertiesLauncher`
+		- https://www.baeldung.com/spring-boot-main-class
+		- https://stackoverflow.com/questions/50367647/run-non-main-class-of-spring-boot-application-through-command-line
+
+2. 自己在整 dll 兼容性的时候想到 jdk 中很多 dll
+
+	- 这不是要麻烦死...全是兼容问题
+	- windows server 2012 上java 调用 dll失败 
+		- 装一个 vc 运行库
+		- https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
+	- 工具
+		- depends walker
+
+3. mysql 强制使用 tcp 通讯, 而不是使用 socket
+
+	- https://serverfault.com/questions/337818/how-to-force-mysql-to-connect-by-tcp-instead-of-a-unix-socket
+	- `mysql --protocol=TCP -u root -p`
+
+
+
+
 
 
 
