@@ -4,7 +4,7 @@
 
 只要你用过了 [JNA (java native access)](https://github.com/java-native-access/jna) , 那你可能就再也不想用 JNI 了
 
-当然实际上, JNA 搞定了 JNI 中最麻烦的数据类型映射, 可以让我们进行高效的开发,  不用再去写各种的转换接口. 
+当然实际上, **JNA 搞定了 JNI 中最麻烦的数据类型映射**, 可以让我们进行高效的开发,  不用再去写各种的转换接口. 
 
 - char*
 - string
@@ -13,7 +13,7 @@
 
 上面的数据类型它都支持
 
-当然, 有人会问 JNA 能完全代替 JNI 么? 不能, **JNA只能实现Java访问C函数**，如果你想实现C语言调用 Java 代码, 你还是需要使用 JNI 技术。
+当然, 有人会问 JNA 能完全代替 JNI 么? 不能, **JNA只能实现Java访问C函数**，如果你想实现C语言调用 Java 代码, 你还是需要使用 JNI 技术
 
 ## JNA 有什么用? 吹一波?
 
@@ -56,7 +56,7 @@ public class HelloWorld {
         CLibrary.INSTANCE.printf("Hello, World\n");
     }
 }
-// 源码来自 https://github.com/java-native-access/jna/blob/master/www/GettingStarted.md
+// 该源码来自 https://github.com/java-native-access/jna/blob/master/www/GettingStarted.md
 ```
 
 ## 哪些项目使用了 JNA 
@@ -101,7 +101,7 @@ from  [JNA - Default Type Mappings](https://github.com/java-native-access/jna/bl
 
 java 部分:  https://github.com/giraffe-tree/jna-func 
 
-c++ 部分(vs 项目): 
+c++ 部分(vs 项目):  https://github.com/giraffe-tree/jna-c
 
 ### max 
 
@@ -243,7 +243,7 @@ JnaLibrary.INSTANCE.printUserRef(user1);
 JnaLibrary.INSTANCE.printUser(user1);
 // out:
 printUserRef user: user1 height: 186 weight: 65.20 
-printUser user: user1 height: 186 weight: 65.20 
+printUser user: user1 height: 186 weight: 65.20
 ```
 
 ### Pointer
@@ -310,7 +310,7 @@ arrInfo[2]: 2
 
 这些 bug 常常很难直接找出, JNA 统一都报了一个 `Invalid memory access` , 导致我们找不到真正错误的原因. 这时候就需要调试了
 
-我使用的开发环境是 IDEA + VS2019
+我使用的开发环境是 IDEA + jdk8 + VS2019 
 
 ### 步骤
 
@@ -360,10 +360,34 @@ yeah, 调试完成 =.=
 
 目前测试下来, 可能存在 java 主线程停止, 但 C++ print 缓存区仍未被清空的情况, 导致控制台打印内容缺失
 
-在这种情况下, 请延长主线程运行的时间.
+在这种情况下, 请延长 java 主线程运行的时间.
 
 ### 未加载 jvm.pdb
 
-目前测试下来, 继续后会报出一个 未加载 jvm.pdb , 我确实没有找到这个文件
+目前测试下来, 在 vs 中 debug 继续后会报出一个 `未加载 jvm.pdb` , 我确实没有找到这个文件
 
 但还可以继续调试, 没啥大问题
+
+不过什么时候来个调试 openjdk 想想应该蛮有趣的 哈哈
+
+###  Invalid memory access
+
+这个问题怎么说呢, JNA 好多地方都能报出这个错误, 我遇到这个错误时, 大部分都是我的java 参数 ->  C++ 参数的映射问题
+
+包括参数类型写错, 顺序写错等, 仔细检查映射关系就能解决
+
+### java.lang.UnsatisfiedLinkError: 找不到指定的模块。
+
+这个错误我遇到过的情况分两种
+
+1. 我调用的 dll 没有放进指定目录
+   - 比如我的平台是 `win32-x86-64`, 但是没有放入这个目录中
+   - 这种情况下, jna 会提示找不到指定目录的资源文件比较好解决
+2. 我调用的 dll 依赖的其他 dll 没有找到
+   - 这个情况, 我在 win10 下编译, 然后在 windower server 2012 上运行时遇到过
+   - 通过解决方案是这样 
+     1. 通过 [Dependency walker](http://www.dependencywalker.com/)  查看 dll 依赖缺失情况
+     2. 补全缺失的  dll
+   - 当时我的情况是 缺失了 vc140, 然后我下载 [ micro soft vc 运行库](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads) 就解决了这个问题
+
+
