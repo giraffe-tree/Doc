@@ -135,7 +135,7 @@ public interface JnaLibrary extends Library {
 ```
 
 
-将编译好的  `JNA.dll`,  `JNA.lib` 放入 resources 文件夹下的 `win32-x86-64` 目录中 (我使用的是 64位 windows), JNA 会自动到 `win32-x86-64` 中去找 `JNA.dll`
+将编译好的  `JNA.dll` (lib 文件不需要哦) 放入 resources 文件夹下的 `win32-x86-64` 目录中 (我使用的是 64位 windows), JNA 会自动到 `win32-x86-64` 中去找 `JNA.dll`
 
 运行 `main` 函数即可
 
