@@ -1287,9 +1287,9 @@ return (Comparator<Map.Entry<K, V>>) (Serializable)
 2. golang 在 windows 上编译 linux 的程序
 
 	```
-	set GOARCH=amd64
-	set GOOS=linux
-	go build
+set GOARCH=amd64
+set GOOS=linux
+go build
 	```
 
 3. `jni.h` 竟然和 netscape 公司有关...惊了. 
@@ -5956,6 +5956,109 @@ unused:21 size:35 -->| cms_free:1 unused:7 ------------------>| (COOPs && CMS fr
 
 	- 延迟加载
 
+## 2019.10.22
+
+1. 使用 服务器打游戏
+
+	- 好像没啥用, 要用显卡的
+
+2. 在 win10 上用 vs 2013 编译的 dll 在 windows server 2012 上无法运行
+
+	- 在 windows server 2012 上使用 vs 2019 编译成功, 然后运行 ok
+	- 具体原因不了解, 查看了 dll 依赖表, 检查了 windows server 2012 目录, 发现 dll 均存在, 但无法运行
+	- 但是反过来, 2012 上编译的, 可以再 win10上使用
+
+
+3. java classpath的作用
+
+	- `.;%JAVA_HOME%\lib;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar`
+
+
+4. 使用JNI技术，不仅可以实现Java访问C函数，也可以实现C语言调用Java代码。 而JNA只能实现Java访问C函数，作为一个Java框架，自然不能实现C语言调用Java代码。此时，你还是需要使用JNI技术。
+
+5. 如何 ignore 已经 push 的文件
+
+	- https://stackoverflow.com/questions/1139762/ignore-files-that-have-already-been-committed-to-a-git-repository
+
+## 2019.10.24
+
+
+1. file batch write 文件批量写
+
+	- 内存映射文件?
+
+2. 如何提升大量小文件的写效率
+
+	- 将多文件转为单个大文件
+	- 大文件使用批量顺序写,提升效率
+
+3. 文件写性能测试
+
+	- https://blog.csdn.net/yiifaa/article/details/78128363
+
+4. golang 常用 
+
+	- int to string `strconv.Itoa`
+	- byte[] to string/json 
+		- `err = json.Unmarshal(body, &httpRes)`
+	- `date :=time.Now().Format("20060102150405")`
+
+
+5. golang 包管理工具 glide https://glide.sh/
+
+	- 使用 12.3 版本
+		- 在 win10 上 13.3 版本会出错
+
+6. 阿里云 api 调试
+
+	- https://api.aliyun.com
+
+7. go 应用程序部署
+
+```Dockerfile
+FROM alpine:latest 
+#元镜像，使用了镜像大小体积只有5MB的alpine镜像
+WORKDIR / 
+#设置程序在容器内的工作路径
+ADD  app /
+ENTRYPOINT ["./app"]
+```
+
+
+## 2019.10.25
+
+1. 在一个 springboot jar 中, 启动非默认 main 方法
+
+	- `java -cp aolang-1.0.0.jar -Dloader.main=me.giraffetree.xxx.xxx org.springframework.boot.loader.PropertiesLauncher`
+		- https://www.baeldung.com/spring-boot-main-class
+		- https://stackoverflow.com/questions/50367647/run-non-main-class-of-spring-boot-application-through-command-line
+
+2. 自己在整 dll 兼容性的时候想到 jdk 中很多 dll
+
+	- 这不是要麻烦死...全是兼容问题
+	- windows server 2012 上java 调用 dll失败 
+		- 装一个 vc 运行库
+		- https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
+	- 工具
+		- depends walker
+
+3. mysql 强制使用 tcp 通讯, 而不是使用 socket
+
+	- https://serverfault.com/questions/337818/how-to-force-mysql-to-connect-by-tcp-instead-of-a-unix-socket
+	- `mysql --protocol=TCP -u root -p`
+
+## 2019.10.28
+
+
+1. dll 和 lib 的区别
+
+	- lib是一个二进制文件，与dll类似，供其他程序调用。lib与dll的区别是：dll是运行时需要的，lib是编译时需要的。
+	- 共有两种库：
+	　　- 一种是LIB包含了函数所在的DLL文件和文件中函数位置的信息（入口），代码由运行时加载在进程空间中的DLL提供，称为动态链接 库dynamic link library。
+	　　- 一种是LIB包含函数代码本身，在编译时直接将代码加入程序当中，称为静态链接库static link library。
+	- 共有两种链接方式
+	　　- 动态链接使用动态链接库，允许可执行模块（.dll文件或.exe文件）仅包含在运行时定 位DLL函数的可执行代码所需的信息。
+	　　- 静态链接使用静态链接库，链接器从静态链接库LIB获取所有被引用函数，并将库同代码一起放到可执行文件 中。
 
 
 
