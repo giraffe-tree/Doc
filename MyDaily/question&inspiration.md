@@ -6047,6 +6047,18 @@ ENTRYPOINT ["./app"]
 	- https://serverfault.com/questions/337818/how-to-force-mysql-to-connect-by-tcp-instead-of-a-unix-socket
 	- `mysql --protocol=TCP -u root -p`
 
+## 2019.10.28
+
+
+1. dll 和 lib 的区别
+
+	- lib是一个二进制文件，与dll类似，供其他程序调用。lib与dll的区别是：dll是运行时需要的，lib是编译时需要的。
+	- 共有两种库：
+	　　- 一种是LIB包含了函数所在的DLL文件和文件中函数位置的信息（入口），代码由运行时加载在进程空间中的DLL提供，称为动态链接 库dynamic link library。
+	　　- 一种是LIB包含函数代码本身，在编译时直接将代码加入程序当中，称为静态链接库static link library。
+	- 共有两种链接方式
+	　　- 动态链接使用动态链接库，允许可执行模块（.dll文件或.exe文件）仅包含在运行时定 位DLL函数的可执行代码所需的信息。
+	　　- 静态链接使用静态链接库，链接器从静态链接库LIB获取所有被引用函数，并将库同代码一起放到可执行文件 中。
 
 
 
