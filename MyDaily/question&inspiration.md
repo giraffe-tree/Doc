@@ -6064,6 +6064,41 @@ ENTRYPOINT ["./app"]
 
 	- chrome://dino
 
+3. gc 中的 evacuated (copied/moved)
+
+4. g1gc log 解读
+
+	- https://www.jianshu.com/p/5d4e319582f7
+	- https://www.redhat.com/en/blog/collecting-and-reading-g1-garbage-collector-logs-part-2#
+
+5. gc log 可视化
+
+	- https://github.com/HubSpot/gc_log_visualizer
+
+6. SATB Snapshot-at-the-beginning 
+	
+	- mark的过程就是遍历heap标记live object，采用的是三色标记算法，这三种颜色为white(表示还未访问到)、gray(访问到但是它用到的引用还没有完全扫描)、black(访问到而且其用到的引用已经完全扫描完)，整个三色标记算法就是从GC roots出发遍历heap，针对可达对象先标记white为gray，然后再标记gray为black；遍历完成之后所有可达对象都是black的，所有white都是可以回收的
+	- https://juejin.im/post/5c95b78df265da60e21bfeda
+
+7. [HotSpot VM]关于增量更新与SATB的一点理解
+	
+	- 
+	- https://hllvm-group.iteye.com/group/topic/44529
+
+8. 中村成洋 徹底解剖「G1GC」 アルゴリズム編
+
+	- https://github.com/authorNari/g1gc-impl-book
+	- http://www.narihiro.info/g1gc-impl-book/
+	- openjdk7 下载
+		- https://blog.csdn.net/qq_23091073/article/details/83178848
+	- 编译帮助文档
+		- http://hg.openjdk.java.net/jdk7/jdk7/raw-file/tip/README-builds.html
+
+9. `-XX：+TraceClassLoading` 可以看到类加载过程
 
 
+10. java 多态性
 
+	- 桥接方法实现多态
+		- https://docs.oracle.com/javase/tutorial/java/generics/bridgeMethods.html
+		- https://blog.csdn.net/jiaobuchong/article/details/83722193
