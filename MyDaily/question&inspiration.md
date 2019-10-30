@@ -6102,3 +6102,157 @@ ENTRYPOINT ["./app"]
 	- 桥接方法实现多态
 		- https://docs.oracle.com/javase/tutorial/java/generics/bridgeMethods.html
 		- https://blog.csdn.net/jiaobuchong/article/details/83722193
+
+
+## 2019.10.30
+
+1. serializable
+	
+	- 允许实现readObject和writeObject方法来覆盖java中的默认序列
+	- https://www.hollischuang.com/archives/1140
+
+2. hollis java 文章
+
+	- https://www.hollischuang.com/archives/category/java
+
+3. 异步异常
+	
+	- jvm specification
+		- https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.10
+	- how to cause async exception
+		- https://stackoverflow.com/questions/51375732/synchronous-and-asynchronous-exceptions-in-java
+
+4. 反编译出来的什么鬼....
+
+```java
+public class ThrowTest {
+    public int test() {
+        try {
+            return 0;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw e;
+        } finally {
+            int a = 10000;
+        }
+    }
+}
+// 反编译出来的...
+public class ThrowTest {
+    public ThrowTest() {
+    }
+
+    public int test() {
+        boolean var7 = false;
+
+        byte var1;
+        try {
+            var7 = true;
+            var1 = 0;
+            var7 = false;
+        } catch (ArrayIndexOutOfBoundsException var8) {
+            throw var8;
+        } finally {
+            if (var7) {
+                boolean var4 = true;
+            }
+        }
+
+        boolean var2 = true;
+        return var1;
+    }
+}
+// javap -v xxx
+public int test();
+descriptor: ()I
+flags: ACC_PUBLIC
+Code:
+  stack=1, locals=5, args_size=1
+     0: iconst_0
+     1: istore_1
+     2: sipush        10000
+     5: istore_2
+     6: iload_1
+     7: ireturn
+     8: astore_1
+     9: aload_1
+    10: athrow
+    11: astore_3
+    12: sipush        10000
+    15: istore        4
+    17: aload_3
+    18: athrow
+  Exception table:
+     from    to  target type
+         0     2     8   Class java/lang/ArrayIndexOutOfBoundsException
+         0     2    11   any
+         8    12    11   any
+  LineNumberTable:
+    line 11: 0
+    line 15: 2
+    line 11: 6
+    line 12: 8
+    line 13: 9
+    line 15: 11
+    line 16: 17
+  LocalVariableTable:
+    Start  Length  Slot  Name   Signature
+        9       2     1     e   Ljava/lang/ArrayIndexOutOfBoundsException;
+        0      19     0  this   Lme/giraffetree/playg1/exception/ThrowTest;
+  StackMapTable: number_of_entries = 2
+    frame_type = 72 /* same_locals_1_stack_item */
+      stack = [ class java/lang/ArrayIndexOutOfBoundsException ]
+    frame_type = 66 /* same_locals_1_stack_item */
+      stack = [ class java/lang/Throwable ]
+
+
+
+```
+
+5. 如果finally有return语句，catch内throw的异常会被忽略，这个从jvm层面怎么解释呢？
+
+	- return
+
+6. 栈轨迹 跟 弹出方法栈帧 是两个概念。你可以直接新建一个异常，然后不抛出，直接打印调用栈。这个时候是不会弹出当前栈帧的。
+
+
+7. 事务传播行为
+
+	- Propagation.REQUIRED
+		- 代表当前方法支持当前的事务，且与调用者处于同一事务上下文中，回滚统一回滚（如果当前方法是被其他方法调用的时候，且调用者本身即有事务），如果没有事务，则自己新建事务，
+	- Propagation.SUPPORTS
+		- 代表当前方法支持当前的事务，且与调用者处于同一事务上下文中，回滚统一回滚（如果当前方法是被其他方法调用的时候，且调用者本身即有事务），如果没有事务，则该方法在非事务的上下文中执行
+	- Propagation.MANDATORY
+		- 代表当前方法支持当前的事务，且与调用者处于同一事务上下文中，回滚统一回滚（如果当前方法是被其他方法调用的时候，且调用者本身即有事务）,如果没有事务，则抛出异常
+	- Propagation.REQUIRES_NEW
+		- 创建一个新的事务上下文，如果当前方法的调用者已经有了事务，则挂起调用者的事务，这两个事务不处于同一上下文，如果各自发生异常，各自回滚
+	- Propagation.NOT_SUPPORTED
+		- 该方法以非事务的状态执行，如果调用该方法的调用者有事务则先挂起调用者的事务
+	- Propagation.NEVER
+		- 该方法以非事务的状态执行，如果调用者存在事务，则抛出异常
+	- Propagation.NESTED
+		- 如果当前上下文中存在事务，则以嵌套事务执行该方法，也就说，这部分方法是外部方法的一部分，调用者回滚，则该方法回滚，但如果该方法自己发生异常，则自己回滚，不会影响外部事务，如果不存在事务，则与PROPAGATION_REQUIRED一样
+	- https://www.cnblogs.com/ll409546297/p/11076258.html
+	- 代码验证
+		 -https://juejin.im/entry/5a8fe57e5188255de201062b
+
+8. try-with-resources
+	
+	- addSuppressed 避免原异常消失的问题
+	- https://www.cnblogs.com/langtianya/p/5139465.html
+
+
+9. 理解注解中的@Inherited
+
+	- 如果一个子类想获取到父类上的注解信息，那么必须在父类上使用的注解上面 加上@Inherit关键字
+	- https://www.iteye.com/blog/latty-2371766
+
+10. springboot + spring security + oauth2.0
+
+	- oauth 流程
+		- http://www.ruanyifeng.com/blog/2019/04/oauth_design.html
+	- 思维导图
+		- https://www.processon.com/view/link/5db9367ee4b0e433945466da
+	- spring boot oauth
+		- https://docs.spring.io/spring-security-oauth2-boot/docs/current/reference/htmlsingle/#do-i-need-to-stand-up-my-own-authorization-server
+	- spring security
+		- https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#core-services-password-encoding
