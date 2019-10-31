@@ -6094,7 +6094,7 @@ ENTRYPOINT ["./app"]
 	- 编译帮助文档
 		- http://hg.openjdk.java.net/jdk7/jdk7/raw-file/tip/README-builds.html
 
-9. `-XX：+TraceClassLoading` 可以看到类加载过程
+9. `-XX:+TraceClassLoading` 可以看到类加载过程
 
 
 10. java 多态性
@@ -6256,3 +6256,45 @@ Code:
 		- https://docs.spring.io/spring-security-oauth2-boot/docs/current/reference/htmlsingle/#do-i-need-to-stand-up-my-own-authorization-server
 	- spring security
 		- https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#core-services-password-encoding
+
+
+## 2019.10.31
+
+1. java 反射全链路解析
+	- 包含java和c++部分
+	- https://www.jianshu.com/p/b6cb4c694951
+
+2. 获取数组 class
+
+	- `Test[].class`
+
+3. 反射调用 R 大回答
+
+	- https://www.iteye.com/blog/rednaxelafx-548536
+
+4. native 代码消耗比 java 代码消耗大
+
+	- 这是HotSpot的优化方式带来的性能特性，同时也是许多虚拟机的共同点：跨越native边界会对优化有阻碍作用，它就像个黑箱一样让虚拟机难以分析也将其内联，于是运行时间长了之后反而是托管版本的代码更快些。
+
+5. typeProfile
+	
+	- optimizing compiler to guess at future types at the same point in the program.
+	- https://wiki.openjdk.java.net/display/HotSpot/TypeProfile
+
+6. 百度搜索资源平台
+
+	- https://ziyuan.baidu.com/dashboard/index
+
+7. sitemap 生成
+
+	- https://www.xml-sitemaps.com/
+
+8. 最常用的分布式 dns
+
+9. google 规范网址
+	- nginx 增加 header 
+	- https://support.google.com/webmasters/answer/139066?hl=zh-Hans
+	- jekyll url 中指定
+
+
+
