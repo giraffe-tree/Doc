@@ -6296,5 +6296,95 @@ Code:
 	- https://support.google.com/webmasters/answer/139066?hl=zh-Hans
 	- jekyll url 中指定
 
+## 2019.11.1
+
+1. 为 每个 invokevirual 记录一个 type profile 
+
+	- https://stackoverflow.com/questions/21679998/does-it-matter-for-runtime-performance-if-a-method-is-called-by-its-explicit-typ
+
+2. openjdk11  `-XX:+PrintGCDateStamps` 无效
+
+	- `-Xlog:gc*:/opt/myapp/gc.log:time`
+
+3. java 视频
+
+	- bilibili 做 java gc 视频
+
+4. 内联规则
+
+	- 即时编译器不会无限制地进行方法内联。下面我便列举即时编译器的部分内联规则。（其他的特殊规则，如自动拆箱总会被内联、Throwable 类的方法不能被其他类中的方法所内联，你可以直接参考JDK 的源代码。）
+		- http://hg.openjdk.java.net/jdk/jdk/file/da387726a4f5/src/hotspot/share/opto/bytecodeInfo.cpp#l197
+	- 内联详解
+		- 包含内联信息来自哪里
+		- https://wiki.openjdk.java.net/display/HotSpot/Server+Compiler+Inlining+Messages
+	- `-XX:+PrintInlining`
+	- `-XX:+PrintGC -Dsun.reflect.noInflation=true  -XX:+UnlockDiagnosticVMOptions -XX:+PrintInlining`
+
+5. C2 编译器 
+
+	- C2 IR Graph and Nodes
+		- https://wiki.openjdk.java.net/display/HotSpot/C2+IR+Graph+and+Nodes
+	- `PrintIdeal`
+		- Error: VM option 'PrintIdeal' is notproduct and is available only in debug version of VM.
+
+6. CallerSensitive
+	
+	- 调用方敏感方法根据其直接调用方的类来改变其行为。它通过调用该sun.reflect.Reflection.getCallerClass方法来发现其调用者的类。
+	- 为了堵住漏洞用的。曾经有黑客通过构造双重反射来提升权限
+		- https://stackoverflow.com/questions/22626808/what-does-the-sun-reflect-callersensitive-annotation-mean
+		- https://www.jianshu.com/p/aec1745196d8
+
+7. 远程连接工具
+
+	- teamviewer
+	- xshell
+	- xftp
+
+8. Method 类中有个 isBridge 方法
+
+	- true if and only if this method is a bridge method as defined by the Java Language Specification.
+	- `public boolean isBridge() {return (getModifiers() & Modifier.BRIDGE) != 0;}`
+
+
+9. java 实例化对象
+
+	- new
+	- 反射 newInstance
+	- clone
+		- jvm 内部实现, 并不会调用构造器, 直接复制byte数组
+		- https://www.zhihu.com/question/63667745/answer/224396818
+	- 序列化/反序列化
+	- 参考
+		- https://stackoverflow.com/questions/3707612/cloning-vs-instantiating-a-new-class
+		- 
+
+10. apache commons
+
+	- 深克隆/拷贝（deep clone/copy）： SerializationUtils
+	- 浅克隆/拷贝（shallow clone/copy）：BeanUtils
+
+
+11. jvm 中的 array 是怎么实现的?
+
+12. 通过复制 构造函数代替 clone
+	- ```public Person(Person original) {
+    this.id = original.id + 1;
+    this.name = new String(original.name);
+    this.city = new City(original.city);
+}```
+	- https://dzone.com/articles/java-cloning-copy-constructor-vs-cloning
+	- 优势
+		- 不需要实现接口/抛出异常
+		- 不需要类型转换
+		- 可以修改 final 字段
+		- 可以加入初始化逻辑
+		- 不需要父类做任何事情
+
+13. 柯里化
+
+	- 柯里化（英語：Currying），又译为卡瑞化或加里化，是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。
+
+
+
 
 
