@@ -5683,6 +5683,11 @@ public class Foo implements IFoo {
 10. 新建对象
 
 	- 在 Java 程序中，我们拥有多种新建对象的方式。除了最为常见的 new 语句之外，我们还可以通过反射机制、Object.clone 方法、反序列化以及 Unsafe.allocateInstance 方法来新建对象。
+	- new
+	- 反射
+	- Object.clone
+	- 反序列化
+	- Unsafe.allocateInstance 
 
 11. 反射性能优化
 	
@@ -6392,7 +6397,68 @@ Code:
 	- https://github.com/ojdkbuild/ojdkbuild
 
 
+## 2019.11.5
+
+1. 人的皮肤需要呼吸么
+	
+	- 可以
+
+2. jsr 292 invokedynamic
+
+	- https://www.zhihu.com/question/40427344
+
+3. java 实现 柯里化
+
+	- MethodHandle.bindTo
+
+4. invokeExact, invoke, invokeWithArguments
+
+	- https://stackoverflow.com/questions/16005824/some-basic-questions-about-methodhandle-api
 
 
+5. 使用 methodHandle 的步骤
+	- Creating the lookup
+		- 创建提供对公共方法的访问的查找
+			- `MethodHandles.Lookup publicLookup = MethodHandles.publicLookup()`;
+		- 还可以访问私有/protected 方法
+			- MethodHandles.Lookup publicLookup = MethodHandles.lookup();
+	- Creating the method type
+	- Finding the method handle
+	- Invoking the method handle
+	- https://www.baeldung.com/java-method-handles
 
+
+6. methodHandle 和 classloader
+
+7. 面向对象编程
+ 
+	- 柯里化 currying 咖喱化hah
+	- 抽象了类似行为的方法(函数)
+	- 我们就写一个类，但是通过构造函数，把一份代码，构造出了行为稍微有点不同的两个实例供我们使用，这时候名词来了，不能进行实例化微调化的类，叫做静态类，函数们的行为是固定的。不能实例化的类，其实只是函数们的一个集合归纳，只是对函数进行了整理，功能的强大和编码的自由灵活度是不够的。能够进行实例化，变化出各种行为各自不大一样的实例的类，我们一般就把它们叫做类了，因为最常见。
+	- https://www.zhihu.com/question/27468564/answer/101951302
+
+8. 阿里面经
+
+	- https://developer.aliyun.com/article/717121?spm=a1z389.11499242.0.0.65452413ilSCX3&utm_content=g_1000084478
+
+9. invokeExact 实现
+
+	- -XX:+ShowHiddenFrames 打印被 Java 虚拟机隐藏了的栈信息时
+
+10. 关闭逃逸分析
+
+	- -XX:-DoEscapeAnalysis
+
+
+11. shijie 
+
+	- Invokedynamic 和 MethodHandle的缘由
+		- https://zhuanlan.zhihu.com/p/26389041
+	- JSR292: InvokeDynamic和MethodHandle的优化
+		- https://zhuanlan.zhihu.com/p/30936412
+
+12. GPU jvm? 好像有点吊? 
+
+	- 榨干机器硬件性能: JVM＆GPU
+	- https://zhuanlan.zhihu.com/p/36284998
 
