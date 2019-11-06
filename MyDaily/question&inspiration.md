@@ -4915,6 +4915,8 @@ tar -xvf filename. tar.gz tar -xvf filename.
 5. jdk1.8中，string是标准的不可变类，但其hash值没有用final修饰，其hash值计算是在第一次调用hashcode方法时计算，但方法没有加锁，变量也没用volatile关键字修饰就无法保证其可见性。当有多个线程调用的时候，hash值可能会被计算多次，虽然结果是一样的，但jdk的作者为什么不将其优化一下呢？
 
 	- 作者回复: 这些“优化”在通用场景可能变成持续的成本，volatile read是有明显开销的；
+	- 虽然会浪费一些 cpu 资源, 但是它是安全的
+	- https://stackoverflow.com/questions/41704185/is-javas-string-hashcode-function-thread-safe-if-its-cache-setter-does-not-us
 
 如果冲突并不多见，read才是更普遍的，简单的cache是更高效的
 	- 我比较同意作者的观点, 脱离实际的优化都是瞎扯淡=.=
@@ -6461,4 +6463,79 @@ Code:
 
 	- 榨干机器硬件性能: JVM＆GPU
 	- https://zhuanlan.zhihu.com/p/36284998
+
+
+## 2019.11.6
+
+
+1. asm 检测 java 字节码
+	
+	- asm 教程
+	- http://web.cs.ucla.edu/~msb/cs239-tutorial/
+
+2. asm 的应用
+
+	- groovy, kotlin 的编译器中
+	- 测试工具 Cobertura, JaCoCo  字节码注入实现的监控工具
+	- lambda 表达式的适配器类, 通过 asm 动态生成
+
+3. 访问者模式
+
+	- 一种将数据操作和数据结构分离的设计模式
+	- 应用
+		- asm 使用
+		- https://time.geekbang.org/column/article/12423
+	- https://www.jianshu.com/p/1f1049d0a0f4
+
+4. jvm 中的重排序
+
+	- 即时编译器的重排序
+		- 编译器在不改变单线程语义的前提下, 重新安排语句的执行顺序
+	- 处理器的乱序执行
+		- 现代处理器采用指令并行计数, ILP , 多条指令重叠执行, 如果不存在数据依赖, cpu 会改变对应的机器指令的执行顺序
+	- 内存系统的重排序。
+		- 读写缓存
+
+5. happens-before 
+
+	- 如果操作 X happens-before 操作 Y，那么 X 的执行结果对于 Y 可见。
+
+6. java 内存模型 JMM
+
+	- https://static001.infoq.cn/resource/ebook/6a/ee/6a9197c0714178e7c50c47e821a571ee.pdf
+	- JMM 决定了一个线程对共享变量的写入何时对另一个线程可见
+		- JMM 定义了线程和主内存的抽象关系
+		- https://open-chen.oss-cn-hangzhou.aliyuncs.com/open/blog/2019/11/JMM/e9270c21022143366f07e86f809369b.png
+	- 屏障类型
+		- 读写
+		- 读读
+		- 写写
+		- 写读
+			- 将处理器写缓冲区的数据全部刷新到内存
+	- happens-before  JSR 133
+		- 单线程中
+		- 监视器锁规则: 对一个监视器的解锁, happens-before 于随后对这个 monitor 的加锁
+		- volatile: 对volatile的写操作 happens-before 于后续 对 volatile 的读
+		- 传递性
+	- JSR 133 cookbook
+		- http://gee.cs.oswego.edu/dl/jmm/cookbook.html
+
+
+7. volatile 单例模式
+
+	- 问题出在 new 操作上，我们以为的 new 操作应该是：
+		- 分配一块内存 M；在内存 M 上初始化 Singleton 对象；然后 M 的地址赋值给 instance 变量。
+	- 但是实际上优化后的执行路径却是这样的：
+		- 分配一块内存 M；将 M 的地址赋值给 instance 变量；最后在内存 M 上初始化 Singleton 对象。
+	- 所谓的单例模式, 就是安全发布的问题
+
+
+8. jcstress 
+
+	- 多线程测试
+	- 测试单例模式, 为什么能单例
+
+
+
+
 
