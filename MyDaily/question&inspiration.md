@@ -6536,6 +6536,135 @@ Code:
 	- 测试单例模式, 为什么能单例
 
 
+## 2019.11.7
+
+1. String hashCode reorder 问题
+	
+	- 参考:
+		- 讨论
+			- https://stackoverflow.com/questions/12554570/instructions-reordering-in-java-jvm
+		- 原始blog
+			- http://jeremymanson.blogspot.com/2008/12/benign-data-races-in-java.html
+	- 使用局部变量, 减少了多次读取可能竞争的变量, 性能可能更好
+
+
+2. 双重检查锁 不工作的原因
+
+	- http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html
+
+3. Synchronization and the Java Memory Model
+
+	- Doug lea 并发大神, 没听过? 去看看jdk concurrent 包的 author?
+	- http://gee.cs.oswego.edu/dl/cpj/jmm.html
+
+
+4. as-if-serial semantics 串行语义
+
+	- 不管怎么重排序, 单线程执行的结果不能改变
+
+5. If anyone can point me to the right direction, I would really appreciate it.
+
+	- 如果有人能指出正确的方向，我将不胜感激。
+
+6. 单例模式
+	
+	- 懒汉式
+		- 双重锁
+		- 静态内部类
+	- 饿汉式
+		- 静态变量
+	- https://www.iteye.com/blog/qindongliang-2426430
+
+7. 双重检查锁定
+
+	- https://stackoverflow.com/questions/29883403/double-checked-locking-without-volatile
+	- http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html
+	- 美团 https://tech.meituan.com/2014/09/23/java-memory-reordering.html
+
+8. 如何重现双重检查锁中, 不加 volatile 时获取实例为 null 的情况
+
+9. jvm cpu profiler
+	
+	- JProfiler
+	- https://tech.meituan.com/2019/10/10/jvm-cpu-profiler.html
+
+
+## 2019.11.8
+
+
+1. java 对象头详解
+
+	- https://www.jianshu.com/p/3d38cba67f8b
+	- https://stackoverflow.com/questions/26357186/what-is-in-java-object-header
+	- http://hg.openjdk.java.net/jdk8/jdk8/hotspot/file/87ee5ee27509/src/share/vm/oops/markOop.hpp
+
+|------------------------------------------------------------------------------|--------------------|
+|                                  Mark Word (64 bits)                         |       State        |
+|------------------------------------------------------------------------------|--------------------|
+| unused:25 | identity_hashcode:31 | unused:1 | age:4 | biased_lock:1 | lock:2 |       Normal       |
+|------------------------------------------------------------------------------|--------------------|
+| thread:54 |       epoch:2        | unused:1 | age:4 | biased_lock:1 | lock:2 |       Biased       |
+|------------------------------------------------------------------------------|--------------------|
+|                       ptr_to_lock_record:62                         | lock:2 | Lightweight Locked |
+|------------------------------------------------------------------------------|--------------------|
+|                     ptr_to_heavyweight_monitor:62                   | lock:2 | Heavyweight Locked |
+|------------------------------------------------------------------------------|--------------------|
+|                                                                     | lock:2 |    Marked for GC   |
+|------------------------------------------------------------------------------|--------------------|
+
+
+- biased_lock
+	- 对象是否启用偏向锁标记，只占1个二进制位。为1时表示对象启用偏向锁，为0时表示对象没有偏向锁。
+- age
+	- 4位的Java对象年龄。在GC中，如果对象在Survivor区复制一次，年龄增加1。当对象达到设定的阈值时，将会晋升到老年代。默认情况下，并行GC的年龄阈值为15，并发GC的年龄阈值为6。由于age只有4位，所以最大值为15，这就是-XX:MaxTenuringThreshold选项最大值为15的原因。
+- identity_hashcode
+	- 25位的对象标识Hash码，采用延迟加载技术。调用方法System.identityHashCode()计算，并会将结果写到该对象头中。当对象被锁定时，该值会移动到管程Monitor中。
+- thread
+	- 持有偏向锁的线程ID。
+- epoch
+	- 偏向年龄
+- ptr_to_lock_record
+	- 指向栈中锁记录的指针。
+- ptr_to_heavyweight_monitor
+	- 指向管程Monitor的指针。
+
+
+2. 撤销偏向锁问题导致GC 时间变长
+
+	- https://www.zhihu.com/question/57722838
+	- synchronized 指南
+		- 轻量级锁加锁过程
+		- 偏向锁获取过程
+		- https://www.cnblogs.com/paddix/p/5405678.html
+
+3. wait/notify
+
+	- Synchronized的语义底层是通过一个monitor的对象来完成，其实wait/notify等方法也依赖于monitor对象，这就是为什么只有在同步的块或者方法中才能调用wait/notify等方法，否则会抛出java.lang.IllegalMonitorStateException的异常的原因。
+	- wait
+		- Causes the current thread to wait until another thread invokes the notify() method or the notifyAll() method for this object.
+	- notify
+		- `void notify()`
+			- Wakes up a single thread that is waiting on this object's monitor.
+		- `void notifyAll()`
+			- Wakes up all threads that are waiting on this object's monitor.
+	- 参考:
+		- https://www.cnblogs.com/paddix/p/5381958.html
+
+4. java hashcode 必须为 25bit ? 
+
+	- 32位 对象头中的 hash 为 25 bit
+	- 64为 对象头中的 hash 为 31 bit
+	- 以内存计算的HashCode的方式“为“identity hash code”
+	- 存储在对象头中的hashcode 都是 identity hash code 所以不会溢出
+	- 参考
+		- https://juejin.im/post/5c3aa2726fb9a04a0c2ead0b
+
+5. 调用 Object.hashCode() 会关闭该对象的偏向锁
+	
+	- https://blogs.oracle.com/dave/biased-locking-in-hotspot
+
+6. 20次, 40次在哪里记录的?
+
 
 
 
