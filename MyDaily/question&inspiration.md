@@ -6389,6 +6389,12 @@ Code:
 
 	- 柯里化（英語：Currying），又译为卡瑞化或加里化，是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。
 
+## 2109.11.2
+
+1. openjdk7
+
+	- 下载
+		- gitee.com 下载 openjdk7 压缩包
 
 ## 2019.11.4
 
@@ -6461,4 +6467,29 @@ Code:
 
 	- 榨干机器硬件性能: JVM＆GPU
 	- https://zhuanlan.zhihu.com/p/36284998
+
+
+## 2019.11.5 晚上
+
+1. 美团 高性能队列 disruptor
+
+	- https://tech.meituan.com/2016/11/18/disruptor.html
+	- log4j2 也使用了里面的技术
+
+2. get java object size
+
+	- jol java object layout
+		- `ClassLayout.parseInstance(object).toPrintable();`
+	- 参考
+		- https://stackoverflow.com/questions/52353/in-java-what-is-the-best-way-to-determine-the-size-of-an-object
+		- https://shipilev.net/blog/2014/heapdump-is-a-lie/
+	- jol samples
+		- http://hg.openjdk.java.net/code-tools/jol/file/tip/jol-samples/src/main/java/org/openjdk/jol/samples/
+	- `-XX:-UseCompressedOops -XX:-RestrictContended`
+	- jol NB!!!!
+	- java9 中运行 jol
+		- https://stackoverflow.com/questions/46583083/how-to-run-jol-on-java-9
+
+
+
 
