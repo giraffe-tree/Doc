@@ -4915,6 +4915,8 @@ tar -xvf filename. tar.gz tar -xvf filename.
 5. jdk1.8中，string是标准的不可变类，但其hash值没有用final修饰，其hash值计算是在第一次调用hashcode方法时计算，但方法没有加锁，变量也没用volatile关键字修饰就无法保证其可见性。当有多个线程调用的时候，hash值可能会被计算多次，虽然结果是一样的，但jdk的作者为什么不将其优化一下呢？
 
 	- 作者回复: 这些“优化”在通用场景可能变成持续的成本，volatile read是有明显开销的；
+	- 虽然会浪费一些 cpu 资源, 但是它是安全的
+	- https://stackoverflow.com/questions/41704185/is-javas-string-hashcode-function-thread-safe-if-its-cache-setter-does-not-us
 
 如果冲突并不多见，read才是更普遍的，简单的cache是更高效的
 	- 我比较同意作者的观点, 脱离实际的优化都是瞎扯淡=.=
@@ -6489,6 +6491,206 @@ Code:
 	- jol NB!!!!
 	- java9 中运行 jol
 		- https://stackoverflow.com/questions/46583083/how-to-run-jol-on-java-9
+
+## 2019.11.6
+
+
+1. asm 检测 java 字节码
+	
+	- asm 教程
+	- http://web.cs.ucla.edu/~msb/cs239-tutorial/
+
+2. asm 的应用
+
+	- groovy, kotlin 的编译器中
+	- 测试工具 Cobertura, JaCoCo  字节码注入实现的监控工具
+	- lambda 表达式的适配器类, 通过 asm 动态生成
+
+3. 访问者模式
+
+	- 一种将数据操作和数据结构分离的设计模式
+	- 应用
+		- asm 使用
+		- https://time.geekbang.org/column/article/12423
+	- https://www.jianshu.com/p/1f1049d0a0f4
+
+4. jvm 中的重排序
+
+	- 即时编译器的重排序
+		- 编译器在不改变单线程语义的前提下, 重新安排语句的执行顺序
+	- 处理器的乱序执行
+		- 现代处理器采用指令并行计数, ILP , 多条指令重叠执行, 如果不存在数据依赖, cpu 会改变对应的机器指令的执行顺序
+	- 内存系统的重排序。
+		- 读写缓存
+
+5. happens-before 
+
+	- 如果操作 X happens-before 操作 Y，那么 X 的执行结果对于 Y 可见。
+
+6. java 内存模型 JMM
+
+	- https://static001.infoq.cn/resource/ebook/6a/ee/6a9197c0714178e7c50c47e821a571ee.pdf
+	- JMM 决定了一个线程对共享变量的写入何时对另一个线程可见
+		- JMM 定义了线程和主内存的抽象关系
+		- https://open-chen.oss-cn-hangzhou.aliyuncs.com/open/blog/2019/11/JMM/e9270c21022143366f07e86f809369b.png
+	- 屏障类型
+		- 读写
+		- 读读
+		- 写写
+		- 写读
+			- 将处理器写缓冲区的数据全部刷新到内存
+	- happens-before  JSR 133
+		- 单线程中
+		- 监视器锁规则: 对一个监视器的解锁, happens-before 于随后对这个 monitor 的加锁
+		- volatile: 对volatile的写操作 happens-before 于后续 对 volatile 的读
+		- 传递性
+	- JSR 133 cookbook
+		- http://gee.cs.oswego.edu/dl/jmm/cookbook.html
+
+
+7. volatile 单例模式
+
+	- 问题出在 new 操作上，我们以为的 new 操作应该是：
+		- 分配一块内存 M；在内存 M 上初始化 Singleton 对象；然后 M 的地址赋值给 instance 变量。
+	- 但是实际上优化后的执行路径却是这样的：
+		- 分配一块内存 M；将 M 的地址赋值给 instance 变量；最后在内存 M 上初始化 Singleton 对象。
+	- 所谓的单例模式, 就是安全发布的问题
+
+
+8. jcstress 
+
+	- 多线程测试
+	- 测试单例模式, 为什么能单例
+
+
+## 2019.11.7
+
+1. String hashCode reorder 问题
+	
+	- 参考:
+		- 讨论
+			- https://stackoverflow.com/questions/12554570/instructions-reordering-in-java-jvm
+		- 原始blog
+			- http://jeremymanson.blogspot.com/2008/12/benign-data-races-in-java.html
+	- 使用局部变量, 减少了多次读取可能竞争的变量, 性能可能更好
+
+
+2. 双重检查锁 不工作的原因
+
+	- http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html
+
+3. Synchronization and the Java Memory Model
+
+	- Doug lea 并发大神, 没听过? 去看看jdk concurrent 包的 author?
+	- http://gee.cs.oswego.edu/dl/cpj/jmm.html
+
+
+4. as-if-serial semantics 串行语义
+
+	- 不管怎么重排序, 单线程执行的结果不能改变
+
+5. If anyone can point me to the right direction, I would really appreciate it.
+
+	- 如果有人能指出正确的方向，我将不胜感激。
+
+6. 单例模式
+	
+	- 懒汉式
+		- 双重锁
+		- 静态内部类
+	- 饿汉式
+		- 静态变量
+	- https://www.iteye.com/blog/qindongliang-2426430
+
+7. 双重检查锁定
+
+	- https://stackoverflow.com/questions/29883403/double-checked-locking-without-volatile
+	- http://www.cs.umd.edu/~pugh/java/memoryModel/DoubleCheckedLocking.html
+	- 美团 https://tech.meituan.com/2014/09/23/java-memory-reordering.html
+
+8. 如何重现双重检查锁中, 不加 volatile 时获取实例为 null 的情况
+
+9. jvm cpu profiler
+	
+	- JProfiler
+	- https://tech.meituan.com/2019/10/10/jvm-cpu-profiler.html
+
+
+## 2019.11.8
+
+
+1. java 对象头详解
+
+	- https://www.jianshu.com/p/3d38cba67f8b
+	- https://stackoverflow.com/questions/26357186/what-is-in-java-object-header
+	- http://hg.openjdk.java.net/jdk8/jdk8/hotspot/file/87ee5ee27509/src/share/vm/oops/markOop.hpp
+
+|------------------------------------------------------------------------------|--------------------|
+|                                  Mark Word (64 bits)                         |       State        |
+|------------------------------------------------------------------------------|--------------------|
+| unused:25 | identity_hashcode:31 | unused:1 | age:4 | biased_lock:1 | lock:2 |       Normal       |
+|------------------------------------------------------------------------------|--------------------|
+| thread:54 |       epoch:2        | unused:1 | age:4 | biased_lock:1 | lock:2 |       Biased       |
+|------------------------------------------------------------------------------|--------------------|
+|                       ptr_to_lock_record:62                         | lock:2 | Lightweight Locked |
+|------------------------------------------------------------------------------|--------------------|
+|                     ptr_to_heavyweight_monitor:62                   | lock:2 | Heavyweight Locked |
+|------------------------------------------------------------------------------|--------------------|
+|                                                                     | lock:2 |    Marked for GC   |
+|------------------------------------------------------------------------------|--------------------|
+
+
+- biased_lock
+	- 对象是否启用偏向锁标记，只占1个二进制位。为1时表示对象启用偏向锁，为0时表示对象没有偏向锁。
+- age
+	- 4位的Java对象年龄。在GC中，如果对象在Survivor区复制一次，年龄增加1。当对象达到设定的阈值时，将会晋升到老年代。默认情况下，并行GC的年龄阈值为15，并发GC的年龄阈值为6。由于age只有4位，所以最大值为15，这就是-XX:MaxTenuringThreshold选项最大值为15的原因。
+- identity_hashcode
+	- 25位的对象标识Hash码，采用延迟加载技术。调用方法System.identityHashCode()计算，并会将结果写到该对象头中。当对象被锁定时，该值会移动到管程Monitor中。
+- thread
+	- 持有偏向锁的线程ID。
+- epoch
+	- 偏向年龄
+- ptr_to_lock_record
+	- 指向栈中锁记录的指针。
+- ptr_to_heavyweight_monitor
+	- 指向管程Monitor的指针。
+
+
+2. 撤销偏向锁问题导致GC 时间变长
+
+	- https://www.zhihu.com/question/57722838
+	- synchronized 指南
+		- 轻量级锁加锁过程
+		- 偏向锁获取过程
+		- https://www.cnblogs.com/paddix/p/5405678.html
+
+3. wait/notify
+
+	- Synchronized的语义底层是通过一个monitor的对象来完成，其实wait/notify等方法也依赖于monitor对象，这就是为什么只有在同步的块或者方法中才能调用wait/notify等方法，否则会抛出java.lang.IllegalMonitorStateException的异常的原因。
+	- wait
+		- Causes the current thread to wait until another thread invokes the notify() method or the notifyAll() method for this object.
+	- notify
+		- `void notify()`
+			- Wakes up a single thread that is waiting on this object's monitor.
+		- `void notifyAll()`
+			- Wakes up all threads that are waiting on this object's monitor.
+	- 参考:
+		- https://www.cnblogs.com/paddix/p/5381958.html
+
+4. java hashcode 必须为 25bit ? 
+
+	- 32位 对象头中的 hash 为 25 bit
+	- 64为 对象头中的 hash 为 31 bit
+	- 以内存计算的HashCode的方式“为“identity hash code”
+	- 存储在对象头中的hashcode 都是 identity hash code 所以不会溢出
+	- 参考
+		- https://juejin.im/post/5c3aa2726fb9a04a0c2ead0b
+
+5. 调用 Object.hashCode() 会关闭该对象的偏向锁
+	
+	- https://blogs.oracle.com/dave/biased-locking-in-hotspot
+
+6. 20次, 40次在哪里记录的?
 
 
 
