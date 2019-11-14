@@ -6697,7 +6697,12 @@ Code:
 ## 2019.11.13晚
 
 1. null 是对象么
-
+	
+	- null is special 
+	- null 是一种特殊的类型
+	- 如果Object为null，它将支持java.lang.Object诸如的方法equals()。但是，事实并非如此-对null的任何方法调用都会导致NullPointerException。
+	- null 没有名称, 也不能强制转换
+		- https://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html#jls-4.1
 
 2. 
 
