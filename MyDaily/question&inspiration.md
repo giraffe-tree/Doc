@@ -3838,6 +3838,7 @@ func tracefile(str_content string)  {
 	
 	- Docker容器日志管理最佳实践
 		- https://www.cnblogs.com/operationhome/p/10907591.html
+	- `--log-opt max-file=3 --log-opt max-size=50m`
 
 2. cookie 在 springboot 中的使用
 
@@ -6693,6 +6694,27 @@ Code:
 6. 20次, 40次在哪里记录的?
 
 
+## 2019.11.13
+
+
+1. spring boot 常用配置
+
+	- redis
+	- mysql
+	- 接口统一返回格式 
+		- `Date` -> timestamp
+		- BigDecimal -> 取两位
+		- JacksonConfig
+	- logging
+	- Error 处理
+		- ProcessExceptionHandler
+		- ErrorController
+	- inteceptor
+	- filter
+	- ExecutorService
+	- 自定义http参数名
+		- 转换 @ParamName
+	- swagger
 
 ## 2019.11.13晚
 
@@ -6704,7 +6726,73 @@ Code:
 	- null 没有名称, 也不能强制转换
 		- https://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html#jls-4.1
 
-2. 
 
+## 2019.11.14
+
+1. linux oom killer
+
+	- http://senlinzhan.github.io/2017/07/03/oom-killer/
+
+2. Can't find dependent libraries
+
+	- 注意依赖顺序, 以倒序load
+	- https://stackoverflow.com/questions/1087054/jni-dependent-libraries
+
+3. docker id 如何避免不重复
+
+	- 
+
+
+## 2019.11.15
+
+1. 编译 openjdk
+	
+	- 环境: win10 + vs2019
+	- 步骤
+		- vs2019 安装
+		- cygwin 安装
+			- binuitls  2.29-1
+			- cpio 2.11-3
+			- m4 1.4.18-1
+			- make 4.2.1-2
+			- procps-ng 3.3.15-1
+			- unzip 6.0-17 
+			- zip 3.0-12
+		- openjdk7 openjdk8
+			- https://github.com/ojdkbuild/ojdkbuild
+		- freetype 2.7
+			- https://download.savannah.gnu.org/releases/freetype/
+		- 
+	- 参考
+		- Win10下编译OpenJDK8
+			- https://www.cnblogs.com/jpfss/p/11641045.html
+		- WINDOWS7平台下编译OpenJDK8和Visual Studio 单步调试HotSpot JVM
+			- https://www.javatt.com/p/50071
+		- clion + centos7 远程调试
+			- 作者在 windows 下编译遇到一堆错误....然后放弃哈哈
+			- https://www.cnblogs.com/jhxxb/p/11094578.html
+		- vscode调试OpenJDK
+			- https://zhuanlan.zhihu.com/p/50220757
+		- openjdk build readme
+			- https://hg.openjdk.java.net/jdk8u/jdk8u/raw-file/945f4ae40e43/README-builds.html
+		- ubuntu 上编译 java
+			- https://my.oschina.net/liebrother/blog/3115104
+		- debug 到 JVM 
+			- https://my.oschina.net/liebrother/blog/3116034
+
+
+2. jpa更新操作，数据库更新了，但是查询的还是旧的数据
+
+	- flush
+	- `entityManager.clear();`
+	- https://blog.csdn.net/chenjianhuideyueding/article/details/88426271
+
+3. nginx 同端口转发不同host
+
+
+4. windows 连接 ubuntu
+
+	- 一次成功 yeah!
+	- https://askubuntu.com/questions/592537/can-i-access-ubuntu-from-windows-remotely/592544#592544
 
 
