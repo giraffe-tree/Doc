@@ -6796,3 +6796,86 @@ Code:
 	- https://askubuntu.com/questions/592537/can-i-access-ubuntu-from-windows-remotely/592544#592544
 
 
+
+## 2019.11.18
+
+1. nginx 只在启动时查找有哪些配置文件, 如果在之后新增了配置文件, 仅仅使用 `nginx -s reload` 将不起作用, 需要将 nginx 完全重启后, 才能使用
+
+	- nginx 完全重启
+		- `nginx -s quit`
+		- `nginx`
+
+2. jmeter 使用 
+
+	- 不要使用GUI运行压力测试，GUI仅用于压力测试的创建和调试；执行压力测试请不要使用GUI。使用下面的命令来执行测试：
+	- `jmeter -n -t [jmx file] -l [results file] -e -o [Path to web report folder]`
+	- GUI 使用步骤
+		1.创建线程组
+		2. 配置文件
+			- http 请求默认值 协议地址端口
+			- http 信息头管理器 
+		3. 采样器 - 构造http请求
+			- 采样器 - http 请求
+		4. 添加断言
+			- 响应断言
+		5. 添加查看结果树
+		6. 添加汇总报告
+
+	- https://www.cnblogs.com/stulzq/p/8971531.html
+
+
+3. java native memory usage
+	- 添加到命令行： `-XX:NativeMemoryTracking=summary`
+	- 然后启动 `jcmd <PID> VM.native_memory`
+	- https://stackoverflow.com/questions/2756798/java-native-memory-usage
+
+4. 堆外内存泄漏分析
+	
+	- NMT, pmap, 系统工具
+	- https://mp.weixin.qq.com/s/73whP7E3SIB5mn_TLrqT_w
+
+5. pmap
+
+	- 查看进程地址空间
+
+```
+chen:~# pmap --help
+
+Usage:
+ pmap [options] PID [PID ...]
+
+Options:
+ -x, --extended              show details
+ -X                          show even more details
+            WARNING: format changes according to /proc/PID/smaps
+ -XX                         show everything the kernel provides
+ -c, --read-rc               read the default rc
+ -C, --read-rc-from=<file>   read the rc from file
+ -n, --create-rc             create new default rc
+ -N, --create-rc-to=<file>   create new rc to file
+            NOTE: pid arguments are not allowed with -n, -N
+ -d, --device                show the device format
+ -q, --quiet                 do not display header and footer
+ -p, --show-path             show path in the mapping
+ -A, --range=<low>[,<high>]  limit results to the given range
+
+ -h, --help     display this help and exit
+ -V, --version  output version information and exit
+```
+
+
+6.  arthas
+	
+	- 教程
+		- https://alibaba.github.io/arthas/arthas-tutorials?language=cn
+	- `docker exec -it  ${containerId} /bin/bash -c "wget https://alibaba.github.io/arthas/arthas-boot.jar && java -jar arthas-boot.jar"`
+	- 项目地址
+		- https://alibaba.github.io/arthas/
+
+7. 浏览器中在线 docker 虚拟机环境
+
+	- https://www.katacoda.com/
+
+
+
+
