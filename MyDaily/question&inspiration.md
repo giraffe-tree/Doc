@@ -6868,7 +6868,12 @@ Options:
 	
 	- 教程
 		- https://alibaba.github.io/arthas/arthas-tutorials?language=cn
-	- `docker exec -it  ${containerId} /bin/bash -c "wget https://alibaba.github.io/arthas/arthas-boot.jar && java -jar arthas-boot.jar"`
+	- 启动
+		- `docker exec -it  ${containerId} /bin/bash -c "wget https://alibaba.github.io/arthas/arthas-boot.jar && java -jar arthas-boot.jar"`
+		- `docker exec -it async-aiqi /bin/bash -c "java -jar arthas-boot.jar"`
+	- 常用命令
+		- dashboard
+		- 
 	- 项目地址
 		- https://alibaba.github.io/arthas/
 
@@ -6876,6 +6881,35 @@ Options:
 
 	- https://www.katacoda.com/
 
+
+## 2019.11.19
+
+1. jni 的额外开销
+	
+	- 概述
+		- 进入C函数时, 对引用参数句柄化
+		- 调整参数位置
+		- C函数返回时, 清理线程私有句柄块
+	- https://stackoverflow.com/questions/24746776/what-does-a-jvm-have-to-do-when-calling-a-native-method
+
+2. 常用的 java 工具
+
+	- arthas NB
+	- jmeter
+	- jstat
+	- jcmd
+	- jvisualvm
+	- jps
+	- jconsole
+
+3. how-to-debug-leak-in-native-memory-on-jvm
+	- https://stackoverflow.com/questions/38153381/how-to-debug-leak-in-native-memory-on-jvm
+
+4. 观察 jni global reference 引起的 memory leak
+
+	- `jstack {pid} | grep JNI`
+	- 案例
+		 - http://blog.2baxb.me/archives/918
 
 
 
