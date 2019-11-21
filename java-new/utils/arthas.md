@@ -1,9 +1,11 @@
-# arthas
+# arthas 使用小结
 
 ## 概述
 
-arthas NB 就是了哈哈[滑稽]
+arthas(阿尔塞斯) 可能是我见过的最强大的 java 诊断工具了. arthas NB 就是了哈哈[手动滑稽] 
 
+- 项目地址
+	- https://github.com/alibaba/arthas
 - 进阶命令
 	- https://alibaba.github.io/arthas/advanced-use.html
 
@@ -36,7 +38,6 @@ arthas NB 就是了哈哈[滑稽]
 	- `tt -t me.giraffetree.demo.controller.CoreController testMethodName`
 - classloader
 	- 了解当前系统中有多少类加载器，以及每个加载器加载的类数量，帮助您判断是否有类加载器泄露。
-- 
 - sysprop
 	- sysprop 可以打印所有的System Properties信息。
 	- 也可以指定单个key： sysprop java.version
@@ -87,11 +88,12 @@ arthas NB 就是了哈哈[滑稽]
 
 ## docker
 
-### 即使使用
+### 即时使用
 
-docker exec -it async-aiqi /bin/bash -c "java -jar arthas-boot.jar"
+```
+docker exec -it ${containerId} /bin/bash -c "java -jar arthas-boot.jar"
 docker exec -it  ${containerId} /bin/bash -c "wget https://alibaba.github.io/arthas/arthas-boot.jar && java -jar arthas-boot.jar"
-
+```
 
 ### 镜像
 

@@ -6901,6 +6901,7 @@ Options:
 	- jvisualvm
 	- jps
 	- jconsole
+	- jstack
 
 3. how-to-debug-leak-in-native-memory-on-jvm
 	- https://stackoverflow.com/questions/38153381/how-to-debug-leak-in-native-memory-on-jvm
@@ -6910,6 +6911,45 @@ Options:
 	- `jstack {pid} | grep JNI`
 	- 案例
 		 - http://blog.2baxb.me/archives/918
+
+
+## 2019.11.20
+
+1. top 命令显示中各个名称的含义
+	- VIRT：virtual memory usage 虚拟内存
+		- 1、进程“需要的”虚拟内存大小，包括进程使用的库、代码、数据等
+		- 2、假如进程申请100m的内存，但实际只使用了10m，那么它会增长100m，而不是实际的使用量
+	- RES：resident memory usage 常驻内存
+	- SHR：shared memory 共享内存
+		- 计算某个进程所占的物理内存大小公式：RES – SHR
+	- 操作:
+		- f 进入行列定义
+	- 参考
+		- https://javawind.net/p131
+
+
+2. why epoll not start ?
+
+	- `2019-11-20 18:37:18.424  INFO 7 --- [nio-7900-exec-4] io.lettuce.core.EpollProvider            : Starting without optional epoll library`
+	- `2019-11-20 18:37:18.426  INFO 7 --- [nio-7900-exec-4] io.lettuce.core.KqueueProvider           : Starting without optional kqueue library`
+
+## 2019.11.21
+
+1. java 外部gc
+
+	- `jcmd {pid} GC.run`
+	- 查看支持的命令
+		- `jcmd {pid} help` 
+	- jcmd 命令介绍
+		 -https://www.jianshu.com/p/388e35d8a09b
+
+2. windows 进程内存查看
+
+	- VMmap
+		- https://blog.csdn.net/weixin_42263483/article/details/86351590
+
+
+
 
 
 
