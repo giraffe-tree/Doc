@@ -6948,8 +6948,17 @@ Options:
 	- VMmap
 		- https://blog.csdn.net/weixin_42263483/article/details/86351590
 
+## 2019.11.22
+
+1. 星轨拍摄技巧
+
+	- https://asingleboat.top/?p=291
+
+2. 验证想法: 使用 debug jdk 用 vs 附加到进程
 
 
+3.  NoClassDefFoundError Could not initialize class
 
+	- JVM在加载类的时候，会初始化类里的静态变量，或执行静态块，如果这个时候抛出了异常，该类就会加载失败，那么以后任何使用到这个类的地方，都会抛出NoClassDefFoundError异常
 
 
