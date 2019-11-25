@@ -6962,3 +6962,51 @@ Options:
 	- JVM在加载类的时候，会初始化类里的静态变量，或执行静态块，如果这个时候抛出了异常，该类就会加载失败，那么以后任何使用到这个类的地方，都会抛出NoClassDefFoundError异常
 
 
+## 2019.11.25
+
+1. ReqestContextHolder 如何实现的?
+
+	- `ThreadLocal<RequestAttributes>`
+
+2. PDB files
+	
+	- Program Database File，程序数据库文件
+	- public Symbol Files (PDB)
+
+3. mysql group by day and count
+
+	- `SELECT year(created_time), month(created_time), day(created_time), count(*) FROM ecg_aiqi.xxx group by  year(created_time), month(created_time), day(created_time);`
+
+
+4. RequestContextHolder
+
+	- `HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        `
+       - https://www.cnblogs.com/Terry-Wu/p/9439126.html
+
+5. ojdkbuild 使用 windows 构建
+
+	- 参考:
+		- https://github.com/ojdkbuild/ojdkbuild/wiki/HowToBuild
+	- `git clone https://github.com/ojdkbuild/ojdkbuild`
+	- `cd ojdkbuild`
+	- `git checkout java-1.8.0-openjdk-debug-1.8.0.232-1.b09`
+	- `git submodule update --init`
+
+6. How to import the openjdk9 source code to visual studio 2017 after compilation in Windows 10l?
+
+	- https://stackoverflow.com/questions/51808317/how-to-import-the-openjdk9-source-code-to-visual-studio-2017-after-compilation-i
+
+	- To build VS Project Creator run the following command from the openjdk9 top directory:
+		- `make hotspot-ide-project`
+	- In my case, the generated VS project files are located in:
+		- `.../openjdk9/build/windows-x86_64-normal-server-slowdebug/ide/hotspot-visualstudio`
+
+7. 查看 .so 包中的函数
+
+	- 
+
+8. `java.lang.UnsatisfiedLinkError: Error looking up function 'effeXXX': /root/.cache/JNA/temp/jna1120004268870969086.tmp: undefined symbol: effeXXX`
+
+	- https://www.oschina.net/question/1791496_2192639
+
