@@ -7010,3 +7010,21 @@ Options:
 
 	- https://www.oschina.net/question/1791496_2192639
 
+## 2019.12.02
+
+1. 二维码是如何识别的?
+
+## 2019.12.03
+
+1. js button on image
+
+	- https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_button_on_image
+
+2. js download file 
+
+	- https://stackoverflow.com/questions/54626186/how-to-download-file-with-javascript
+
+
+
+
+
