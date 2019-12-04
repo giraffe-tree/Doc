@@ -7024,7 +7024,22 @@ Options:
 
 	- https://stackoverflow.com/questions/54626186/how-to-download-file-with-javascript
 
+## 2019.12.04
 
+1. log4j2 如何实现的
 
+	- 如何高速写日志
+
+2. 部分标记清除算法
+
+	- https://www.bbsmax.com/A/A2dmkqo7Je/
+
+3. 现代 jvm 的 垃圾回收中还有 引用计数么
+
+	- https://www.zhihu.com/question/30896688
+
+4. Java使用JNI调用C写的库时，使用malloc分配的内存是由谁来管理？
+
+	- https://www.zhihu.com/question/28250278/answer/40071228
 
 
