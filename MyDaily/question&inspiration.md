@@ -7042,4 +7042,68 @@ Options:
 
 	- https://www.zhihu.com/question/28250278/answer/40071228
 
+## 2019.12.05
 
+1. 单实例 mysql 更新行的 极限速度
+
+2. logstash 是做什么用的
+	
+	- Logstash是一个开源数据收集引擎，具有实时管道功能。Logstash可以动态地将来自不同数据源的数据统一起来，并将数据标准化到你所选择的目的地。
+	- https://www.cnblogs.com/cjsblog/p/9459781.html
+
+3. log 使用
+
+	- `SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".`
+	- `log4j:WARN No appenders could be found for logger`
+		- pom 中添加 log4j-slf4j-impl 依赖, 注意 scope
+
+```xml
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.10</version>
+        </dependency>
+
+        <!-- 日志 -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>3.4.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.29</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+```
+
+4. 如何优雅地关闭 log4j2
+
+	- https://stackoverflow.com/questions/25877102/how-to-properly-shutdown-log4j2
+
+5. log4j2 routing
+
+	- 分别记录不同用户的日志
+	- https://stackoverflow.com/questions/17827923/how-to-write-different-logs-in-different-files-with-log4j2-mdc-in-xml
+
+6. ERROR appender RollingRandomAccessFile has no parameter that matches element Filters
+
+	- https://stackoverflow.com/questions/28276619/log4j2s-failoverappender-error-appender-failover-has-no-parameter-that-matches 
+	- https://issues.apache.org/jira/browse/LOG4J2-878
