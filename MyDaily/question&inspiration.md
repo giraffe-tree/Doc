@@ -7107,3 +7107,23 @@ Options:
 
 	- https://stackoverflow.com/questions/28276619/log4j2s-failoverappender-error-appender-failover-has-no-parameter-that-matches 
 	- https://issues.apache.org/jira/browse/LOG4J2-878
+
+
+## 2019.12.06
+
+
+1. `Multiple default routes. Route Route(type=dynamic - type=Route default) will be ignored`
+
+	- Route 的属性 key 没有指定
+
+2. AI 识别人的笑话?
+
+3. Log4j2 - Unable to invoke factory method in class org.apache.logging.log4j.core.appender.RollingFile
+	
+	- 这个异常是由于RollingFile使用到了${ctx:xxx}，而该变量值是null，导致无法创建对应的RollingFile文件到磁盘。
+	- https://blog.csdn.net/lewky_liu/article/details/85644047
+
+4. electron 部署应用
+
+
+

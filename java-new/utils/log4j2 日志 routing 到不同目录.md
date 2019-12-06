@@ -355,9 +355,60 @@ pom 中添加 log4j-slf4j-impl 依赖, 注意 scope
 1. How to write different logs in different files with log4j2 (MDC in xml)?
 	- https://stackoverflow.com/questions/17827923/how-to-write-different-logs-in-different-files-with-log4j2-mdc-in-xml
 
+2. How do I dynamically write to separate log files?
 
+	- http://logging.apache.org/log4j/2.x/faq.html#separate_log_files
 
-
+```xml
+<Routing name="Routing">
+  <Routes pattern="$${ctx:ROUTINGKEY}">
+ 
+    <!-- This route is chosen if ThreadContext has value 'special' for key ROUTINGKEY. -->
+    <Route key="special">
+      <RollingFile name="Rolling-${ctx:ROUTINGKEY}" fileName="logs/special-${ctx:ROUTINGKEY}.log"
+	filePattern="./logs/${date:yyyy-MM}/${ctx:ROUTINGKEY}-special-%d{yyyy-MM-dd}-%i.log.gz">
+	<PatternLayout>
+	  <pattern>%d{ISO8601} [%t] %p %c{3} - %m%n</pattern>
+	</PatternLayout>
+	<Policies>
+	  <TimeBasedTriggeringPolicy interval="6" modulate="true" />
+          <SizeBasedTriggeringPolicy size="10 MB" />
+	</Policies>
+      </RollingFile>
+    </Route>
+ 
+    <!-- This route is chosen if ThreadContext has no value for key ROUTINGKEY. -->
+    <Route key="$${ctx:ROUTINGKEY}">
+      <RollingFile name="Rolling-default" fileName="logs/default.log"
+	filePattern="./logs/${date:yyyy-MM}/default-%d{yyyy-MM-dd}-%i.log.gz">
+        <PatternLayout>
+	  <pattern>%d{ISO8601} [%t] %p %c{3} - %m%n</pattern>
+        </PatternLayout>
+        <Policies>
+          <TimeBasedTriggeringPolicy interval="6" modulate="true" />
+          <SizeBasedTriggeringPolicy size="10 MB" />
+        </Policies>
+      </RollingFile>
+    </Route>
+ 
+    <!-- This route is chosen if ThreadContext has a value for ROUTINGKEY
+         (other than the value 'special' which had its own route above).
+         The value dynamically determines the name of the log file. -->
+    <Route>
+      <RollingFile name="Rolling-${ctx:ROUTINGKEY}" fileName="logs/other-${ctx:ROUTINGKEY}.log"
+	filePattern="./logs/${date:yyyy-MM}/${ctx:ROUTINGKEY}-other-%d{yyyy-MM-dd}-%i.log.gz">
+	<PatternLayout>
+	  <pattern>%d{ISO8601} [%t] %p %c{3} - %m%n</pattern>
+	</PatternLayout>
+	<Policies>
+	  <TimeBasedTriggeringPolicy interval="6" modulate="true" />
+	  <SizeBasedTriggeringPolicy size="10 MB" />
+	</Policies>
+      </RollingFile>
+    </Route>
+  </Routes>
+</Routing>
+```
 
 
 
