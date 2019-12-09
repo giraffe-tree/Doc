@@ -7125,5 +7125,26 @@ Options:
 
 4. electron 部署应用
 
+5.  Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-12-06 19:28:19.210  INFO 7 --- [           main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path
+
+
+## 2018.12.09
+
+1. Major GC和Full GC的区别是什么？触发条件呢？
+	
+	- major GC 可能指 老年代 GC , 也可能指 full gc
+	- https://www.zhihu.com/question/41922036/answer/93079526
+
+2. 中村成洋
+
+	- g1gc 算法
+		- https://tatsu-zine.com/books/g1gc
+		- https://open-chen.oss-cn-hangzhou.aliyuncs.com/open/blog/2019/12/%E5%BE%B9%E5%BA%95%E8%A7%A3%E5%89%96%E3%80%8CG1GC%E3%80%8D%E3%82%A2%E3%83%AB%E3%82%B4%E3%83%AA%E3%82%BA%E3%83%A0%E7%B7%A8-1.0.0.pdf
+	- g1gc 实现
+		- https://open-chen.oss-cn-hangzhou.aliyuncs.com/open/blog/2019/12/g1gc-impl-20120914.pdf
+	- 论文 g1gc
+		- http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.63.6386
+
 
 
