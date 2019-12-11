@@ -6795,33 +6795,6 @@ Code:
 	- 一次成功 yeah!
 	- https://askubuntu.com/questions/592537/can-i-access-ubuntu-from-windows-remotely/592544#592544
 
-5. clion 配置
-
-	- cyglto_plugin.dll not found
-		- 重装了 gcc-core 就可以了
-		- https://stackoverflow.com/questions/24017534/cmake-in-cygwin-cyglto-plugin-dll-not-found
-
-## 2019.11.16
-
-1. clion gcc: error: spawn: No such file or directory
-
-2. 如何使用本地 clion 远程调试 服务器上的程序
-	
-	- https://coding3min.com/CLion_cplusplus/
-
-3. java 直接内存
-
-	-  1.8版本最大可以直接内存可以使用参数-XX:MaxDirectMemorySize设置，如不设置，默认值为java heap 的max最大值，-Xmx - from区域的大小（几乎等同xmx）。native heap 达到最大值，不会触发gc，如果释放不了足够的空间，引发宕机的风险。
-	- https://blog.csdn.net/PioneerX_x/article/details/81489702
-	- https://hllvm-group.iteye.com/group/topic/27945
-
-## 2019.11.17
-
-1. debuginfo
-
-	- 
-	- 深入理解debuginfo
-		- https://blog.csdn.net/chinainvent/article/details/24129311
 
 
 ## 2019.11.18
@@ -7156,7 +7129,7 @@ Options:
 2019-12-06 19:28:19.210  INFO 7 --- [           main] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path
 
 
-## 2018.12.09
+## 2019.12.09
 
 1. Major GC和Full GC的区别是什么？触发条件呢？
 	
@@ -7172,9 +7145,18 @@ Options:
 		- https://open-chen.oss-cn-hangzhou.aliyuncs.com/open/blog/2019/12/g1gc-impl-20120914.pdf
 	- 论文 g1gc
 		- http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.63.6386
+	- 论文笔记
+		- https://www.jianshu.com/p/b1609c81cd5f
+	- 历史 gc
+		- https://hllvm-group.iteye.com/group/topic/41086
 
-3. his computer does not support Intel Virtualization Technology (VT-x) or it is being exclusively used
+## 2019.12.10
 
-	- android sdk 安装时候的问题
-	
+1. flutter get started
+
+	- https://flutterchina.club/get-started/codelab/
+	- https://flutter.dev/docs
+
+2. pdf translator
+
 

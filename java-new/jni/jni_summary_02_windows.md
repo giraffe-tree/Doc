@@ -122,7 +122,8 @@ JNIEXPORT void JNICALL Java_HelloWorld_Hello
 #include "HelloWorld.h"
 
 JNIEXPORT void JNICALL Java_HelloWorld_Hello
-  (JNIEnv *, jclass){
+  (JNIEnv* env, jclass thiz){
+  	// 注意 变量名要加上!!! 否则虽然编译能通过, 但在执行的时候会造成 Segmentation fault
 	// C++ 有自己的缓存区, java也有自己的缓存区, 由于缓存区不同所会导致, 控制台输出的内容产生顺序问题, 所以这里我们直接刷新缓存.
   	std::cout << "Hello World!\n" << std::flush;
 }
