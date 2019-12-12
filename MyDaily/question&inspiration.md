@@ -7147,7 +7147,7 @@ Options:
 		- http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.63.6386
 	- 论文笔记
 		- https://www.jianshu.com/p/b1609c81cd5f
-	- 历史 gc
+	- 历史 gc , 高级语言虚拟机讨论组
 		- https://hllvm-group.iteye.com/group/topic/41086
 
 ## 2019.12.10
@@ -7158,5 +7158,13 @@ Options:
 	- https://flutter.dev/docs
 
 2. pdf translator
+
+
+## 2019.12.12
+
+1. Segmentation fault
+
+	- 带有c ++的JNI在cout，printf和方法调用上不断崩溃
+	- https://stackoverflow.com/questions/36959657/jni-with-c-keeps-crashing-on-cout-printf-and-method-calls
 
 
