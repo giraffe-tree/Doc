@@ -7167,4 +7167,95 @@ Options:
 	- 带有c ++的JNI在cout，printf和方法调用上不断崩溃
 	- https://stackoverflow.com/questions/36959657/jni-with-c-keeps-crashing-on-cout-printf-and-method-calls
 
+2. openjdk 调试
+
+
+	-  CentOS7 上编译，Windows 上使用 Clion 远程调试
+		- https://www.cnblogs.com/jhxxb/p/11094578.html
+		- 实际上, 从远程机子上同步代码到本地花了我8小时 (我同步了一段时间, 然后晚上就去睡觉了, 结果第二天起来还没同步完...)
+		- 后面我同步完成, 重新编译了下远程代码... 结果又开始无休止的同步, 只能byebye了
+	- JAVA虚拟机学习笔记（一）Windows10下编译OpenJDK8
+		- https://www.cnblogs.com/lighten/p/5906359.html
+		- https://www.jianshu.com/p/e85f93cc74cb
+		- 上面两篇结合着看
+			- cygwin
+				- E:\environment\cygwin\install\bin
+			- openjdk 8 src 
+				- E:\environment\openjdk\openjdk-8u40-src-b25-10_feb_2015\openjdk
+				- 其他
+					- C:\openjdk\jdk\make\CreateJars.gmk 未修改
+					- C:\openjdk\common\autoconf\generated-configure.sh
+						注释了7246-7254
+			- bootstrap jdk
+				- E:\environment\jdk7\jdk-7u80-windows-x64.exe\jdk7\bin
+			- freetype
+				- https://download.savannah.gnu.org/releases/freetype/
+				- E:\environment\freetype\ft28\freetype-2.8
+				- output:
+					- E:\environment\freetype\ft28\freetype-2.8\objs\vc2010\x64\freetype28MT.dll
+					- E:\environment\freetype\ft28\freetype-2.8\objs\vc2010\x64\freetype28MT.lib
+			- configure 时的报错
+				- openjdk\common\autoconf\generated-configure.sh 提示 版本过低
+					- 注释 7246-7254 行
+				- Your path contains Windows tools (C:\Windows\system32) before your unix (cygwin or msys) tools.
+					- export PATH=/cygdrive/e/environment/cygwin/install/bin:$PATH
+				- Target CPU mismatch. We are building for x86_64 but CL is for ""; expected "x64".
+					- https://blog.csdn.net/quantum7/article/details/93052571
+					-  找到 openjdk\common\autoconf\generated-configure.sh 对应代码行, 注释
+
+		- 参考
+			- 32位
+				- https://hllvm-group.iteye.com/group/topic/41271
+			- 包含vs2010 安装
+				- https://blog.csdn.net/tangyongzhe/article/details/53576097
+			- freetype binary 下载
+				- https://github.com/ubawurinna/freetype-windows-binaries/releases 
+
+
+## 2019.12.13
+
+1. 在G1 GC之前，所有HotSpot VM的GC堆布局都继承自1984年David Ungar在Berkeley Smalltalk里所实现的Generation Scavenging。参考论文：Generation Scavenging: A Non-disruptive High Performance Storage Reclamation Algorithm
+
+	- https://hllvm-group.iteye.com/group/topic/39376
+
+2. 尝试编译 openjdk11
+	
+	- 参考
+		- windows10下编译调试openjdk11
+			- https://www.jianshu.com/p/10a83eead822
+	- 环境
+		-  
+
+3. git clone openjdk
+
+	- 之前用 mercurial clone 的, clone 了一下午还没好...
+	- 然后用 git clone 开了vpn还是蛮快的, 但是openjdk太大了(我clone了一半就已经几百兆了), clone 了两次到一半都因为网络问题断连了, 然后要重新clone...
+	- 最后使用 `--depth 1` 终于成功了
+
+```
+
+$ git clone --depth 1 https://github.com/xxx/xxxxxxx.git
+$ git remote set-branches origin 'remote_branch_name'
+$ git fetch --depth 1 origin remote_branch_name
+$ git checkout remote_branch_name
+```
+
+```
+git clone --depth 1 https://github.com/unofficial-openjdk/openjdk.git
+cd openjdk
+git remote set-branches origin jdk8u/jdk8u
+git fetch --depth 1 origin jdk8u/jdk8u
+git checkout jdk8u/jdk8u
+```
+
+```
+// git 换行符 https://www.jianshu.com/p/f13ef9e538e0
+// 提交时转换为LF，检出时转换为CRLF
+git config --global core.autocrlf true   
+```
+
+
+	- 然后用 git clone  下来的代码有换行符问题, 命令执行不下去
+
+
 
