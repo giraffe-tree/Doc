@@ -7257,5 +7257,18 @@ git config --global core.autocrlf true
 
 	- 然后用 git clone  下来的代码有换行符问题, 命令执行不下去
 
+langtools\src\share\classes\com\sun\tools\javac\parser\JavacParser.java
+
+## 2019.12.17
+
+1. 分词器
+
+	- ik_max_word
+		- 会将文本做最细粒度的拆分，比如会将“中华人民共和国人民大会堂”拆分为“中华人民共和国、中华人民、中华、华人、人民共和国、人民、共和国、大会堂、大会、会堂等词语。
+	- ik_smart
+		- 会做最粗粒度的拆分，比如会将“中华人民共和国人民大会堂”拆分为中华人民共和国、人民大会堂。
+	- 最佳实践是：索引时用ik_max_word，在搜索时用ik_smart。
+
+
 
 
