@@ -7270,5 +7270,35 @@ langtools\src\share\classes\com\sun\tools\javac\parser\JavacParser.java
 	- 最佳实践是：索引时用ik_max_word，在搜索时用ik_smart。
 
 
+## 2019.12.19
+
+1. openjdk8 centos
+	
+	- `./configure --with-boot-jdk=/opt/jdk1.7.0_80/ -with-target-bits=64 --with-jvm-variants=server --with-debug-level=slowdebug`
+	- `make all CONF=linux-x86_64-normal-server-slowdebug ZIP_DEBUGINFO_FILES=0 ENABLE_FULL_DEBUG_SYMBOLS=1`
+	- `cd ./build/linux-x86_64-normal-server-slowdebug/jdk/bin/`
+	- `./java -version`
+	- `gdb -args ./java -Xms10m -Xmx20m -XX:-UseCompressedOops -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:G1LogLevel=finest -XX:+PrintGCDetails GCTest`
+
+
+```
+show args
+b G1ParScanThreadState.cpp:210
+b G1ParScanThreadState::copy_to_survivor_space
+r
+c
+i locals
+```
+
+```
+javac GCTest.java
+java GCTest
+gdbserver :1234 ./java -Xms10m -Xmx20m -XX:-UseCompressedOops -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:G1LogLevel=finest -XX:+PrintGCDetails GCTest
+```
+
+可喜可贺!!!终于可以调试hotspot vm 了, TT 
+整了不下三次, 今天终于调通了啊啊啊啊
+
+
 
 
