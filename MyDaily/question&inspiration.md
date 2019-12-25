@@ -7263,7 +7263,7 @@ git config --global core.autocrlf true
 
 4. this computer does not support Intel Virtualization Technology (VT-x) or it is being exclusively used
 
-	- android sdk 安装时候的问题
+langtools\src\share\classes\com\sun\tools\javac\parser\JavacParser.java
 
 ## 2019.12.15
 
@@ -7298,3 +7298,47 @@ vim .bashrc
 
 2. Could not succesfully extract the envionment variables needed for the VS setup. Cannot continueconfigure: Try setting --with-tools-dir to the VC/bin directory within the VS installation
 	- https://www.codetd.com/article/2901356
+
+
+## 2019.12.17
+
+1. 分词器
+
+	- ik_max_word
+		- 会将文本做最细粒度的拆分，比如会将“中华人民共和国人民大会堂”拆分为“中华人民共和国、中华人民、中华、华人、人民共和国、人民、共和国、大会堂、大会、会堂等词语。
+	- ik_smart
+		- 会做最粗粒度的拆分，比如会将“中华人民共和国人民大会堂”拆分为中华人民共和国、人民大会堂。
+	- 最佳实践是：索引时用ik_max_word，在搜索时用ik_smart。
+
+
+## 2019.12.19
+
+1. openjdk8 centos
+	
+	- `./configure --with-boot-jdk=/opt/jdk1.7.0_80/ -with-target-bits=64 --with-jvm-variants=server --with-debug-level=slowdebug`
+	- `make all CONF=linux-x86_64-normal-server-slowdebug ZIP_DEBUGINFO_FILES=0 ENABLE_FULL_DEBUG_SYMBOLS=1`
+	- `cd ./build/linux-x86_64-normal-server-slowdebug/jdk/bin/`
+	- `./java -version`
+	- `gdb -args ./java -Xms10m -Xmx20m -XX:-UseCompressedOops -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:G1LogLevel=finest -XX:+PrintGCDetails GCTest`
+
+
+```
+show args
+b G1ParScanThreadState.cpp:210
+b G1ParScanThreadState::copy_to_survivor_space
+r
+c
+i locals
+```
+
+```
+javac GCTest.java
+java GCTest
+gdbserver :1234 ./java -Xms10m -Xmx20m -XX:-UseCompressedOops -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:G1LogLevel=finest -XX:+PrintGCDetails GCTest
+```
+
+可喜可贺!!!终于可以调试hotspot vm 了, TT 
+整了不下三次, 今天终于调通了啊啊啊啊
+
+	- android sdk 安装时候的问题
+
