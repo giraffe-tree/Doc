@@ -7150,6 +7150,7 @@ Options:
 	- 历史 gc , 高级语言虚拟机讨论组
 		- https://hllvm-group.iteye.com/group/topic/41086
 
+<<<<<<< Updated upstream
 ## 2019.12.10
 
 1. flutter get started
@@ -7299,6 +7300,9 @@ vim .bashrc
 2. Could not succesfully extract the envionment variables needed for the VS setup. Cannot continueconfigure: Try setting --with-tools-dir to the VC/bin directory within the VS installation
 	- https://www.codetd.com/article/2901356
 
+3. this computer does not support Intel Virtualization Technology (VT-x) or it is being exclusively used
+
+	- android sdk 安装时候的问题
 
 ## 2019.12.17
 
@@ -7340,5 +7344,6 @@ gdbserver :1234 ./java -Xms10m -Xmx20m -XX:-UseCompressedOops -XX:+UseG1GC -XX:+
 可喜可贺!!!终于可以调试hotspot vm 了, TT 
 整了不下三次, 今天终于调通了啊啊啊啊
 
-	- android sdk 安装时候的问题
+
+
 
