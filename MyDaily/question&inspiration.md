@@ -7241,6 +7241,10 @@ $ git checkout remote_branch_name
 ```
 
 ```
+## 如果你头铁网速快....可以直接...
+## git clone --branch jdk-11+28 https://gitee.com/lexihc/openjdk.git
+## 使用国内的
+## git clone --depth 1 https://gitee.com/lexihc/openjdk.git
 git clone --depth 1 https://github.com/unofficial-openjdk/openjdk.git
 cd openjdk
 git remote set-branches origin jdk8u/jdk8u
@@ -7257,5 +7261,40 @@ git config --global core.autocrlf true
 
 	- 然后用 git clone  下来的代码有换行符问题, 命令执行不下去
 
+4. this computer does not support Intel Virtualization Technology (VT-x) or it is being exclusively used
 
+	- android sdk 安装时候的问题
 
+## 2019.12.15
+
+1. 程序员必须掌握哪些算法？
+	
+	- https://www.zhihu.com/question/23148377
+	- 算法
+		- 排序算法：快速排序、归并排序、计数排序
+		- 搜索算法：回溯、递归、剪枝技巧
+		- 图论：最短路、最小生成树、网络流建模
+		- 动态规划：背包问题、最长子序列、计数问题
+		- 基础技巧：分治、倍增、二分、贪心
+	- 数据结构
+		- 数组与链表：单 / 双向链表、跳舞链
+		- 栈与队列
+		- 树与图：最近公共祖先、并查集
+		- 哈希表
+		- 堆：大 / 小根堆、可并堆
+		- 字符串：字典树、后缀树
+
+## 2019.12.16
+
+1. configure crlf 问题
+
+	- https://stackoverflow.com/questions/11616835/r-command-not-found-bashrc-bash-profile
+
+```
+vim .bashrc
+:set ff=unix
+:wq!
+```
+
+2. Could not succesfully extract the envionment variables needed for the VS setup. Cannot continueconfigure: Try setting --with-tools-dir to the VC/bin directory within the VS installation
+	- https://www.codetd.com/article/2901356
