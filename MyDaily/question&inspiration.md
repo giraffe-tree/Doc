@@ -7345,5 +7345,139 @@ gdbserver :1234 ./java -Xms10m -Xmx20m -XX:-UseCompressedOops -XX:+UseG1GC -XX:+
 整了不下三次, 今天终于调通了啊啊啊啊
 
 
+## 2019.12.24
+
+1. openjdk7 b147 下载
+	
+	- 下载地址: http://download.java.net/openjdk/jdk7/promoted/b147/openjdk-7-fcs-src-b147-27_jun_2011.zip
+	- https://www.jianshu.com/p/d509d78a613a
+
+2. jdk6 下载
+	- https://www.oracle.com/technetwork/java/javase/archive-139210.html
+
+
+## 2019.12.25
+
+1. JAVA 中的 句柄
+
+	- 即指向对象的引用
+
+2. C++ 中的虚函数调用
+
+	- C++编译阶段，没办法知道一个基类的指针或引用所指对象的类型，所以没办法通过这个指针判断调用的虚函数到底是谁的，所以只能通过查找虚函数表来找到函数的入口地址。
+
+3. 虚函数和纯虚函数的区别
+
+	- 首先：强调一个概念
+		- 定义一个函数为虚函数，不代表函数为不被实现的函数。
+		- 定义他为虚函数是为了允许用基类的指针来调用子类的这个函数。
+		- 定义一个函数为纯虚函数，才代表函数没有被实现。
+		- 抽象类的定义：  称带有纯虚函数的类为抽象类。
+	- 总结
+		1. 纯虚函数声明如下： virtual void funtion1()=0; 纯虚函数一定没有定义，纯虚函数用来规范派生类的行为，即接口。包含纯虚函数的类是抽象类，抽象类不能定义实例，但可以声明指向实现该抽象类的具体类的指针或引用。
+		2. 虚函数声明如下：virtual ReturnType FunctionName(Parameter)；虚函数必须实现，如果不实现，编译器将报错，错误提示为：`error LNK****: unresolved external symbol "public: virtual void __thiscall ClassName::virtualFunctionName(void)`
+		3. 对于虚函数来说，父类和子类都有各自的版本。由多态方式调用的时候动态绑定。
+		4. 实现了纯虚函数的子类，该纯虚函数在子类中就编程了虚函数，子类的子类即孙子类可以覆盖该虚函数，由多态方式调用的时候动态绑定。
+		5. 虚函数是C++中用于实现多态(polymorphism)的机制。核心理念就是通过基类访问派生类定义的函数。
+		6. 在有动态分配堆上内存的时候，析构函数必须是虚函数，但没有必要是纯虚的。
+		7. 友元不是成员函数，只有成员函数才可以是虚拟的，因此友元不能是虚拟函数。但可以通过让友元函数调用虚拟成员函数来解决友元的虚拟问题。
+		8. 析构函数应当是虚函数，将调用相应对象类型的析构函数，因此，如果指针指向的是子类对象，将调用子类的析构函数，然后自动调用基类的析构函数。
+	- 析构函数(destructor) 与构造函数相反，当对象结束其生命周期，如对象所在的函数已调用完毕时，系统自动执行析构函数。析构函数往往用来做“清理善后” 的工作（例如在建立对象时用new开辟了一片内存空间，delete会自动调用析构函数后释放内存）。
+	- https://blog.csdn.net/hackbuteer1/article/details/7558868
+
+4. C++ 中 volatile
+	- 易变性
+	- 不可优化性
+	- 顺序性: 能够保证Volatile变量间的顺序性，编译器不会进行乱序优化
+	- Java的Volatile有很极大的增强，Java Volatile变量的操作，附带了Acquire与Release语义。所谓的Acquire与Release语义，可参考文章：Acquire and Release Semantics。(这一点，后续有必要的话，可以写一篇文章专门讨论)。Java Volatile所支持的Acquire、Release语义，如下:
+		1. 对于Java Volatile变量的写操作，带有Release语义，所有Volatile变量写操作之前的针对其他任何变量的读写操作，都不会被编译器、CPU优化后，乱序到Volatile变量的写操作之后执行。
+		2. 对于Java Volatile变量的读操作，带有Acquire语义，所有Volatile变量读操作之后的针对其他任何变量的读写操作，都不会被编译器、CPU优化后，乱序到Volatile变量的读操作之前进行。
+	- http://hedengcheng.com/?p=725
+
+5. mysql 相关博客
+
+	- 何登成 http://hedengcheng.com/
+
+6. double check 的历史 论文
+
+	- https://www.aristeia.com/Papers/DDJ_Jul_Aug_2004_revised.pdf
+
+7. C++ 内联函数
+
+	- C++ 内联函数是通常与类一起使用。如果一个函数是内联的，那么在编译时，编译器会把该函数的代码副本放置在每个调用该函数的地方。
+	- 对内联函数进行任何修改，都需要重新编译函数的所有客户端，因为编译器需要重新更换一次所有的代码，否则将会继续使用旧的函数。
+	- 引入内联函数的目的是为了解决程序中函数调用的效率问题, 空间换时间
+	- https://www.runoob.com/cplusplus/cpp-inline-functions.html
+
+8. JVM_ENTRY 和 JVM_END 的含义
+	
+	- 就是一个方法的模板, 定义了一些 JVM 内部接口通用的操作
+	- https://juejin.im/post/5b4b08e06fb9a04fb900c276
+	- `#define JNI_END } }`
+
+9. javaw 
+	
+	- 像是在后台启动
+
+10. openjdk8 中废弃了 gamma launcher
+
+	- https://hllvm-group.iteye.com/group/topic/39731?page=2
+
+## 2019.12.26
+
+1. C++中的friend class 用法总结
+
+	- C++中的friend关键字其实做这样的事情：在一个类中指明其他的类（或者）函数能够直接访问该类中的private和protected成员。
+	- https://blog.csdn.net/weixin_38293850/article/details/80191242
+	- friend function
+		- C++中的友元机制允许类的非公有成员被一个类或者函数访问，友元按类型分为三种：普通非类成员函数作为友元,类的成员函数作为友元，类作为友元。
+	- https://blog.csdn.net/weixin_38293850/article/details/80191242
+
+2. C++ union
+
+	- 共用体，也叫联合体，在一个“联合”内可以定义多种不同的数据类型， 一个被说明为该“联合”类型的变量中，允许装入该“联合”所定义的任何一种数据，这些数据共享同一段内存，以达到节省空间的目的。union变量所占用的内存长度等于最长的成员的内存长度。
+
+3. C++ 常量成员函数 const
+
+	- `int day() const;`
+	- 在函数声明的(空)参数表后面出现的 const , 它指明这些函数不会修改 类成员 的状态
+	- <C++程序设计语言> 第10章类 P205
+
+4. java 对象引用持有 指向对象的指针, 对象持有指向 类的指针
+
+5. HSDB
+
+	- 使用 HSDB 调试 hotspot
+	- GUI
+		- `java -cp .;%JAVA_HOME%/lib/sa-jdi.jar sun.jvm.hotspot.HSDB`
+	- `java -cp .;%JAVA_HOME%/lib/sa-jdi.jar sun.jvm.hotspot.CLHSDB`
+	- 使用介绍 https://www.jianshu.com/p/a28ae76ac3b4
+	- https://www.iteye.com/blog/rednaxelafx-1847971
+
+6. jdb
+	- java 调试器
+	- https://docs.oracle.com/javase/7/docs/technotes/tools/windows/jdb.html
+	- idea 如何使用 jdb 的
+		- `E:\environment\java\bin\java.exe -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:53998,suspend=y,server=n -javaagent:C:\Users\pc\.IntelliJIdea2019.1\system\captureAgent\debugger-agent.jar -Dfile.encoding=UTF-8 -classpath "E:\environment\java\jre\lib\charsets.jar;E:\environment\java\jre\lib\deploy.jar;...;" me.giraffetree.java.jiujiu.utils.Test`
+
+7. javaagent
+
+	- Javaagent 是什么？
+		- Javaagent是java命令的一个参数。参数 javaagent 可以用于指定一个 jar 包，并且对该 java 包有2个要求：
+			- 这个 jar 包的 MANIFEST.MF 文件必须指定 Premain-Class 项。
+			- Premain-Class 指定的那个类必须实现 premain() 方法。
+		- premain 方法，从字面上理解，就是运行在 main 函数之前的的类。当Java 虚拟机启动时，在执行 main 函数之前，JVM 会先运行-javaagent所指定 jar 包内 Premain-Class 这个类的 premain 方法 。
+
+8. JVM启动后动态Instrument
+
+	- 上面介绍的Instrumentation是在 JDK 1.5中提供的，开发者只能在main加载之前添加手脚，在 Java SE 6 的 Instrumentation 当中，提供了一个新的代理操作方法：agentmain，可以在 main 函数开始运行之后再运行。
+	- https://www.cnblogs.com/rickiyang/p/11368932.html#3898086050
+
+9.  instrument原理
+
+	- instrument的底层实现依赖于JVMTI(JVM Tool Interface)，它是JVM暴露出来的一些供用户扩展的接口集合，JVMTI是基于事件驱动的，JVM每执行到一定的逻辑就会调用一些事件的回调接口（如果有的话），这些接口可以供开发者去扩展自己的逻辑。JVMTIAgent是一个利用JVMTI暴露出来的接口提供了代理启动时加载(agent on load)、代理通过attach形式加载(agent on attach)和代理卸载(agent on unload)功能的动态库。而instrument agent可以理解为一类JVMTIAgent动态库，别名是JPLISAgent(Java Programming Language Instrumentation Services Agent)，也就是专门为java语言编写的插桩服务提供支持的代理。
+
+
+
 
 
