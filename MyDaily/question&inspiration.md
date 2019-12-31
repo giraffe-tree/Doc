@@ -7484,6 +7484,31 @@ gdbserver :1234 ./java -Xms10m -Xmx20m -XX:-UseCompressedOops -XX:+UseG1GC -XX:+
 
 	- `cout << $content$ << endl;`
 
-2. 
+
+## 2019.12.31
+
+1. jpa GenerationType
+
+	- TABLE：使用一个特定的数据库表格来保存主键。
+	- SEQUENCE：根据底层数据库的序列来生成主键，条件是数据库支持序列。
+	- IDENTITY：主键由数据库自动生成（主要是自动增长型）
+
+2. Cannot initialize variable with an rvalue of type void*
+
+```C++
+    int a = 123;
+    int *p = &a;
+    // int *q = &p; // 报错 Cannot initialize a variable of type 'int *' with an rvalue of type 'int **'
+    // 应该写成下面的格式
+    int **q = &p;
+```
+
+3. `int *p;`
+
+	- 声明一个变量 p，它的类型必须满足 `*p` 属于 int
+	- 等同于 `int* p = &var;`
+	- 其实是个 `int*` 类型的变量
+	- `*p` 属于 int 类型
+
 
 

@@ -499,6 +499,246 @@ void testRandom() {
 
 ## C++ 数组
 
+```C++
+void testArray() {
+//    double balance[5] = {1000.0, 2.0, 3.4, 7.0, 50.0};
+    double balance[] = {1000.0, 2.0, 3.4, 7.0, 50.0};
+
+    double salary = balance[3];
+    for (int i = 0; i < 5; ++i) {
+        cout << balance[i] << endl;
+    }
+}
+```
+
+## C++ 字符串
+
+C++ 提供了以下两种类型的字符串表示形式：
+
+- C 风格字符串
+- C++ 引入的 string 类类型
+
+### C string
+
+```
+#include <cstring>
+
+
+序号	函数 & 目的
+1	strcpy(s1, s2);
+复制字符串 s2 到字符串 s1。
+2	strcat(s1, s2);
+连接字符串 s2 到字符串 s1 的末尾。
+3	strlen(s1);
+返回字符串 s1 的长度。
+4	strcmp(s1, s2);
+如果 s1 和 s2 是相同的，则返回 0；如果 s1<s2 则返回值小于 0；如果 s1>s2 则返回值大于 0。
+5	strchr(s1, ch);
+返回一个指针，指向字符串 s1 中字符 ch 的第一次出现的位置。
+6	strstr(s1, s2);
+返回一个指针，指向字符串 s1 中字符串 s2 的第一次出现的位置。
+```
+
+### C++ 中的 String 类
+
+`#include <string>`
+
+```C++
+#include <string>
+void testString() {
+    string str1 = "Hello";
+    string str2 = "World";
+    string str3;
+    int len;
+
+    // 复制 str1 到 str3
+    str3 = str1;
+    cout << "str3 : " << str3 << endl;
+
+    // 连接 str1 和 str2
+    str3 = str1 + str2;
+    cout << "str1 + str2 : " << str3 << endl;
+
+    // 连接后，str3 的总长度
+    len = str3.size();
+    cout << "str3.size() :  " << len << endl;
+    cout << str1.size() << endl;
+}
+```
+
+## 指针
+
+指针是一个变量，其值为另一个变量的地址，即，内存位置的直接地址。
+
+指针变量声明的一般形式为：
+
+```C++
+type *var-name;
+```
+
+`&(取址运算符)和*(间接访问运算符/解引用指针)`
+
+在这里，type 是指针的基类型，它必须是一个有效的 C++ 数据类型，var-name 是指针变量的名称。用来声明指针的星号 * 与乘法中使用的星号是相同的。但是，在这个语句中，星号是用来指定一个变量是指针。以下是有效的指针声明：
+
+```
+int    *ip;    /* 一个整型的指针 */
+double *dp;    /* 一个 double 型的指针 */
+float  *fp;    /* 一个浮点型的指针 */
+char   *ch;    /* 一个字符型的指针 */
+```
+
+```C++
+void testPoint() {
+
+    int a = 123;
+    int *p;
+    p = &a;
+    cout << p << endl; // 0xffffcbdc
+    cout << *p << endl; // 123
+
+    int *q = &a;
+    cout << q << endl; // 0xffffcbdc
+    cout << *q << endl; // 123
+
+    p = NULL;
+    cout << p << endl; // 0
+}
+
+```
+
+### NULL 指针
+
+```C++
+define NULL 0
+```
+
+### C++ 指针的算术运算
+
+在程序中**使用指针代替数组**，因为变量指针可以递增，而数组不能递增，因为数组是一个**常量指针**。
+
+
+```C++
+void testPointAdd() {
+    int a[] = {123, 234, 344, 455, 523};
+    // a 是常量指针, 可以使用下面的方法新建一个变量指针
+//    int *p = a;
+    int *p = &a[0];
+    int i = 0;
+    while (i < 5) {
+        cout << *p << endl;
+        p++;
+        i++;
+    }
+}
+```
+
+##### 指针的比较
+
+### C++ 指针 vs 数组
+
+`int[] array = {1,2,3};`
+
+可以通过数组的指针直接修改数组内的值 `*array=44`, 而不需要使用 `array[]`
+
+```C++
+#include <iostream>
+ 
+using namespace std;
+const int MAX = 3;
+ 
+int main ()
+{
+   int  var[MAX] = {10, 100, 200};
+ 
+   for (int i = 0; i < MAX; i++)
+   {
+      *var = i;    // 这是正确的语法
+      var++;       // 这是不正确的
+   }
+   return 0;
+}
+```
+
+### C++ 指针数组
+
+```C++
+const char *names[MAX] = {
+        "Zara Ali",
+        "Hina Ali",
+        "Nuha Ali",
+        "Sara Ali"
+};
+
+for (int i = 0; i < MAX; i++) {
+    cout << "Value of names[" << i << "] = ";
+    cout << names[i] << endl;
+}
+```
+
+### 指向指针的指针（多级间接寻址）
+
+```C++
+int a = 123;
+int *p = &a;
+int **q = &p;
+int ***w = &q;
+
+cout << "a 的值" << endl;
+cout << a << endl;
+cout << *p << endl;
+cout << **q << endl;
+cout << ***w << endl;
+
+cout << "a 的地址" << endl;
+cout << &a << endl;
+cout << p << endl;
+cout << *q << endl;
+cout << **w << endl;
+
+cout << "p 的地址" << endl;
+cout << &p << endl;
+cout << q << endl;
+cout << *w << endl;
+```
+
+
+### 传递指针给函数
+
+```C++
+void testPointParam(int *a, int *b, int bSize) {
+    cout << *a << endl;
+    for (int i = 0; i < bSize; ++i) {
+        cout << b[i] << endl;
+    }
+}
+int main(){
+    int a = 23;
+    int b[] = {1, 2, 3};
+    testPointParam(&a, b, 3);
+
+    return 0;
+}
+
+```
+
+### 从函数返回指针
+
+C++ 不支持在函数外返回局部变量的地址，除非定义局部变量为 static 变量。
+
+```C++
+int *testPointArrayReturn(){
+    static int a = 132;
+    return &a;
+}
+int main(){
+    int *p = testPointArrayReturn();
+    cout << *p << endl;
+
+
+    return 0;
+}
+
+```
 
 
 
