@@ -7519,8 +7519,24 @@ gdbserver :1234 ./java -Xms10m -Xmx20m -XX:-UseCompressedOops -XX:+UseG1GC -XX:+
 		- 删除
 	- 感觉如果是这样的话, 还是不要加入为好
 
+## 2019.1.3
 
+1. 算法 algorithms第四版答案
+	
+	- https://algs4.cs.princeton.edu/15uf/
 
+2. 动态连通性问题
+	
 
+3. 可视化算法
 
+	- https://visualgo.net/en
+
+4. 原地排序
+
+	- 对一个长度为 n 的数组进行排序, 只使用 常数级的额外存储空间
+
+5. java 打印参数 
+
+	- `java -XX:+PrintFlagsFinal -version | grep Inline`
 
