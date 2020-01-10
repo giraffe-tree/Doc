@@ -7540,3 +7540,53 @@ gdbserver :1234 ./java -Xms10m -Xmx20m -XX:-UseCompressedOops -XX:+UseG1GC -XX:+
 
 	- `java -XX:+PrintFlagsFinal -version | grep Inline`
 
+
+## 2019.1.6
+
+1. 数据库 JOIN 的实现 
+	- https://www.infoq.cn/article/6XGx92FyQ45cMXpj2mgZ
+
+
+## 2019.1.7
+
+
+1. 桶排序的实现
+	
+	- 数组加链表
+	- https://www.cs.usfca.edu/~galles/visualization/BucketSort.html
+	- 优化
+		- 常见的优化方法是先将存储桶中未排序的元素放回原始数组中，然后对整个数组进行插入排序；因为插入排序的运行时基于每个元素距其最终位置的距离，所以比较的数量保持相对较小，并且通过将列表连续存储在内存中可以更好地利用内存层次结构。
+
+
+2. Math 四舍五入, 向上取整, 向下取整
+	  
+
+```java
+// 四舍五入
+long round = Math.round(1.499);
+long round2 = Math.round(1.5);
+System.out.println(round);
+System.out.println(round2);
+
+// 向上取整
+int s = (int)Math.ceil(1.1);
+System.out.println(s);
+
+// 向下取整
+System.out.println((int)Math.floor(1.6));	
+```
+
+3. 正则 规则一览
+
+	- http://c.runoob.com/front-end/854
+
+
+## 2020.1.8
+
+1. linux mysql 配置文件 `/etc/my.cnf`
+
+2. mysql 5.6 函数 `length('str')`
+
+	- 并不是按照字符来计算长度的,而是通过字节 
+	- `char_length('str')` 计算的才是字符
+
