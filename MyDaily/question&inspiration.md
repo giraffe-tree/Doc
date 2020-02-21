@@ -7531,6 +7531,8 @@ gdbserver :1234 ./java -Xms10m -Xmx20m -XX:-UseCompressedOops -XX:+UseG1GC -XX:+
 3. 可视化算法
 
 	- https://visualgo.net/en
+	- rbt
+		- https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
 
 4. 原地排序
 
@@ -7590,3 +7592,37 @@ System.out.println((int)Math.floor(1.6));
 	- 并不是按照字符来计算长度的,而是通过字节 
 	- `char_length('str')` 计算的才是字符
 
+## 2020.2.18
+
+1. Spring data MongoDb: MappingMongoConverter remove `_class`
+	- 作用是映射子类
+	- https://www.cnblogs.com/keeya/p/9969535.html
+	- https://stackoverflow.com/questions/6810488/spring-data-mongodb-mappingmongoconverter-remove-class/%C2%A0
+
+
+## 2020.2.19
+
+1. DateUtils ceiling, round, truncate 的区别
+
+```
+       /**
+         * Wed Feb 19 16:23:20 CST 2020
+         * Wed Feb 19 16:24:00 CST 2020
+         * Wed Feb 19 16:23:00 CST 2020
+         * Wed Feb 19 16:23:00 CST 2020
+         *
+         *Wed Feb 19 16:23:35 CST 2020
+         * Wed Feb 19 16:24:00 CST 2020
+         * Wed Feb 19 16:24:00 CST 2020
+         * Wed Feb 19 16:23:00 CST 2020
+         *
+         */
+        Date now = new Date();
+        Date ceiling = DateUtils.ceiling(now, Calendar.MINUTE);
+        Date round = DateUtils.round(now, Calendar.MINUTE);
+        Date truncate = DateUtils.truncate(now, Calendar.MINUTE);
+        System.out.println(now);
+        System.out.println(ceiling);
+        System.out.println(round);
+        System.out.println(truncate);
+```
