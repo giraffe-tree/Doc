@@ -2483,6 +2483,10 @@ show create table t1\G
 	:set noautoindent
 	关闭C语言缩进 
 	:set nocindent
+	显示行号
+	:set nu
+	不显示行号
+	:set nonu
 	```
 
 2. vim 取消搜索字体高亮
