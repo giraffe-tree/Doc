@@ -4634,6 +4634,7 @@ hlebalbau/kafka-manager:stable \
 		- `docker restart xxx` 重启之后, 日志会重定向到新的 `{container_id}-json.log` 
 		- 这个故事的后续是, dockerd 进程仍然引用了这个文件, 当我rm后, 它实际并未删除
 		- 接下来就是 接下来就是如何删除 已经deleted文件的故事了....
+			- `echo "" > access.log`
 
 2. mysql 5.6/5.7 的 `count(*)` 差异
 
@@ -7630,3 +7631,22 @@ System.out.println((int)Math.floor(1.6));
         System.out.println(round);
         System.out.println(truncate);
 ```
+
+
+## 2020.3.9
+
+1.  windows docker exec
+
+	-  `winpty docker exec -it redisbloom sh`
+
+
+## 2020.3.27
+
+1. 多线程交替打印数字
+
+	- https://blog.csdn.net/u011514810/article/details/77131296
+	- https://www.cnblogs.com/dolphin0520/p/3920397.html
+
+2. log 异步刷盘如何实现?
+	
+
