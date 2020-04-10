@@ -7650,3 +7650,70 @@ System.out.println((int)Math.floor(1.6));
 2. log 异步刷盘如何实现?
 	
 
+## 2020.3.30
+
+1. java 内部类 有什么用
+	- https://www.zhihu.com/question/26954130
+	- 内部类 可以嵌套多少层?
+
+2. douban 自己动手写 jvm
+	- 书籍
+		- https://read.douban.com/reader/ebook/21808451/?from=book
+	- class 文件展示
+		- classpy
+		- https://github.com/zxh0/classpy
+
+3. thread local 原理
+	- https://www.cnblogs.com/twoheads/p/9646415.html
+
+## 2020.4.1
+
+1. Cannot create namespace cms-lan.patient in multi-document transaction.
+	- 将 collection 新建之后就可以了
+
+
+## 2020.4.2
+
+1. spring scope 用来规定每个 bean 可以使用的范围, 单例/多例/request/session等
+	
+	- 获取 application context
+		- https://stackoverflow.com/questions/812415/why-is-springs-applicationcontext-getbean-considered-bad
+	- 使用 scope
+		- https://stackoverflow.com/questions/42378023/how-to-get-multiple-instances-of-same-bean-in-spring
+	- scope 没有生成新的 bean
+		- https://stackoverflow.com/questions/7621920/scopeprototype-bean-scope-not-creating-new-bean
+
+2. throw exception 在接口声明中?
+
+3. windows 查看 端口占用
+
+	- `netstat -aon|findstr "8081" `
+
+## 2020.4.3
+
+1. jackson json objectMapper
+
+	- 应当声明成static
+	- https://stackoverflow.com/questions/3907929/should-i-declare-jacksons-objectmapper-as-a-static-field
+
+## 2020.4.7
+
+1. 线程间传输数据
+
+2.  Bean named 'defaultSockJsTaskScheduler' is expected to be of type 'org.springframework.scheduling.TaskScheduler' but was actually of type 
+	- websocket 定时任务与默认定时任务冲突
+	- https://www.cnblogs.com/threadj/articles/10631193.html 
+
+## 2020.4.10
+
+1. event bus
+	- 使用注册表根据数据内容(数据类型, 长度)来分发数据
+		- 可以使用继承 
+2. protobuf
+	- java 快速入门
+		- https://www.jianshu.com/p/bb3ac7e5834e
+	- 官方教程
+		- https://developers.google.com/protocol-buffers/docs/javatutorial
+
+
+
