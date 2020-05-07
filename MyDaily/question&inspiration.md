@@ -7715,5 +7715,14 @@ System.out.println((int)Math.floor(1.6));
 	- 官方教程
 		- https://developers.google.com/protocol-buffers/docs/javatutorial
 
+## 2020.4.16
 
+1. spring boot 面向过程编程的原因
 
+	- 网络请求的处理本就是 一个hander接着一个hander 的过滤链的方式
+
+## 2020.04.24
+
+1. java reboot itself
+
+	- https://stackoverflow.com/questions/4159802/how-can-i-restart-a-java-application/48992863#48992863
