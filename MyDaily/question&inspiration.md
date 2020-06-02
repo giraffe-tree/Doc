@@ -7726,3 +7726,12 @@ System.out.println((int)Math.floor(1.6));
 1. java reboot itself
 
 	- https://stackoverflow.com/questions/4159802/how-can-i-restart-a-java-application/48992863#48992863
+
+
+## 2020.06.02
+
+1. wscat 
+
+	- `npm install -g wscat`
+	- https://www.npmjs.com/package/wscat
+
