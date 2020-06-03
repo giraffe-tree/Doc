@@ -7735,3 +7735,52 @@ System.out.println((int)Math.floor(1.6));
 	- `npm install -g wscat`
 	- https://www.npmjs.com/package/wscat
 
+2. dubbo 学习
+
+	- https://dubbo.apache.org/zh-cn/docs/user/preface/architecture.html
+
+## 2020.06.03
+
+1. windows 开机启动
+
+	- `C:\Users\Administrator\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup` 
+	- 在上面的目录下放入 bat 文件
+	- 或者使用 vbs, 也放在那个目录下 
+	
+```
+Set objShell2 = WScript.CreateObject("WScript.Shell")
+objShell2.Run("C:\projects\ac\start-version.bat"), 0, True
+```
+
+2. graal 介绍
+
+	- https://zhengyudi.github.io/2018/03/20/graal-intro/#more
+	- https://medium.com/graalvm
+	- https://www.graalvm.org/
+
+3. java aot 静态编译
+
+	- http://openjdk.java.net/jeps/295
+
+4. jvm c2 入门, 包含 graal IR 的一些论文
+
+	- https://hllvm-group.iteye.com/group/topic/39493
+
+
+5. https://hllvm-group.iteye.com/
+
+6. igv 使用
+	
+	- 需要在 etc 目录下的 `idealgraphvisualizer.conf` 进行配置
+
+```
+# 注意不要放在跟 idealgraphvisualizer 相同的目录下
+# 不然会提示一个 Your user directory cannot reside inside your NetBeans installation directory 错误
+default_userdir="E:\2020\June\igv\user"
+default_cachedir="E:\2020\June\igv\cache"
+
+# 需要手动设置 jdkhome
+# 不然会提示 Cannot find java 1.8 or higher
+jdkhome="E:\environment\java"
+
+```
