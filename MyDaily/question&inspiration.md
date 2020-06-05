@@ -7752,6 +7752,11 @@ Set objShell2 = WScript.CreateObject("WScript.Shell")
 objShell2.Run("C:\projects\ac\start-version.bat"), 0, True
 ```
 
+```bat
+参考:  https://blog.csdn.net/RadiantJeral/article/details/80849527
+{command} > xxx.log 2>&1
+```
+
 2. graal 介绍
 
 	- https://zhengyudi.github.io/2018/03/20/graal-intro/#more
@@ -7784,3 +7789,50 @@ default_cachedir="E:\2020\June\igv\cache"
 jdkhome="E:\environment\java"
 
 ```
+
+	- `Caused: org.graalvm.visualizer.data.serialization.VersionMismatchException: File format version 6.1 unsupported.  Current version is 6.0`
+		- 这个错误发生的环境是 idealgraphvisualizer-543(我在 github graal 中下载的) + openjdk 11.0.7 + `-XX:+UnlockExperimentalVMOptions -XX:+UseJVMCICompiler -XX:CompileCommand=dontinline,"CompilationTest::hash" -Dgraal.Dump=:3 -Dgraal.MethodFilter=me.giraffetree.java.boomjava.utils.igv.CompilationTest.hash -Dgraal.OptDeoptimizationGrouping=false -Dgraal.PrintGraph=Network` 
+	- 
+
+
+参考:
+
+- GraalVM Enterprise 19.3.2 Details → Free for evaluation and development
+	- https://docs.oracle.com/en/graalvm/enterprise/20/guide/reference/ideal-graph-visualizer.html
+	- https://www.oracle.com/downloads/graalvm-downloads.html
+
+## 2020.06.04
+
+1. git-flow
+	
+	- 介绍
+		- https://www.git-tower.com/learn/git/ebook/cn/command-line/advanced-topics/git-flow
+
+2. 公司todo
+	- 单元测试
+	- 持续集成
+
+3. 笨神 - jvm 参数教程
+
+	- https://club.perfma.com/course/438755/list
+
+5. sea of nodes 文章
+
+	- https://darksi.de/d.sea-of-nodes/
+
+6. 人工智能辅助进行编译优化
+
+7. 线程独立操作游戏
+
+	- 每个线程抢占资源
+
+8. 如何看懂 igv 的 ir 图 ? 总结下?
+
+	- https://www.ofcoder.com/2019/08/11/java/%E6%B7%B1%E5%85%A5JVM%E6%8E%A2%E8%AE%A8%E4%B8%80%E9%81%93%E4%BA%86%E4%BA%89%E8%AE%BA%E4%BA%86%E4%B8%83%E5%B9%B4%E7%9A%84%E9%9D%A2%E8%AF%95%E9%A2%98/
+	1. 常量值:C(0)、C(1)。就是常量值1、2 (类型是i32)
+	2. 参数值P(0)、P(1)。就是方法参数0和方法参数1=>上面int a,int b
+
+
+
+
+
