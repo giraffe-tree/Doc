@@ -7833,6 +7833,98 @@ jdkhome="E:\environment\java"
 	2. 参数值P(0)、P(1)。就是方法参数0和方法参数1=>上面int a,int b
 
 
+## 2020.06.10
+
+1. docker 离线安装
+
+	- https://www.jianshu.com/p/64a470628e49
+
+2. 换行符
+
+	1.unix2dos：将具有unix风格的格式文件转化为具有window下的格式文件。
+	2.dos2unix：将具有windows风格的格式文件转化为unix下的格式文件。
+
+3. docker centos 镜像中安装
+
+	- no package available
+	- vim /etc/yum.repos.d/nginx.repo
+
+```
+[nginx]
+name=nginx repo
+baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
+gpgcheck=0
+enabled=1
+```
+
+	- sudo yum install epel-release
+	- yum update
+	- yum install nginx
+
+## 2020.06.11
+
+1. mongodb-replica-set-member-state-is-other
+	- `rs.initiate({_id:"rs0",version:1,members:[{_id:0,host:"localhost:27017'}]})`
+	- https://stackoverflow.com/questions/47439781/mongodb-replica-set-member-state-is-other
+
+2. vim 修改换行符
+	- set ff=unix
 
 
+3. curl 访问 ftp 资源
+
+	- curl ftp://192.168.0.162/dependency.zip --user usernmae:password -o dependency.zip
+
+4. Linux查看、修改SELinux的状态
+	
+	- 方法1: /etc/selinux/config 修改状态为 disable , 然后重启
+	- 方法2: setenforce 0 临时有效
+	- https://blog.csdn.net/l18637220680/article/details/70231989
+
+
+5. mongodb 根据 objid 更新
+	- `colleciton.update({"_id":ObjectId('59d726c819292b0355c45e28')},{"$set":{"Level":"5"}})`
+
+
+## 2020.06.02
+
+1. rpc 与 消息队列的使用场景
+
+	- RPC和MQ的差异点是，MQ可以把消息存储。
+		- https://segmentfault.com/a/1190000011408347
+	- 希望同步得到结果的场合，RPC合适
+	- 希望使用简单，则RPC；RPC操作基于接口，使用简单，使用方式模拟本地调用。异步的方式编程比较复杂。
+	- 不希望发送端（RPC Consumer、Message Sender）受限于处理端（RPC Provider、Message Receiver）的速度时，使用Message Queue。
+	- 随着业务增长，有的处理端处理量会成为瓶颈，会进行同步调用到异步消息的改造。
+
+	- 关于解耦, 消息的发送者，不需要关心接收者的信息。 
+	- 服务通过注册中心也可以做到，即服务调用者到注册中心查询服务提供者信息，调用者不需知道。
+
+2. jdk9 module
+
+	- 参考
+		- https://www.liaoxuefeng.com/wiki/1252599548343744/1281795926523938
+		- https://stackoverflow.com/questions/49398894/unable-to-compile-simple-java-10-java-11-project-with-maven
+
+```
+module me.giraffetree.test {
+    requires java.base;
+    requires java.xml;
+}
+
+jar --create --file hello.jar --main-class me.giraffetree.test.Test -C target/classes/ .
+jmod create --class-path hello.jar hello.jmod
+java --module-path hello.jar --module me.giraffetree.test
+```
+
+3. git flow 工作流
+
+	- https://www.git-tower.com/learn/git/ebook/cn/command-line/advanced-topics/git-flow
+
+4. 观星指南
+
+	- 月相
+		- https://zh.wikipedia.org/wiki/%E6%9C%88%E7%9B%B8
+	- 杭州周边观星地概览：杭州篇
+		- https://mp.weixin.qq.com/s?__biz=MzI2OTI2ODMzMA==&mid=2247485461&idx=2&sn=89267a5779c479f311274d78c9c0c7cc
 
