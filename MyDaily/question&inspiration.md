@@ -7928,3 +7928,34 @@ java --module-path hello.jar --module me.giraffetree.test
 	- 杭州周边观星地概览：杭州篇
 		- https://mp.weixin.qq.com/s?__biz=MzI2OTI2ODMzMA==&mid=2247485461&idx=2&sn=89267a5779c479f311274d78c9c0c7cc
 
+
+## 2020.06.16
+
+
+1. buffer 
+	- write
+		- position   limit=capacity
+	- read
+		- position limit  capacity
+
+2. DoubleBuffer flip 方法 java.lang.NoSuchMethodError
+	
+	- 通过 jdk9 以上的版本运行 maven 编译 jdk8的代码时, ByteBuffer.flip（）返回JDK8中的Buffer, 然后会在运行时报错 DoubleBuffer.flip NoSuchMethodError
+	- https://github.com/plasma-umass/doppio/issues/497
+
+3. 复制文件夹
+
+	- `cp -R path_to_source path_to_destination/`
+	- https://stackoverflow.com/questions/14922562/how-do-i-copy-folder-with-files-to-another-folder-in-unix-linux
+
+## 2020.06.18
+
+1. 更新yum源
+
+```
+cp /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+wget -P /etc/yum.repos.d/ http://mirrors.aliyun.com/repo/epel-7.repo 
+yum clean all  
+yum makecache 
+```
