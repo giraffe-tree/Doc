@@ -7959,3 +7959,98 @@ wget -P /etc/yum.repos.d/ http://mirrors.aliyun.com/repo/epel-7.repo
 yum clean all  
 yum makecache 
 ```
+
+## 2020.06.19
+
+1. java 11 中引入的问题
+
+	- javax.validation 缺失
+		- module-info.java 文件中   `requires java.validation;`
+	- pom 中已经引入 swagger , 但不能使用 swagger 注解
+		- `requires swagger.annotations;`
+
+2. `Module lombok does not read a module that exports org.mapstruct.ap.spi`
+
+	- https://github.com/rzwitserloot/lombok/issues/2125
+
+	```
+	<dependency>
+	    <groupId>org.mapstruct</groupId>
+	    <artifactId>mapstruct-processor</artifactId>
+	    <version>1.3.0.Final</version>
+	</dependency>
+	```
+
+3. `java.lang.module.ResolutionException: Modules springfox.core and springfox.spi export package springfox.documentation.service to module jsr305`
+
+	- 尚未解决 =.=
+	- https://stackoverflow.com/questions/46277188/modules-a-and-b-export-package-some-package-to-module-c-in-java-9
+	- https://stackoverflow.com/questions/42358084/package-conflicts-with-automatic-modules-in-java-9
+
+
+## 2020.06.22
+
+1. java se 11 文档
+	
+	- https://docs.oracle.com/en/java/javase/11/
+
+2. java module exports to 
+
+	- `exports 包名 to 模块1,模块2……`
+	- 还可以通过在export 包名后添加to 模块名，限定只对哪些模块进行暴露
+	- https://zhuanlan.zhihu.com/p/31074237
+
+3. java module opens
+
+	- `module A {opens com.example.api;}`
+	- 在运行时，可以通过反射访问com.example.api包下的所有类、接口，并可以访问 public、protected、包私有、private的方法和变量。
+但是包在编译时是不暴露的，即无法通过import访问。
+	- 如果想在编译时访问，又想在运行时可以通过反射访问，则可以同时声明 exports 和 opens ，如下：
+	- `module A {exports com.example.api;opens com.example.api;}`
+
+4. java module requires
+
+	- 在 Module Y 中 `requires X`
+		- 要求 Y 在编译时和运行时，都必须依赖模块 X
+	- 在 Module Y 中 `requires static X`
+		- 要求 Y 在编译时，必须依赖模块 X，运行时不必须。
+	- 在 Module Y 中 `requires transitive X`
+		- 在 Y 在被其他 module Z 依赖时 , Z 可以在编译时 import X, 在运行时通过反射访问 X
+
+```
+ModuleDirective:
+	requires {RequiresModifier} ModuleName ;
+	exports PackageName [to ModuleName {, ModuleName}] ;
+	opens PackageName [to ModuleName {, ModuleName}] ;
+	uses TypeName ;
+	provides TypeName with TypeName {, TypeName} ;
+RequiresModifier:
+	(one of) transitive static
+```
+
+
+5. `java.lang.module.ResolutionException: Modules jsr305 and java.annotation export package javax.annotation to module jul.to.slf4j`
+
+	- 通过查看 pom diagram, 发现 guava 依赖了 jsr305, 于是有了下面的解决方案
+	- 解决方案是, 我直接在 pom 中 exclude 了 guava 中依赖的 jsr305
+	- https://stackoverflow.com/questions/37598775/jsr-305-annotations-replacement-for-java-9
+	- https://stackoverflow.com/questions/46277188/modules-a-and-b-export-package-some-package-to-module-c-in-java-9
+
+6. `java.lang.IllegalAccessException-->module myapp does not open myapp.pkg.config to module spring.core`
+
+	- `opens com.protontek.hospitalmonitorac.aclistener.config`
+
+7. `Information:java: java.lang.module.ResolutionException: Modules springfox.core and springfox.spi export package springfox.documentation.service to module org.apache.commons.lang3`
+	- 在 springfox 的 依赖中 `exclude` 掉 `org.apache.commons.lang3`
+
+8. `Module 'myapp' reads package 'springfox.documentation.service' from both 'springfox.spi' and 'springfox.core'`
+
+	- springfox-spi springfox-core jdk 11 同时使用了同一个包 `springfox.documentation`, 不适配 jdk11
+	- 一个 java9 发布之后就存在的问题=.=
+	- https://github.com/springfox/springfox/issues/2064
+
+9. springfox-swagger 无法在 java 9 版本以上运行的可能的解决方案
+
+	- https://github.com/springdoc/springdoc-openapi
+	- https://springdoc.org/
+
