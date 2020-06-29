@@ -8038,7 +8038,7 @@ RequiresModifier:
 
 6. `java.lang.IllegalAccessException-->module myapp does not open myapp.pkg.config to module spring.core`
 
-	- `opens com.protontek.hospitalmonitorac.aclistener.config`
+	- `opens myapp.pkg.config`
 
 7. `Information:java: java.lang.module.ResolutionException: Modules springfox.core and springfox.spi export package springfox.documentation.service to module org.apache.commons.lang3`
 	- 在 springfox 的 依赖中 `exclude` 掉 `org.apache.commons.lang3`
@@ -8049,8 +8049,91 @@ RequiresModifier:
 	- 一个 java9 发布之后就存在的问题=.=
 	- https://github.com/springfox/springfox/issues/2064
 
-9. springfox-swagger 无法在 java 9 版本以上运行的可能的解决方案
+9. springfox-swagger 无法在 java 9 版本以上运行的可能的代替解决方案
 
 	- https://github.com/springdoc/springdoc-openapi
 	- https://springdoc.org/
+
+## 2020.06.23
+
+1. zookeeper
+
+	- ZooKeeper 的设计目标是将那些复杂且容易出错的分布式一致性服务封装起来，构成一个高效可靠的原语集，并以一系列简单易用的接口提供给用户使用。
+	- 在Zookeeper中 Leader 选举算法采用了Zab协议。Zab核心思想是当多数 Server 写成功，则任务数据写成功。
+		- 集群间通过 Zab 协议（Zookeeper Atomic Broadcast）来保持数据的一致性。
+		- 
+对于来自客户端的每个更新请求，ZooKeeper 都会分配一个全局唯一的递增编号，这个编号反应了所有事务操作的先后顺序，应用程序可以使用 ZooKeeper 这个特性来实现更高层次的同步原语。 这个编号也叫做时间戳——zxid（Zookeeper Transaction Id）
+	- ZooKeeper 底层其实只提供了两个功能
+		1. 管理（存储、读取）用户程序提交的数据, 适用于 “读”多于“写”的场景
+		2. 为用户程序提交数据节点监听服务
+	- 在Zookeeper中，“节点"分为两类
+		- 第一类同样是指构成集群的机器，我们称之为机器节点
+		- 第二类则是指数据模型中的数据单元，我们称之为数据节点一一ZNode。
+	- 功能
+		- watcher 监听你感兴趣的事件
+		- ACL 五种权限
+			- create/delete/read/write/admin
+	- 角色
+		- Leader/Follower/Observer
+		- Follower 和 Observer 唯一的区别在于 Observer 机器不参与 Leader 的选举过程，也不参与写操作的“过半写成功”策略，因此 Observer 机器可以在不影响写性能的情况下提升集群的读性能。
+	- ZAB 与 Paxos
+		- Paxos 算法应该可以说是 ZooKeeper 的灵魂了。但是，ZooKeeper 并没有完全采用 Paxos算法
+		- ZAB协议并不像 Paxos 算法那样，是一种通用的分布式一致性算法，它是一种特别为Zookeeper设计的崩溃可恢复的原子消息广播算法。
+		- ZAB协议包括两种基本的模式，分别是 崩溃恢复和消息广播
+			- 当整个服务框架在启动过程中，或是当 Leader 服务器出现网络中断、崩溃退出与重启等异常情况时，ZAB 协议就会进人恢复模式并选举产生新的Leader服务器。当选举产生了新的 Leader 服务器，同时集群中已经有过半的机器与该Leader服务器完成了状态同步之后，ZAB协议就会退出恢复模式。
+		- 当集群中已经有过半的Follower服务器完成了和Leader服务器的状态同步，那么整个服务框架就可以进人消息广播模式了。
+	- 参考
+		- https://segmentfault.com/a/1190000016349824
+
+## 2020.06.24
+
+
+1. 解决the NTP socket is in use, exiting问题
+
+	- https://blog.csdn.net/ytp151730/article/details/48373679
+
+2. docker remote error: tls: bad certificate
+
+	- todo
+
+## 2020.06.28
+
+1.  windows server docker
+
+	- https://docs.microsoft.com/zh-cn/virtualization/windowscontainers/quick-start/set-up-environment?tabs=Windows-Server
+
+## 2020.06.29
+
+1. kafka spring boot demo
+
+
+2. kafka commit async demo
+
+
+3. nginx 重定向 error_page
+
+```
+  location ^~ /xxx-advice/ {
+        alias /data/www/your/xxx-advice/;
+        error_page 404 = http://www.your.com/xxx-advice/;
+  }
+```
+
+
+4. GroupCoordinator 与 consumer rebalance 的关系
+
+
+5. 新增 partition 后, consumer rebalance 的时长?
+
+	- 目前测试时, 大约是 add partition 后的2到3分钟, 进行的 rebalance
+	- `group.initial.rebalance.delay.ms` 尝试?
+	- 组协调员在执行第一次重新平衡之前将等待更多消费者加入新组的时间。较长的延迟可能意味着较少的重新平衡，但是会增加处理开始之前的时间。
+
+DOCKER_OPTS="--selinux-enabled --tlsverify --tlscacert=/etc/docker/ca.pem --tlscert=/etc/docker/server-cert.pem --tlskey=/etc/docker/server-key.pem -H=unix:///var/run/docker.sock -H=0.0.0.0:2375"
+
+6. tcp close_wait 只会发生在被动关闭链接的那一端
+
+
+
+
 
