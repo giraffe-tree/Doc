@@ -8135,5 +8135,45 @@ DOCKER_OPTS="--selinux-enabled --tlsverify --tlscacert=/etc/docker/ca.pem --tlsc
 
 
 
+## 2020.7.1
 
+
+1. kafka zookeeper with JMX `docker-compose -f docker-compose-single-broker.yml up -d`
+
+```
+version: '2'
+services:
+  zookeeper:
+    image: zookeeper:3.6.1
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka:2.12-2.4.1
+    container_name: kafka
+    # docker-compose -f docker-compose-single-broker.yml up -d
+    # build: .
+    ports:
+      - "9092:9092"
+      - "1099:1099"
+    environment:
+      KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=192.168.2.153 -Dcom.sun.management.jmxremote.rmi.port=1099"
+      JMX_PORT: 1099
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.2.153
+      # KAFKA_CREATE_TOPICS: "test:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_MESSAGE_MAX_BYTES: 4000
+    # volumes:
+    #   - /var/run/docker.sock:/var/run/docker.sock
+```
+
+2. kafka-manager
+
+```
+docker run -d  -p 9001:9000 --name manager \
+-e ZK_HOSTS="192.168.2.153:2181" \
+hlebalbau/kafka-manager:stable \
+-Dpidfile.path=/dev/null
+```
 
