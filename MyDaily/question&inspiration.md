@@ -8177,3 +8177,55 @@ hlebalbau/kafka-manager:stable \
 -Dpidfile.path=/dev/null
 ```
 
+## 2020.07.02
+
+1. java strictfp 关键字
+
+	- 在任意平台上都能计算出完全相同的结果
+	- https://stackoverflow.com/questions/517915/when-should-i-use-the-strictfp-keyword-in-java
+
+2. java 11 card table 中 false sharing 问题不存在?
+
+	- todo: 会不会是因为 g1gc 的问题?
+
+## 2020.07.03
+
+1. dubbo
+
+	- Provider	暴露服务的服务提供方
+	- Consumer	调用远程服务的服务消费方
+	- Registry	服务注册与发现的注册中心
+	- Monitor	统计服务的调用次数和调用时间的监控中心
+	- Container	服务运行容器
+
+2. java.lang.module.ResolutionException: Modules dubbo.spring.boot.autoconfigure and dubbo.spring.boot.autoconfigure.compatible export package org.apache.dubbo.spring.boot.autoconfigure to module org.apache.commons.io
+
+	- 原因就是 dubbo.spring.boot.autoconfigure 和 dubbo.spring.boot.autoconfigure.compatible 都包含了同一个包名, 导致 module 使用时出现错误
+
+
+```xml
+<!-- 可能的解决方案 -->
+<!-- 原本的配置 -->
+<dependency>
+	<groupId>org.apache.dubbo</groupId>
+	<artifactId>dubbo-spring-boot-starter</artifactId>
+	<version>2.7.7</version>
+</dependency>
+
+<!-- 修改后的配置, 相当于去除了 dubbo.spring.boot.autoconfigure 的依赖, 现在可以启动, 但是可能的影响还需要评估 -->
+<dependency>
+    <groupId>org.apache.dubbo</groupId>
+    <artifactId>dubbo-spring-boot-autoconfigure-compatible</artifactId>
+    <version>2.7.7</version>
+</dependency>
+```
+
+3. `Caused by: java.lang.reflect.InaccessibleObjectException: Unable to make protected final java.lang.Class java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain) throws java.lang.ClassFormatError accessible: module java.base does not "opens java.lang" to module javassist`
+
+	- `--add-opens java.base/java.lang=javassist`
+
+4. centos 查看 当前文件夹大小
+	- `du -h --max-depth=1`
+
+
+
