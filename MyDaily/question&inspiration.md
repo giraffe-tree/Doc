@@ -8227,5 +8227,11 @@ hlebalbau/kafka-manager:stable \
 4. centos 查看 当前文件夹大小
 	- `du -h --max-depth=1`
 
+5. dubbo + spring boot2 + jdk11 
+	- `java.lang.NoClassDefFoundError: org/apache/curator/framework/CuratorFrameworkFactory`
+	- `requires dubbo.spring.boot.autoconfigure.compatible;requires dubbo;`
 
+6. 找出所有 size 为 0 字节的文件
+
+	- `find ./ -maxdepth 2 -size 0c`
 
