@@ -7987,7 +7987,6 @@ yum makecache
 	- https://stackoverflow.com/questions/46277188/modules-a-and-b-export-package-some-package-to-module-c-in-java-9
 	- https://stackoverflow.com/questions/42358084/package-conflicts-with-automatic-modules-in-java-9
 
-
 ## 2020.06.22
 
 1. java se 11 文档
@@ -8234,4 +8233,27 @@ hlebalbau/kafka-manager:stable \
 6. 找出所有 size 为 0 字节的文件
 
 	- `find ./ -maxdepth 2 -size 0c`
+
+
+## 2020.07.06
+
+1. `Modules zookeeper and zookeeper.jute export package org.apache.zookeeper.server.persistence`
+
+	- https://github.com/apache/zookeeper/pull/945
+	- 使用 dubbo-spring-boot-autoconfigure 也会有相同的问题, 所以只能用 dubbo-spring-boot-autoconfigure-compatible + curtor-framework + curtor-client
+	- https://mvnrepository.com/artifact/org.apache.curator/curator-framework/5.1.0
+
+2. cron
+
+```
+名称		是否必须	允许值			特殊字符
+秒		是		0-59			, - * /
+分		是		0-59			, - * /
+时		是		0-23			, - * /
+日		是		1-31			, - * ? / L W C
+月		是		1-12 或 JAN-DEC	, - * /
+周		是		1-7 或 SUN-SAT	, - * ? / L C #
+年		否		空 或 1970-2099	, - * /
+```
+
 
