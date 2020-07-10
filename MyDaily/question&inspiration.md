@@ -8256,4 +8256,15 @@ hlebalbau/kafka-manager:stable \
 年		否		空 或 1970-2099	, - * /
 ```
 
+## 2020.07.08
+
+1. `rpm -ivh *.rpm`
+
+## 2020.07.10
+
+1. spring boot config zookeeper 
+	- todo: 通过 zookeeper 完成分布式配置中心
+
+
+
 
