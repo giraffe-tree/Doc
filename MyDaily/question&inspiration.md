@@ -8265,6 +8265,13 @@ hlebalbau/kafka-manager:stable \
 1. spring boot config zookeeper 
 	- todo: 通过 zookeeper 完成分布式配置中心
 
+## 2020.07.13
+
+1. scala 介绍
+	- https://docs.scala-lang.org/overviews/scala-book/introduction.html
+2. kafka 是混用 scala 和 java 的吗?
+	- Kafka broker端代码一直是用Scala实现的。
+	- Clients端代码使用Java实现
 
 
 
