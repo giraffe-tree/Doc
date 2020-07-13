@@ -8272,6 +8272,8 @@ hlebalbau/kafka-manager:stable \
 2. kafka 是混用 scala 和 java 的吗?
 	- Kafka broker端代码一直是用Scala实现的。
 	- Clients端代码使用Java实现
-
+3. 设置 git 代理
+	- `git config --global http.proxy 'socks5://127.0.0.1:1080'`
+	- `git config --global https.proxy 'socks5://127.0.0.1:1080`
 
 
