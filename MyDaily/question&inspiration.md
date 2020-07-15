@@ -8276,4 +8276,54 @@ hlebalbau/kafka-manager:stable \
 	- `git config --global http.proxy 'socks5://127.0.0.1:1080'`
 	- `git config --global https.proxy 'socks5://127.0.0.1:1080`
 
+## 2020.07.14
+
+
+1. zookeeper api
+
+	- `org.apache.zookeeper.Zookeeper.java`
+		- zookeeper 客户端的主类
+		- 内部的方法是线程安全的, 除非另有说明
+		- 与服务器建立连接是, 会分配到一个 session id, 并且客户端会定期发送心跳数据
+		- 在 session id 有效的期间, 可以使用 zookeeper 的 api
+		- 如果 session 连接 zookeeper 服务器失败, 在session id 过期之前, 它会自动尝试连接其他服务器
+		- zookeeper 的 api 方法既可以用同步调用, 也可以用异步调用
+		- 一些成功的 api 调用可以在 zookeeper "数据节点"上 保持监控(watch),当监视器(watcher)被触发时, 客户端在离开监视之前会收到一个事件.
+			- 每个 watch 在结束时仅会被触发一次
+		- 当 client 断开当前连接并重连到服务器时, 所有存在的 watch 都会被当做已触发, 但是未传送过来的 event 会丢失.
+			- 为了模拟这一点, 客户端会生成一个特殊的事件来高速 事件处理器 连接已经断开.
+			- 这个特殊的事件 EventType 为 None , KeeperState 为 Disconnected.
+	- https://zookeeper.apache.org/doc/r3.5.5/api/index.html
+
+2. InterruptedException 和 AutoCloseable 的关系?
+
+3. 如何在 idea 中使用 maven 构建依赖, 并调试 zookeeper 源码
+
+	- 关于 log4j.properties 没有作用
+		- 需要将 resources 目录 mark as Resources
+	- 参考: https://juejin.im/post/5eb4211f6fb9a04345112a2d
+
+## 2020.07.15
+
+
+1. docker link 
+	- 将 busybox 链接到一个现有的容器
+	- `docker --link zookeeper busybox`
+	- `docker network ls`
+	- `docker run -it --net myapp_default worker`
+
+2. ruok is not executed because it is not in the whitelist.
+	- stat 查看状态信息
+	- ruok 查看zookeeper是否启动
+	- dump 列出没有处理的节点，临时节点
+	- conf 查看服务器配置
+	- cons 显示连接到服务端的信息
+	- envi 显示环境变量信息
+	- mntr 查看zk的健康信息
+	- wchs 展示watch的信息
+	- wchc和wchp 显示session的watch信息 path的watch信息
+
+3. protobuf version 3 不能表达空值的解决办法
+	- 个人比较倾向于使用 特殊值 来区分, 这样不会占用位子
+	- https://zhuanlan.zhihu.com/p/46603988
 
