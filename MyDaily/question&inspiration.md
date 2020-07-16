@@ -8327,3 +8327,12 @@ hlebalbau/kafka-manager:stable \
 	- 个人比较倾向于使用 特殊值 来区分, 这样不会占用位子
 	- https://zhuanlan.zhihu.com/p/46603988
 
+## 2020.07.16
+
+1. 问题探究
+
+	- zookeeper 如何实现组成员管理 ?
+	- zookeeper 如何实现高效 rebalance ?
+
+
+
