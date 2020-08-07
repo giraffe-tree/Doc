@@ -8334,5 +8334,37 @@ hlebalbau/kafka-manager:stable \
 	- zookeeper 如何实现组成员管理 ?
 	- zookeeper 如何实现高效 rebalance ?
 
+2. 分布式环境下, 有限资源分配的问题
 
+## 2020.07.20
+
+1. aiXcoder 代码补全
+
+## 2020.07.24
+
+1. wireshark
+
+	- `ip.addr == 192.168.2.153 && tcp.port == 7777`
+
+2. 内存屏障 和 LOCK 前缀的含义有什么区别
+
+
+## 2020.07.28
+
+1. gitlab 
+	- `OpenSSL::Cipher::CipherError`
+		- https://www.oschina.net/question/2946511_2200445
+		- 覆盖原来gitlab的 db_key_base 到新的gitlab , db_key_base  位置在 /etc/gitlab/gitlab-secrets.json
+		- `sudo gitlab-rails runner "Project.where.not(import_url: nil).each { |p| p.import_data.destroy if p.import_data }"`
+	- gitlab 修改端口
+		- https://lengxiaobing.github.io/2019/04/22/%E4%BD%BF%E7%94%A8docker%E6%90%AD%E5%BB%BAGitLab%E7%8E%AF%E5%A2%83/
+		- `vim /etc/gitlab/gitlab.rb`
+		- `gitlab-ctl reconfigure`
+	- 备份
+		- gitlab-rake gitlab:backup:restore BACKUP=1595851541
+
+## 2020.08.06
+
+1. cmake 中文介绍
+	- https://chenxiaowei.gitbook.io/cmake-cookbook/
 
